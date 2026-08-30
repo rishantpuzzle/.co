@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +7,6 @@
 <title>Munger Mandir Room Request</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -17,15 +15,15 @@
 }
 
 body{
-    background:#f7f2e8;
+    background:#f6f3ee;
     color:#30261b;
 }
 
 /* HEADER */
 
 header{
-    background:#fffdf8;
-    border-bottom:1px solid #e8dcc7;
+    background:#ffffff;
+    border-bottom:1px solid #e5ddd1;
     position:sticky;
     top:0;
     z-index:1000;
@@ -47,21 +45,21 @@ header{
 }
 
 .logo{
-    width:48px;
-    height:48px;
-    border-radius:14px;
-    background:#b97818;
+    width:50px;
+    height:50px;
+    border-radius:15px;
+    background:#8f570d;
     color:white;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:bold;
-    font-size:17px;
+    font-size:18px;
 }
 
 .brand h1{
-    font-size:19px;
-    color:#5b3510;
+    font-size:20px;
+    color:#4e2d0b;
 }
 
 .brand small{
@@ -76,19 +74,21 @@ header{
 }
 
 .user-photo{
-    width:38px;
-    height:38px;
+    width:40px;
+    height:40px;
     border-radius:50%;
     object-fit:cover;
+    border:2px solid #e3d4bf;
 }
 
 .user-name{
     font-size:14px;
     font-weight:bold;
+    color:#4d3923;
 }
 
 .hidden{
-    display:none!important;
+    display:none !important;
 }
 
 /* BUTTONS */
@@ -107,7 +107,7 @@ button{
 
 .login-btn{
     background:#fff;
-    border:1px solid #d9c8ae;
+    border:1px solid #d7c8b3;
     color:#5b3510;
 }
 
@@ -119,7 +119,7 @@ button{
 /* LOGIN */
 
 .login-screen{
-    min-height:calc(100vh - 78px);
+    min-height:calc(100vh - 79px);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -129,30 +129,30 @@ button{
 .login-card{
     width:100%;
     max-width:430px;
-    background:#fffdf8;
-    border:1px solid #eadfcf;
+    background:#fff;
+    border:1px solid #e5ddd1;
     border-radius:24px;
-    padding:38px 30px;
+    padding:40px 30px;
     text-align:center;
-    box-shadow:0 15px 45px rgba(91,53,16,.10);
+    box-shadow:0 15px 45px rgba(70,45,15,.08);
 }
 
 .temple-icon{
-    width:78px;
-    height:78px;
+    width:80px;
+    height:80px;
     border-radius:22px;
-    background:#b97818;
+    background:#9a600e;
     color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
-    margin:auto auto 18px;
-    font-size:25px;
+    margin:0 auto 18px;
+    font-size:26px;
     font-weight:bold;
 }
 
 .login-card h2{
-    color:#5b3510;
+    color:#51300d;
     margin-bottom:10px;
 }
 
@@ -186,12 +186,12 @@ button{
 }
 
 .hero{
-    background:linear-gradient(135deg,#a96512,#d59a39);
+    background:linear-gradient(135deg,#774607,#b97818);
     color:white;
     border-radius:24px;
     padding:40px;
     margin-bottom:25px;
-    box-shadow:0 12px 30px rgba(125,79,18,.16);
+    box-shadow:0 12px 30px rgba(100,60,10,.14);
 }
 
 .hero h2{
@@ -214,11 +214,11 @@ button{
 }
 
 .card{
-    background:#fffdf8;
-    border:1px solid #eadfcf;
+    background:#fff;
+    border:1px solid #e5ddd1;
     border-radius:20px;
     padding:25px;
-    box-shadow:0 6px 22px rgba(91,53,16,.05);
+    box-shadow:0 6px 22px rgba(70,45,15,.04);
 }
 
 .card h3{
@@ -253,8 +253,8 @@ textarea{
 input:focus,
 select:focus,
 textarea:focus{
-    border-color:#b97818;
-    box-shadow:0 0 0 3px rgba(185,120,24,.10);
+    border-color:#a96812;
+    box-shadow:0 0 0 3px rgba(169,104,18,.10);
 }
 
 .two{
@@ -279,6 +279,11 @@ textarea:focus{
     margin-bottom:11px;
 }
 
+.option-title small{
+    color:#876b45;
+    font-weight:normal;
+}
+
 .radio-row{
     display:flex;
     gap:20px;
@@ -300,7 +305,7 @@ textarea:focus{
 
 .price-box{
     margin-top:20px;
-    background:#f9efd9;
+    background:#fbf2df;
     border:1px solid #e6d0a9;
     border-radius:14px;
     padding:18px;
@@ -327,17 +332,22 @@ textarea:focus{
 .submit{
     width:100%;
     margin-top:20px;
-    padding:14px;
+    padding:15px;
     border:none;
     border-radius:10px;
-    background:#a96512;
+    background:#92570c;
     color:white;
     font-size:16px;
     font-weight:bold;
 }
 
 .submit:hover{
-    background:#8d540d;
+    background:#754407;
+}
+
+.submit:disabled{
+    opacity:.65;
+    cursor:not-allowed;
 }
 
 /* INFO */
@@ -348,7 +358,7 @@ textarea:focus{
 }
 
 .info-item{
-    background:#faf6ee;
+    background:#faf7f1;
     border:1px solid #eee2cf;
     border-radius:12px;
     padding:15px;
@@ -371,11 +381,22 @@ textarea:focus{
 .message{
     display:none;
     margin-top:14px;
-    padding:11px;
+    padding:12px;
     border-radius:9px;
     background:#f4ead8;
     color:#654317;
     font-size:13px;
+    line-height:1.5;
+}
+
+.message.success{
+    background:#e8f7ed;
+    color:#166534;
+}
+
+.message.error{
+    background:#feecec;
+    color:#991b1b;
 }
 
 /* REQUESTS */
@@ -388,7 +409,7 @@ textarea:focus{
     background:#fffaf2;
     border:1px solid #eadfcf;
     border-radius:13px;
-    padding:17px;
+    padding:18px;
     margin-top:12px;
 }
 
@@ -421,7 +442,7 @@ textarea:focus{
 .request p{
     color:#776954;
     font-size:13px;
-    margin-top:5px;
+    margin-top:6px;
 }
 
 /* ADMIN */
@@ -450,6 +471,14 @@ textarea:focus{
 
 .delete-button{
     background:#b91c1c;
+}
+
+/* EMPTY */
+
+.empty{
+    color:#8a7964;
+    padding:15px 0;
+    font-size:14px;
 }
 
 /* FOOTER */
@@ -506,88 +535,86 @@ footer{
         font-size:10px;
     }
 
+    .nav{
+        padding:10px 13px;
+    }
+
 }
-
 </style>
-
 </head>
 
 <body>
-
-<!-- HEADER -->
 
 <header>
 
 <div class="nav">
 
-```
-<div class="brand">
+    <div class="brand">
 
-    <div class="logo">
-        MM
+        <div class="logo">
+            MM
+        </div>
+
+        <div>
+            <h1>Munger Mandir</h1>
+            <small>Room Request Portal</small>
+        </div>
+
     </div>
 
-    <div>
-        <h1>Munger Mandir</h1>
-        <small>Room Request Portal</small>
+    <div id="userArea" class="user-area hidden">
+
+        <span id="userName" class="user-name"></span>
+
+        <img
+            id="userPhoto"
+            class="user-photo"
+            src=""
+            alt="Profile"
+        >
+
+        <button id="logoutBtn" class="logout">
+            Logout
+        </button>
+
     </div>
 
-</div>
-
-<div id="userArea" class="user-area hidden">
-
-    <span id="userName" class="user-name"></span>
-
-    <img
-        id="userPhoto"
-        class="user-photo"
-        src=""
-        alt="Profile"
-    >
-
-    <button id="logoutBtn" class="logout">
-        Logout
+    <button id="topLogin" class="login-btn">
+        Google Login
     </button>
-
-</div>
-
-<button id="topLogin" class="login-btn">
-    Google Login
-</button>
-```
 
 </div>
 
 </header>
 
-<!-- LOGIN SCREEN -->
+
+<!-- LOGIN -->
 
 <section id="loginScreen" class="login-screen">
 
 <div class="login-card">
 
-```
-<div class="temple-icon">
-    MM
-</div>
+    <div class="temple-icon">
+        MM
+    </div>
 
-<h2>Munger Mandir</h2>
+    <h2>Munger Mandir</h2>
 
-<p>
-    Please login with your Google account
-    to submit a room request.
-</p>
+    <p>
+        Please login with your Google account
+        to submit a room request.
+    </p>
 
-<button id="googleBtn" class="google-btn">
-    Continue with Google
-</button>
+    <button id="googleBtn" class="google-btn">
+        Continue with Google
+    </button>
 
-<div id="loginMessage" class="message"></div>
-```
+    <div id="loginMessage" class="message"></div>
 
 </div>
 
 </section>
+
 
 <!-- MAIN APP -->
 
@@ -595,26 +622,24 @@ footer{
 
 <div class="container">
 
-<!-- HERO -->
-
 <section class="hero">
 
-```
-<h2>
-    Munger Mandir Room Request
-</h2>
+    <h2>
+        Munger Mandir Room Request
+    </h2>
 
-<p>
-    Please fill in the details below to request
-    accommodation at Munger Mandir.
-</p>
-```
+    <p>
+        Please fill in the details below to request
+        accommodation at Munger Mandir.
+    </p>
 
 </section>
 
+
 <div class="grid">
 
-<!-- REQUEST FORM -->
+
+<!-- FORM -->
 
 <div class="card">
 
@@ -629,11 +654,10 @@ footer{
 <label>First Name</label>
 
 <input
-id="firstName"
-type="text"
-required
-placeholder="First name"
-
+    id="firstName"
+    type="text"
+    required
+    placeholder="First name"
 >
 
 </div>
@@ -643,37 +667,37 @@ placeholder="First name"
 <label>Last Name</label>
 
 <input
-id="lastName"
-type="text"
-required
-placeholder="Last name"
-
+    id="lastName"
+    type="text"
+    required
+    placeholder="Last name"
 >
 
 </div>
 
 </div>
+
 
 <label>Phone Number</label>
 
 <input
-id="phone"
-type="tel"
-maxlength="15"
-required
-placeholder="Phone number"
-
+    id="phone"
+    type="tel"
+    maxlength="15"
+    required
+    placeholder="Phone number"
 >
+
 
 <label>Email</label>
 
 <input
-id="email"
-type="email"
-required
-placeholder="[your@email.com](mailto:your@email.com)"
-
+    id="email"
+    type="email"
+    required
+    placeholder="your@email.com"
 >
+
 
 <div class="two">
 
@@ -682,10 +706,9 @@ placeholder="[your@email.com](mailto:your@email.com)"
 <label>Check-in Date</label>
 
 <input
-id="checkIn"
-type="date"
-required
-
+    id="checkIn"
+    type="date"
+    required
 >
 
 </div>
@@ -695,29 +718,30 @@ required
 <label>Check-out Date</label>
 
 <input
-id="checkOut"
-type="date"
-required
-
+    id="checkOut"
+    type="date"
+    required
 >
 
 </div>
 
 </div>
+
 
 <label>Passport Number</label>
 
 <input
-id="passport"
-type="text"
-required
-placeholder="Passport number"
-
+    id="passport"
+    type="text"
+    required
+    placeholder="Passport number"
 >
+
 
 <h3 style="margin-top:10px">
 Room Request Info
 </h3>
+
 
 <!-- AC -->
 
@@ -752,6 +776,7 @@ No
 
 </div>
 
+
 <!-- HOT WATER -->
 
 <div class="option-box">
@@ -785,6 +810,7 @@ No
 
 </div>
 
+
 <!-- BEDS -->
 
 <div class="option-box">
@@ -795,19 +821,40 @@ How many beds do you need in room?
 
 <select id="beds" required>
 
-<option value="">Select beds</option>
-<option value="1">1 Bed</option>
-<option value="2">2 Beds</option>
-<option value="3">3 Beds</option>
-<option value="4">4 Beds</option>
-<option value="5">5 Beds</option>
-<option value="6">6 Beds</option>
+<option value="">
+Select beds
+</option>
+
+<option value="1">
+1 Bed
+</option>
+
+<option value="2">
+2 Beds
+</option>
+
+<option value="3">
+3 Beds
+</option>
+
+<option value="4">
+4 Beds
+</option>
+
+<option value="5">
+5 Beds
+</option>
+
+<option value="6">
+6 Beds
+</option>
 
 </select>
 
 </div>
 
-<!-- PLATE -->
+
+<!-- UTENSILS -->
 
 <div class="option-box">
 
@@ -820,6 +867,7 @@ Do you need to rent a plate, spoon, glass?
 <div class="radio-row">
 
 <label class="radio">
+
 <input
     type="radio"
     name="utensils"
@@ -827,22 +875,28 @@ Do you need to rent a plate, spoon, glass?
     data-price="300"
     required
 >
+
 Yes
+
 </label>
 
 <label class="radio">
+
 <input
     type="radio"
     name="utensils"
     value="No"
     data-price="0"
 >
+
 No
+
 </label>
 
 </div>
 
 </div>
+
 
 <!-- WATER -->
 
@@ -880,6 +934,7 @@ No water jug
 
 </div>
 
+
 <!-- MOSQUITO -->
 
 <div class="option-box">
@@ -895,12 +950,11 @@ Do you want an All Out mosquito dispeller in room?
 <label class="radio">
 
 <input
-type="radio"
-name="mosquito"
-value="Yes"
-data-price="100"
-required
-
+    type="radio"
+    name="mosquito"
+    value="Yes"
+    data-price="100"
+    required
 >
 
 Yes
@@ -910,11 +964,10 @@ Yes
 <label class="radio">
 
 <input
-type="radio"
-name="mosquito"
-value="No"
-data-price="0"
-
+    type="radio"
+    name="mosquito"
+    value="No"
+    data-price="0"
 >
 
 No
@@ -925,13 +978,16 @@ No
 
 </div>
 
+
 <!-- PRICE -->
 
 <div class="price-box">
 
 <div class="price-row">
 
-<span>Plate / Spoon / Glass</span>
+<span>
+Plate / Spoon / Glass
+</span>
 
 <strong id="utensilPrice">
 ₹0
@@ -939,9 +995,12 @@ No
 
 </div>
 
+
 <div class="price-row">
 
-<span>20L Water Jugs</span>
+<span>
+20L Water Jugs
+</span>
 
 <strong id="waterPrice">
 ₹0
@@ -949,9 +1008,12 @@ No
 
 </div>
 
+
 <div class="price-row">
 
-<span>All Out Mosquito Dispeller</span>
+<span>
+All Out Mosquito Dispeller
+</span>
 
 <strong id="mosquitoPrice">
 ₹0
@@ -959,9 +1021,12 @@ No
 
 </div>
 
+
 <div class="total">
 
-<span>Total Extra</span>
+<span>
+Total Extra
+</span>
 
 <strong id="totalPrice">
 ₹0
@@ -971,14 +1036,15 @@ No
 
 </div>
 
+
 <button
-type="submit"
-class="submit"
-id="submitBtn"
-
+    type="submit"
+    class="submit"
+    id="submitBtn"
 >
+Submit Room Request
+</button>
 
-Submit Room Request </button>
 
 <div id="formMessage" class="message"></div>
 
@@ -986,11 +1052,14 @@ Submit Room Request </button>
 
 </div>
 
+
 <!-- INFORMATION -->
 
 <div class="card">
 
-<h3>Room Request Information</h3>
+<h3>
+Room Request Information
+</h3>
 
 <div class="info">
 
@@ -1005,6 +1074,7 @@ before submitting your request.
 
 </div>
 
+
 <div class="info-item">
 
 <strong>❄️ AC Room</strong>
@@ -1014,6 +1084,7 @@ Select whether you require an AC room.
 </span>
 
 </div>
+
 
 <div class="info-item">
 
@@ -1025,6 +1096,7 @@ You can request a room with a hot water heater.
 
 </div>
 
+
 <div class="info-item">
 
 <strong>🍽️ Utensils</strong>
@@ -1034,6 +1106,7 @@ Plate, spoon and glass rental is ₹300 for the stay.
 </span>
 
 </div>
+
 
 <div class="info-item">
 
@@ -1045,6 +1118,7 @@ Each 20L water jug costs ₹100.
 
 </div>
 
+
 <div class="info-item">
 
 <strong>🦟 Mosquito Protection</strong>
@@ -1055,13 +1129,14 @@ All Out mosquito dispeller is ₹100.
 
 </div>
 
+
 <div class="info-item">
 
 <strong>📧 Email Confirmation</strong>
 
 <span>
-A confirmation email can be sent to the guest's
-email address after submitting the request.
+Your request will be saved securely in the
+Munger Mandir system.
 </span>
 
 </div>
@@ -1071,6 +1146,7 @@ email address after submitting the request.
 </div>
 
 </div>
+
 
 <!-- MY REQUESTS -->
 
@@ -1089,6 +1165,7 @@ Loading requests...
 </div>
 
 </section>
+
 
 <!-- ADMIN PANEL -->
 
@@ -1139,27 +1216,22 @@ Loading requests...
 
 </main>
 
+
 <footer>
-
 Munger Mandir Room Request Portal
-
 </footer>
 
-<!-- EMAILJS -->
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script type="module">
 
 /* ==========================================
-   FIREBASE
+   FIREBASE IMPORT
 ========================================== */
 
 import {
     initializeApp
 }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
 
 import {
     getAuth,
@@ -1170,14 +1242,12 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-
 import {
     getFirestore,
     collection,
     addDoc,
     query,
     where,
-    orderBy,
     onSnapshot,
     doc,
     updateDoc,
@@ -1213,21 +1283,20 @@ const firebaseConfig = {
 
     measurementId:
     "G-LF2K2KFCN6"
-
 };
 
 
-const app =
-initializeApp(firebaseConfig);
+/* ==========================================
+   INITIALIZE
+========================================== */
 
-const auth =
-getAuth(app);
+const app = initializeApp(firebaseConfig);
 
-const db =
-getFirestore(app);
+const auth = getAuth(app);
 
-const provider =
-new GoogleAuthProvider();
+const db = getFirestore(app);
+
+const provider = new GoogleAuthProvider();
 
 
 /* ==========================================
@@ -1237,33 +1306,6 @@ new GoogleAuthProvider();
 
 const ADMIN_EMAIL =
 "YOUR_ADMIN_EMAIL@gmail.com";
-
-
-/* ==========================================
-   EMAILJS SETTINGS
-   REPLACE THESE 3 VALUES
-========================================== */
-
-const EMAILJS_PUBLIC_KEY =
-"YOUR_EMAILJS_PUBLIC_KEY";
-
-const EMAILJS_SERVICE_ID =
-"YOUR_EMAILJS_SERVICE_ID";
-
-const EMAILJS_TEMPLATE_ID =
-"YOUR_EMAILJS_TEMPLATE_ID";
-
-
-if(
-    EMAILJS_PUBLIC_KEY !==
-    "YOUR_EMAILJS_PUBLIC_KEY"
-){
-
-    emailjs.init({
-        publicKey:EMAILJS_PUBLIC_KEY
-    });
-
-}
 
 
 /* ==========================================
@@ -1315,17 +1357,26 @@ document.getElementById("allRequests");
 const adminFilter =
 document.getElementById("adminFilter");
 
+const submitBtn =
+document.getElementById("submitBtn");
+
 
 /* ==========================================
-   MESSAGE
+   MESSAGE FUNCTION
 ========================================== */
 
-function message(element,text){
+function showMessage(
+    element,
+    text,
+    type=""
+){
 
-    element.textContent=text;
+    element.textContent = text;
 
-    element.style.display="block";
+    element.className =
+    "message " + type;
 
+    element.style.display = "block";
 }
 
 
@@ -1335,29 +1386,46 @@ function message(element,text){
 
 async function login(){
 
-    try{
+    googleBtn.disabled = true;
+    topLogin.disabled = true;
 
-        message(
-            loginMessage,
-            "Opening Google Login..."
-        );
+    showMessage(
+        loginMessage,
+        "Opening Google Login..."
+    );
+
+    try{
 
         await signInWithPopup(
             auth,
             provider
         );
 
+        loginMessage.style.display =
+        "none";
+
     }
 
     catch(error){
 
-        console.error(error);
-
-        message(
-            loginMessage,
-            "Login failed: "+
-            error.message
+        console.error(
+            "LOGIN ERROR:",
+            error
         );
+
+        showMessage(
+            loginMessage,
+            "Login failed: " +
+            getFirebaseError(error),
+            "error"
+        );
+
+    }
+
+    finally{
+
+        googleBtn.disabled = false;
+        topLogin.disabled = false;
 
     }
 
@@ -1383,7 +1451,16 @@ logoutBtn.addEventListener(
     "click",
     async()=>{
 
-        await signOut(auth);
+        try{
+
+            await signOut(auth);
+
+        }
+        catch(error){
+
+            console.error(error);
+
+        }
 
     }
 );
@@ -1445,7 +1522,8 @@ onAuthStateChanged(
             if(user.displayName){
 
                 const parts =
-                user.displayName.split(" ");
+                user.displayName.trim()
+                .split(/\s+/);
 
                 first.value =
                 parts.shift() || "";
@@ -1462,8 +1540,9 @@ onAuthStateChanged(
 
             if(
                 user.email &&
-                user.email.toLowerCase()
-                ===
+                ADMIN_EMAIL !==
+                "YOUR_ADMIN_EMAIL@gmail.com" &&
+                user.email.toLowerCase() ===
                 ADMIN_EMAIL.toLowerCase()
             ){
 
@@ -1483,7 +1562,9 @@ onAuthStateChanged(
             }
 
 
-            loadMyRequests(user.uid);
+            loadMyRequests(
+                user.uid
+            );
 
         }
         else{
@@ -1504,6 +1585,9 @@ onAuthStateChanged(
                 "hidden"
             );
 
+            myRequests.innerHTML =
+            '<div class="empty">Please login to view requests.</div>';
+
         }
 
     }
@@ -1516,8 +1600,8 @@ onAuthStateChanged(
 
 function calculateTotal(){
 
-    let utensils=0;
-    let mosquito=0;
+    let utensils = 0;
+    let mosquito = 0;
 
     const utensil =
     document.querySelector(
@@ -1534,7 +1618,7 @@ function calculateTotal(){
 
         utensils =
         Number(
-            utensil.dataset.price
+            utensil.dataset.price || 0
         );
 
     }
@@ -1544,7 +1628,7 @@ function calculateTotal(){
 
         mosquito =
         Number(
-            mosquitoInput.dataset.price
+            mosquitoInput.dataset.price || 0
         );
 
     }
@@ -1571,25 +1655,25 @@ function calculateTotal(){
     document.getElementById(
         "utensilPrice"
     ).textContent =
-    "₹"+utensils;
+    "₹" + utensils;
 
 
     document.getElementById(
         "waterPrice"
     ).textContent =
-    "₹"+water;
+    "₹" + water;
 
 
     document.getElementById(
         "mosquitoPrice"
     ).textContent =
-    "₹"+mosquito;
+    "₹" + mosquito;
 
 
     document.getElementById(
         "totalPrice"
     ).textContent =
-    "₹"+total;
+    "₹" + total;
 
 
     return {
@@ -1643,9 +1727,10 @@ roomForm.addEventListener(
 
         if(!user){
 
-            message(
+            showMessage(
                 formMessage,
-                "Please login first."
+                "Please login with Google first.",
+                "error"
             );
 
             return;
@@ -1665,11 +1750,15 @@ roomForm.addEventListener(
         ).value;
 
 
-        if(checkOut <= checkIn){
+        if(
+            !checkIn ||
+            !checkOut
+        ){
 
-            message(
+            showMessage(
                 formMessage,
-                "Check-out date must be after check-in date."
+                "Please select check-in and check-out dates.",
+                "error"
             );
 
             return;
@@ -1677,8 +1766,17 @@ roomForm.addEventListener(
         }
 
 
-        const prices =
-        calculateTotal();
+        if(checkOut <= checkIn){
+
+            showMessage(
+                formMessage,
+                "Check-out date must be after check-in date.",
+                "error"
+            );
+
+            return;
+
+        }
 
 
         const firstName =
@@ -1711,22 +1809,16 @@ roomForm.addEventListener(
         ).value.trim();
 
 
-        const ac =
+        const acInput =
         document.querySelector(
             'input[name="ac"]:checked'
-        ).value;
+        );
 
 
-        const heater =
+        const heaterInput =
         document.querySelector(
             'input[name="heater"]:checked'
-        ).value;
-
-
-        const beds =
-        document.getElementById(
-            "beds"
-        ).value;
+        );
 
 
         const utensilsInput =
@@ -1741,12 +1833,28 @@ roomForm.addEventListener(
         );
 
 
-        const utensils =
-        utensilsInput.value;
+        if(
+            !acInput ||
+            !heaterInput ||
+            !utensilsInput ||
+            !mosquitoInput
+        ){
+
+            showMessage(
+                formMessage,
+                "Please complete all room options.",
+                "error"
+            );
+
+            return;
+
+        }
 
 
-        const mosquito =
-        mosquitoInput.value;
+        const beds =
+        document.getElementById(
+            "beds"
+        ).value;
 
 
         const waterJugs =
@@ -1755,22 +1863,97 @@ roomForm.addEventListener(
         ).value;
 
 
-        const submitBtn =
-        document.getElementById(
-            "submitBtn"
-        );
+        const prices =
+        calculateTotal();
 
 
-        submitBtn.disabled=true;
+        submitBtn.disabled = true;
 
-        submitBtn.textContent=
+        submitBtn.textContent =
         "Submitting...";
+
+
+        formMessage.style.display =
+        "none";
 
 
         try{
 
+            console.log(
+                "Saving request to Firestore..."
+            );
 
-            /* SAVE TO FIRESTORE */
+
+            const requestData = {
+
+                uid:
+                user.uid,
+
+                userName:
+                user.displayName || "",
+
+                userEmail:
+                user.email || "",
+
+                firstName:
+                firstName,
+
+                lastName:
+                lastName,
+
+                phone:
+                phone,
+
+                email:
+                email,
+
+                passport:
+                passport,
+
+                checkIn:
+                checkIn,
+
+                checkOut:
+                checkOut,
+
+                acRoom:
+                acInput.value,
+
+                hotWater:
+                heaterInput.value,
+
+                beds:
+                Number(beds),
+
+                utensils:
+                utensilsInput.value,
+
+                waterJugs:
+                Number(waterJugs),
+
+                mosquito:
+                mosquitoInput.value,
+
+                utensilsPrice:
+                prices.utensils,
+
+                waterPrice:
+                prices.water,
+
+                mosquitoPrice:
+                prices.mosquito,
+
+                totalExtra:
+                prices.total,
+
+                status:
+                "pending",
+
+                createdAt:
+                serverTimestamp()
+
+            };
+
 
             const docRef =
             await addDoc(
@@ -1778,137 +1961,21 @@ roomForm.addEventListener(
                     db,
                     "roomRequests"
                 ),
-                {
-
-                    uid:user.uid,
-
-                    userName:
-                    user.displayName || "",
-
-                    userEmail:
-                    user.email || email,
-
-                    firstName,
-
-                    lastName,
-
-                    phone,
-
-                    email,
-
-                    passport,
-
-                    checkIn,
-
-                    checkOut,
-
-                    acRoom:ac,
-
-                    hotWater:heater,
-
-                    beds:Number(beds),
-
-                    utensils,
-
-                    waterJugs:Number(
-                        waterJugs
-                    ),
-
-                    mosquito,
-
-                    utensilsPrice:
-                    prices.utensils,
-
-                    waterPrice:
-                    prices.water,
-
-                    mosquitoPrice:
-                    prices.mosquito,
-
-                    totalExtra:
-                    prices.total,
-
-                    status:"pending",
-
-                    createdAt:
-                    serverTimestamp()
-
-                }
+                requestData
             );
 
 
-            /* SEND EMAIL */
+            console.log(
+                "Request saved:",
+                docRef.id
+            );
 
-            if(
-                EMAILJS_PUBLIC_KEY !==
-                "YOUR_EMAILJS_PUBLIC_KEY"
-            ){
 
-                try{
-
-                    await emailjs.send(
-                        EMAILJS_SERVICE_ID,
-                        EMAILJS_TEMPLATE_ID,
-                        {
-
-                            to_email:email,
-
-                            guest_name:
-                            firstName+
-                            " "+
-                            lastName,
-
-                            guest_email:email,
-
-                            phone:phone,
-
-                            passport:passport,
-
-                            check_in:checkIn,
-
-                            check_out:checkOut,
-
-                            ac_room:ac,
-
-                            hot_water:heater,
-
-                            beds:beds,
-
-                            utensils:utensils,
-
-                            water_jugs:waterJugs,
-
-                            mosquito:mosquito,
-
-                            utensils_price:
-                            prices.utensils,
-
-                            water_price:
-                            prices.water,
-
-                            mosquito_price:
-                            prices.mosquito,
-
-                            total_extra:
-                            prices.total,
-
-                            request_id:
-                            docRef.id
-
-                        }
-                    );
-
-                }
-                catch(emailError){
-
-                    console.error(
-                        "Email error:",
-                        emailError
-                    );
-
-                }
-
-            }
+            showMessage(
+                formMessage,
+                "Room request submitted successfully! Request ID: " + docRef.id,
+                "success"
+            );
 
 
             roomForm.reset();
@@ -1920,88 +1987,78 @@ roomForm.addEventListener(
             user.email || "";
 
 
-            document.getElementById(
-                "firstName"
-            ).value =
-            firstName;
-
-
-            document.getElementById(
-                "lastName"
-            ).value =
-            lastName;
-
-
             calculateTotal();
 
 
-            message(
-                formMessage,
-                "Room request submitted successfully! Check your email for confirmation."
-            );
+            window.scrollTo({
+                top:document.body.scrollHeight,
+                behavior:"smooth"
+            });
 
 
         }
+
         catch(error){
 
-            console.error(error);
+            console.error(
+                "FIRESTORE SUBMIT ERROR:",
+                error
+            );
 
-            message(
+
+            showMessage(
                 formMessage,
-                "Request failed: "+
-                error.message
+                getFirebaseError(error),
+                "error"
             );
 
         }
 
+        finally{
 
-        submitBtn.disabled=false;
+            submitBtn.disabled = false;
 
-        submitBtn.textContent=
-        "Submit Room Request";
+            submitBtn.textContent =
+            "Submit Room Request";
+
+        }
 
     }
 );
 
 
 /* ==========================================
-   MY REQUESTS
+   LOAD MY REQUESTS
 ========================================== */
 
 function loadMyRequests(uid){
 
     const q =
     query(
-
         collection(
             db,
             "roomRequests"
         ),
-
         where(
             "uid",
             "==",
             uid
-        ),
-
-        orderBy(
-            "createdAt",
-            "desc"
         )
-
     );
 
 
     onSnapshot(
+
         q,
+
         snapshot=>{
 
-            myRequests.innerHTML="";
+            myRequests.innerHTML = "";
 
 
             if(snapshot.empty){
 
-                myRequests.innerHTML=
+                myRequests.innerHTML =
                 '<div class="empty">No room requests yet.</div>';
 
                 return;
@@ -2009,13 +2066,43 @@ function loadMyRequests(uid){
             }
 
 
+            const requests = [];
+
+
             snapshot.forEach(
+                item=>{
+
+                    requests.push({
+                        id:item.id,
+                        data:item.data()
+                    });
+
+                }
+            );
+
+
+            requests.sort(
+                (a,b)=>{
+
+                    const aTime =
+                    a.data.createdAt?.toMillis?.() || 0;
+
+                    const bTime =
+                    b.data.createdAt?.toMillis?.() || 0;
+
+                    return bTime - aTime;
+
+                }
+            );
+
+
+            requests.forEach(
                 item=>{
 
                     myRequests.appendChild(
                         createCard(
                             item.id,
-                            item.data(),
+                            item.data,
                             false
                         )
                     );
@@ -2024,21 +2111,30 @@ function loadMyRequests(uid){
             );
 
         },
+
         error=>{
 
-            console.error(error);
+            console.error(
+                "MY REQUESTS ERROR:",
+                error
+            );
 
-            myRequests.innerHTML=
-            '<div class="empty">Unable to load requests.</div>';
+            myRequests.innerHTML =
+            '<div class="empty">Unable to load requests: ' +
+            escapeHTML(
+                getFirebaseError(error)
+            ) +
+            '</div>';
 
         }
+
     );
 
 }
 
 
 /* ==========================================
-   REQUEST CARD
+   CREATE REQUEST CARD
 ========================================== */
 
 function createCard(
@@ -2053,35 +2149,47 @@ function createCard(
     );
 
 
-    div.className="request";
+    div.className =
+    "request";
 
 
     const status =
-    data.status || "pending";
+    data.status ||
+    "pending";
 
 
     const statusText =
-    status.charAt(0).toUpperCase()+
+    status.charAt(0).toUpperCase() +
     status.slice(1);
 
 
-    div.innerHTML=`
+    div.innerHTML = `
 
         <div class="request-top">
 
             <strong>
                 ${escapeHTML(
-                    data.firstName+
-                    " "+
-                    data.lastName
+                    (data.firstName || "") +
+                    " " +
+                    (data.lastName || "")
                 )}
             </strong>
 
-            <span class="badge ${status}">
-                ${statusText}
+            <span class="badge ${escapeHTML(status)}">
+                ${escapeHTML(statusText)}
             </span>
 
         </div>
+
+        <p>
+            <b>Email:</b>
+            ${escapeHTML(data.email || data.userEmail || "")}
+        </p>
+
+        <p>
+            <b>Phone:</b>
+            ${escapeHTML(data.phone || "")}
+        </p>
 
         <p>
             <b>Check-in:</b>
@@ -2091,6 +2199,11 @@ function createCard(
         <p>
             <b>Check-out:</b>
             ${escapeHTML(data.checkOut || "")}
+        </p>
+
+        <p>
+            <b>Passport:</b>
+            ${escapeHTML(data.passport || "")}
         </p>
 
         <p>
@@ -2106,6 +2219,21 @@ function createCard(
         <p>
             <b>Hot Water:</b>
             ${escapeHTML(data.hotWater || "")}
+        </p>
+
+        <p>
+            <b>Utensils:</b>
+            ${escapeHTML(data.utensils || "")}
+        </p>
+
+        <p>
+            <b>Water Jugs:</b>
+            ${data.waterJugs || 0}
+        </p>
+
+        <p>
+            <b>Mosquito Dispeller:</b>
+            ${escapeHTML(data.mosquito || "")}
         </p>
 
         <p>
@@ -2174,20 +2302,39 @@ function createCard(
                     "click",
                     async()=>{
 
-                        await updateDoc(
+                        try{
 
-                            doc(
-                                db,
-                                "roomRequests",
-                                button.dataset.id
-                            ),
+                            button.disabled = true;
 
-                            {
-                                status:
-                                button.dataset.status
-                            }
+                            await updateDoc(
 
-                        );
+                                doc(
+                                    db,
+                                    "roomRequests",
+                                    button.dataset.id
+                                ),
+
+                                {
+                                    status:
+                                    button.dataset.status
+                                }
+
+                            );
+
+                        }
+                        catch(error){
+
+                            alert(
+                                "Update failed: " +
+                                getFirebaseError(error)
+                            );
+
+                        }
+                        finally{
+
+                            button.disabled = false;
+
+                        }
 
                     }
                 );
@@ -2217,15 +2364,31 @@ function createCard(
                 }
 
 
-                await deleteDoc(
+                try{
 
-                    doc(
-                        db,
-                        "roomRequests",
-                        deleteBtn.dataset.id
-                    )
+                    deleteBtn.disabled = true;
 
-                );
+                    await deleteDoc(
+
+                        doc(
+                            db,
+                            "roomRequests",
+                            deleteBtn.dataset.id
+                        )
+
+                    );
+
+                }
+                catch(error){
+
+                    alert(
+                        "Delete failed: " +
+                        getFirebaseError(error)
+                    );
+
+                    deleteBtn.disabled = false;
+
+                }
 
             }
         );
@@ -2239,38 +2402,65 @@ function createCard(
 
 
 /* ==========================================
-   ADMIN REQUESTS
+   LOAD ALL ADMIN REQUESTS
 ========================================== */
+
+let adminUnsubscribe = null;
+
 
 function loadAllRequests(){
 
+    if(adminUnsubscribe){
+
+        adminUnsubscribe();
+
+    }
+
+
     const q =
-    query(
-
-        collection(
-            db,
-            "roomRequests"
-        ),
-
-        orderBy(
-            "createdAt",
-            "desc"
-        )
-
+    collection(
+        db,
+        "roomRequests"
     );
 
 
+    adminUnsubscribe =
     onSnapshot(
+
         q,
+
         snapshot=>{
 
-            renderAdmin(snapshot);
+            renderAdmin(
+                snapshot
+            );
+
+        },
+
+        error=>{
+
+            console.error(
+                "ADMIN ERROR:",
+                error
+            );
+
+            allRequests.innerHTML =
+            '<div class="empty">Unable to load admin requests: ' +
+            escapeHTML(
+                getFirebaseError(error)
+            ) +
+            '</div>';
 
         }
+
     );
 
 }
 
+
+/* ==========================================
+   RENDER ADMIN
+========================================== */
 
 function renderAdmin(snapshot){
 
@@ -2278,26 +2468,53 @@ function renderAdmin(snapshot){
     adminFilter.value;
 
 
-    allRequests.innerHTML="";
+    allRequests.innerHTML = "";
 
-    let count=0;
+
+    const requests = [];
 
 
     snapshot.forEach(
         item=>{
 
-            const data =
-            item.data();
+            requests.push({
+                id:item.id,
+                data:item.data()
+            });
 
+        }
+    );
+
+
+    requests.sort(
+        (a,b)=>{
+
+            const aTime =
+            a.data.createdAt?.toMillis?.() || 0;
+
+            const bTime =
+            b.data.createdAt?.toMillis?.() || 0;
+
+            return bTime - aTime;
+
+        }
+    );
+
+
+    let count = 0;
+
+
+    requests.forEach(
+        item=>{
 
             const status =
-            data.status ||
+            item.data.status ||
             "pending";
 
 
             if(
-                filter!=="all" &&
-                filter!==status
+                filter !== "all" &&
+                filter !== status
             ){
 
                 return;
@@ -2312,7 +2529,7 @@ function renderAdmin(snapshot){
 
                 createCard(
                     item.id,
-                    data,
+                    item.data,
                     true
                 )
 
@@ -2322,9 +2539,9 @@ function renderAdmin(snapshot){
     );
 
 
-    if(count===0){
+    if(count === 0){
 
-        allRequests.innerHTML=
+        allRequests.innerHTML =
         '<div class="empty">No requests found.</div>';
 
     }
@@ -2334,8 +2551,91 @@ function renderAdmin(snapshot){
 
 adminFilter.addEventListener(
     "change",
-    loadAllRequests
+    ()=>{
+
+        loadAllRequests();
+
+    }
 );
+
+
+/* ==========================================
+   FIREBASE ERROR
+========================================== */
+
+function getFirebaseError(error){
+
+    if(!error){
+        return "Unknown error.";
+    }
+
+
+    if(
+        error.code ===
+        "permission-denied"
+    ){
+
+        return "Firestore permission denied. Firebase Console mein Firestore Rules check karo.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/popup-blocked"
+    ){
+
+        return "Google login popup blocked hai. Browser mein popup allow karo.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/popup-closed-by-user"
+    ){
+
+        return "Google login window close kar di gayi.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/unauthorized-domain"
+    ){
+
+        return "Ye website Firebase Authentication mein authorized domain nahi hai.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/operation-not-allowed"
+    ){
+
+        return "Firebase Console mein Google Sign-In enable karo.";
+
+    }
+
+
+    if(
+        error.code ===
+        "failed-precondition"
+    ){
+
+        return "Firebase configuration/index problem. Firestore settings check karo.";
+
+    }
+
+
+    return (
+        error.message ||
+        "Something went wrong."
+    );
+
+}
 
 
 /* ==========================================
@@ -2344,7 +2644,7 @@ adminFilter.addEventListener(
 
 function escapeHTML(value){
 
-    return String(value)
+    return String(value ?? "")
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -2354,7 +2654,9 @@ function escapeHTML(value){
 }
 
 
-/* INITIAL PRICE */
+/* ==========================================
+   INITIAL PRICE
+========================================== */
 
 calculateTotal();
 
