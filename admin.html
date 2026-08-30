@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Munger Mandir - Admin Panel</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f7fb;
+      color: #1f2937;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================
+       LOGIN
+    ========================== */
+
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #fff7ed, #f8fafc);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .login-logo {
+      width: 75px;
+      height: 75px;
+      margin: 0 auto 18px;
+      border-radius: 18px;
+      background: #9a5b13;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .login-card h1 {
+      font-size: 25px;
+      color: #7c4a0a;
+      margin-bottom: 8px;
+    }
+
+    .login-card p {
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .google-login {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      color: #111827;
+      padding: 13px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .google-login:hover {
+      background: #f9fafb;
+    }
+
+    .login-error {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #fee2e2;
+      color: #991b1b;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .header {
+      height: 70px;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 43px;
+      height: 43px;
+      border-radius: 11px;
+      background: #9a5b13;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .brand-text h2 {
+      font-size: 17px;
+      color: #7c4a0a;
+    }
+
+    .brand-text span {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .admin-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-photo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .admin-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .logout {
+      border: none;
+      background: #111827;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    /* =========================
+       DASHBOARD
+    ========================== */
+
+    .dashboard {
+      max-width: 1400px;
+      margin: auto;
+      padding: 30px 22px 50px;
+    }
+
+    .page-heading {
+      margin-bottom: 25px;
+    }
+
+    .page-heading h1 {
+      font-size: 28px;
+      color: #111827;
+      margin-bottom: 7px;
+    }
+
+    .page-heading p {
+      color: #6b7280;
+    }
+
+    /* =========================
+       STATS
+    ========================== */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .stat-title {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 29px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .pending-value {
+      color: #d97706;
+    }
+
+    .approved-value {
+      color: #15803d;
+    }
+
+    .rejected-value {
+      color: #dc2626;
+    }
+
+    /* =========================
+       TOOLBAR
+    ========================== */
+
+    .toolbar {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 15px;
+      padding: 15px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 230px;
+      border: 1px solid #d1d5db;
+      border-radius: 9px;
+      padding: 11px 13px;
+      outline: none;
+    }
+
+    .search:focus,
+    .filter:focus {
+      border-color: #9a5b13;
+    }
+
+    .filter {
+      border: 1px solid #d1d5db;
+      border-radius: 9px;
+      padding: 11px 13px;
+      background: white;
+      outline: none;
+    }
+
+    .toolbar-button {
+      border: none;
+      background: #9a5b13;
+      color: white;
+      border-radius: 9px;
+      padding: 11px 15px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .export {
+      background: #15803d;
+    }
+
+    /* =========================
+       TABLE
+    ========================== */
+
+    .table-wrapper {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 15px;
+      overflow: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1100px;
+    }
+
+    th {
+      background: #fafafa;
+      color: #6b7280;
+      font-size: 12px;
+      text-align: left;
+      padding: 14px;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: #fafafa;
+    }
+
+    .guest-name {
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .guest-email {
+      color: #6b7280;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status-pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-approved {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status-rejected {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .view-button {
+      border: 1px solid #d1d5db;
+      background: white;
+      padding: 7px 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .view-button:hover {
+      background: #f3f4f6;
+    }
+
+    /* =========================
+       EMPTY
+    ========================== */
+
+    .empty {
+      text-align: center;
+      padding: 50px 20px;
+      color: #9ca3af;
+    }
+
+    /* =========================
+       MODAL
+    ========================== */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 760px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      color: #7c4a0a;
+      font-size: 21px;
+    }
+
+    .close {
+      border: none;
+      background: #f3f4f6;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .detail-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .detail-label {
+      color: #9ca3af;
+      font-size: 10px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .detail-value {
+      color: #111827;
+      font-size: 13px;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .modal-section {
+      margin-top: 20px;
+    }
+
+    .modal-section h3 {
+      font-size: 15px;
+      color: #7c4a0a;
+      margin-bottom: 10px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+
+    .action {
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .action-pending {
+      background: #d97706;
+    }
+
+    .action-approved {
+      background: #15803d;
+    }
+
+    .action-rejected {
+      background: #dc2626;
+    }
+
+    .action-delete {
+      background: #374151;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        height: auto;
+        padding: 12px;
+      }
+
+      .admin-name {
+        display: none;
+      }
+
+      .dashboard {
+        padding: 22px 12px 40px;
+      }
+
+      .page-heading h1 {
+        font-size: 23px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-value {
+        font-size: 23px;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-card {
+        padding: 18px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOGIN PAGE
+====================================================== -->
+
+<section id="loginPage" class="login-page">
+
+  <div class="login-card">
+
+```
+<div class="login-logo">
+  MM
+</div>
+
+<h1>
+  Munger Mandir
+</h1>
+
+<p>
+  Admin Panel<br>
+  Sign in with your authorized Google account.
+</p>
+
+<button id="googleLogin" class="google-login">
+  Continue with Google
+</button>
+
+<div id="loginError" class="login-error hidden"></div>
+```
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     ADMIN APP
+====================================================== -->
+
+<div id="adminApp" class="hidden">
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+```
+<div class="brand">
+
+  <div class="brand-logo">
+    MM
+  </div>
+
+  <div class="brand-text">
+
+    <h2>
+      Munger Mandir
+    </h2>
+
+    <span>
+      Room Request Administration
+    </span>
+
+  </div>
+
+</div>
+
+
+<div class="admin-area">
+
+  <span id="adminName" class="admin-name">
+    Admin
+  </span>
+
+  <img
+    id="adminPhoto"
+    class="admin-photo"
+    src=""
+    alt="Admin"
+  >
+
+  <button id="logoutButton" class="logout">
+    Logout
+  </button>
+
+</div>
+```
+
+  </header>
+
+  <!-- DASHBOARD -->
+
+  <main class="dashboard">
+
+```
+<div class="page-heading">
+
+  <h1>
+    Room Requests
+  </h1>
+
+  <p>
+    View and manage all guest room requests.
+  </p>
+
+</div>
+
+
+<!-- STATISTICS -->
+
+<section class="stats">
+
+  <div class="stat-card">
+
+    <div class="stat-title">
+      Total Requests
+    </div>
+
+    <div id="totalCount" class="stat-value">
+      0
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-title">
+      Pending
+    </div>
+
+    <div
+      id="pendingCount"
+      class="stat-value pending-value"
+    >
+      0
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-title">
+      Approved
+    </div>
+
+    <div
+      id="approvedCount"
+      class="stat-value approved-value"
+    >
+      0
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-title">
+      Rejected
+    </div>
+
+    <div
+      id="rejectedCount"
+      class="stat-value rejected-value"
+    >
+      0
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- TOOLBAR -->
+
+<section class="toolbar">
+
+  <input
+    id="searchInput"
+    class="search"
+    type="search"
+    placeholder="Search name, email, phone, passport..."
+  >
+
+
+  <select id="statusFilter" class="filter">
+
+    <option value="all">
+      All Status
+    </option>
+
+    <option value="pending">
+      Pending
+    </option>
+
+    <option value="approved">
+      Approved
+    </option>
+
+    <option value="rejected">
+      Rejected
+    </option>
+
+  </select>
+
+
+  <button id="refreshButton" class="toolbar-button">
+    Refresh
+  </button>
+
+
+  <button id="exportButton" class="toolbar-button export">
+    Export CSV
+  </button>
+
+</section>
+
+
+<!-- TABLE -->
+
+<section class="table-wrapper">
+
+  <table>
+
+    <thead>
+
+      <tr>
+
+        <th>
+          Guest
+        </th>
+
+        <th>
+          Phone
+        </th>
+
+        <th>
+          Check In
+        </th>
+
+        <th>
+          Check Out
+        </th>
+
+        <th>
+          Beds
+        </th>
+
+        <th>
+          AC
+        </th>
+
+        <th>
+          Status
+        </th>
+
+        <th>
+          Action
+        </th>
+
+      </tr>
+
+    </thead>
+
+    <tbody id="requestTable">
+
+      <tr>
+        <td colspan="8">
+
+          <div class="empty">
+            Loading requests...
+          </div>
+
+        </td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</section>
+```
+
+  </main>
+
+</div>
+
+<!-- =====================================================
+     DETAILS MODAL
+====================================================== -->
+
+<div id="detailsModal" class="modal hidden">
+
+  <div class="modal-card">
+
+```
+<div class="modal-header">
+
+  <h2>
+    Guest Request Details
+  </h2>
+
+  <button id="closeModal" class="close">
+    ×
+  </button>
+
+</div>
+
+
+<div id="modalContent">
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- =====================================================
+     FIREBASE
+====================================================== -->
+
+<script type="module">
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    onSnapshot,
+    query,
+    orderBy,
+    updateDoc,
+    deleteDoc,
+    doc
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+  /* =====================================================
+     FIREBASE CONFIG
+  ====================================================== */
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD7qJWxjijDXrdTiI7D14zR-ds-j46rNzc",
+    authDomain: "munger-mandir-room-request.firebaseapp.com",
+    projectId: "munger-mandir-room-request",
+    storageBucket: "munger-mandir-room-request.firebasestorage.app",
+    messagingSenderId: "145384185034",
+    appId: "1:145384185034:web:c828c0388f8bd79d79a833",
+    measurementId: "G-LF2K2KFCN6"
+  };
+
+
+  /* =====================================================
+     ADMIN EMAIL
+     
+     IMPORTANT:
+     Replace this with your actual admin Gmail.
+  ====================================================== */
+
+  const ADMIN_EMAIL = "rishantbhaumik@gmail.com";
+
+
+  /* =====================================================
+     INITIALIZE
+  ====================================================== */
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const db = getFirestore(app);
+
+  const provider = new GoogleAuthProvider();
+
+
+  /* =====================================================
+     ELEMENTS
+  ====================================================== */
+
+  const loginPage =
+    document.getElementById("loginPage");
+
+  const adminApp =
+    document.getElementById("adminApp");
+
+  const googleLogin =
+    document.getElementById("googleLogin");
+
+  const loginError =
+    document.getElementById("loginError");
+
+  const logoutButton =
+    document.getElementById("logoutButton");
+
+  const adminName =
+    document.getElementById("adminName");
+
+  const adminPhoto =
+    document.getElementById("adminPhoto");
+
+  const requestTable =
+    document.getElementById("requestTable");
+
+  const searchInput =
+    document.getElementById("searchInput");
+
+  const statusFilter =
+    document.getElementById("statusFilter");
+
+  const detailsModal =
+    document.getElementById("detailsModal");
+
+  const modalContent =
+    document.getElementById("modalContent");
+
+  const closeModal =
+    document.getElementById("closeModal");
+
+
+  /* =====================================================
+     DATA
+  ====================================================== */
+
+  let requests = [];
+
+  let unsubscribeRequests = null;
+
+
+  /* =====================================================
+     GOOGLE LOGIN
+  ====================================================== */
+
+  googleLogin.addEventListener("click", async () => {
+
+    loginError.classList.add("hidden");
+
+    try {
+
+      await signInWithPopup(
+        auth,
+        provider
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      loginError.textContent =
+        "Login failed: " + error.message;
+
+      loginError.classList.remove("hidden");
+
+    }
+
+  });
+
+
+  /* =====================================================
+     AUTH STATE
+  ====================================================== */
+
+  onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+
+      loginPage.classList.remove("hidden");
+
+      adminApp.classList.add("hidden");
+
+      if (unsubscribeRequests) {
+        unsubscribeRequests();
+        unsubscribeRequests = null;
+      }
+
+      return;
+
+    }
+
+
+    /* ADMIN EMAIL CHECK */
+
+    if (
+      !user.email ||
+      user.email.toLowerCase() !==
+      ADMIN_EMAIL.toLowerCase()
+    ) {
+
+      loginError.textContent =
+        "Access denied. This Google account is not authorized as an admin.";
+
+      loginError.classList.remove("hidden");
+
+      signOut(auth);
+
+      return;
+
+    }
+
+
+    /* SHOW ADMIN */
+
+    loginPage.classList.add("hidden");
+
+    adminApp.classList.remove("hidden");
+
+    adminName.textContent =
+      user.displayName || "Administrator";
+
+    adminPhoto.src =
+      user.photoURL ||
+      "https://via.placeholder.com/100";
+
+
+    loadRequests();
+
+  });
+
+
+  /* =====================================================
+     LOAD REQUESTS
+  ====================================================== */
+
+  function loadRequests() {
+
+    if (unsubscribeRequests) {
+      unsubscribeRequests();
+    }
+
+
+    const requestsQuery = query(
+      collection(db, "roomRequests"),
+      orderBy("createdAt", "desc")
+    );
+
+
+    unsubscribeRequests = onSnapshot(
+      requestsQuery,
+      (snapshot) => {
+
+        requests = [];
+
+        snapshot.forEach((documentSnapshot) => {
+
+          requests.push({
+            id: documentSnapshot.id,
+            ...documentSnapshot.data()
+          });
+
+        });
+
+
+        updateStatistics();
+
+        renderTable();
+
+      },
+      (error) => {
+
+        console.error(error);
+
+        requestTable.innerHTML = `
+          <tr>
+            <td colspan="8">
+              <div class="empty">
+                Unable to load requests.<br><br>
+                ${escapeHTML(error.message)}
+              </div>
+            </td>
+          </tr>
+        `;
+
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     STATISTICS
+  ====================================================== */
+
+  function updateStatistics() {
+
+    const total =
+      requests.length;
+
+    const pending =
+      requests.filter(
+        item => (item.status || "pending") === "pending"
+      ).length;
+
+    const approved =
+      requests.filter(
+        item => item.status === "approved"
+      ).length;
+
+    const rejected =
+      requests.filter(
+        item => item.status === "rejected"
+      ).length;
+
+
+    document.getElementById("totalCount").textContent =
+      total;
+
+    document.getElementById("pendingCount").textContent =
+      pending;
+
+    document.getElementById("approvedCount").textContent =
+      approved;
+
+    document.getElementById("rejectedCount").textContent =
+      rejected;
+
+  }
+
+
+  /* =====================================================
+     FILTER
+  ====================================================== */
+
+  searchInput.addEventListener(
+    "input",
+    renderTable
+  );
+
+  statusFilter.addEventListener(
+    "change",
+    renderTable
+  );
+
+
+  /* =====================================================
+     RENDER TABLE
+  ====================================================== */
+
+  function renderTable() {
+
+    const search =
+      searchInput.value.trim().toLowerCase();
+
+    const filter =
+      statusFilter.value;
+
+
+    const filtered =
+      requests.filter((item) => {
+
+        const searchableText = [
+
+          item.firstName,
+          item.lastName,
+          item.email,
+          item.phone,
+          item.passportNumber,
+          item.passport,
+          item.checkIn,
+          item.checkOut
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+        const searchMatch =
+          !search ||
+          searchableText.includes(search);
+
+
+        const currentStatus =
+          item.status || "pending";
+
+
+        const statusMatch =
+          filter === "all" ||
+          currentStatus === filter;
+
+
+        return searchMatch && statusMatch;
+
+      });
+
+
+    requestTable.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+      requestTable.innerHTML = `
+        <tr>
+          <td colspan="8">
+            <div class="empty">
+              No room requests found.
+            </div>
+          </td>
+        </tr>
+      `;
+
+      return;
+
+    }
+
+
+    filtered.forEach((item) => {
+
+      const row =
+        document.createElement("tr");
+
+
+      const name =
+        `${item.firstName || ""} ${item.lastName || ""}`
+        .trim() || "Unknown Guest";
+
+
+      const status =
+        item.status || "pending";
+
+
+      const statusClass =
+        status === "approved"
+          ? "status-approved"
+          : status === "rejected"
+            ? "status-rejected"
+            : "status-pending";
+
+
+      row.innerHTML = `
+
+        <td>
+
+          <div class="guest-name">
+            ${escapeHTML(name)}
+          </div>
+
+          <div class="guest-email">
+            ${escapeHTML(item.email || "-")}
+          </div>
+
+        </td>
+
+        <td>
+          ${escapeHTML(item.phone || "-")}
+        </td>
+
+        <td>
+          ${escapeHTML(item.checkIn || "-")}
+        </td>
+
+        <td>
+          ${escapeHTML(item.checkOut || "-")}
+        </td>
+
+        <td>
+          ${escapeHTML(item.beds || "-")}
+        </td>
+
+        <td>
+          ${escapeHTML(item.acRoom || "-")}
+        </td>
+
+        <td>
+
+          <span class="status ${statusClass}">
+            ${capitalize(status)}
+          </span>
+
+        </td>
+
+        <td>
+
+          <button
+            class="view-button"
+            data-id="${escapeHTML(item.id)}"
+          >
+            View
+          </button>
+
+        </td>
+
+      `;
+
+
+      row
+        .querySelector(".view-button")
+        .addEventListener(
+          "click",
+          () => openDetails(item.id)
+        );
+
+
+      requestTable.appendChild(row);
+
+    });
+
+  }
+
+
+  /* =====================================================
+     OPEN DETAILS
+  ====================================================== */
+
+  function openDetails(id) {
+
+    const item =
+      requests.find(
+        request => request.id === id
+      );
+
+
+    if (!item) {
+      return;
+    }
+
+
+    const status =
+      item.status || "pending";
+
+
+    modalContent.innerHTML = `
+
+      <div class="detail-grid">
+
+        ${detail(
+          "First Name",
+          item.firstName
+        )}
+
+        ${detail(
+          "Last Name",
+          item.lastName
+        )}
+
+        ${detail(
+          "Phone Number",
+          item.phone
+        )}
+
+        ${detail(
+          "Email",
+          item.email
+        )}
+
+        ${detail(
+          "Check In",
+          item.checkIn
+        )}
+
+        ${detail(
+          "Check Out",
+          item.checkOut
+        )}
+
+        ${detail(
+          "Passport Number",
+          item.passportNumber || item.passport
+        )}
+
+        ${detail(
+          "Number of Beds",
+          item.beds
+        )}
+
+        ${detail(
+          "AC Room",
+          item.acRoom
+        )}
+
+        ${detail(
+          "Hot Water",
+          item.hotWater
+        )}
+
+        ${detail(
+          "Plate / Spoon / Glass",
+          item.utensils
+        )}
+
+        ${detail(
+          "20L Water Jug",
+          item.waterJugs
+        )}
+
+        ${detail(
+          "All Out Mosquito",
+          item.mosquito
+        )}
+
+        ${detail(
+          "Status",
+          capitalize(status)
+        )}
+
+      </div>
+
+
+      <div class="modal-section">
+
+        <h3>
+          Extra Charges
+        </h3>
+
+        <div class="detail-grid">
+
+          ${detail(
+            "Utensils",
+            "₹" + (item.utensilsPrice || 0)
+          )}
+
+          ${detail(
+            "Water",
+            "₹" + (item.waterPrice || 0)
+          )}
+
+          ${detail(
+            "Mosquito Dispeller",
+            "₹" + (item.mosquitoPrice || 0)
+          )}
+
+          ${detail(
+            "Total Extra",
+            "₹" + (item.totalExtra || 0)
+          )}
+
+        </div>
+
+      </div>
+
+
+      ${
+        item.note
+          ? `
+            <div class="modal-section">
+
+              <h3>
+                Additional Information
+              </h3>
+
+              <div class="detail-box">
+
+                <div class="detail-value">
+                  ${escapeHTML(item.note)}
+                </div>
+
+              </div>
+
+            </div>
+          `
+          : ""
+      }
+
+
+      <div class="modal-actions">
+
+        <button
+          id="pendingAction"
+          class="action action-pending"
+        >
+          Mark Pending
+        </button>
+
+        <button
+          id="approveAction"
+          class="action action-approved"
+        >
+          Approve
+        </button>
+
+        <button
+          id="rejectAction"
+          class="action action-rejected"
+        >
+          Reject
+        </button>
+
+        <button
+          id="deleteAction"
+          class="action action-delete"
+        >
+          Delete
+        </button>
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById("pendingAction")
+      .onclick = () =>
+        changeStatus(id, "pending");
+
+
+    document
+      .getElementById("approveAction")
+      .onclick = () =>
+        changeStatus(id, "approved");
+
+
+    document
+      .getElementById("rejectAction")
+      .onclick = () =>
+        changeStatus(id, "rejected");
+
+
+    document
+      .getElementById("deleteAction")
+      .onclick = () =>
+        deleteRequest(id);
+
+
+    detailsModal.classList.remove("hidden");
+
+  }
+
+
+  /* =====================================================
+     DETAIL HELPER
+  ====================================================== */
+
+  function detail(label, value) {
+
+    return `
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          ${escapeHTML(label)}
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(value ?? "-")}
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =====================================================
+     CHANGE STATUS
+  ====================================================== */
+
+  async function changeStatus(id, status) {
+
+    try {
+
+      await updateDoc(
+        doc(db, "roomRequests", id),
+        {
+          status: status
+        }
+      );
+
+
+      closeDetails();
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Could not update status:\n" +
+        error.message
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     DELETE
+  ====================================================== */
+
+  async function deleteRequest(id) {
+
+    const confirmed =
+      confirm(
+        "Are you sure you want to permanently delete this request?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    try {
+
+      await deleteDoc(
+        doc(db, "roomRequests", id)
+      );
+
+
+      closeDetails();
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Could not delete request:\n" +
+        error.message
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     CLOSE MODAL
+  ====================================================== */
+
+  function closeDetails() {
+
+    detailsModal.classList.add("hidden");
+
+  }
+
+
+  closeModal.addEventListener(
+    "click",
+    closeDetails
+  );
+
+
+  detailsModal.addEventListener(
+    "click",
+    (event) => {
+
+      if (event.target === detailsModal) {
+        closeDetails();
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     LOGOUT
+  ====================================================== */
+
+  logoutButton.addEventListener(
+    "click",
+    async () => {
+
+      await signOut(auth);
+
+    }
+  );
+
+
+  /* =====================================================
+     REFRESH
+  ====================================================== */
+
+  document
+    .getElementById("refreshButton")
+    .addEventListener(
+      "click",
+      () => {
+
+        renderTable();
+        updateStatistics();
+
+      }
+    );
+
+
+  /* =====================================================
+     CSV EXPORT
+  ====================================================== */
+
+  document
+    .getElementById("exportButton")
+    .addEventListener(
+      "click",
+      exportCSV
+    );
+
+
+  function exportCSV() {
+
+    if (requests.length === 0) {
+
+      alert(
+        "There are no requests to export."
+      );
+
+      return;
+
+    }
+
+
+    const headers = [
+
+      "Request ID",
+      "First Name",
+      "Last Name",
+      "Phone",
+      "Email",
+      "Passport Number",
+      "Check In",
+      "Check Out",
+      "Beds",
+      "AC Room",
+      "Hot Water",
+      "Utensils",
+      "Water Jugs",
+      "Mosquito",
+      "Utensils Price",
+      "Water Price",
+      "Mosquito Price",
+      "Total Extra",
+      "Status"
+
+    ];
+
+
+    const rows =
+      requests.map(item => [
+
+        item.id,
+        item.firstName,
+        item.lastName,
+        item.phone,
+        item.email,
+        item.passportNumber || item.passport,
+        item.checkIn,
+        item.checkOut,
+        item.beds,
+        item.acRoom,
+        item.hotWater,
+        item.utensils,
+        item.waterJugs,
+        item.mosquito,
+        item.utensilsPrice,
+        item.waterPrice,
+        item.mosquitoPrice,
+        item.totalExtra,
+        item.status || "pending"
+
+      ]);
+
+
+    const csv = [
+
+      headers,
+      ...rows
+
+    ]
+    .map(row =>
+      row.map(value =>
+        `"${String(value ?? "")
+          .replaceAll('"', '""')}"`
+      ).join(",")
+    )
+    .join("\n");
+
+
+    const blob =
+      new Blob(
+        [csv],
+        {
+          type: "text/csv;charset=utf-8;"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(blob);
+
+
+    const link =
+      document.createElement("a");
+
+
+    link.href = url;
+
+    link.download =
+      "munger-mandir-room-requests.csv";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+  }
+
+
+  /* =====================================================
+     HELPERS
+  ====================================================== */
+
+  function capitalize(value) {
+
+    const text =
+      String(value || "");
+
+    return text.charAt(0).toUpperCase() +
+      text.slice(1);
+
+  }
+
+
+  function escapeHTML(value) {
+
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+</script>
+
+</body>
+</html>
