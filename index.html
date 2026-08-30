@@ -1,2472 +1,1436 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Munger Mandir Room Request</title>
-
-  <meta name="theme-color" content="#7b4b24">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --brown: #75471f;
-      --brown-dark: #553016;
-      --gold: #c69245;
-      --cream: #fffaf0;
-      --border: #e6d3b9;
-      --text: #3f2c1e;
-      --muted: #786858;
-      --green: #287a42;
-    }
-
-    body {
-      font-family: Georgia, "Times New Roman", serif;
-      background:
-        linear-gradient(
-          rgba(255, 250, 240, 0.93),
-          rgba(255, 250, 240, 0.93)
-        ),
-        radial-gradient(
-          circle at top,
-          #f2d3a3,
-          #fffaf0 60%,
-          #ead8c1
-        );
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    button,
-    input,
-    select {
-      font-family: inherit;
-    }
-
-    /* ================= HEADER ================= */
-
-    header {
-      height: 72px;
-      background: var(--brown);
-      color: white;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 10px 25px;
-
-      position: sticky;
-      top: 0;
-      z-index: 100;
-
-      box-shadow: 0 4px 18px rgba(70, 40, 18, 0.25);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo {
-      width: 47px;
-      height: 47px;
-      border-radius: 50%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: #f8d693;
-      color: var(--brown);
-
-      font-size: 25px;
-    }
-
-    .brand h1 {
-      font-size: 20px;
-    }
-
-    .brand p {
-      font-size: 11px;
-      opacity: 0.8;
-      margin-top: 3px;
-    }
-
-    .account {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Munger Mandir | Room Request</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#f5f7fb;
+  color:#1f2937;
+}
+
+header{
+  background:#ffffff;
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.nav{
+  max-width:1150px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:45px;
+  height:45px;
+  border-radius:12px;
+  background:#7c3aed;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.brand h1{
+  font-size:18px;
+}
+
+.brand small{
+  display:block;
+  color:#6b7280;
+  font-size:12px;
+  margin-top:3px;
+}
+
+.user-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.user-photo{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+button{
+  cursor:pointer;
+  border:none;
+}
+
+.logout{
+  background:#111827;
+  color:white;
+  padding:9px 14px;
+  border-radius:8px;
+}
+
+.login-btn{
+  background:#fff;
+  border:1px solid #d1d5db;
+  padding:11px 16px;
+  border-radius:9px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:35px 20px 60px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#6d28d9,#4f46e5);
+  color:white;
+  border-radius:22px;
+  padding:40px;
+  margin-bottom:25px;
+}
+
+.hero h2{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  opacity:.9;
+  max-width:650px;
+  line-height:1.6;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:25px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 6px 20px rgba(0,0,0,.04);
+}
+
+.card h3{
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid #d1d5db;
+  border-radius:9px;
+  outline:none;
+  font-size:14px;
+  margin-bottom:16px;
+  background:#fff;
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:#6366f1;
+  box-shadow:0 0 0 3px rgba(99,102,241,.1);
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.submit{
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  background:#4f46e5;
+  color:#fff;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.submit:hover{
+  background:#4338ca;
+}
+
+.info{
+  display:grid;
+  gap:12px;
+}
+
+.info-item{
+  padding:15px;
+  background:#f8fafc;
+  border-radius:12px;
+}
+
+.info-item strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.requests{
+  margin-top:25px;
+}
+
+.request{
+  border:1px solid #e5e7eb;
+  padding:17px;
+  border-radius:13px;
+  margin-top:12px;
+  background:#fafafa;
+}
+
+.request-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.badge{
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.badge.approved{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.badge.rejected{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.request p{
+  color:#6b7280;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.empty{
+  color:#6b7280;
+  text-align:center;
+  padding:25px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.login-screen{
+  min-height:calc(100vh - 76px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.login-card{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border-radius:22px;
+  padding:35px;
+  text-align:center;
+  border:1px solid #e5e7eb;
+  box-shadow:0 15px 45px rgba(0,0,0,.08);
+}
+
+.login-icon{
+  width:70px;
+  height:70px;
+  margin:auto;
+  margin-bottom:18px;
+  border-radius:20px;
+  background:#4f46e5;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:bold;
+}
+
+.login-card h2{
+  margin-bottom:10px;
+}
+
+.login-card p{
+  color:#6b7280;
+  line-height:1.5;
+  margin-bottom:25px;
+}
+
+.google{
+  width:100%;
+  padding:13px;
+  border:1px solid #d1d5db;
+  background:#fff;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:bold;
+}
+
+.google:hover{
+  background:#f9fafb;
+}
+
+.admin{
+  margin-top:25px;
+}
+
+.admin-controls{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.admin-controls select{
+  margin:0;
+  max-width:180px;
+}
+
+.update-btn{
+  background:#111827;
+  color:white;
+  padding:10px 14px;
+  border-radius:8px;
+}
+
+.delete-btn{
+  background:#fee2e2;
+  color:#991b1b;
+  padding:7px 10px;
+  border-radius:7px;
+  font-size:12px;
+}
+
+.message{
+  margin-top:12px;
+  padding:10px;
+  border-radius:8px;
+  background:#f3f4f6;
+  font-size:13px;
+  display:none;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#9ca3af;
+  font-size:13px;
+}
+
+@media(max-width:800px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding:28px 22px;
+  }
+
+  .hero h2{
+    font-size:27px;
+  }
+
+  .user-name{
+    display:none;
+  }
+}
+
+@media(max-width:500px){
+  .two{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .container{
+    padding:20px 13px 40px;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .brand h1{
+    font-size:15px;
+  }
+
+  .brand small{
+    font-size:10px;
+  }
+
+  .login-card{
+    padding:28px 20px;
+  }
+}
+</style>
 
-    #userPhoto {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 2px solid white;
-      object-fit: cover;
-      display: none;
-    }
-
-    #userName {
-      max-width: 180px;
-      font-size: 13px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    #logoutBtn {
-      display: none;
-
-      border: none;
-      background: #a43d31;
-      color: white;
-
-      padding: 9px 13px;
-      border-radius: 7px;
-
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    /* ================= LOGIN ================= */
-
-    #loginPage {
-      min-height: calc(100vh - 72px);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 25px;
-    }
-
-    .login-card {
-      width: 100%;
-      max-width: 440px;
-
-      background: white;
-      border: 1px solid var(--border);
-
-      border-radius: 20px;
-
-      padding: 38px 30px;
-
-      text-align: center;
-
-      box-shadow: 0 12px 40px rgba(80, 50, 25, 0.14);
-    }
-
-    .temple {
-      width: 90px;
-      height: 90px;
-
-      margin: 0 auto 20px;
-
-      border-radius: 50%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: #fff1d3;
-      border: 2px solid #e3bd7b;
-
-      font-size: 45px;
-    }
-
-    .login-card h2 {
-      color: var(--brown);
-      font-size: 27px;
-      margin-bottom: 8px;
-    }
-
-    .login-card p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .google-btn {
-      width: 100%;
-
-      margin-top: 25px;
-
-      background: white;
-      border: 1px solid #d4c3b0;
-
-      padding: 14px;
-
-      border-radius: 9px;
-
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-
-      font-size: 15px;
-      font-weight: bold;
-
-      transition: 0.2s;
-    }
-
-    .google-btn:hover {
-      background: #fffaf4;
-      transform: translateY(-1px);
-    }
-
-    .google-icon {
-      font-family: Arial, sans-serif;
-      color: #4285f4;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .small-note {
-      margin-top: 16px;
-      font-size: 12px !important;
-      color: #918174 !important;
-    }
-
-    /* ================= APP ================= */
-
-    #appPage {
-      display: none;
-
-      width: 100%;
-      max-width: 900px;
-
-      margin: auto;
-
-      padding: 35px 15px 60px;
-    }
-
-    .heading {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .heading .om {
-      color: #a66b29;
-      font-size: 31px;
-      margin-bottom: 5px;
-    }
-
-    .heading h2 {
-      color: var(--brown);
-      font-size: 29px;
-      margin-bottom: 7px;
-    }
-
-    .heading p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* ================= CARD ================= */
-
-    .card {
-      background: white;
-
-      border: 1px solid var(--border);
-
-      border-radius: 15px;
-
-      padding: 25px;
-
-      margin-bottom: 20px;
-
-      box-shadow: 0 6px 25px rgba(80, 50, 25, 0.08);
-    }
-
-    .card-title {
-      color: var(--brown);
-
-      font-size: 20px;
-      font-weight: bold;
-
-      padding-bottom: 13px;
-
-      border-bottom: 1px solid #eadcca;
-
-      margin-bottom: 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .required {
-      color: #b33229;
-    }
-
-    input {
-      width: 100%;
-
-      padding: 12px 13px;
-
-      border-radius: 8px;
-
-      border: 1px solid #d8c6b1;
-
-      outline: none;
-
-      background: white;
-
-      color: var(--text);
-
-      font-size: 14px;
-    }
-
-    input:focus {
-      border-color: var(--gold);
-
-      box-shadow:
-        0 0 0 3px rgba(198, 146, 69, 0.13);
-    }
-
-    input[readonly] {
-      background: #faf5ed;
-      color: #71573d;
-    }
-
-    /* ================= QUESTION ================= */
-
-    .question {
-      border: 1px solid #eadcca;
-
-      background: #fffdf9;
-
-      padding: 16px;
-
-      border-radius: 10px;
-
-      margin-bottom: 13px;
-    }
-
-    .question:last-child {
-      margin-bottom: 0;
-    }
-
-    .question-title {
-      font-size: 14px;
-      font-weight: bold;
-      line-height: 1.5;
-
-      margin-bottom: 11px;
-    }
-
-    .price {
-      color: #986021;
-      font-size: 12px;
-      font-weight: normal;
-    }
-
-    .options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .option {
-      position: relative;
-    }
-
-    .option input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .option label {
-      display: block;
-
-      border: 1px solid #d7c4ae;
-
-      background: white;
-
-      padding: 9px 18px;
-
-      border-radius: 8px;
-
-      cursor: pointer;
-
-      font-weight: normal;
-
-      transition: 0.2s;
-    }
-
-    .option input:checked + label {
-      background: var(--brown);
-      border-color: var(--brown);
-      color: white;
-    }
-
-    /* ================= BED ================= */
-
-    .beds-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .beds-row input {
-      max-width: 160px;
-    }
-
-    .beds-row span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* ================= JUG ================= */
-
-    #jugQuantityBox {
-      display: none;
-      margin-top: 14px;
-    }
-
-    #jugQuantityBox input {
-      margin-top: 7px;
-      max-width: 160px;
-    }
-
-    /* ================= SUMMARY ================= */
-
-    .summary {
-      background: #fff8e8;
-
-      border: 1px solid #e6c986;
-
-      border-radius: 12px;
-
-      padding: 20px;
-    }
-
-    .summary h3 {
-      color: var(--brown);
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-
-      padding: 9px 0;
-
-      border-bottom: 1px dashed #ddc79d;
-
-      font-size: 14px;
-    }
-
-    .total {
-      display: flex;
-      justify-content: space-between;
-
-      margin-top: 10px;
-      padding-top: 14px;
-
-      border-top: 2px solid #d9b86d;
-
-      color: var(--brown);
-
-      font-size: 19px;
-      font-weight: bold;
-    }
-
-    /* ================= SUBMIT ================= */
-
-    #submitBtn {
-      width: 100%;
-
-      margin-top: 20px;
-
-      border: none;
-
-      padding: 15px;
-
-      border-radius: 9px;
-
-      background: var(--brown);
-      color: white;
-
-      cursor: pointer;
-
-      font-size: 16px;
-      font-weight: bold;
-
-      transition: 0.2s;
-    }
-
-    #submitBtn:hover {
-      background: var(--brown-dark);
-    }
-
-    #submitBtn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* ================= SUCCESS ================= */
-
-    #successPage {
-      display: none;
-
-      max-width: 650px;
-
-      margin: 65px auto;
-
-      padding: 20px;
-    }
-
-    .success-card {
-      background: white;
-
-      border: 1px solid var(--border);
-
-      border-radius: 20px;
-
-      padding: 40px 25px;
-
-      text-align: center;
-
-      box-shadow: 0 12px 40px rgba(80, 50, 25, 0.12);
-    }
-
-    .success-icon {
-      width: 82px;
-      height: 82px;
-
-      margin: 0 auto 20px;
-
-      border-radius: 50%;
-
-      background: #e6f5e9;
-
-      color: var(--green);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-family: Arial, sans-serif;
-
-      font-size: 45px;
-      font-weight: bold;
-    }
-
-    .success-card h2 {
-      color: var(--green);
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .success-card p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .request-id {
-      background: #faf4eb;
-
-      border: 1px dashed #c8a77e;
-
-      padding: 15px;
-
-      margin: 22px 0;
-
-      border-radius: 9px;
-
-      font-family: monospace;
-      font-size: 15px;
-      word-break: break-all;
-    }
-
-    .email-box {
-      background: #eef6ff;
-
-      border: 1px solid #c8def8;
-
-      color: #315a84;
-
-      padding: 13px;
-
-      border-radius: 8px;
-
-      font-size: 13px;
-
-      margin-bottom: 20px;
-    }
-
-    .new-btn {
-      border: none;
-
-      background: var(--brown);
-      color: white;
-
-      padding: 12px 23px;
-
-      border-radius: 8px;
-
-      cursor: pointer;
-
-      font-weight: bold;
-    }
-
-    /* ================= LOADER ================= */
-
-    #loader {
-      display: none;
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 9999;
-
-      background: rgba(255, 250, 241, 0.9);
-
-      align-items: center;
-      justify-content: center;
-
-      flex-direction: column;
-
-      gap: 15px;
-    }
-
-    .spinner {
-      width: 48px;
-      height: 48px;
-
-      border-radius: 50%;
-
-      border: 4px solid #e5d8c8;
-
-      border-top-color: var(--brown);
-
-      animation: spin 0.9s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    #loaderText {
-      color: var(--brown);
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    /* ================= TOAST ================= */
-
-    #toast {
-      display: none;
-
-      position: fixed;
-
-      right: 20px;
-      bottom: 20px;
-
-      z-index: 10000;
-
-      max-width: 360px;
-
-      padding: 14px 18px;
-
-      border-radius: 8px;
-
-      background: #3d2a1e;
-      color: white;
-
-      font-family: Arial, sans-serif;
-
-      font-size: 14px;
-
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    }
-
-    footer {
-      text-align: center;
-
-      color: #8b7a6a;
-
-      font-size: 12px;
-
-      padding: 0 20px 30px;
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 650px) {
-
-      header {
-        padding: 10px 13px;
-      }
-
-      .brand h1 {
-        font-size: 16px;
-      }
-
-      .brand p {
-        display: none;
-      }
-
-      .logo {
-        width: 40px;
-        height: 40px;
-        font-size: 21px;
-      }
-
-      #userName {
-        display: none;
-      }
-
-      #appPage {
-        padding: 25px 11px 45px;
-      }
-
-      .heading h2 {
-        font-size: 23px;
-      }
-
-      .card {
-        padding: 17px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .full {
-        grid-column: auto;
-      }
-
-      .login-card {
-        padding: 30px 20px;
-      }
-    }
-  </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
 <header>
+  <div class="nav">
 
-  <div class="brand">
+```
+<div class="brand">
+  <div class="logo">MM</div>
+  <div>
+    <h1>Munger Mandir</h1>
+    <small>Room Request Portal</small>
+  </div>
+</div>
 
-    <div class="logo">
-      🛕
-    </div>
+<div id="userArea" class="user-area hidden">
+  <span id="userName" class="user-name"></span>
+  <img id="userPhoto" class="user-photo" src="" alt="User">
+  <button id="logoutBtn" class="logout">Logout</button>
+</div>
 
-    <div>
-      <h1>Munger Mandir</h1>
-      <p>Room Request</p>
-    </div>
+<button id="topLogin" class="login-btn">
+  Login with Google
+</button>
+```
 
   </div>
-
-
-  <div class="account">
-
-    <img
-      id="userPhoto"
-      src=""
-      alt="User">
-
-    <span id="userName"></span>
-
-    <button
-      id="logoutBtn">
-      Logout
-    </button>
-
-  </div>
-
 </header>
 
+<!-- LOGIN -->
 
-<!-- =========================================================
-     LOGIN
-========================================================= -->
-
-<section id="loginPage">
+<section id="loginScreen" class="login-screen">
 
   <div class="login-card">
 
-    <div class="temple">
-      🛕
-    </div>
+```
+<div class="login-icon">MM</div>
 
-    <h2>Munger Mandir</h2>
+<h2>Welcome</h2>
 
-    <p>
-      Room Request
-    </p>
+<p>
+  Login with your Google account to request a room
+  and check your request status.
+</p>
 
-    <p style="margin-top:8px;">
-      Please sign in with your Google account
-      before submitting your room request.
-    </p>
+<button id="googleBtn" class="google">
+  Continue with Google
+</button>
 
-
-    <button
-      id="googleLoginBtn"
-      class="google-btn">
-
-      <span class="google-icon">
-        G
-      </span>
-
-      Continue with Google
-
-    </button>
-
-
-    <p class="small-note">
-      Your Google email will automatically be
-      attached to your room request.
-    </p>
+<div id="loginMessage" class="message"></div>
+```
 
   </div>
 
 </section>
 
+<!-- MAIN APP -->
 
-<!-- =========================================================
-     USER APP
-========================================================= -->
+<main id="mainApp" class="hidden">
 
-<main id="appPage">
+  <div class="container">
 
-  <div class="heading">
+```
+<section class="hero">
 
-    <div class="om">
-      ॐ
-    </div>
+  <h2>Room Request</h2>
 
-    <h2>
-      Munger Mandir Room Request
-    </h2>
+  <p>
+    Submit your room request online. After submitting,
+    you can check your request status from this portal.
+  </p>
 
-    <p>
-      Please fill in your details carefully.
-    </p>
-
-  </div>
+</section>
 
 
-  <form id="roomRequestForm">
+<div class="grid">
 
+  <!-- FORM -->
 
-    <!-- PERSONAL DETAILS -->
+  <div class="card">
 
-    <div class="card">
+    <h3>Request a Room</h3>
 
-      <div class="card-title">
-        👤 Personal Details
-      </div>
+    <form id="roomForm">
 
+      <label>Full Name</label>
+      <input id="fullName" type="text" required>
 
-      <div class="grid">
+      <div class="two">
 
-        <div class="field">
-
-          <label>
-            First Name
-            <span class="required">*</span>
-          </label>
-
-          <input
-            id="firstName"
-            type="text"
-            placeholder="First name"
-            required>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Last Name
-            <span class="required">*</span>
-          </label>
-
-          <input
-            id="lastName"
-            type="text"
-            placeholder="Last name"
-            required>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Phone Number
-            <span class="required">*</span>
-          </label>
-
+        <div>
+          <label>Mobile Number</label>
           <input
             id="phone"
             type="tel"
-            placeholder="Phone number"
-            required>
-
+            maxlength="10"
+            required
+          >
         </div>
 
-
-        <div class="field">
-
-          <label>
-            Email
-            <span class="required">*</span>
-          </label>
-
+        <div>
+          <label>Number of Guests</label>
           <input
-            id="email"
-            type="email"
-            readonly
-            required>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Check-in Date
-            <span class="required">*</span>
-          </label>
-
-          <input
-            id="checkIn"
-            type="date"
-            required>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Check-out Date
-            <span class="required">*</span>
-          </label>
-
-          <input
-            id="checkOut"
-            type="date"
-            required>
-
-        </div>
-
-
-        <div class="field full">
-
-          <label>
-            Passport Number
-            <span class="required">*</span>
-          </label>
-
-          <input
-            id="passport"
-            type="text"
-            placeholder="Passport number"
-            required>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ROOM REQUEST -->
-
-    <div class="card">
-
-      <div class="card-title">
-        🛏️ Room Request Info
-      </div>
-
-
-      <!-- AC -->
-
-      <div class="question">
-
-        <div class="question-title">
-          Do you need an AC room?
-        </div>
-
-        <div class="options">
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="acRoom"
-              id="acYes"
-              value="Yes"
-              required>
-
-            <label for="acYes">
-              Yes
-            </label>
-
-          </div>
-
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="acRoom"
-              id="acNo"
-              value="No">
-
-            <label for="acNo">
-              No
-            </label>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- HOT WATER -->
-
-      <div class="question">
-
-        <div class="question-title">
-          Do you need a room with a hot water heater?
-        </div>
-
-        <div class="options">
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="hotWater"
-              id="hotYes"
-              value="Yes"
-              required>
-
-            <label for="hotYes">
-              Yes
-            </label>
-
-          </div>
-
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="hotWater"
-              id="hotNo"
-              value="No">
-
-            <label for="hotNo">
-              No
-            </label>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- BEDS -->
-
-      <div class="question">
-
-        <div class="question-title">
-          How many beds do you need in room?
-        </div>
-
-        <div class="beds-row">
-
-          <input
-            id="beds"
+            id="guests"
             type="number"
             min="1"
             max="20"
             value="1"
-            required>
-
-          <span>
-            Number of beds
-          </span>
-
+            required
+          >
         </div>
 
       </div>
 
+      <div class="two">
 
-      <!-- UTENSILS -->
-
-      <div class="question">
-
-        <div class="question-title">
-
-          Do you need to rent a plate,
-          spoon, glass?
-
-          <br>
-
-          <span class="price">
-            ₹300 for the stay
-          </span>
-
+        <div>
+          <label>Check-in Date</label>
+          <input id="checkIn" type="date" required>
         </div>
 
-
-        <div class="options">
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="utensils"
-              id="utensilsYes"
-              value="Yes"
-              required>
-
-            <label for="utensilsYes">
-              Yes — ₹300
-            </label>
-
-          </div>
-
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="utensils"
-              id="utensilsNo"
-              value="No">
-
-            <label for="utensilsNo">
-              No
-            </label>
-
-          </div>
-
+        <div>
+          <label>Check-out Date</label>
+          <input id="checkOut" type="date" required>
         </div>
 
       </div>
 
+      <label>Room Preference</label>
 
-      <!-- WATER JUG -->
+      <select id="roomType" required>
 
-      <div class="question">
+        <option value="">Select room type</option>
+        <option value="Single Room">Single Room</option>
+        <option value="Double Room">Double Room</option>
+        <option value="Family Room">Family Room</option>
+        <option value="Any Available Room">
+          Any Available Room
+        </option>
 
-        <div class="question-title">
+      </select>
 
-          Do you need a 20L water jug
-          in your room?
+      <label>Additional Note</label>
 
-          <br>
+      <textarea
+        id="note"
+        placeholder="Any additional information..."
+      ></textarea>
 
-          <span class="price">
-            ₹100 per jug
-          </span>
-
-        </div>
-
-
-        <div class="options">
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="waterJug"
-              id="jugYes"
-              value="Yes"
-              required>
-
-            <label for="jugYes">
-              Yes
-            </label>
-
-          </div>
-
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="waterJug"
-              id="jugNo"
-              value="No">
-
-            <label for="jugNo">
-              No
-            </label>
-
-          </div>
-
-        </div>
-
-
-        <div id="jugQuantityBox">
-
-          <label>
-            Number of 20L Jugs
-          </label>
-
-          <input
-            id="jugQuantity"
-            type="number"
-            min="1"
-            max="20"
-            value="1">
-
-        </div>
-
-      </div>
-
-
-      <!-- MOSQUITO -->
-
-      <div class="question">
-
-        <div class="question-title">
-
-          Do you want an All Out
-          Mosquito dispeller in room?
-
-          <br>
-
-          <span class="price">
-            ₹100
-          </span>
-
-        </div>
-
-
-        <div class="options">
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="mosquito"
-              id="mosquitoYes"
-              value="Yes"
-              required>
-
-            <label for="mosquitoYes">
-              Yes — ₹100
-            </label>
-
-          </div>
-
-
-          <div class="option">
-
-            <input
-              type="radio"
-              name="mosquito"
-              id="mosquitoNo"
-              value="No">
-
-            <label for="mosquitoNo">
-              No
-            </label>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- SUMMARY -->
-
-    <div class="card">
-
-      <div class="card-title">
-        💰 Request Summary
-      </div>
-
-
-      <div class="summary">
-
-        <h3>
-          Additional Services
-        </h3>
-
-
-        <div class="summary-row">
-
-          <span>
-            Plate / Spoon / Glass
-          </span>
-
-          <strong id="utensilsAmount">
-            ₹0
-          </strong>
-
-        </div>
-
-
-        <div class="summary-row">
-
-          <span>
-            20L Water Jug
-          </span>
-
-          <strong id="jugAmount">
-            ₹0
-          </strong>
-
-        </div>
-
-
-        <div class="summary-row">
-
-          <span>
-            All Out Mosquito Dispeller
-          </span>
-
-          <strong id="mosquitoAmount">
-            ₹0
-          </strong>
-
-        </div>
-
-
-        <div class="total">
-
-          <span>
-            Extra Service Total
-          </span>
-
-          <span id="totalAmount">
-            ₹0
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <button
-        type="submit"
-        id="submitBtn">
-
+      <button class="submit" type="submit">
         Submit Room Request
-
       </button>
 
-    </div>
+      <div id="formMessage" class="message"></div>
 
-  </form>
-
-</main>
-
-
-<!-- =========================================================
-     SUCCESS PAGE
-========================================================= -->
-
-<section id="successPage">
-
-  <div class="success-card">
-
-    <div class="success-icon">
-      ✓
-    </div>
-
-    <h2>
-      Request Submitted!
-    </h2>
-
-    <p>
-      Your Munger Mandir room request has
-      been successfully submitted.
-    </p>
-
-
-    <div class="request-id">
-
-      Request ID:
-
-      <strong id="requestId">
-        -
-      </strong>
-
-    </div>
-
-
-    <div class="email-box">
-
-      📧 Request submitted using:
-
-      <strong id="confirmationEmail">
-        -
-      </strong>
-
-    </div>
-
-
-    <button
-      class="new-btn"
-      id="newRequestBtn">
-
-      Submit Another Request
-
-    </button>
+    </form>
 
   </div>
 
-</section>
 
+  <!-- INFORMATION -->
 
-<!-- =========================================================
-     LOADER
-========================================================= -->
+  <div class="card">
 
-<div id="loader">
+    <h3>Request Information</h3>
 
-  <div class="spinner"></div>
+    <div class="info">
 
-  <div id="loaderText">
-    Please wait...
+      <div class="info-item">
+        <strong>📝 Submit Request</strong>
+        Fill in your details and submit the form.
+      </div>
+
+      <div class="info-item">
+        <strong>⏳ Pending</strong>
+        Your request will remain pending until reviewed.
+      </div>
+
+      <div class="info-item">
+        <strong>✅ Approved</strong>
+        Once approved, your status will be updated.
+      </div>
+
+      <div class="info-item">
+        <strong>❌ Rejected</strong>
+        If a room is unavailable, the request may be rejected.
+      </div>
+
+    </div>
+
   </div>
 
 </div>
 
 
-<!-- TOAST -->
+<!-- USER REQUESTS -->
 
-<div id="toast"></div>
+<section class="card requests">
 
+  <h3>My Room Requests</h3>
+
+  <div id="myRequests">
+    <div class="empty">
+      Loading requests...
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="adminPanel" class="card admin hidden">
+
+  <h3>Admin Panel</h3>
+
+  <div class="admin-controls">
+
+    <select id="adminFilter">
+
+      <option value="all">All Requests</option>
+      <option value="pending">Pending</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+
+    </select>
+
+  </div>
+
+  <div id="allRequests">
+    <div class="empty">
+      Loading admin requests...
+    </div>
+  </div>
+
+</section>
+```
+
+  </div>
+
+</main>
 
 <footer>
-  Munger Mandir Room Request
+  Munger Mandir Room Request Portal
 </footer>
-
-
-<!-- =========================================================
-     SUPABASE
-========================================================= -->
 
 <script type="module">
 
-  import {
-    createClient
-  } from
-  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+/* ==============================
+   FIREBASE IMPORTS
+============================== */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-  /* =========================================================
-     SUPABASE CONFIG
-  ========================================================= */
+/* ==============================
+   FIREBASE CONFIG
+============================== */
 
-  const SUPABASE_URL =
-    "https://xcfolefoazdgfxykqwaf.supabase.co";
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyD7qJWxjijDXrdTiI7D14zR-ds-j46rNzc",
+
+  authDomain:
+  "munger-mandir-room-request.firebaseapp.com",
+
+  projectId:
+  "munger-mandir-room-request",
+
+  storageBucket:
+  "munger-mandir-room-request.firebasestorage.app",
+
+  messagingSenderId:
+  "145384185034",
+
+  appId:
+  "1:145384185034:web:c828c0388f8bd79d79a833",
+
+  measurementId:
+  "G-LF2K2KFCN6"
+
+};
 
 
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_yIVRx-puNnSWx-U__C8jhg_skx88q0n";
+/* ==============================
+   INITIALIZE
+============================== */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+const provider = new GoogleAuthProvider();
 
 
-  const supabase =
-    createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
+/* ==============================
+   ADMIN EMAIL
+   CHANGE THIS
+============================== */
+
+const ADMIN_EMAIL = "YOUR_ADMIN_EMAIL@gmail.com";
+
+
+/* ==============================
+   ELEMENTS
+============================== */
+
+const loginScreen =
+document.getElementById("loginScreen");
+
+const mainApp =
+document.getElementById("mainApp");
+
+const userArea =
+document.getElementById("userArea");
+
+const topLogin =
+document.getElementById("topLogin");
+
+const googleBtn =
+document.getElementById("googleBtn");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+const userName =
+document.getElementById("userName");
+
+const userPhoto =
+document.getElementById("userPhoto");
+
+const loginMessage =
+document.getElementById("loginMessage");
+
+const roomForm =
+document.getElementById("roomForm");
+
+const formMessage =
+document.getElementById("formMessage");
+
+const myRequests =
+document.getElementById("myRequests");
+
+const adminPanel =
+document.getElementById("adminPanel");
+
+const allRequests =
+document.getElementById("allRequests");
+
+const adminFilter =
+document.getElementById("adminFilter");
+
+
+/* ==============================
+   SHOW MESSAGE
+============================== */
+
+function showMessage(element,text){
+
+  element.textContent = text;
+
+  element.style.display = "block";
+
+}
+
+
+/* ==============================
+   GOOGLE LOGIN
+============================== */
+
+async function login(){
+
+  try{
+
+    showMessage(
+      loginMessage,
+      "Opening Google Login..."
     );
 
+    const result =
+    await signInWithPopup(auth,provider);
 
-  /* =========================================================
-     ELEMENTS
-  ========================================================= */
+    console.log(
+      "Logged in:",
+      result.user
+    );
 
-  const loginPage =
-    document.getElementById("loginPage");
+  }catch(error){
 
-  const appPage =
-    document.getElementById("appPage");
+    console.error(error);
 
-  const successPage =
-    document.getElementById("successPage");
-
-  const googleLoginBtn =
-    document.getElementById("googleLoginBtn");
-
-  const logoutBtn =
-    document.getElementById("logoutBtn");
-
-  const userName =
-    document.getElementById("userName");
-
-  const userPhoto =
-    document.getElementById("userPhoto");
-
-  const emailInput =
-    document.getElementById("email");
-
-  const loader =
-    document.getElementById("loader");
-
-  const loaderText =
-    document.getElementById("loaderText");
-
-  const toast =
-    document.getElementById("toast");
-
-  const form =
-    document.getElementById("roomRequestForm");
-
-  const submitBtn =
-    document.getElementById("submitBtn");
-
-
-  /* =========================================================
-     LOADER
-  ========================================================= */
-
-  function showLoader(message) {
-
-    loaderText.textContent =
-      message || "Please wait...";
-
-    loader.style.display =
-      "flex";
+    showMessage(
+      loginMessage,
+      "Login failed: " + error.message
+    );
 
   }
 
-
-  function hideLoader() {
-
-    loader.style.display =
-      "none";
-
-  }
+}
 
 
-  /* =========================================================
-     TOAST
-  ========================================================= */
+googleBtn.addEventListener(
+  "click",
+  login
+);
 
-  function showToast(message) {
-
-    toast.textContent =
-      message;
-
-    toast.style.display =
-      "block";
+topLogin.addEventListener(
+  "click",
+  login
+);
 
 
-    setTimeout(() => {
+/* ==============================
+   LOGOUT
+============================== */
 
-      toast.style.display =
-        "none";
+logoutBtn.addEventListener(
+  "click",
+  async()=>{
 
-    }, 3500);
+    try{
 
-  }
+      await signOut(auth);
 
-
-  /* =========================================================
-     GOOGLE LOGIN
-  ========================================================= */
-
-  googleLoginBtn.addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        showLoader(
-          "Opening Google Login..."
-        );
-
-
-        const { error } =
-          await supabase.auth.signInWithOAuth({
-
-            provider: "google",
-
-            options: {
-
-              redirectTo:
-                window.location.origin
-
-            }
-
-          });
-
-
-        if (error) {
-
-          throw error;
-
-        }
-
-      }
-
-      catch (error) {
-
-        console.error(error);
-
-        hideLoader();
-
-        showToast(
-          error.message ||
-          "Google login failed."
-        );
-
-      }
-
-    }
-  );
-
-
-  /* =========================================================
-     AUTH STATE
-  ========================================================= */
-
-  async function loadUser() {
-
-    const {
-      data,
-      error
-    } =
-      await supabase.auth.getUser();
-
-
-    if (error) {
+    }catch(error){
 
       console.error(error);
+
+    }
+
+  }
+);
+
+
+/* ==============================
+   AUTH STATE
+============================== */
+
+onAuthStateChanged(
+  auth,
+  user=>{
+
+    if(user){
+
+      loginScreen.classList.add("hidden");
+
+      mainApp.classList.remove("hidden");
+
+      userArea.classList.remove("hidden");
+
+      topLogin.classList.add("hidden");
+
+      userName.textContent =
+      user.displayName || "User";
+
+      userPhoto.src =
+      user.photoURL ||
+      "https://via.placeholder.com/100";
+
+      document.getElementById("fullName").value =
+      user.displayName || "";
+
+      if(
+        user.email &&
+        user.email.toLowerCase() ===
+        ADMIN_EMAIL.toLowerCase()
+      ){
+
+        adminPanel.classList.remove("hidden");
+
+        loadAllRequests();
+
+      }else{
+
+        adminPanel.classList.add("hidden");
+
+      }
+
+      loadMyRequests(user.uid);
+
+    }else{
+
+      loginScreen.classList.remove("hidden");
+
+      mainApp.classList.add("hidden");
+
+      userArea.classList.add("hidden");
+
+      topLogin.classList.remove("hidden");
+
+      myRequests.innerHTML =
+      '<div class="empty">Please login to view your requests.</div>';
+
+    }
+
+  }
+);
+
+
+/* ==============================
+   ROOM REQUEST
+============================== */
+
+roomForm.addEventListener(
+  "submit",
+  async event=>{
+
+    event.preventDefault();
+
+    const user = auth.currentUser;
+
+    if(!user){
+
+      showMessage(
+        formMessage,
+        "Please login first."
+      );
 
       return;
 
     }
 
+    const checkIn =
+    document.getElementById("checkIn").value;
 
-    const user =
-      data.user;
+    const checkOut =
+    document.getElementById("checkOut").value;
 
+    if(checkOut <= checkIn){
 
-    if (user) {
-
-      showUser(user);
-
-    }
-
-    else {
-
-      showLogin();
-
-    }
-
-  }
-
-
-  function showUser(user) {
-
-    loginPage.style.display =
-      "none";
-
-    appPage.style.display =
-      "block";
-
-    successPage.style.display =
-      "none";
-
-
-    userName.textContent =
-      user.user_metadata?.full_name ||
-      user.user_metadata?.name ||
-      user.email ||
-      "";
-
-
-    const photo =
-      user.user_metadata?.avatar_url ||
-      user.user_metadata?.picture;
-
-
-    if (photo) {
-
-      userPhoto.src =
-        photo;
-
-      userPhoto.style.display =
-        "block";
-
-    }
-
-
-    logoutBtn.style.display =
-      "block";
-
-
-    emailInput.value =
-      user.email || "";
-
-  }
-
-
-  function showLogin() {
-
-    loginPage.style.display =
-      "flex";
-
-    appPage.style.display =
-      "none";
-
-    successPage.style.display =
-      "none";
-
-
-    userName.textContent =
-      "";
-
-    userPhoto.style.display =
-      "none";
-
-    logoutBtn.style.display =
-      "none";
-
-  }
-
-
-  /* =========================================================
-     AUTH LISTENER
-  ========================================================= */
-
-  supabase.auth.onAuthStateChange(
-    (event, session) => {
-
-      if (session?.user) {
-
-        showUser(
-          session.user
-        );
-
-      }
-
-      else {
-
-        showLogin();
-
-      }
-
-    }
-  );
-
-
-  /* =========================================================
-     LOGOUT
-  ========================================================= */
-
-  logoutBtn.addEventListener(
-    "click",
-    async () => {
-
-      showLoader(
-        "Logging out..."
+      showMessage(
+        formMessage,
+        "Check-out date must be after check-in date."
       );
 
-
-      const {
-        error
-      } =
-        await supabase.auth.signOut();
-
-
-      hideLoader();
-
-
-      if (error) {
-
-        showToast(
-          error.message
-        );
-
-        return;
-
-      }
-
-
-      showLogin();
-
-      showToast(
-        "Logged out successfully."
-      );
+      return;
 
     }
-  );
 
+    const submitButton =
+    roomForm.querySelector("button[type=submit]");
 
-  /* =========================================================
-     DATE
-  ========================================================= */
+    submitButton.disabled = true;
 
-  const checkIn =
-    document.getElementById("checkIn");
+    submitButton.textContent =
+    "Submitting...";
 
-  const checkOut =
-    document.getElementById("checkOut");
+    try{
 
+      await addDoc(
+        collection(db,"roomRequests"),
+        {
 
-  const today =
-    new Date()
-      .toISOString()
-      .split("T")[0];
+          uid:user.uid,
 
+          userName:user.displayName || "",
 
-  checkIn.min =
-    today;
+          userEmail:user.email || "",
 
-  checkOut.min =
-    today;
+          userPhoto:user.photoURL || "",
 
-
-  checkIn.addEventListener(
-    "change",
-    () => {
-
-      if (checkIn.value) {
-
-        checkOut.min =
-          checkIn.value;
-
-      }
-
-
-      if (
-        checkOut.value &&
-        checkOut.value <= checkIn.value
-      ) {
-
-        checkOut.value =
-          "";
-
-      }
-
-    }
-  );
-
-
-  /* =========================================================
-     RADIO HELPER
-  ========================================================= */
-
-  function getRadio(name) {
-
-    const selected =
-      document.querySelector(
-        `input[name="${name}"]:checked`
-      );
-
-
-    return selected
-      ? selected.value
-      : null;
-
-  }
-
-
-  /* =========================================================
-     WATER JUG
-  ========================================================= */
-
-  const jugYes =
-    document.getElementById("jugYes");
-
-  const jugQuantityBox =
-    document.getElementById(
-      "jugQuantityBox"
-    );
-
-  const jugQuantity =
-    document.getElementById(
-      "jugQuantity"
-    );
-
-
-  document
-    .querySelectorAll(
-      'input[name="waterJug"]'
-    )
-    .forEach((radio) => {
-
-      radio.addEventListener(
-        "change",
-        () => {
-
-          if (jugYes.checked) {
-
-            jugQuantityBox.style.display =
-              "block";
-
-          }
-
-          else {
-
-            jugQuantityBox.style.display =
-              "none";
-
-          }
-
-
-          calculateTotal();
-
-        }
-      );
-
-    });
-
-
-  /* =========================================================
-     PRICE CALCULATION
-  ========================================================= */
-
-  function calculateTotal() {
-
-    let utensilsAmount =
-      0;
-
-    let jugAmount =
-      0;
-
-    let mosquitoAmount =
-      0;
-
-
-    const utensils =
-      getRadio("utensils");
-
-
-    if (
-      utensils === "Yes"
-    ) {
-
-      utensilsAmount =
-        300;
-
-    }
-
-
-    const waterJug =
-      getRadio("waterJug");
-
-
-    if (
-      waterJug === "Yes"
-    ) {
-
-      let quantity =
-        Number(
-          jugQuantity.value
-        ) || 1;
-
-
-      if (quantity < 1) {
-
-        quantity = 1;
-
-      }
-
-
-      jugAmount =
-        quantity * 100;
-
-    }
-
-
-    const mosquito =
-      getRadio("mosquito");
-
-
-    if (
-      mosquito === "Yes"
-    ) {
-
-      mosquitoAmount =
-        100;
-
-    }
-
-
-    const total =
-      utensilsAmount +
-      jugAmount +
-      mosquitoAmount;
-
-
-    document.getElementById(
-      "utensilsAmount"
-    ).textContent =
-      `₹${utensilsAmount}`;
-
-
-    document.getElementById(
-      "jugAmount"
-    ).textContent =
-      `₹${jugAmount}`;
-
-
-    document.getElementById(
-      "mosquitoAmount"
-    ).textContent =
-      `₹${mosquitoAmount}`;
-
-
-    document.getElementById(
-      "totalAmount"
-    ).textContent =
-      `₹${total}`;
-
-
-    return {
-
-      utensilsAmount,
-
-      jugAmount,
-
-      mosquitoAmount,
-
-      total
-
-    };
-
-  }
-
-
-  document
-    .querySelectorAll(
-      'input[type="radio"]'
-    )
-    .forEach((radio) => {
-
-      radio.addEventListener(
-        "change",
-        calculateTotal
-      );
-
-    });
-
-
-  jugQuantity.addEventListener(
-    "input",
-    calculateTotal
-  );
-
-
-  calculateTotal();
-
-
-  /* =========================================================
-     SUBMIT
-  ========================================================= */
-
-  form.addEventListener(
-    "submit",
-    async (event) => {
-
-      event.preventDefault();
-
-
-      const {
-        data: authData
-      } =
-        await supabase.auth.getUser();
-
-
-      const user =
-        authData.user;
-
-
-      if (!user) {
-
-        showToast(
-          "Please login with Google first."
-        );
-
-        return;
-
-      }
-
-
-      /* ===============================
-         VALUES
-      =============================== */
-
-      const firstName =
-        document
-          .getElementById("firstName")
-          .value.trim();
-
-
-      const lastName =
-        document
-          .getElementById("lastName")
-          .value.trim();
-
-
-      const phone =
-        document
-          .getElementById("phone")
-          .value.trim();
-
-
-      const passport =
-        document
-          .getElementById("passport")
-          .value.trim();
-
-
-      const acRoom =
-        getRadio("acRoom");
-
-
-      const hotWater =
-        getRadio("hotWater");
-
-
-      const beds =
-        Number(
-          document
-            .getElementById("beds")
-            .value
-        );
-
-
-      const utensils =
-        getRadio("utensils");
-
-
-      const waterJug =
-        getRadio("waterJug");
-
-
-      const mosquito =
-        getRadio("mosquito");
-
-
-      const waterJugQuantity =
-        waterJug === "Yes"
-          ? Number(
-              jugQuantity.value
-            ) || 1
-          : 0;
-
-
-      /* ===============================
-         DATE VALIDATION
-      =============================== */
-
-      if (
-        checkOut.value <=
-        checkIn.value
-      ) {
-
-        showToast(
-          "Check-out date must be after check-in date."
-        );
-
-        return;
-
-      }
-
-
-      /* ===============================
-         PRICE
-      =============================== */
-
-      const prices =
-        calculateTotal();
-
-
-      /* ===============================
-         SUBMIT
-      =============================== */
-
-      submitBtn.disabled =
-        true;
-
-      submitBtn.textContent =
-        "Submitting...";
-
-
-      showLoader(
-        "Saving your room request..."
-      );
-
-
-      try {
-
-        const requestData = {
-
-          user_id:
-            user.id,
-
-
-          first_name:
-            firstName,
-
-          last_name:
-            lastName,
+          fullName:
+          document.getElementById("fullName").value.trim(),
 
           phone:
-            phone,
+          document.getElementById("phone").value.trim(),
 
-          email:
-            user.email || "",
+          guests:
+          Number(
+            document.getElementById("guests").value
+          ),
 
+          checkIn:checkIn,
 
-          check_in:
-            checkIn.value,
+          checkOut:checkOut,
 
-          check_out:
-            checkOut.value,
+          roomType:
+          document.getElementById("roomType").value,
 
-          passport_number:
-            passport,
+          note:
+          document.getElementById("note").value.trim(),
 
+          status:"pending",
 
-          ac_room:
-            acRoom === "Yes",
+          createdAt:serverTimestamp()
 
-          hot_water_heater:
-            hotWater === "Yes",
+        }
+      );
 
-          beds:
-            beds,
+      roomForm.reset();
 
+      document.getElementById("fullName").value =
+      user.displayName || "";
 
-          utensils:
-            utensils === "Yes",
+      showMessage(
+        formMessage,
+        "Room request submitted successfully!"
+      );
 
-          utensils_amount:
-            prices.utensilsAmount,
+    }catch(error){
 
+      console.error(error);
 
-          water_jug:
-            waterJug === "Yes",
+      showMessage(
+        formMessage,
+        "Could not submit request: " +
+        error.message
+      );
 
-          water_jug_quantity:
-            waterJugQuantity,
+    }
 
-          water_jug_amount:
-            prices.jugAmount,
+    submitButton.disabled = false;
 
+    submitButton.textContent =
+    "Submit Room Request";
 
-          mosquito_dispeller:
-            mosquito === "Yes",
-
-          mosquito_amount:
-            prices.mosquitoAmount,
-
-
-          extra_service_total:
-            prices.total,
-
-
-          status:
-            "pending"
-
-        };
+  }
+);
 
 
-        const {
-          data,
-          error
-        } =
-          await supabase
+/* ==============================
+   LOAD USER REQUESTS
+============================== */
 
-            .from("room_requests")
+function loadMyRequests(uid){
 
-            .insert(
-              requestData
+  const q = query(
+
+    collection(db,"roomRequests"),
+
+    where("uid","==",uid),
+
+    orderBy("createdAt","desc")
+
+  );
+
+
+  onSnapshot(
+    q,
+    snapshot=>{
+
+      if(snapshot.empty){
+
+        myRequests.innerHTML =
+        '<div class="empty">No room requests yet.</div>';
+
+        return;
+
+      }
+
+      myRequests.innerHTML = "";
+
+      snapshot.forEach(
+        item=>{
+
+          const data = item.data();
+
+          myRequests.appendChild(
+            createRequestCard(
+              item.id,
+              data,
+              false
             )
-
-            .select("id")
-
-            .single();
-
-
-        if (error) {
-
-          throw error;
+          );
 
         }
+      );
 
+    },
+    error=>{
 
-        /* ===============================
-           SUCCESS
-        =============================== */
+      console.error(error);
 
-        document.getElementById(
-          "requestId"
-        ).textContent =
-          data.id;
-
-
-        document.getElementById(
-          "confirmationEmail"
-        ).textContent =
-          user.email;
-
-
-        form.reset();
-
-
-        jugQuantityBox.style.display =
-          "none";
-
-
-        calculateTotal();
-
-
-        appPage.style.display =
-          "none";
-
-
-        successPage.style.display =
-          "block";
-
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-
-        showToast(
-          "Room request submitted successfully!"
-        );
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Submit error:",
-          error
-        );
-
-
-        let message =
-          "Request could not be submitted.";
-
-
-        if (
-          error.message
-        ) {
-
-          message =
-            error.message;
-
-        }
-
-
-        showToast(
-          message
-        );
-
-      }
-
-      finally {
-
-        hideLoader();
-
-        submitBtn.disabled =
-          false;
-
-        submitBtn.textContent =
-          "Submit Room Request";
-
-      }
+      myRequests.innerHTML =
+      '<div class="empty">Could not load requests. Check Firestore rules/index.</div>';
 
     }
   );
 
-
-  /* =========================================================
-     NEW REQUEST
-  ========================================================= */
-
-  document
-    .getElementById(
-      "newRequestBtn"
-    )
-    .addEventListener(
-      "click",
-      () => {
-
-        successPage.style.display =
-          "none";
-
-        appPage.style.display =
-          "block";
+}
 
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
+/* ==============================
+   REQUEST CARD
+============================== */
+
+function createRequestCard(
+  id,
+  data,
+  adminMode
+){
+
+  const div =
+  document.createElement("div");
+
+  div.className = "request";
+
+  const status =
+  data.status || "pending";
+
+  const statusText =
+  status.charAt(0).toUpperCase() +
+  status.slice(1);
+
+  div.innerHTML = `
+
+    <div class="request-top">
+
+      <strong>
+        ${escapeHTML(data.roomType || "Room")}
+      </strong>
+
+      <span class="badge ${status}">
+        ${statusText}
+      </span>
+
+    </div>
+
+    <p>
+      <b>Name:</b>
+      ${escapeHTML(data.fullName || "")}
+    </p>
+
+    <p>
+      <b>Guests:</b>
+      ${data.guests || 1}
+    </p>
+
+    <p>
+      <b>Check-in:</b>
+      ${escapeHTML(data.checkIn || "")}
+    </p>
+
+    <p>
+      <b>Check-out:</b>
+      ${escapeHTML(data.checkOut || "")}
+    </p>
+
+    ${
+      data.phone
+      ?
+      `<p><b>Phone:</b>
+      ${escapeHTML(data.phone)}</p>`
+      :
+      ""
+    }
+
+    ${
+      data.note
+      ?
+      `<p><b>Note:</b>
+      ${escapeHTML(data.note)}</p>`
+      :
+      ""
+    }
+
+    ${
+      adminMode
+      ?
+      `
+
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+
+        <button
+          class="update-btn"
+          data-id="${id}"
+          data-status="pending">
+          Pending
+        </button>
+
+        <button
+          class="update-btn"
+          data-id="${id}"
+          data-status="approved">
+          Approve
+        </button>
+
+        <button
+          class="update-btn"
+          data-id="${id}"
+          data-status="rejected">
+          Reject
+        </button>
+
+        <button
+          class="delete-btn"
+          data-id="${id}">
+          Delete
+        </button>
+
+      </div>
+
+      `
+      :
+      ""
+    }
+
+  `;
+
+
+  if(adminMode){
+
+    div.querySelectorAll(".update-btn")
+    .forEach(
+      button=>{
+
+        button.addEventListener(
+          "click",
+          async()=>{
+
+            try{
+
+              await updateDoc(
+                doc(
+                  db,
+                  "roomRequests",
+                  button.dataset.id
+                ),
+                {
+                  status:
+                  button.dataset.status
+                }
+              );
+
+            }catch(error){
+
+              alert(
+                "Update failed: " +
+                error.message
+              );
+
+            }
+
+          }
+        );
 
       }
     );
 
 
-  /* =========================================================
-     START
-  ========================================================= */
+    const deleteButton =
+    div.querySelector(".delete-btn");
 
-  loadUser();
+    deleteButton.addEventListener(
+      "click",
+      async()=>{
+
+        if(
+          !confirm(
+            "Delete this request?"
+          )
+        ) return;
+
+        try{
+
+          await deleteDoc(
+            doc(
+              db,
+              "roomRequests",
+              deleteButton.dataset.id
+            )
+          );
+
+        }catch(error){
+
+          alert(
+            "Delete failed: " +
+            error.message
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  return div;
+
+}
+
+
+/* ==============================
+   LOAD ALL REQUESTS
+============================== */
+
+function loadAllRequests(){
+
+  const q = query(
+
+    collection(db,"roomRequests"),
+
+    orderBy("createdAt","desc")
+
+  );
+
+
+  onSnapshot(
+    q,
+    snapshot=>{
+
+      renderAdminRequests(
+        snapshot
+      );
+
+    },
+    error=>{
+
+      console.error(error);
+
+      allRequests.innerHTML =
+      '<div class="empty">Admin requests could not be loaded.</div>';
+
+    }
+  );
+
+}
+
+
+function renderAdminRequests(snapshot){
+
+  const filter =
+  adminFilter.value;
+
+  allRequests.innerHTML = "";
+
+  let count = 0;
+
+  snapshot.forEach(
+    item=>{
+
+      const data = item.data();
+
+      const status =
+      data.status || "pending";
+
+      if(
+        filter !== "all" &&
+        status !== filter
+      ){
+
+        return;
+
+      }
+
+      count++;
+
+      allRequests.appendChild(
+        createRequestCard(
+          item.id,
+          data,
+          true
+        )
+      );
+
+    }
+  );
+
+
+  if(count === 0){
+
+    allRequests.innerHTML =
+    '<div class="empty">No requests found.</div>';
+
+  }
+
+}
+
+
+adminFilter.addEventListener(
+  "change",
+  ()=>{
+    loadAllRequests();
+  }
+);
+
+
+/* ==============================
+   HTML ESCAPE
+============================== */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
 
 </script>
 
