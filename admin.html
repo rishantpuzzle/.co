@@ -149,19 +149,34 @@ body{
     margin-bottom:25px;
 }
 
-.google-btn{
+.login-input{
     width:100%;
     padding:15px;
     border:1px solid #d8e0ea;
-    background:white;
     border-radius:12px;
+    margin-bottom:13px;
     font-size:16px;
+    outline:none;
+}
+
+.login-input:focus{
+    border-color:#2f6df6;
+}
+
+.login-btn{
+    width:100%;
+    padding:15px;
+    border:0;
+    background:#2f6df6;
+    color:white;
+    border-radius:12px;
+    font-size:17px;
     font-weight:bold;
     cursor:pointer;
 }
 
-.google-btn:hover{
-    background:#f5f7fa;
+.login-btn:hover{
+    background:#1f5de0;
 }
 
 .login-error{
@@ -641,11 +656,27 @@ select:focus{
 
         <p>Admin Dashboard</p>
 
-        <button
-            class="google-btn"
-            id="googleLogin">
+        <input
+            class="login-input"
+            id="adminUsername"
+            type="text"
+            placeholder="Username"
+            autocomplete="username"
+        >
 
-            🔐 Continue with Google
+        <input
+            class="login-input"
+            id="adminPassword"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+        >
+
+        <button
+            class="login-btn"
+            id="loginButton">
+
+            🔐 Login
 
         </button>
 
@@ -768,7 +799,7 @@ select:focus{
     <div class="admin-user">
 
         Logged in as:
-        <strong id="adminEmail"></strong>
+        <strong id="adminEmail">Mandir Admin</strong>
 
     </div>
 
@@ -1334,16 +1365,6 @@ import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-
-import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    onAuthStateChanged,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
 import {
     getFirestore,
     collection,
@@ -1384,145 +1405,124 @@ const firebaseConfig = {
 
 
 /* =====================================================
-   ADMIN EMAIL
-===================================================== */
-
-const ADMIN_EMAIL =
-"rishantbhaumik@gmail.com";
-
-
-/* =====================================================
    INITIALIZE FIREBASE
 ===================================================== */
 
 const app =
-initializeApp(
-    firebaseConfig
-);
-
-const auth =
-getAuth(app);
+initializeApp(firebaseConfig);
 
 const db =
 getFirestore(app);
 
 
 /* =====================================================
-   GOOGLE LOGIN
+   SIMPLE ADMIN LOGIN
 ===================================================== */
 
+const ADMIN_USERNAME = "mandir";
+const ADMIN_PASSWORD = "radhamohan108";
+
+
 document
-.getElementById("googleLogin")
-.addEventListener(
-"click",
-async function(){
+.getElementById("loginButton")
+.addEventListener("click", adminLogin);
 
-    const errorBox =
-    document.getElementById(
-        "loginError"
-    );
 
-    errorBox.textContent="";
+document
+.getElementById("adminPassword")
+.addEventListener("keydown", function(event){
 
-    try{
+    if(event.key === "Enter"){
 
-        const provider =
-        new GoogleAuthProvider();
-
-        provider.setCustomParameters({
-            prompt:"select_account"
-        });
-
-        await signInWithPopup(
-            auth,
-            provider
-        );
-
-    }catch(error){
-
-        console.error(error);
-
-        errorBox.textContent =
-        error.message;
+        adminLogin();
 
     }
 
 });
 
 
-/* =====================================================
-   AUTH STATE
-===================================================== */
+function adminLogin(){
 
-onAuthStateChanged(
-    auth,
-    function(user){
+    const username =
+    document
+    .getElementById("adminUsername")
+    .value
+    .trim();
 
-        if(!user){
+    const password =
+    document
+    .getElementById("adminPassword")
+    .value;
 
-            document
-            .getElementById(
-                "loginOverlay"
-            )
-            .style.display="flex";
-
-            document
-            .getElementById(
-                "adminBar"
-            )
-            .style.display="none";
-
-            return;
-        }
+    const error =
+    document
+    .getElementById("loginError");
 
 
-        /* ADMIN EMAIL CHECK */
-
-        if(
-            user.email.toLowerCase()
-            !==
-            ADMIN_EMAIL.toLowerCase()
-        ){
-
-            alert(
-                "Access denied.\n\n"+
-                "This Google account is not the admin account."
-            );
-
-            signOut(auth);
-
-            return;
-        }
+    error.textContent = "";
 
 
-        /* SHOW ADMIN */
+    if(
+        username === ADMIN_USERNAME &&
+        password === ADMIN_PASSWORD
+    ){
 
-        document
-        .getElementById(
-            "loginOverlay"
-        )
-        .style.display="none";
+        sessionStorage.setItem(
+            "mm_admin_login",
+            "true"
+        );
 
 
         document
-        .getElementById(
-            "adminBar"
-        )
-        .style.display="flex";
+        .getElementById("loginOverlay")
+        .style.display = "none";
 
 
         document
-        .getElementById(
-            "adminEmail"
-        )
-        .textContent =
-        user.email;
+        .getElementById("adminBar")
+        .style.display = "flex";
+
+
+        document
+        .getElementById("adminEmail")
+        .textContent = "Mandir Admin";
 
 
         loadRequests();
 
+    }else{
+
+        error.textContent =
+        "❌ Invalid username or password.";
+
     }
-);
+
+}
+
+
+/* =====================================================
+   AUTO LOGIN FOR CURRENT SESSION
+===================================================== */
+
+if(
+    sessionStorage.getItem(
+        "mm_admin_login"
+    ) === "true"
+){
+
+    document
+    .getElementById("loginOverlay")
+    .style.display = "none";
+
+
+    document
+    .getElementById("adminBar")
+    .style.display = "flex";
+
+
+    loadRequests();
+
+}
 
 
 /* =====================================================
@@ -1530,17 +1530,36 @@ onAuthStateChanged(
 ===================================================== */
 
 window.logoutAdmin =
-async function(){
+function(){
 
-    try{
+    sessionStorage.removeItem(
+        "mm_admin_login"
+    );
 
-        await signOut(auth);
 
-    }catch(error){
+    document
+    .getElementById("loginOverlay")
+    .style.display = "flex";
 
-        console.error(error);
 
-    }
+    document
+    .getElementById("adminBar")
+    .style.display = "none";
+
+
+    document
+    .getElementById("adminUsername")
+    .value = "";
+
+
+    document
+    .getElementById("adminPassword")
+    .value = "";
+
+
+    document
+    .getElementById("loginError")
+    .textContent = "";
 
 };
 
@@ -1577,12 +1596,6 @@ async function(){
 
     try{
 
-        /*
-         * No orderBy here.
-         * This prevents errors if some documents
-         * don't contain createdAt.
-         */
-
         const snapshot =
         await getDocs(
             collection(
@@ -1610,13 +1623,13 @@ async function(){
 
             `;
 
+
             updateDashboard([]);
 
             return;
+
         }
 
-
-        /* Convert documents to array */
 
         const requests =
         snapshot.docs.map(
@@ -1629,11 +1642,6 @@ async function(){
             })
         );
 
-
-        /*
-         * Sort by createdAt if available.
-         * If not available, keep original order.
-         */
 
         requests.sort(
             function(a,b){
@@ -1654,7 +1662,7 @@ async function(){
         );
 
 
-        body.innerHTML="";
+        body.innerHTML = "";
 
 
         requests.forEach(
@@ -1673,6 +1681,7 @@ async function(){
         updateDashboard(
             requests
         );
+
 
     }catch(error){
 
@@ -1697,10 +1706,6 @@ async function(){
                     ${escapeHTML(
                         error.message
                     )}
-
-                    <br><br>
-
-                    Check Firestore Rules.
 
                 </td>
 
@@ -1772,9 +1777,7 @@ function createRequestRow(
 
 
     const row =
-    document.createElement(
-        "tr"
-    );
+    document.createElement("tr");
 
 
     row.innerHTML = `
@@ -1853,7 +1856,6 @@ function createRequestRow(
 
             <div class="action">
 
-
                 ${
                     status === "pending"
 
@@ -1868,7 +1870,6 @@ function createRequestRow(
                         ✓ Accept
 
                     </button>
-
 
                     <button
                         class="btn reject"
@@ -1904,15 +1905,12 @@ function createRequestRow(
 
                 </button>
 
-
             </div>
 
         </td>
 
     `;
 
-
-    /* ACCEPT */
 
     const accept =
     row.querySelector(
@@ -1935,8 +1933,6 @@ function createRequestRow(
     }
 
 
-    /* REJECT */
-
     const reject =
     row.querySelector(
         '[data-action="reject"]'
@@ -1958,8 +1954,6 @@ function createRequestRow(
     }
 
 
-    /* VIEW */
-
     const view =
     row.querySelector(
         '[data-action="view"]'
@@ -1979,8 +1973,6 @@ function createRequestRow(
 
     }
 
-
-    /* WHATSAPP */
 
     const whatsapp =
     row.querySelector(
@@ -2003,9 +1995,7 @@ function createRequestRow(
     }
 
 
-    body.appendChild(
-        row
-    );
+    body.appendChild(row);
 
 }
 
@@ -2077,6 +2067,7 @@ async function changeStatus(
 
         loadRequests();
 
+
     }catch(error){
 
         console.error(error);
@@ -2118,11 +2109,6 @@ function sendWhatsApp(
         ""
     );
 
-
-    /*
-     * If Indian 10-digit number,
-     * add country code 91.
-     */
 
     if(
         phone.length === 10
@@ -2218,9 +2204,6 @@ function updateDashboard(
 
     let pending = 0;
 
-    let rejected = 0;
-
-
     let todayCheckin = 0;
 
     let todayCheckout = 0;
@@ -2262,15 +2245,6 @@ function updateDashboard(
             }
 
 
-            if(
-                status === "rejected"
-            ){
-
-                rejected++;
-
-            }
-
-
             const checkIn =
             normalizeDate(
                 data.checkIn ||
@@ -2307,38 +2281,28 @@ function updateDashboard(
 
 
     document
-    .getElementById(
-        "checkins"
-    )
+    .getElementById("checkins")
     .textContent =
     todayCheckin;
 
 
     document
-    .getElementById(
-        "checkouts"
-    )
+    .getElementById("checkouts")
     .textContent =
     todayCheckout;
 
 
     document
-    .getElementById(
-        "occupiedRooms"
-    )
+    .getElementById("occupiedRooms")
     .textContent =
     accepted;
 
 
     document
-    .getElementById(
-        "cleaningPending"
-    )
+    .getElementById("cleaningPending")
     .textContent =
     pending;
 
-
-    /* Activity */
 
     const activity =
     document.getElementById(
@@ -2370,13 +2334,10 @@ function updateDashboard(
 
 
     const latest =
-    requests.slice(
-        0,
-        10
-    );
+    requests.slice(0,10);
 
 
-    activity.innerHTML="";
+    activity.innerHTML = "";
 
 
     latest.forEach(
@@ -2422,9 +2383,7 @@ function updateDashboard(
 
 
             const tr =
-            document.createElement(
-                "tr"
-            );
+            document.createElement("tr");
 
 
             tr.innerHTML = `
@@ -2510,9 +2469,7 @@ function updateDashboard(
             };
 
 
-            activity.appendChild(
-                tr
-            );
+            activity.appendChild(tr);
 
         }
     );
@@ -2521,7 +2478,7 @@ function updateDashboard(
 
 
 /* =====================================================
-   TIMESTAMP VALUE
+   TIMESTAMP
 ===================================================== */
 
 function getTimestampValue(
@@ -2543,8 +2500,7 @@ function getTimestampValue(
 
 
     const time =
-    new Date(value)
-    .getTime();
+    new Date(value).getTime();
 
 
     return isNaN(time)
@@ -2586,9 +2542,7 @@ function formatDate(
 
     if(isNaN(date)){
 
-        return escapeHTML(
-            value
-        );
+        return escapeHTML(value);
 
     }
 
@@ -2629,10 +2583,6 @@ function normalizeDate(
 
     }
 
-
-    /*
-     * If value is already YYYY-MM-DD
-     */
 
     if(
         /^\d{4}-\d{2}-\d{2}$/.test(
@@ -2677,19 +2627,13 @@ function getTodayString(){
     const month =
     String(
         now.getMonth()+1
-    ).padStart(
-        2,
-        "0"
-    );
+    ).padStart(2,"0");
 
 
     const day =
     String(
         now.getDate()
-    ).padStart(
-        2,
-        "0"
-    );
+    ).padStart(2,"0");
 
 
     return `${year}-${month}-${day}`;
@@ -2752,9 +2696,7 @@ function(
 
 
     document
-    .getElementById(
-        section
-    )
+    .getElementById(section)
     .style.display =
     "block";
 
@@ -2774,38 +2716,28 @@ function(
     );
 
 
-    button.classList.add(
-        "active"
-    );
+    button.classList.add("active");
 
 
     const titles = {
 
-        dashboard:
-        "Dashboard",
+        dashboard:"Dashboard",
 
-        requests:
-        "Room Requests",
+        requests:"Room Requests",
 
-        bookings:
-        "Bookings",
+        bookings:"Bookings",
 
-        rooms:
-        "Rooms 1–70",
+        rooms:"Rooms 1–70",
 
-        cleaning:
-        "Cleaning",
+        cleaning:"Cleaning",
 
-        calendar:
-        "Calendar"
+        calendar:"Calendar"
 
     };
 
 
     document
-    .getElementById(
-        "pageTitle"
-    )
+    .getElementById("pageTitle")
     .textContent =
     titles[section];
 
@@ -2838,9 +2770,7 @@ window.openBooking =
 function(){
 
     document
-    .getElementById(
-        "bookingModal"
-    )
+    .getElementById("bookingModal")
     .style.display =
     "flex";
 
@@ -2851,9 +2781,7 @@ window.closeBooking =
 function(){
 
     document
-    .getElementById(
-        "bookingModal"
-    )
+    .getElementById("bookingModal")
     .style.display =
     "none";
 
@@ -2861,7 +2789,7 @@ function(){
 
 
 /* =====================================================
-   SAVE LOCAL BOOKING
+   SAVE BOOKING
 ===================================================== */
 
 window.saveBooking =
@@ -2869,42 +2797,32 @@ function(){
 
     const name =
     document
-    .getElementById(
-        "guestName"
-    )
+    .getElementById("guestName")
     .value
     .trim();
 
 
     const room =
     document
-    .getElementById(
-        "roomNumber"
-    )
+    .getElementById("roomNumber")
     .value;
 
 
     const checkIn =
     document
-    .getElementById(
-        "checkIn"
-    )
+    .getElementById("checkIn")
     .value;
 
 
     const checkOut =
     document
-    .getElementById(
-        "checkOut"
-    )
+    .getElementById("checkOut")
     .value;
 
 
     const phone =
     document
-    .getElementById(
-        "phone"
-    )
+    .getElementById("phone")
     .value
     .trim();
 
@@ -2952,9 +2870,7 @@ function(){
 
     localStorage.setItem(
         "mm_bookings",
-        JSON.stringify(
-            bookings
-        )
+        JSON.stringify(bookings)
     );
 
 
@@ -3152,9 +3068,7 @@ function renderRooms(){
         `;
 
 
-        grid.appendChild(
-            card
-        );
+        grid.appendChild(card);
 
 
         const option =
@@ -3171,9 +3085,7 @@ function renderRooms(){
         "Room "+room;
 
 
-        select.appendChild(
-            option
-        );
+        select.appendChild(option);
 
     }
 
@@ -3222,13 +3134,11 @@ function showToast(
 
 
 /* =====================================================
-   DATE DISPLAY
+   DATE
 ===================================================== */
 
 document
-.getElementById(
-    "todayDate"
-)
+.getElementById("todayDate")
 .textContent =
 new Date()
 .toLocaleDateString(
