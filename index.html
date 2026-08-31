@@ -11,6 +11,12 @@
           type="image/png"
           href="logo.png">
 
+<!-- EMAILJS -->
+<script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+
 <style>
 *{
     margin:0;
@@ -1305,6 +1311,24 @@ const provider = new GoogleAuthProvider();
 
 
 /* ==========================================
+   EMAILJS CONFIGURATION
+========================================== */
+
+const EMAILJS_PUBLIC_KEY =
+"CXWBYZsHGFAFjnh1m";
+
+const EMAILJS_TEMPLATE_ID =
+"template_unguw7q";
+
+const EMAILJS_SERVICE_ID =
+"service_o8984nf";
+
+emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY
+});
+
+
+/* ==========================================
    ADMIN EMAIL
    CHANGE THIS
 ========================================== */
@@ -1977,10 +2001,90 @@ roomForm.addEventListener(
             );
 
 
+            /* ==========================================
+               AUTOMATIC GUEST EMAIL
+            ========================================== */
+
+            let emailSent = false;
+
+            try{
+
+                await emailjs.send(
+                    EMAILJS_SERVICE_ID,
+                    EMAILJS_TEMPLATE_ID,
+                    {
+                        name:
+                        firstName + " " + lastName,
+
+                        email:
+                        email,
+
+                        guest_name:
+                        firstName + " " + lastName,
+
+                        check_in:
+                        checkIn,
+
+                        check_out:
+                        checkOut,
+
+                        phone:
+                        phone,
+
+                        passport:
+                        passport,
+
+                        beds:
+                        beds,
+
+                        ac_room:
+                        acInput.value,
+
+                        hot_water:
+                        heaterInput.value,
+
+                        utensils:
+                        utensilsInput.value,
+
+                        water_jugs:
+                        waterJugs,
+
+                        mosquito:
+                        mosquitoInput.value,
+
+                        total_extra:
+                        prices.total,
+
+                        request_id:
+                        docRef.id,
+
+                        status:
+                        "Pending"
+                    }
+                );
+
+                emailSent = true;
+
+                console.log(
+                    "Guest confirmation email sent successfully."
+                );
+
+            }catch(emailError){
+
+                console.error(
+                    "EMAILJS ERROR:",
+                    emailError
+                );
+
+            }
+
+
             showMessage(
                 formMessage,
-                "Room request submitted successfully! Request ID: " + docRef.id,
-                "success"
+                emailSent
+                    ? "Room request submitted successfully! A confirmation email has been sent to " + email + ". Request ID: " + docRef.id
+                    : "Room request submitted successfully! Request ID: " + docRef.id + ". However, the confirmation email could not be sent. Please check your EmailJS template/service settings.",
+                emailSent ? "success" : "error"
             );
 
 
