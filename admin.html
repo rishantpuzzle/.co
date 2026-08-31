@@ -316,6 +316,12 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
+import {
+    getAuth,
+    signInAnonymously
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
 const firebaseConfig = {
     apiKey:"AIzaSyD7qJWxijDXrdTiI7D14zR-ds-j46rNzc",
     authDomain:"munger-mandir-room-request.firebaseapp.com",
@@ -328,6 +334,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 const ADMIN_USERNAME = "mandir";
 const ADMIN_PASSWORD = "radhamohan108";
@@ -338,16 +345,30 @@ let unsubscribe = null;
 const loginOverlay = document.getElementById("loginOverlay");
 const loginError = document.getElementById("loginError");
 
-function doLogin(){
+async function doLogin(){
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
 
-    if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD){
+    if(username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD){
+        loginError.textContent = "❌ Invalid username or password.";
+        return;
+    }
+
+    loginError.textContent = "Connecting to Firebase...";
+
+    try{
+        if(!auth.currentUser){
+            await signInAnonymously(auth);
+        }
+
         sessionStorage.setItem("mm_admin_login","true");
         loginOverlay.style.display = "none";
+        loginError.textContent = "";
         loadRequests();
-    }else{
-        loginError.textContent = "❌ Invalid username or password.";
+    }catch(error){
+        console.error("ADMIN AUTH ERROR:", error);
+        loginError.textContent =
+            "❌ Firebase Anonymous Login enable karo. Firebase Console → Authentication → Sign-in method → Anonymous → Enable.";
     }
 }
 
@@ -362,10 +383,19 @@ window.logout = function(){
     loginOverlay.style.display = "flex";
 };
 
-function startAdmin(){
+async function startAdmin(){
     if(sessionStorage.getItem("mm_admin_login")==="true"){
-        loginOverlay.style.display = "none";
-        loadRequests();
+        try{
+            if(!auth.currentUser){
+                await signInAnonymously(auth);
+            }
+            loginOverlay.style.display = "none";
+            loadRequests();
+        }catch(error){
+            console.error("AUTO AUTH ERROR:", error);
+            sessionStorage.removeItem("mm_admin_login");
+            loginOverlay.style.display = "flex";
+        }
     }
 }
 
@@ -395,7 +425,7 @@ window.loadRequests = function(){
         console.error(error);
         document.getElementById("requestsBody").innerHTML =
         `<tr><td colspan="8" class="empty">❌ ${escapeHTML(error.message)}</td></tr>`;
-        showToast("Firestore permission/config error");
+        showToast("Firestore access blocked — check Firebase Rules");
     });
 };
 
