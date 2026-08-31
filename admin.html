@@ -1,1910 +1,3256 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Munger Mandir - Admin Panel</title>
-
-  <!-- HOTEL APP FAVICON -->
-    <link rel="icon"
-          type="image/png"
-          href="logo.png">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f6f7fb;
-      color: #1f2937;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* =========================
-       LOGIN
-    ========================== */
-
-    .login-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: linear-gradient(135deg, #fff7ed, #f8fafc);
-    }
-
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 35px;
-      text-align: center;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
-      border: 1px solid #e5e7eb;
-    }
-
-    .login-logo {
-      width: 75px;
-      height: 75px;
-      margin: 0 auto 18px;
-      border-radius: 18px;
-      background: #9a5b13;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 21px;
-      font-weight: 700;
-    }
-
-    .login-card h1 {
-      font-size: 25px;
-      color: #7c4a0a;
-      margin-bottom: 8px;
-    }
-
-    .login-card p {
-      color: #6b7280;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
-
-    .google-login {
-      width: 100%;
-      border: 1px solid #d1d5db;
-      background: #ffffff;
-      color: #111827;
-      padding: 13px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .google-login:hover {
-      background: #f9fafb;
-    }
-
-    .login-error {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 9px;
-      background: #fee2e2;
-      color: #991b1b;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    .header {
-      height: 70px;
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 25px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-logo {
-      width: 43px;
-      height: 43px;
-      border-radius: 11px;
-      background: #9a5b13;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .brand-text h2 {
-      font-size: 17px;
-      color: #7c4a0a;
-    }
-
-    .brand-text span {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .admin-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .admin-photo {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .admin-name {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .logout {
-      border: none;
-      background: #111827;
-      color: white;
-      padding: 9px 13px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    /* =========================
-       DASHBOARD
-    ========================== */
-
-    .dashboard {
-      max-width: 1400px;
-      margin: auto;
-      padding: 30px 22px 50px;
-    }
-
-    .page-heading {
-      margin-bottom: 25px;
-    }
-
-    .page-heading h1 {
-      font-size: 28px;
-      color: #111827;
-      margin-bottom: 7px;
-    }
-
-    .page-heading p {
-      color: #6b7280;
-    }
-
-    /* =========================
-       STATS
-    ========================== */
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .stat-card {
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 15px;
-      padding: 20px;
-    }
-
-    .stat-title {
-      font-size: 13px;
-      color: #6b7280;
-      margin-bottom: 8px;
-    }
-
-    .stat-value {
-      font-size: 29px;
-      font-weight: 700;
-      color: #111827;
-    }
-
-    .pending-value {
-      color: #d97706;
-    }
-
-    .approved-value {
-      color: #15803d;
-    }
-
-    .rejected-value {
-      color: #dc2626;
-    }
-
-    /* =========================
-       TOOLBAR
-    ========================== */
-
-    .toolbar {
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 15px;
-      padding: 15px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .search {
-      flex: 1;
-      min-width: 230px;
-      border: 1px solid #d1d5db;
-      border-radius: 9px;
-      padding: 11px 13px;
-      outline: none;
-    }
-
-    .search:focus,
-    .filter:focus {
-      border-color: #9a5b13;
-    }
-
-    .filter {
-      border: 1px solid #d1d5db;
-      border-radius: 9px;
-      padding: 11px 13px;
-      background: white;
-      outline: none;
-    }
-
-    .toolbar-button {
-      border: none;
-      background: #9a5b13;
-      color: white;
-      border-radius: 9px;
-      padding: 11px 15px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .export {
-      background: #15803d;
-    }
-
-    /* =========================
-       TABLE
-    ========================== */
-
-    .table-wrapper {
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 15px;
-      overflow: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 1100px;
-    }
-
-    th {
-      background: #fafafa;
-      color: #6b7280;
-      font-size: 12px;
-      text-align: left;
-      padding: 14px;
-      border-bottom: 1px solid #e5e7eb;
-      white-space: nowrap;
-    }
-
-    td {
-      padding: 14px;
-      border-bottom: 1px solid #f0f0f0;
-      font-size: 13px;
-      vertical-align: middle;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    tr:hover td {
-      background: #fafafa;
-    }
-
-    .guest-name {
-      font-weight: 700;
-      color: #111827;
-    }
-
-    .guest-email {
-      color: #6b7280;
-      font-size: 11px;
-      margin-top: 4px;
-    }
-
-    .status {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .status-pending {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .status-approved {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .status-rejected {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .view-button {
-      border: 1px solid #d1d5db;
-      background: white;
-      padding: 7px 10px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .view-button:hover {
-      background: #f3f4f6;
-    }
-
-    /* =========================
-       EMPTY
-    ========================== */
-
-    .empty {
-      text-align: center;
-      padding: 50px 20px;
-      color: #9ca3af;
-    }
-
-    /* =========================
-       MODAL
-    ========================== */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-    }
-
-    .modal-card {
-      width: 100%;
-      max-width: 760px;
-      max-height: 90vh;
-      overflow-y: auto;
-      background: white;
-      border-radius: 18px;
-      padding: 25px;
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .modal-header h2 {
-      color: #7c4a0a;
-      font-size: 21px;
-    }
-
-    .close {
-      border: none;
-      background: #f3f4f6;
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .detail-box {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 12px;
-    }
-
-    .detail-label {
-      color: #9ca3af;
-      font-size: 10px;
-      margin-bottom: 5px;
-      text-transform: uppercase;
-    }
-
-    .detail-value {
-      color: #111827;
-      font-size: 13px;
-      font-weight: 600;
-      word-break: break-word;
-    }
-
-    .modal-section {
-      margin-top: 20px;
-    }
-
-    .modal-section h3 {
-      font-size: 15px;
-      color: #7c4a0a;
-      margin-bottom: 10px;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 22px;
-      flex-wrap: wrap;
-    }
-
-    .action {
-      border: none;
-      padding: 10px 14px;
-      border-radius: 8px;
-      color: white;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .action-pending {
-      background: #d97706;
-    }
-
-    .action-approved {
-      background: #15803d;
-    }
-
-    .action-rejected {
-      background: #dc2626;
-    }
-
-    .action-delete {
-      background: #374151;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 900px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .header {
-        height: auto;
-        padding: 12px;
-      }
-
-      .admin-name {
-        display: none;
-      }
-
-      .dashboard {
-        padding: 22px 12px 40px;
-      }
-
-      .page-heading h1 {
-        font-size: 23px;
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-
-      .stat-card {
-        padding: 15px;
-      }
-
-      .stat-value {
-        font-size: 23px;
-      }
-
-      .detail-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .modal-card {
-        padding: 18px;
-      }
-    }
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Munger Mandir - Hotel Manager</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#10203a;
+}
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:303px;
+    background:#111a2b;
+    color:white;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    padding-top:25px;
+    z-index:100;
+}
+
+.logo{
+    padding:0 25px 35px;
+    font-size:27px;
+    font-weight:800;
+    color:#62a4ff;
+}
+
+.nav button{
+    display:block;
+    width:calc(100% - 20px);
+    margin-left:0;
+    padding:16px 25px;
+    border:0;
+    border-radius:0 15px 15px 0;
+    background:transparent;
+    color:#e7edf7;
+    text-align:left;
+    font-size:18px;
+    cursor:pointer;
+    margin-bottom:7px;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:#202c3d;
+}
+
+.nav-icon{
+    display:inline-block;
+    width:32px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:303px;
+    width:calc(100% - 303px);
+    padding:30px 38px 50px;
+}
+
+/* ================= TOP ================= */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.title h1{
+    font-size:40px;
+}
+
+.date{
+    margin-top:8px;
+    font-size:19px;
+    color:#667892;
+}
+
+.add-btn{
+    border:0;
+    background:#2f6df6;
+    color:white;
+    padding:16px 23px;
+    border-radius:16px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.add-btn:hover{
+    background:#1f5de0;
+}
+
+/* ================= LOGIN ================= */
+
+.login-overlay{
+    position:fixed;
+    inset:0;
+    background:#111a2b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+}
+
+.login-box{
+    background:white;
+    width:min(420px,92%);
+    padding:35px;
+    border-radius:24px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.login-logo{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.login-box h2{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.login-box p{
+    color:#667892;
+    margin-bottom:25px;
+}
+
+.google-btn{
+    width:100%;
+    padding:15px;
+    border:1px solid #d8e0ea;
+    background:white;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.google-btn:hover{
+    background:#f5f7fa;
+}
+
+.login-error{
+    margin-top:15px;
+    color:#b42323;
+    font-size:14px;
+}
+
+/* ================= ADMIN BAR ================= */
+
+.admin-bar{
+    display:none;
+    margin-top:15px;
+    background:white;
+    border:1px solid #e4eaf2;
+    padding:10px 15px;
+    border-radius:12px;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.admin-user{
+    color:#667892;
+    font-size:14px;
+}
+
+.logout-btn{
+    border:0;
+    background:#fee2e2;
+    color:#b42323;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    margin-top:32px;
+}
+
+.stat-card{
+    background:white;
+    border:1px solid #e4eaf2;
+    border-radius:22px;
+    padding:25px;
+    min-height:140px;
+    position:relative;
+    box-shadow:0 10px 30px rgba(28,48,82,.06);
+}
+
+.stat-title{
+    color:#667892;
+    font-size:17px;
+}
+
+.stat-number{
+    font-size:43px;
+    font-weight:800;
+    margin-top:17px;
+}
+
+.stat-icon{
+    position:absolute;
+    right:25px;
+    top:27px;
+    font-size:35px;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+    background:white;
+    border:1px solid #e4eaf2;
+    border-radius:22px;
+    margin-top:28px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(28,48,82,.06);
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px;
+}
+
+.section-head h2{
+    font-size:25px;
+}
+
+.section-sub{
+    color:#667892;
+    margin-top:5px;
+}
+
+.refresh{
+    border:0;
+    background:#eaf1ff;
+    color:#225bd1;
+    padding:12px 18px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+    overflow:auto;
+    padding:0 25px 22px;
+}
+
+table{
+    width:100%;
+    min-width:1100px;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:16px 12px;
+    text-align:left;
+    border-top:1px solid #e4eaf2;
+}
+
+th{
+    color:#667892;
+    font-size:13px;
+    text-transform:uppercase;
+}
+
+.empty{
+    text-align:center;
+    color:#7889a0;
+    padding:50px 20px;
+}
+
+/* ================= BADGES ================= */
+
+.badge{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.pending{
+    background:#fff0d8;
+    color:#a45a00;
+}
+
+.accepted{
+    background:#dff8ea;
+    color:#087443;
+}
+
+.rejected{
+    background:#ffe1e1;
+    color:#b42323;
+}
+
+/* ================= BUTTONS ================= */
+
+.action{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    padding:9px 12px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.accept{
+    background:#dcfce7;
+    color:#087443;
+}
+
+.reject{
+    background:#fee2e2;
+    color:#b42323;
+}
+
+.view{
+    background:#edf2f8;
+    color:#334155;
+}
+
+.whatsapp{
+    background:#dcfce7;
+    color:#087443;
+}
+
+.whatsapp:hover{
+    background:#c8f6da;
+}
+
+/* ================= ROOMS ================= */
+
+.rooms{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:17px;
+    padding:0 25px 28px;
+}
+
+.room{
+    border:1px solid #e4eaf2;
+    border-radius:17px;
+    padding:19px;
+    transition:.2s;
+}
+
+.room:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+
+.room h3{
+    font-size:22px;
+}
+
+.room p{
+    color:#667892;
+    margin:7px 0 14px;
+}
+
+.room-status{
+    display:inline-block;
+    padding:7px 11px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.room-available{
+    background:#dff8ea;
+    color:#087443;
+}
+
+.room-reserved{
+    background:#e2edff;
+    color:#245bc8;
+}
+
+.room-occupied{
+    background:#fff0d8;
+    color:#a45a00;
+}
+
+.room-cleaning{
+    background:#eee7ff;
+    color:#6232c8;
+}
+
+.room-maintenance{
+    background:#ffe1e1;
+    color:#b42323;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    width:min(600px,100%);
+    background:white;
+    border-radius:22px;
+    padding:28px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:#edf2f7;
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+label{
+    display:block;
+    color:#60718a;
+    font-weight:bold;
+    font-size:14px;
+}
+
+input,
+select{
+    width:100%;
+    padding:13px;
+    margin-top:6px;
+    border:1px solid #d8e0ea;
+    border-radius:10px;
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#2f6df6;
+}
+
+.modal-actions{
+    margin-top:22px;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+.modal-actions button{
+    border:0;
+    border-radius:10px;
+    padding:12px 18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.cancel{
+    background:#edf2f7;
+}
+
+.save{
+    background:#2f6df6;
+    color:white;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#152238;
+    color:white;
+    padding:15px 20px;
+    border-radius:13px;
+    display:none;
+    z-index:6000;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1100px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .rooms{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:72px;
+    }
+
+    .logo{
+        font-size:0;
+        text-align:center;
+        padding:22px 0;
+    }
+
+    .logo:first-letter{
+        font-size:27px;
+    }
+
+    .nav button{
+        font-size:0;
+        width:58px;
+        padding:16px 0;
+        text-align:center;
+        margin:auto;
+    }
+
+    .nav-icon{
+        font-size:22px;
+        width:auto;
+    }
+
+    .main{
+        margin-left:72px;
+        width:calc(100% - 72px);
+        padding:22px 15px;
+    }
+
+    .title h1{
+        font-size:31px;
+    }
+
+    .add-btn{
+        font-size:14px;
+        padding:13px;
+    }
+
+    .rooms{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:520px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .rooms{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        gap:10px;
+    }
+
+    .section-head{
+        gap:10px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
 <!-- =====================================================
-     LOGIN PAGE
-====================================================== -->
+     LOGIN
+===================================================== -->
 
-<section id="loginPage" class="login-page">
+<div class="login-overlay" id="loginOverlay">
 
-  <div class="login-card">
+    <div class="login-box">
 
-```
-<div class="login-logo">
-  MM
+        <div class="login-logo">
+            🏨
+        </div>
+
+        <h2>Munger Mandir</h2>
+
+        <p>Admin Dashboard</p>
+
+        <button
+            class="google-btn"
+            id="googleLogin">
+
+            🔐 Continue with Google
+
+        </button>
+
+        <div
+            class="login-error"
+            id="loginError">
+        </div>
+
+    </div>
+
 </div>
 
-<h1>
-  Munger Mandir
-</h1>
 
-<p>
-  Admin Panel<br>
-  Sign in with your authorized Google account.
-</p>
-
-<button id="googleLogin" class="google-login">
-  Continue with Google
-</button>
-
-<div id="loginError" class="login-error hidden"></div>
-```
-
-  </div>
-
-</section>
+<div class="app">
 
 <!-- =====================================================
-     ADMIN APP
-====================================================== -->
+     SIDEBAR
+===================================================== -->
 
-<div id="adminApp" class="hidden">
+<aside class="sidebar">
 
-  <!-- HEADER -->
-
-  <header class="header">
-
-```
-<div class="brand">
-
-  <div class="brand-logo">
-    MM
-  </div>
-
-  <div class="brand-text">
-
-    <h2>
-      Munger Mandir
-    </h2>
-
-    <span>
-      Room Request Administration
-    </span>
-
-  </div>
-
-</div>
-
-
-<div class="admin-area">
-
-  <span id="adminName" class="admin-name">
-    Admin
-  </span>
-
-  <img
-    id="adminPhoto"
-    class="admin-photo"
-    src=""
-    alt="Admin"
-  >
-
-  <button id="logoutButton" class="logout">
-    Logout
-  </button>
-
-</div>
-```
-
-  </header>
-
-  <!-- DASHBOARD -->
-
-  <main class="dashboard">
-
-```
-<div class="page-heading">
-
-  <h1>
-    Room Requests
-  </h1>
-
-  <p>
-    View and manage all guest room requests.
-  </p>
-
-</div>
-
-
-<!-- STATISTICS -->
-
-<section class="stats">
-
-  <div class="stat-card">
-
-    <div class="stat-title">
-      Total Requests
+    <div class="logo">
+        🏨 Hotel Manager
     </div>
 
-    <div id="totalCount" class="stat-value">
-      0
-    </div>
+    <nav class="nav">
 
-  </div>
+        <button
+            class="active"
+            onclick="showSection('dashboard',this)">
 
+            <span class="nav-icon">📊</span>
+            Dashboard
 
-  <div class="stat-card">
+        </button>
 
-    <div class="stat-title">
-      Pending
-    </div>
+        <button
+            onclick="showSection('requests',this)">
 
-    <div
-      id="pendingCount"
-      class="stat-value pending-value"
-    >
-      0
-    </div>
+            <span class="nav-icon">📋</span>
+            Room Requests
 
-  </div>
+        </button>
 
+        <button
+            onclick="showSection('bookings',this)">
 
-  <div class="stat-card">
+            <span class="nav-icon">🗓️</span>
+            Bookings
 
-    <div class="stat-title">
-      Approved
-    </div>
+        </button>
 
-    <div
-      id="approvedCount"
-      class="stat-value approved-value"
-    >
-      0
-    </div>
+        <button
+            onclick="showSection('rooms',this)">
 
-  </div>
+            <span class="nav-icon">🚪</span>
+            Rooms 1–70
 
+        </button>
 
-  <div class="stat-card">
+        <button
+            onclick="showSection('cleaning',this)">
 
-    <div class="stat-title">
-      Rejected
-    </div>
+            <span class="nav-icon">🧹</span>
+            Cleaning
 
-    <div
-      id="rejectedCount"
-      class="stat-value rejected-value"
-    >
-      0
-    </div>
+        </button>
 
-  </div>
+        <button
+            onclick="showSection('calendar',this)">
 
-</section>
+            <span class="nav-icon">📅</span>
+            Calendar
 
+        </button>
 
-<!-- TOOLBAR -->
+    </nav>
 
-<section class="toolbar">
+</aside>
 
-  <input
-    id="searchInput"
-    class="search"
-    type="search"
-    placeholder="Search name, email, phone, passport..."
-  >
-
-
-  <select id="statusFilter" class="filter">
-
-    <option value="all">
-      All Status
-    </option>
-
-    <option value="pending We will be touch soon">
-      Pending
-    </option>
-
-    <option value="approved">
-      Approved
-    </option>
-
-    <option value="rejected">
-      Rejected
-    </option>
-
-  </select>
-
-
-  <button id="refreshButton" class="toolbar-button">
-    Refresh
-  </button>
-
-
-  <button id="exportButton" class="toolbar-button export">
-    Export CSV
-  </button>
-
-</section>
-
-
-<!-- TABLE -->
-
-<section class="table-wrapper">
-
-  <table>
-
-    <thead>
-
-      <tr>
-
-        <th>
-          Guest
-        </th>
-
-        <th>
-          Phone
-        </th>
-
-        <th>
-          Check In
-        </th>
-
-        <th>
-          Check Out
-        </th>
-
-        <th>
-          Beds
-        </th>
-
-        <th>
-          AC
-        </th>
-
-        <th>
-          Status
-        </th>
-
-        <th>
-          Action
-        </th>
-
-      </tr>
-
-    </thead>
-
-    <tbody id="requestTable">
-
-      <tr>
-        <td colspan="8">
-
-          <div class="empty">
-            Loading requests...
-          </div>
-
-        </td>
-      </tr>
-
-    </tbody>
-
-  </table>
-
-</section>
-```
-
-  </main>
-
-</div>
 
 <!-- =====================================================
-     DETAILS MODAL
-====================================================== -->
+     MAIN
+===================================================== -->
 
-<div id="detailsModal" class="modal hidden">
+<main class="main">
 
-  <div class="modal-card">
+<div class="topbar">
 
-```
-<div class="modal-header">
+    <div class="title">
 
-  <h2>
-    Guest Request Details
-  </h2>
+        <h1 id="pageTitle">
+            Dashboard
+        </h1>
 
-  <button id="closeModal" class="close">
-    ×
-  </button>
+        <div
+            class="date"
+            id="todayDate">
+        </div>
+
+    </div>
+
+    <button
+        class="add-btn"
+        onclick="openBooking()">
+
+        ＋ Add Booking
+
+    </button>
 
 </div>
 
 
-<div id="modalContent">
-</div>
-```
+<!-- ADMIN BAR -->
 
-  </div>
+<div
+    class="admin-bar"
+    id="adminBar">
+
+    <div class="admin-user">
+
+        Logged in as:
+        <strong id="adminEmail"></strong>
+
+    </div>
+
+    <button
+        class="logout-btn"
+        onclick="logoutAdmin()">
+
+        Logout
+
+    </button>
 
 </div>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section id="dashboard">
+
+<div class="stats">
+
+    <div class="stat-card">
+
+        <div class="stat-title">
+            Today's Check-ins
+        </div>
+
+        <div
+            class="stat-number"
+            id="checkins">
+            0
+        </div>
+
+        <div class="stat-icon">
+            ✈️
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-title">
+            Today's Check-outs
+        </div>
+
+        <div
+            class="stat-number"
+            id="checkouts">
+            0
+        </div>
+
+        <div class="stat-icon">
+            🛫
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-title">
+            Occupied Rooms
+        </div>
+
+        <div
+            class="stat-number"
+            id="occupiedRooms">
+            0
+        </div>
+
+        <div class="stat-icon">
+            🛏️
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-title">
+            Cleaning Pending
+        </div>
+
+        <div
+            class="stat-number"
+            id="cleaningPending">
+            0
+        </div>
+
+        <div class="stat-icon">
+            🧹
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TODAY ACTIVITY -->
+
+<div class="section">
+
+    <div class="section-head">
+
+        <h2>
+            Today's Activity
+        </h2>
+
+        <button
+            class="refresh"
+            onclick="loadRequests()">
+
+            Refresh
+
+        </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="activityBody">
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        class="empty">
+
+                        No activity today.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     REQUESTS
+===================================================== -->
+
+<section
+    id="requests"
+    style="display:none">
+
+<div class="section">
+
+    <div class="section-head">
+
+        <div>
+
+            <h2>
+                Room Requests
+            </h2>
+
+            <div class="section-sub">
+                Guest requests from Firebase Firestore
+            </div>
+
+        </div>
+
+        <button
+            class="refresh"
+            onclick="loadRequests()">
+
+            Refresh
+
+        </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Guest</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Request</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="requestsBody">
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        class="empty">
+
+                        Loading requests...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     BOOKINGS
+===================================================== -->
+
+<section
+    id="bookings"
+    style="display:none">
+
+<div class="section">
+
+    <div class="section-head">
+
+        <h2>
+            Bookings
+        </h2>
+
+        <button
+            class="refresh"
+            onclick="openBooking()">
+
+            ＋ Add Booking
+
+        </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="bookingBody">
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        class="empty">
+
+                        No bookings yet.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ROOMS
+===================================================== -->
+
+<section
+    id="rooms"
+    style="display:none">
+
+<div class="section">
+
+    <div class="section-head">
+
+        <h2>
+            Room Overview — 1 to 70
+        </h2>
+
+    </div>
+
+    <div
+        class="rooms"
+        id="roomsGrid">
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CLEANING
+===================================================== -->
+
+<section
+    id="cleaning"
+    style="display:none">
+
+<div class="section">
+
+    <div class="section-head">
+
+        <h2>
+            Cleaning
+        </h2>
+
+    </div>
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Room</th>
+                    <th>Guest</th>
+                    <th>Checkout</th>
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="cleaningBody">
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        class="empty">
+
+                        No cleaning pending.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CALENDAR
+===================================================== -->
+
+<section
+    id="calendar"
+    style="display:none">
+
+<div class="section">
+
+    <div class="section-head">
+
+        <h2>
+            Calendar
+        </h2>
+
+    </div>
+
+    <div class="empty">
+
+        Google Calendar integration can be connected here.
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     BOOKING MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="bookingModal">
+
+<div class="modal-box">
+
+    <div class="modal-head">
+
+        <h2>
+            Add Booking
+        </h2>
+
+        <button
+            class="close"
+            onclick="closeBooking()">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+        <label>
+
+            Guest Name
+
+            <input
+                id="guestName"
+                type="text">
+
+        </label>
+
+
+        <label>
+
+            Room
+
+            <select id="roomNumber">
+            </select>
+
+        </label>
+
+
+        <label>
+
+            Check-in
+
+            <input
+                id="checkIn"
+                type="date">
+
+        </label>
+
+
+        <label>
+
+            Check-out
+
+            <input
+                id="checkOut"
+                type="date">
+
+        </label>
+
+
+        <label>
+
+            Phone
+
+            <input
+                id="phone"
+                type="tel">
+
+        </label>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+        <button
+            class="cancel"
+            onclick="closeBooking()">
+
+            Cancel
+
+        </button>
+
+        <button
+            class="save"
+            onclick="saveBooking()">
+
+            Save Booking
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
 
 <!-- =====================================================
      FIREBASE
-====================================================== -->
+===================================================== -->
 
 <script type="module">
 
-  import {
+import {
     initializeApp
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-  import {
+
+import {
     getAuth,
     GoogleAuthProvider,
     signInWithPopup,
-    signOut,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-  import {
+
+import {
     getFirestore,
     collection,
-    onSnapshot,
-    query,
-    orderBy,
+    getDocs,
     updateDoc,
-    deleteDoc,
     doc
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-  /* =====================================================
-     FIREBASE CONFIG
-  ====================================================== */
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyD7qJWxjijDXrdTiI7D14zR-ds-j46rNzc",
-    authDomain: "munger-mandir-room-request.firebaseapp.com",
-    projectId: "munger-mandir-room-request",
-    storageBucket: "munger-mandir-room-request.firebasestorage.app",
-    messagingSenderId: "145384185034",
-    appId: "1:145384185034:web:c828c0388f8bd79d79a833",
-    measurementId: "G-LF2K2KFCN6"
-  };
+const firebaseConfig = {
 
+    apiKey:
+    "AIzaSyD7qJWxijDXrdTiI7D14zR-ds-j46rNzc",
 
-  /* =====================================================
-     ADMIN EMAIL
-     
-     IMPORTANT:
-     Replace this with your actual admin Gmail.
-  ====================================================== */
+    authDomain:
+    "munger-mandir-room-request.firebaseapp.com",
 
-  const ADMIN_EMAIL = "rishantbhaumik@gmail.com";
+    projectId:
+    "munger-mandir-room-request",
 
+    storageBucket:
+    "munger-mandir-room-request.firebasestorage.app",
 
-  /* =====================================================
-     INITIALIZE
-  ====================================================== */
+    messagingSenderId:
+    "145384185034",
 
-  const app = initializeApp(firebaseConfig);
+    appId:
+    "1:145384185034:web:c828c0388f8bd79d79a833",
 
-  const auth = getAuth(app);
+    measurementId:
+    "G-LF2K2KFCN6"
 
-  const db = getFirestore(app);
+};
 
-  const provider = new GoogleAuthProvider();
 
+/* =====================================================
+   ADMIN EMAIL
+===================================================== */
 
-  /* =====================================================
-     ELEMENTS
-  ====================================================== */
+const ADMIN_EMAIL =
+"rishantbhaumik@gmail.com";
 
-  const loginPage =
-    document.getElementById("loginPage");
 
-  const adminApp =
-    document.getElementById("adminApp");
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
 
-  const googleLogin =
-    document.getElementById("googleLogin");
+const app =
+initializeApp(
+    firebaseConfig
+);
 
-  const loginError =
-    document.getElementById("loginError");
+const auth =
+getAuth(app);
 
-  const logoutButton =
-    document.getElementById("logoutButton");
+const db =
+getFirestore(app);
 
-  const adminName =
-    document.getElementById("adminName");
 
-  const adminPhoto =
-    document.getElementById("adminPhoto");
+/* =====================================================
+   GOOGLE LOGIN
+===================================================== */
 
-  const requestTable =
-    document.getElementById("requestTable");
+document
+.getElementById("googleLogin")
+.addEventListener(
+"click",
+async function(){
 
-  const searchInput =
-    document.getElementById("searchInput");
-
-  const statusFilter =
-    document.getElementById("statusFilter");
-
-  const detailsModal =
-    document.getElementById("detailsModal");
-
-  const modalContent =
-    document.getElementById("modalContent");
-
-  const closeModal =
-    document.getElementById("closeModal");
-
-
-  /* =====================================================
-     DATA
-  ====================================================== */
-
-  let requests = [];
-
-  let unsubscribeRequests = null;
-
-
-  /* =====================================================
-     GOOGLE LOGIN
-  ====================================================== */
-
-  googleLogin.addEventListener("click", async () => {
-
-    loginError.classList.add("hidden");
-
-    try {
-
-      await signInWithPopup(
-        auth,
-        provider
-      );
-
-    } catch (error) {
-
-      console.error(error);
-
-      loginError.textContent =
-        "Login failed: " + error.message;
-
-      loginError.classList.remove("hidden");
-
-    }
-
-  });
-
-
-  /* =====================================================
-     AUTH STATE
-  ====================================================== */
-
-  onAuthStateChanged(auth, (user) => {
-
-    if (!user) {
-
-      loginPage.classList.remove("hidden");
-
-      adminApp.classList.add("hidden");
-
-      if (unsubscribeRequests) {
-        unsubscribeRequests();
-        unsubscribeRequests = null;
-      }
-
-      return;
-
-    }
-
-
-    /* ADMIN EMAIL CHECK */
-
-    if (
-      !user.email ||
-      user.email.toLowerCase() !==
-      ADMIN_EMAIL.toLowerCase()
-    ) {
-
-      loginError.textContent =
-        "Access denied. This Google account is not authorized as an admin.";
-
-      loginError.classList.remove("hidden");
-
-      signOut(auth);
-
-      return;
-
-    }
-
-
-    /* SHOW ADMIN */
-
-    loginPage.classList.add("hidden");
-
-    adminApp.classList.remove("hidden");
-
-    adminName.textContent =
-      user.displayName || "Administrator";
-
-    adminPhoto.src =
-      user.photoURL ||
-      "https://via.placeholder.com/100";
-
-
-    loadRequests();
-
-  });
-
-
-  /* =====================================================
-     LOAD REQUESTS
-  ====================================================== */
-
-  function loadRequests() {
-
-    if (unsubscribeRequests) {
-      unsubscribeRequests();
-    }
-
-
-    const requestsQuery = query(
-      collection(db, "roomRequests"),
-      orderBy("createdAt", "desc")
+    const errorBox =
+    document.getElementById(
+        "loginError"
     );
 
+    errorBox.textContent="";
 
-    unsubscribeRequests = onSnapshot(
-      requestsQuery,
-      (snapshot) => {
+    try{
 
-        requests = [];
+        const provider =
+        new GoogleAuthProvider();
 
-        snapshot.forEach((documentSnapshot) => {
-
-          requests.push({
-            id: documentSnapshot.id,
-            ...documentSnapshot.data()
-          });
-
+        provider.setCustomParameters({
+            prompt:"select_account"
         });
 
+        await signInWithPopup(
+            auth,
+            provider
+        );
 
-        updateStatistics();
-
-        renderTable();
-
-      },
-      (error) => {
+    }catch(error){
 
         console.error(error);
 
-        requestTable.innerHTML = `
-          <tr>
-            <td colspan="8">
-              <div class="empty">
-                Unable to load requests.<br><br>
-                ${escapeHTML(error.message)}
-              </div>
-            </td>
-          </tr>
-        `;
-
-      }
-    );
-
-  }
-
-
-  /* =====================================================
-     STATISTICS
-  ====================================================== */
-
-  function updateStatistics() {
-
-    const total =
-      requests.length;
-
-    const pending =
-      requests.filter(
-        item => (item.status || "pending") === "pending"
-      ).length;
-
-    const approved =
-      requests.filter(
-        item => item.status === "approved"
-      ).length;
-
-    const rejected =
-      requests.filter(
-        item => item.status === "rejected"
-      ).length;
-
-
-    document.getElementById("totalCount").textContent =
-      total;
-
-    document.getElementById("pendingCount").textContent =
-      pending;
-
-    document.getElementById("approvedCount").textContent =
-      approved;
-
-    document.getElementById("rejectedCount").textContent =
-      rejected;
-
-  }
-
-
-  /* =====================================================
-     FILTER
-  ====================================================== */
-
-  searchInput.addEventListener(
-    "input",
-    renderTable
-  );
-
-  statusFilter.addEventListener(
-    "change",
-    renderTable
-  );
-
-
-  /* =====================================================
-     RENDER TABLE
-  ====================================================== */
-
-  function renderTable() {
-
-    const search =
-      searchInput.value.trim().toLowerCase();
-
-    const filter =
-      statusFilter.value;
-
-
-    const filtered =
-      requests.filter((item) => {
-
-        const searchableText = [
-
-          item.firstName,
-          item.lastName,
-          item.email,
-          item.phone,
-          item.passportNumber,
-          item.passport,
-          item.checkIn,
-          item.checkOut
-
-        ]
-        .join(" ")
-        .toLowerCase();
-
-
-        const searchMatch =
-          !search ||
-          searchableText.includes(search);
-
-
-        const currentStatus =
-          item.status || "pending";
-
-
-        const statusMatch =
-          filter === "all" ||
-          currentStatus === filter;
-
-
-        return searchMatch && statusMatch;
-
-      });
-
-
-    requestTable.innerHTML = "";
-
-
-    if (filtered.length === 0) {
-
-      requestTable.innerHTML = `
-        <tr>
-          <td colspan="8">
-            <div class="empty">
-              No room requests found.
-            </div>
-          </td>
-        </tr>
-      `;
-
-      return;
+        errorBox.textContent =
+        error.message;
 
     }
 
-
-    filtered.forEach((item) => {
-
-      const row =
-        document.createElement("tr");
+});
 
 
-      const name =
-        `${item.firstName || ""} ${item.lastName || ""}`
-        .trim() || "Unknown Guest";
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(!user){
+
+            document
+            .getElementById(
+                "loginOverlay"
+            )
+            .style.display="flex";
+
+            document
+            .getElementById(
+                "adminBar"
+            )
+            .style.display="none";
+
+            return;
+        }
 
 
-      const status =
-        item.status || "pending";
+        /* ADMIN EMAIL CHECK */
+
+        if(
+            user.email.toLowerCase()
+            !==
+            ADMIN_EMAIL.toLowerCase()
+        ){
+
+            alert(
+                "Access denied.\n\n"+
+                "This Google account is not the admin account."
+            );
+
+            signOut(auth);
+
+            return;
+        }
 
 
-      const statusClass =
-        status === "approved"
-          ? "status-approved"
-          : status === "rejected"
-            ? "status-rejected"
-            : "status-pending";
+        /* SHOW ADMIN */
+
+        document
+        .getElementById(
+            "loginOverlay"
+        )
+        .style.display="none";
 
 
-      row.innerHTML = `
-
-        <td>
-
-          <div class="guest-name">
-            ${escapeHTML(name)}
-          </div>
-
-          <div class="guest-email">
-            ${escapeHTML(item.email || "-")}
-          </div>
-
-        </td>
-
-        <td>
-          ${escapeHTML(item.phone || "-")}
-        </td>
-
-        <td>
-          ${escapeHTML(item.checkIn || "-")}
-        </td>
-
-        <td>
-          ${escapeHTML(item.checkOut || "-")}
-        </td>
-
-        <td>
-          ${escapeHTML(item.beds || "-")}
-        </td>
-
-        <td>
-          ${escapeHTML(item.acRoom || "-")}
-        </td>
-
-        <td>
-
-          <span class="status ${statusClass}">
-            ${capitalize(status)}
-          </span>
-
-        </td>
-
-        <td>
-
-          <button
-            class="view-button"
-            data-id="${escapeHTML(item.id)}"
-          >
-            View
-          </button>
-
-        </td>
-
-      `;
+        document
+        .getElementById(
+            "adminBar"
+        )
+        .style.display="flex";
 
 
-      row
-        .querySelector(".view-button")
-        .addEventListener(
-          "click",
-          () => openDetails(item.id)
+        document
+        .getElementById(
+            "adminEmail"
+        )
+        .textContent =
+        user.email;
+
+
+        loadRequests();
+
+    }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+window.logoutAdmin =
+async function(){
+
+    try{
+
+        await signOut(auth);
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+};
+
+
+/* =====================================================
+   LOAD FIRESTORE REQUESTS
+===================================================== */
+
+window.loadRequests =
+async function(){
+
+    const body =
+    document.getElementById(
+        "requestsBody"
+    );
+
+
+    body.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="8"
+                class="empty">
+
+                Loading requests...
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    try{
+
+        /*
+         * No orderBy here.
+         * This prevents errors if some documents
+         * don't contain createdAt.
+         */
+
+        const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "roomRequests"
+            )
         );
 
 
-      requestTable.appendChild(row);
+        if(snapshot.empty){
 
-    });
+            body.innerHTML = `
 
-  }
+                <tr>
+
+                    <td
+                        colspan="8"
+                        class="empty">
+
+                        No room requests found.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            updateDashboard([]);
+
+            return;
+        }
 
 
-  /* =====================================================
-     OPEN DETAILS
-  ====================================================== */
+        /* Convert documents to array */
 
-  function openDetails(id) {
+        const requests =
+        snapshot.docs.map(
+            item => ({
 
-    const item =
-      requests.find(
-        request => request.id === id
-      );
+                id:item.id,
+
+                data:item.data()
+
+            })
+        );
 
 
-    if (!item) {
-      return;
+        /*
+         * Sort by createdAt if available.
+         * If not available, keep original order.
+         */
+
+        requests.sort(
+            function(a,b){
+
+                const aTime =
+                getTimestampValue(
+                    a.data.createdAt
+                );
+
+                const bTime =
+                getTimestampValue(
+                    b.data.createdAt
+                );
+
+                return bTime - aTime;
+
+            }
+        );
+
+
+        body.innerHTML="";
+
+
+        requests.forEach(
+            function(item){
+
+                createRequestRow(
+                    item.id,
+                    item.data,
+                    body
+                );
+
+            }
+        );
+
+
+        updateDashboard(
+            requests
+        );
+
+    }catch(error){
+
+        console.error(
+            "Firestore error:",
+            error
+        );
+
+
+        body.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty">
+
+                    ❌ Could not load requests.
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        error.message
+                    )}
+
+                    <br><br>
+
+                    Check Firestore Rules.
+
+                </td>
+
+            </tr>
+
+        `;
+
     }
+
+};
+
+
+/* =====================================================
+   CREATE REQUEST ROW
+===================================================== */
+
+function createRequestRow(
+    id,
+    data,
+    body
+){
+
+    const guestName =
+    data.name ||
+    (
+        (data.firstName || "")+
+        " "+
+        (data.lastName || "")
+    ).trim() ||
+    "Guest";
+
+
+    const email =
+    data.email ||
+    "";
+
+
+    const phone =
+    data.phone ||
+    data.mobile ||
+    "";
+
+
+    const checkIn =
+    data.checkIn ||
+    data.checkin ||
+    "";
+
+
+    const checkOut =
+    data.checkOut ||
+    data.checkout ||
+    "";
+
+
+    const requestInfo =
+    data.roomRequestInfo ||
+    data.requestInfo ||
+    data.roomRequest ||
+    data.request ||
+    "Room Request";
 
 
     const status =
-      item.status || "pending";
+    String(
+        data.status ||
+        "pending"
+    ).toLowerCase();
 
 
-    modalContent.innerHTML = `
-
-      <div class="detail-grid">
-
-        ${detail(
-          "First Name",
-          item.firstName
-        )}
-
-        ${detail(
-          "Last Name",
-          item.lastName
-        )}
-
-        ${detail(
-          "Phone Number",
-          item.phone
-        )}
-
-        ${detail(
-          "Email",
-          item.email
-        )}
-
-        ${detail(
-          "Check In",
-          item.checkIn
-        )}
-
-        ${detail(
-          "Check Out",
-          item.checkOut
-        )}
-
-        ${detail(
-          "Passport Number",
-          item.passportNumber || item.passport
-        )}
-
-        ${detail(
-          "Number of Beds",
-          item.beds
-        )}
-
-        ${detail(
-          "AC Room",
-          item.acRoom
-        )}
-
-        ${detail(
-          "Hot Water",
-          item.hotWater
-        )}
-
-        ${detail(
-          "Plate / Spoon / Glass",
-          item.utensils
-        )}
-
-        ${detail(
-          "20L Water Jug",
-          item.waterJugs
-        )}
-
-        ${detail(
-          "All Out Mosquito",
-          item.mosquito
-        )}
-
-        ${detail(
-          "Status",
-          capitalize(status)
-        )}
-
-      </div>
+    const row =
+    document.createElement(
+        "tr"
+    );
 
 
-      <div class="modal-section">
+    row.innerHTML = `
 
-        <h3>
-          Extra Charges
-        </h3>
+        <td>
 
-        <div class="detail-grid">
+            <strong>
 
-          ${detail(
-            "Utensils",
-            "₹" + (item.utensilsPrice || 0)
-          )}
+                ${escapeHTML(
+                    guestName
+                )}
 
-          ${detail(
-            "Water",
-            "₹" + (item.waterPrice || 0)
-          )}
+            </strong>
 
-          ${detail(
-            "Mosquito Dispeller",
-            "₹" + (item.mosquitoPrice || 0)
-          )}
-
-          ${detail(
-            "Total Extra",
-            "₹" + (item.totalExtra || 0)
-          )}
-
-        </div>
-
-      </div>
+        </td>
 
 
-      ${
-        item.note
-          ? `
-            <div class="modal-section">
+        <td>
 
-              <h3>
-                Additional Information
-              </h3>
+            ${escapeHTML(
+                email
+            )}
 
-              <div class="detail-box">
+        </td>
 
-                <div class="detail-value">
-                  ${escapeHTML(item.note)}
-                </div>
 
-              </div>
+        <td>
+
+            ${escapeHTML(
+                phone
+            )}
+
+        </td>
+
+
+        <td>
+
+            ${formatDate(
+                checkIn
+            )}
+
+        </td>
+
+
+        <td>
+
+            ${formatDate(
+                checkOut
+            )}
+
+        </td>
+
+
+        <td>
+
+            ${escapeHTML(
+                requestInfo
+            )}
+
+        </td>
+
+
+        <td>
+
+            <span
+                class="badge ${status}">
+
+                ${status.toUpperCase()}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <div class="action">
+
+
+                ${
+                    status === "pending"
+
+                    ?
+
+                    `
+
+                    <button
+                        class="btn accept"
+                        data-action="accept">
+
+                        ✓ Accept
+
+                    </button>
+
+
+                    <button
+                        class="btn reject"
+                        data-action="reject">
+
+                        ✕ Reject
+
+                    </button>
+
+                    `
+
+                    :
+
+                    `
+
+                    <button
+                        class="btn view"
+                        data-action="view">
+
+                        View
+
+                    </button>
+
+                    `
+                }
+
+
+                <button
+                    class="btn whatsapp"
+                    data-action="whatsapp">
+
+                    📱 WhatsApp
+
+                </button>
+
 
             </div>
-          `
-          : ""
-      }
 
-
-      <div class="modal-actions">
-
-        <button
-          id="pendingAction"
-          class="action action-pending"
-        >
-          Mark Pending
-        </button>
-
-        <button
-          id="approveAction"
-          class="action action-approved"
-        >
-          Approve
-        </button>
-
-        <button
-          id="rejectAction"
-          class="action action-rejected"
-        >
-          Reject
-        </button>
-
-        <button
-          id="deleteAction"
-          class="action action-delete"
-        >
-          Delete
-        </button>
-
-      </div>
+        </td>
 
     `;
 
 
-    document
-      .getElementById("pendingAction")
-      .onclick = () =>
-        changeStatus(id, "pending");
+    /* ACCEPT */
+
+    const accept =
+    row.querySelector(
+        '[data-action="accept"]'
+    );
 
 
-    document
-      .getElementById("approveAction")
-      .onclick = () =>
-        changeStatus(id, "approved");
+    if(accept){
+
+        accept.onclick =
+        function(){
+
+            changeStatus(
+                id,
+                "accepted"
+            );
+
+        };
+
+    }
 
 
-    document
-      .getElementById("rejectAction")
-      .onclick = () =>
-        changeStatus(id, "rejected");
+    /* REJECT */
+
+    const reject =
+    row.querySelector(
+        '[data-action="reject"]'
+    );
 
 
-    document
-      .getElementById("deleteAction")
-      .onclick = () =>
-        deleteRequest(id);
+    if(reject){
+
+        reject.onclick =
+        function(){
+
+            changeStatus(
+                id,
+                "rejected"
+            );
+
+        };
+
+    }
 
 
-    detailsModal.classList.remove("hidden");
+    /* VIEW */
 
-  }
-
-
-  /* =====================================================
-     DETAIL HELPER
-  ====================================================== */
-
-  function detail(label, value) {
-
-    return `
-
-      <div class="detail-box">
-
-        <div class="detail-label">
-          ${escapeHTML(label)}
-        </div>
-
-        <div class="detail-value">
-          ${escapeHTML(value ?? "-")}
-        </div>
-
-      </div>
-
-    `;
-
-  }
+    const view =
+    row.querySelector(
+        '[data-action="view"]'
+    );
 
 
-  /* =====================================================
-     CHANGE STATUS
-  ====================================================== */
+    if(view){
 
-  async function changeStatus(id, status) {
+        view.onclick =
+        function(){
 
-    try {
+            showGuestDetails(
+                data
+            );
 
-      await updateDoc(
-        doc(db, "roomRequests", id),
-        {
-          status: status
+        };
+
+    }
+
+
+    /* WHATSAPP */
+
+    const whatsapp =
+    row.querySelector(
+        '[data-action="whatsapp"]'
+    );
+
+
+    if(whatsapp){
+
+        whatsapp.onclick =
+        function(){
+
+            sendWhatsApp(
+                phone,
+                guestName
+            );
+
+        };
+
+    }
+
+
+    body.appendChild(
+        row
+    );
+
+}
+
+
+/* =====================================================
+   CHANGE STATUS
+===================================================== */
+
+async function changeStatus(
+    requestId,
+    status
+){
+
+    const text =
+    status === "accepted"
+
+    ?
+
+    "Are you sure you want to ACCEPT this request?"
+
+    :
+
+    "Are you sure you want to REJECT this request?";
+
+
+    if(!confirm(text)){
+
+        return;
+
+    }
+
+
+    try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "roomRequests",
+                requestId
+            ),
+
+            {
+
+                status:status,
+
+                statusUpdatedAt:
+                new Date()
+
+            }
+
+        );
+
+
+        if(status === "accepted"){
+
+            showToast(
+                "✅ Room request accepted"
+            );
+
+        }else{
+
+            showToast(
+                "❌ Room request rejected"
+            );
+
         }
-      );
 
 
-      closeDetails();
+        loadRequests();
 
-    } catch (error) {
+    }catch(error){
 
-      console.error(error);
+        console.error(error);
 
-      alert(
-        "Could not update status:\n" +
-        error.message
-      );
-
-    }
-
-  }
-
-
-  /* =====================================================
-     DELETE
-  ====================================================== */
-
-  async function deleteRequest(id) {
-
-    const confirmed =
-      confirm(
-        "Are you sure you want to permanently delete this request?"
-      );
-
-
-    if (!confirmed) {
-      return;
-    }
-
-
-    try {
-
-      await deleteDoc(
-        doc(db, "roomRequests", id)
-      );
-
-
-      closeDetails();
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert(
-        "Could not delete request:\n" +
-        error.message
-      );
+        alert(
+            "Status update failed:\n\n"+
+            error.message
+        );
 
     }
 
-  }
+}
 
 
-  /* =====================================================
-     CLOSE MODAL
-  ====================================================== */
+/* =====================================================
+   WHATSAPP
+===================================================== */
 
-  function closeDetails() {
+function sendWhatsApp(
+    phone,
+    name
+){
 
-    detailsModal.classList.add("hidden");
+    if(!phone){
 
-  }
+        alert(
+            "Guest phone number is not available."
+        );
 
-
-  closeModal.addEventListener(
-    "click",
-    closeDetails
-  );
-
-
-  detailsModal.addEventListener(
-    "click",
-    (event) => {
-
-      if (event.target === detailsModal) {
-        closeDetails();
-      }
+        return;
 
     }
-  );
 
 
-  /* =====================================================
-     LOGOUT
-  ====================================================== */
-
-  logoutButton.addEventListener(
-    "click",
-    async () => {
-
-      await signOut(auth);
-
-    }
-  );
-
-
-  /* =====================================================
-     REFRESH
-  ====================================================== */
-
-  document
-    .getElementById("refreshButton")
-    .addEventListener(
-      "click",
-      () => {
-
-        renderTable();
-        updateStatistics();
-
-      }
+    phone =
+    String(phone)
+    .replace(
+        /\D/g,
+        ""
     );
 
 
-  /* =====================================================
-     CSV EXPORT
-  ====================================================== */
+    /*
+     * If Indian 10-digit number,
+     * add country code 91.
+     */
 
-  document
-    .getElementById("exportButton")
-    .addEventListener(
-      "click",
-      exportCSV
-    );
+    if(
+        phone.length === 10
+    ){
 
-
-  function exportCSV() {
-
-    if (requests.length === 0) {
-
-      alert(
-        "There are no requests to export."
-      );
-
-      return;
+        phone =
+        "91"+
+        phone;
 
     }
 
 
-    const headers = [
+    const message =
 
-      "Request ID",
-      "First Name",
-      "Last Name",
-      "Phone",
-      "Email",
-      "Passport Number",
-      "Check In",
-      "Check Out",
-      "Beds",
-      "AC Room",
-      "Hot Water",
-      "Utensils",
-      "Water Jugs",
-      "Mosquito",
-      "Utensils Price",
-      "Water Price",
-      "Mosquito Price",
-      "Total Extra",
-      "Status"
+`Hello ${name},
+
+We got your room request at Munger Mandir.
+
+Our team will get back to you soon.
+
+Thank you for choosing Munger Mandir. 🙏
+
+Regards,
+Munger Mandir Team`;
+
+
+    const url =
+    "https://wa.me/"+
+    phone+
+    "?text="+
+    encodeURIComponent(
+        message
+    );
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   GUEST DETAILS
+===================================================== */
+
+function showGuestDetails(
+    data
+){
+
+    const details =
+
+`Guest Name:
+${data.name || data.firstName || "Guest"}
+
+Email:
+${data.email || "—"}
+
+Phone:
+${data.phone || "—"}
+
+Check-in:
+${data.checkIn || data.checkin || "—"}
+
+Check-out:
+${data.checkOut || data.checkout || "—"}
+
+Passport:
+${data.passportNumber || data.passport || "—"}
+
+Room Request:
+${data.roomRequestInfo || data.requestInfo || "—"}
+
+Status:
+${data.status || "pending"}`;
+
+
+    alert(details);
+
+}
+
+
+/* =====================================================
+   DASHBOARD UPDATE
+===================================================== */
+
+function updateDashboard(
+    requests
+){
+
+    let accepted = 0;
+
+    let pending = 0;
+
+    let rejected = 0;
+
+
+    let todayCheckin = 0;
+
+    let todayCheckout = 0;
+
+
+    const today =
+    getTodayString();
+
+
+    requests.forEach(
+        function(item){
+
+            const data =
+            item.data || item;
+
+
+            const status =
+            String(
+                data.status ||
+                "pending"
+            ).toLowerCase();
+
+
+            if(
+                status === "accepted"
+            ){
+
+                accepted++;
+
+            }
+
+
+            if(
+                status === "pending"
+            ){
+
+                pending++;
+
+            }
+
+
+            if(
+                status === "rejected"
+            ){
+
+                rejected++;
+
+            }
+
+
+            const checkIn =
+            normalizeDate(
+                data.checkIn ||
+                data.checkin
+            );
+
+
+            const checkOut =
+            normalizeDate(
+                data.checkOut ||
+                data.checkout
+            );
+
+
+            if(
+                checkIn === today
+            ){
+
+                todayCheckin++;
+
+            }
+
+
+            if(
+                checkOut === today
+            ){
+
+                todayCheckout++;
+
+            }
+
+        }
+    );
+
+
+    document
+    .getElementById(
+        "checkins"
+    )
+    .textContent =
+    todayCheckin;
+
+
+    document
+    .getElementById(
+        "checkouts"
+    )
+    .textContent =
+    todayCheckout;
+
+
+    document
+    .getElementById(
+        "occupiedRooms"
+    )
+    .textContent =
+    accepted;
+
+
+    document
+    .getElementById(
+        "cleaningPending"
+    )
+    .textContent =
+    pending;
+
+
+    /* Activity */
+
+    const activity =
+    document.getElementById(
+        "activityBody"
+    );
+
+
+    if(!requests.length){
+
+        activity.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="empty">
+
+                    No activity today.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    const latest =
+    requests.slice(
+        0,
+        10
+    );
+
+
+    activity.innerHTML="";
+
+
+    latest.forEach(
+        function(item){
+
+            const data =
+            item.data || item;
+
+
+            const guestName =
+            data.name ||
+            (
+                (data.firstName || "")+
+                " "+
+                (data.lastName || "")
+            ).trim() ||
+            "Guest";
+
+
+            const room =
+            data.room ||
+            data.roomNumber ||
+            "—";
+
+
+            const checkIn =
+            data.checkIn ||
+            data.checkin ||
+            "";
+
+
+            const checkOut =
+            data.checkOut ||
+            data.checkout ||
+            "";
+
+
+            const status =
+            String(
+                data.status ||
+                "pending"
+            ).toLowerCase();
+
+
+            const tr =
+            document.createElement(
+                "tr"
+            );
+
+
+            tr.innerHTML = `
+
+                <td>
+
+                    <strong>
+
+                        ${escapeHTML(
+                            guestName
+                        )}
+
+                    </strong>
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        room
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${formatDate(
+                        checkIn
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${formatDate(
+                        checkOut
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="badge ${status}">
+
+                        ${status.toUpperCase()}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        class="btn whatsapp">
+
+                        📱 WhatsApp
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tr.querySelector(
+                ".whatsapp"
+            ).onclick =
+            function(){
+
+                sendWhatsApp(
+                    data.phone ||
+                    data.mobile ||
+                    "",
+                    guestName
+                );
+
+            };
+
+
+            activity.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   TIMESTAMP VALUE
+===================================================== */
+
+function getTimestampValue(
+    value
+){
+
+    if(!value)
+    return 0;
+
+
+    if(
+        typeof value === "object" &&
+        value.seconds
+    ){
+
+        return value.seconds * 1000;
+
+    }
+
+
+    const time =
+    new Date(value)
+    .getTime();
+
+
+    return isNaN(time)
+    ? 0
+    : time;
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(
+    value
+){
+
+    if(!value)
+    return "—";
+
+
+    if(
+        typeof value === "object" &&
+        value.seconds
+    ){
+
+        return new Date(
+            value.seconds * 1000
+        ).toLocaleDateString(
+            "en-IN"
+        );
+
+    }
+
+
+    const date =
+    new Date(value);
+
+
+    if(isNaN(date)){
+
+        return escapeHTML(
+            value
+        );
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-IN"
+    );
+
+}
+
+
+/* =====================================================
+   NORMALIZE DATE
+===================================================== */
+
+function normalizeDate(
+    value
+){
+
+    if(!value)
+    return "";
+
+
+    if(
+        typeof value === "object" &&
+        value.seconds
+    ){
+
+        const date =
+        new Date(
+            value.seconds * 1000
+        );
+
+
+        return date
+        .toISOString()
+        .split("T")[0];
+
+    }
+
+
+    /*
+     * If value is already YYYY-MM-DD
+     */
+
+    if(
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            String(value)
+        )
+    ){
+
+        return String(value);
+
+    }
+
+
+    const date =
+    new Date(value);
+
+
+    if(isNaN(date))
+    return "";
+
+
+    return date
+    .toISOString()
+    .split("T")[0];
+
+}
+
+
+/* =====================================================
+   TODAY
+===================================================== */
+
+function getTodayString(){
+
+    const now =
+    new Date();
+
+
+    const year =
+    now.getFullYear();
+
+
+    const month =
+    String(
+        now.getMonth()+1
+    ).padStart(
+        2,
+        "0"
+    );
+
+
+    const day =
+    String(
+        now.getDate()
+    ).padStart(
+        2,
+        "0"
+    );
+
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    ).replace(
+        /[&<>"']/g,
+        function(character){
+
+            return {
+
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+
+            }[character];
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+window.showSection =
+function(
+    section,
+    button
+){
+
+    document
+    .querySelectorAll(
+        "main section"
+    )
+    .forEach(
+        function(item){
+
+            item.style.display =
+            "none";
+
+        }
+    );
+
+
+    document
+    .getElementById(
+        section
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .querySelectorAll(
+        ".nav button"
+    )
+    .forEach(
+        function(item){
+
+            item.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    const titles = {
+
+        dashboard:
+        "Dashboard",
+
+        requests:
+        "Room Requests",
+
+        bookings:
+        "Bookings",
+
+        rooms:
+        "Rooms 1–70",
+
+        cleaning:
+        "Cleaning",
+
+        calendar:
+        "Calendar"
+
+    };
+
+
+    document
+    .getElementById(
+        "pageTitle"
+    )
+    .textContent =
+    titles[section];
+
+
+    if(
+        section === "requests"
+    ){
+
+        loadRequests();
+
+    }
+
+
+    if(
+        section === "bookings"
+    ){
+
+        renderBookings();
+
+    }
+
+};
+
+
+/* =====================================================
+   BOOKING MODAL
+===================================================== */
+
+window.openBooking =
+function(){
+
+    document
+    .getElementById(
+        "bookingModal"
+    )
+    .style.display =
+    "flex";
+
+};
+
+
+window.closeBooking =
+function(){
+
+    document
+    .getElementById(
+        "bookingModal"
+    )
+    .style.display =
+    "none";
+
+};
+
+
+/* =====================================================
+   SAVE LOCAL BOOKING
+===================================================== */
+
+window.saveBooking =
+function(){
+
+    const name =
+    document
+    .getElementById(
+        "guestName"
+    )
+    .value
+    .trim();
+
+
+    const room =
+    document
+    .getElementById(
+        "roomNumber"
+    )
+    .value;
+
+
+    const checkIn =
+    document
+    .getElementById(
+        "checkIn"
+    )
+    .value;
+
+
+    const checkOut =
+    document
+    .getElementById(
+        "checkOut"
+    )
+    .value;
+
+
+    const phone =
+    document
+    .getElementById(
+        "phone"
+    )
+    .value
+    .trim();
+
+
+    if(
+        !name ||
+        !room ||
+        !checkIn ||
+        !checkOut
+    ){
+
+        alert(
+            "Please fill all required fields."
+        );
+
+        return;
+
+    }
+
+
+    const bookings =
+    JSON.parse(
+        localStorage.getItem(
+            "mm_bookings"
+        ) || "[]"
+    );
+
+
+    bookings.push({
+
+        name:name,
+
+        room:room,
+
+        checkIn:checkIn,
+
+        checkOut:checkOut,
+
+        phone:phone,
+
+        status:"Reserved"
+
+    });
+
+
+    localStorage.setItem(
+        "mm_bookings",
+        JSON.stringify(
+            bookings
+        )
+    );
+
+
+    closeBooking();
+
+    renderBookings();
+
+    showToast(
+        "✅ Booking added"
+    );
+
+};
+
+
+/* =====================================================
+   BOOKINGS
+===================================================== */
+
+function renderBookings(){
+
+    const bookings =
+    JSON.parse(
+        localStorage.getItem(
+            "mm_bookings"
+        ) || "[]"
+    );
+
+
+    const body =
+    document.getElementById(
+        "bookingBody"
+    );
+
+
+    if(!bookings.length){
+
+        body.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty">
+
+                    No bookings yet.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    body.innerHTML =
+    bookings.map(
+        function(booking){
+
+            return `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+
+                            ${escapeHTML(
+                                booking.name
+                            )}
+
+                        </strong>
+
+                    </td>
+
+                    <td>
+
+                        Room
+                        ${escapeHTML(
+                            booking.room
+                        )}
+
+                    </td>
+
+                    <td>
+
+                        ${formatDate(
+                            booking.checkIn
+                        )}
+
+                    </td>
+
+                    <td>
+
+                        ${formatDate(
+                            booking.checkOut
+                        )}
+
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="badge pending">
+
+                            ${escapeHTML(
+                                booking.status
+                            )}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    ).join("");
+
+}
+
+
+/* =====================================================
+   ROOMS 1 - 70
+===================================================== */
+
+function renderRooms(){
+
+    const grid =
+    document.getElementById(
+        "roomsGrid"
+    );
+
+
+    const select =
+    document.getElementById(
+        "roomNumber"
+    );
+
+
+    const statuses = [
+
+        "Available",
+        "Reserved",
+        "Occupied",
+        "Cleaning",
+        "Maintenance"
 
     ];
 
 
-    const rows =
-      requests.map(item => [
+    for(
+        let room=1;
+        room<=70;
+        room++
+    ){
 
-        item.id,
-        item.firstName,
-        item.lastName,
-        item.phone,
-        item.email,
-        item.passportNumber || item.passport,
-        item.checkIn,
-        item.checkOut,
-        item.beds,
-        item.acRoom,
-        item.hotWater,
-        item.utensils,
-        item.waterJugs,
-        item.mosquito,
-        item.utensilsPrice,
-        item.waterPrice,
-        item.mosquitoPrice,
-        item.totalExtra,
-        item.status || "pending"
-
-      ]);
+        const status =
+        statuses[
+            (room-1)%5
+        ];
 
 
-    const csv = [
-
-      headers,
-      ...rows
-
-    ]
-    .map(row =>
-      row.map(value =>
-        `"${String(value ?? "")
-          .replaceAll('"', '""')}"`
-      ).join(",")
-    )
-    .join("\n");
+        const card =
+        document.createElement(
+            "div"
+        );
 
 
-    const blob =
-      new Blob(
-        [csv],
-        {
-          type: "text/csv;charset=utf-8;"
-        }
-      );
+        card.className =
+        "room";
 
 
-    const url =
-      URL.createObjectURL(blob);
+        card.innerHTML = `
+
+            <h3>
+                Room ${room}
+            </h3>
+
+            <p>
+                Standard · Floor
+                ${Math.ceil(room/10)}
+            </p>
+
+            <span
+                class="room-status room-${status.toLowerCase()}">
+
+                ${status}
+
+            </span>
+
+        `;
 
 
-    const link =
-      document.createElement("a");
+        grid.appendChild(
+            card
+        );
 
 
-    link.href = url;
-
-    link.download =
-      "munger-mandir-room-requests.csv";
-
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
-
-    URL.revokeObjectURL(url);
-
-  }
+        const option =
+        document.createElement(
+            "option"
+        );
 
 
-  /* =====================================================
-     HELPERS
-  ====================================================== */
-
-  function capitalize(value) {
-
-    const text =
-      String(value || "");
-
-    return text.charAt(0).toUpperCase() +
-      text.slice(1);
-
-  }
+        option.value =
+        room;
 
 
-  function escapeHTML(value) {
+        option.textContent =
+        "Room "+room;
 
-    return String(value ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
 
-  }
+        select.appendChild(
+            option
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+    message
+){
+
+    const toast =
+    document.getElementById(
+        "toast"
+    );
+
+
+    toast.textContent =
+    message;
+
+
+    toast.style.display =
+    "block";
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+    setTimeout(
+        function(){
+
+            toast.style.display =
+            "none";
+
+        },
+        3500
+    );
+
+}
+
+
+/* =====================================================
+   DATE DISPLAY
+===================================================== */
+
+document
+.getElementById(
+    "todayDate"
+)
+.textContent =
+new Date()
+.toLocaleDateString(
+    "en-IN",
+    {
+
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+renderRooms();
+
+renderBookings();
 
 </script>
 
