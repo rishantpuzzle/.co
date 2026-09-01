@@ -6,18 +6,25 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<title>Munger Mandir Admin Panel</title>
+<title>Munger Mandir Admin</title>
 
+<link rel="icon"
+      type="image/png"
+      href="logo.png">
+
+<!-- FULLCALENDAR -->
 <link
-    rel="icon"
-    type="image/png"
-    href="logo.png"
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.css"
 >
+
+<script
+src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js">
+</script>
+
 
 <style>
 
@@ -135,14 +142,6 @@ button{
     color:#fff;
 }
 
-.login-btn:hover{
-    background:#faf7f0;
-}
-
-.logout:hover{
-    background:#3f2509;
-}
-
 /* ================= LOGIN ================= */
 
 .login-screen{
@@ -160,6 +159,7 @@ button{
     max-width:430px;
 
     background:#fff;
+
     border:1px solid #e5ddd1;
     border-radius:24px;
 
@@ -168,7 +168,7 @@ button{
     text-align:center;
 
     box-shadow:
-        0 15px 45px rgba(70,45,15,.08);
+    0 15px 45px rgba(70,45,15,.08);
 }
 
 .temple-icon{
@@ -209,6 +209,7 @@ button{
     background:white;
 
     border:1px solid #d6c7b2;
+
     border-radius:10px;
 
     font-size:15px;
@@ -239,11 +240,6 @@ button{
     color:#991b1b;
 }
 
-.message.success{
-    background:#e8f7ed;
-    color:#166534;
-}
-
 /* ================= MAIN ================= */
 
 .container{
@@ -256,11 +252,11 @@ button{
 
 .hero{
     background:
-        linear-gradient(
-            135deg,
-            #774607,
-            #b97818
-        );
+    linear-gradient(
+        135deg,
+        #774607,
+        #b97818
+    );
 
     color:white;
 
@@ -271,7 +267,7 @@ button{
     margin-bottom:25px;
 
     box-shadow:
-        0 12px 30px rgba(100,60,10,.14);
+    0 12px 30px rgba(100,60,10,.14);
 }
 
 .hero h2{
@@ -282,7 +278,6 @@ button{
 .hero p{
     max-width:700px;
     line-height:1.6;
-    opacity:.95;
 }
 
 /* ================= STATS ================= */
@@ -291,7 +286,7 @@ button{
     display:grid;
 
     grid-template-columns:
-        repeat(4,1fr);
+    repeat(4,1fr);
 
     gap:15px;
 
@@ -308,26 +303,29 @@ button{
     padding:20px;
 
     box-shadow:
-        0 6px 22px rgba(70,45,15,.04);
+    0 6px 22px rgba(70,45,15,.04);
 
     border-left:5px solid #9a600e;
 }
 
 .stat h3{
-    font-size:29px;
+    font-size:28px;
+
     color:#51300d;
+
     margin-bottom:5px;
 }
 
 .stat p{
     color:#8a7964;
+
     font-size:13px;
 }
 
 /* ================= CONTROLS ================= */
 
 .controls{
-    background:#fff;
+    background:white;
 
     border:1px solid #e5ddd1;
 
@@ -347,7 +345,7 @@ button{
 .search{
     flex:1;
 
-    min-width:230px;
+    min-width:220px;
 
     padding:12px 14px;
 
@@ -356,15 +354,6 @@ button{
     border-radius:9px;
 
     outline:none;
-
-    color:#30261b;
-}
-
-.search:focus{
-    border-color:#a96812;
-
-    box-shadow:
-        0 0 0 3px rgba(169,104,18,.10);
 }
 
 .filter{
@@ -393,19 +382,10 @@ button{
     font-weight:bold;
 }
 
-.refresh:hover{
-    background:#3f2509;
-}
-
-/* ================= REQUEST CARD ================= */
-
-.requests{
-    display:grid;
-    gap:15px;
-}
+/* ================= REQUEST ================= */
 
 .request{
-    background:#fff;
+    background:#ffffff;
 
     border:1px solid #e5ddd1;
 
@@ -413,16 +393,18 @@ button{
 
     padding:20px;
 
+    margin-bottom:15px;
+
     box-shadow:
-        0 6px 22px rgba(70,45,15,.04);
+    0 6px 22px rgba(70,45,15,.04);
 }
 
 .request-top{
     display:flex;
 
-    align-items:flex-start;
-
     justify-content:space-between;
+
+    align-items:flex-start;
 
     gap:15px;
 
@@ -430,33 +412,29 @@ button{
 }
 
 .guest-name{
-    font-size:20px;
+    font-size:19px;
+
+    font-weight:bold;
 
     color:#51300d;
 }
 
 .request-id{
-    margin-top:5px;
+    font-size:11px;
 
     color:#9b8970;
 
-    font-size:11px;
-
-    word-break:break-all;
+    margin-top:5px;
 }
 
-/* ================= STATUS ================= */
-
 .status{
-    padding:7px 12px;
+    padding:6px 11px;
 
     border-radius:20px;
 
     font-size:12px;
 
     font-weight:bold;
-
-    white-space:nowrap;
 }
 
 .status.pending{
@@ -474,90 +452,63 @@ button{
     color:#991b1b;
 }
 
-/* ================= DETAILS ================= */
+.room-badge{
+    background:#f4ead8;
 
-.details{
+    color:#654317;
+
+    padding:6px 10px;
+
+    border-radius:8px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    display:inline-block;
+
+    margin-top:8px;
+}
+
+/* ================= REQUEST SUMMARY ================= */
+
+.summary{
     display:grid;
 
     grid-template-columns:
-        repeat(2,1fr);
+    repeat(4,1fr);
 
     gap:10px;
 
-    margin-bottom:18px;
+    margin-bottom:16px;
 }
 
-.detail{
+.summary-item{
     background:#faf7f1;
 
     border:1px solid #eee2cf;
 
-    border-radius:11px;
+    border-radius:10px;
 
-    padding:12px;
+    padding:11px;
 }
 
-.detail-label{
+.summary-item span{
     display:block;
 
     color:#9b8060;
 
-    font-size:11px;
-
-    margin-bottom:4px;
+    font-size:10px;
 
     text-transform:uppercase;
+
+    margin-bottom:4px;
 }
 
-.detail-value{
+.summary-item strong{
     color:#4d3923;
 
-    font-size:14px;
-
-    font-weight:bold;
-
-    word-break:break-word;
-}
-
-/* ================= EXTRA ================= */
-
-.extra{
-    background:#fbf2df;
-
-    border:1px solid #e6d0a9;
-
-    border-radius:12px;
-
-    padding:15px;
-
-    margin-bottom:18px;
-}
-
-.extra-title{
-    color:#654317;
-
-    font-weight:bold;
-
-    margin-bottom:10px;
-}
-
-.extra-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:8px;
-}
-
-.extra-item{
     font-size:13px;
-
-    color:#776954;
-}
-
-.extra-item strong{
-    color:#4d3923;
 }
 
 /* ================= ACTIONS ================= */
@@ -568,6 +519,8 @@ button{
     gap:8px;
 
     flex-wrap:wrap;
+
+    margin-top:15px;
 }
 
 .action{
@@ -577,43 +530,62 @@ button{
 
     padding:10px 14px;
 
+    color:white;
+
     font-size:12px;
 
     font-weight:bold;
+}
 
-    color:white;
+.view-btn{
+    background:#6b4a22;
+}
+
+.view-btn:hover{
+    background:#513617;
 }
 
 .approve-btn{
     background:#23823e;
 }
 
-.approve-btn:hover{
-    background:#17632d;
-}
-
 .reject-btn{
     background:#b91c1c;
-}
-
-.reject-btn:hover{
-    background:#991b1b;
 }
 
 .pending-btn{
     background:#8a650d;
 }
 
-.pending-btn:hover{
-    background:#6f5109;
-}
-
 .delete-btn{
-    background:#3f3f3f;
+    background:#444;
 }
 
-.delete-btn:hover{
-    background:#222;
+/* ================= CALENDAR ================= */
+
+.calendar-card{
+    background:white;
+
+    border:1px solid #e5ddd1;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    margin-top:25px;
+
+    box-shadow:
+    0 6px 22px rgba(70,45,15,.04);
+}
+
+.calendar-title{
+    color:#5b3510;
+
+    margin-bottom:17px;
+}
+
+#calendar{
+    width:100%;
 }
 
 /* ================= EMPTY ================= */
@@ -625,7 +597,7 @@ button{
 
     border-radius:16px;
 
-    padding:45px 20px;
+    padding:40px 20px;
 
     text-align:center;
 
@@ -638,62 +610,204 @@ button{
     margin-bottom:7px;
 }
 
-/* ================= ACCESS DENIED ================= */
+/* ================= MODAL ================= */
 
-.denied{
-    text-align:center;
+.modal{
+    display:none;
 
-    max-width:500px;
+    position:fixed;
 
-    margin:80px auto;
+    inset:0;
+
+    background:
+    rgba(0,0,0,.55);
+
+    z-index:5000;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+}
+
+.modal-box{
+    width:100%;
+
+    max-width:600px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
 
     background:white;
 
-    border:1px solid #e5ddd1;
-
     border-radius:20px;
 
-    padding:35px;
+    padding:25px;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.25);
 }
 
-.denied h2{
-    color:#991b1b;
+.modal-head{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.modal-head h2{
+    color:#51300d;
+
+    font-size:22px;
+}
+
+.close{
+    width:35px;
+    height:35px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f3eee6;
+
+    color:#51300d;
+
+    font-size:20px;
+}
+
+.detail-section{
+    margin-bottom:18px;
+}
+
+.detail-section h3{
+    color:#6b4a22;
+
+    font-size:15px;
+
+    border-bottom:1px solid #eadfcf;
+
+    padding-bottom:8px;
 
     margin-bottom:10px;
 }
 
-.denied p{
-    color:#776954;
+.detail-grid{
+    display:grid;
 
-    line-height:1.6;
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:9px;
 }
 
-/* ================= LOADING ================= */
+.detail{
+    background:#faf7f1;
 
-.loading{
-    text-align:center;
+    border:1px solid #eee2cf;
+
+    border-radius:9px;
+
+    padding:10px;
+}
+
+.detail label{
+    display:block;
+
+    color:#9b8060;
+
+    font-size:10px;
+
+    margin-bottom:4px;
+}
+
+.detail strong{
+    color:#4d3923;
+
+    font-size:13px;
+}
+
+.room-select-box{
+    background:#fbf2df;
+
+    border:1px solid #e6d0a9;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    margin-top:15px;
+}
+
+.room-select-box label{
+    display:block;
+
+    font-weight:bold;
+
+    color:#654317;
+
+    margin-bottom:8px;
+}
+
+.room-select{
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #d9cbb8;
+
+    border-radius:9px;
 
     background:white;
 
-    border:1px solid #e5ddd1;
-
-    border-radius:16px;
-
-    padding:40px;
-
-    color:#8a7964;
+    color:#30261b;
 }
 
-/* ================= FOOTER ================= */
+.modal-actions{
+    display:flex;
 
-footer{
-    text-align:center;
+    gap:8px;
 
-    padding:25px;
+    margin-top:20px;
+}
 
-    color:#9b8970;
+.modal-actions button{
+    flex:1;
 
-    font-size:13px;
+    padding:12px;
+
+    border:none;
+
+    border-radius:9px;
+
+    color:white;
+
+    font-weight:bold;
+}
+
+.save-room{
+    background:#23823e;
+}
+
+.cancel{
+    background:#6b4a22;
+}
+
+/* ================= CALENDAR EVENT ================= */
+
+.fc-event{
+    cursor:pointer;
+}
+
+.fc-event-title{
+    font-weight:bold;
 }
 
 /* ================= MOBILE ================= */
@@ -702,12 +816,12 @@ footer{
 
     .stats{
         grid-template-columns:
-            repeat(2,1fr);
+        repeat(2,1fr);
     }
 
-    .extra-grid{
+    .summary{
         grid-template-columns:
-            repeat(2,1fr);
+        repeat(2,1fr);
     }
 
 }
@@ -742,28 +856,12 @@ footer{
         font-size:27px;
     }
 
-    .stats{
-        gap:10px;
-    }
-
-    .stat{
-        padding:15px;
-    }
-
-    .stat h3{
-        font-size:23px;
-    }
-
-    .details{
+    .summary{
         grid-template-columns:1fr;
     }
 
-    .extra-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .request{
-        padding:15px;
+    .detail-grid{
+        grid-template-columns:1fr;
     }
 
     .request-top{
@@ -775,6 +873,7 @@ footer{
 </style>
 
 </head>
+
 
 <body>
 
@@ -792,8 +891,15 @@ footer{
         </div>
 
         <div>
-            <h1>Munger Mandir</h1>
-            <small>Admin Room Management</small>
+
+            <h1>
+                Munger Mandir
+            </h1>
+
+            <small>
+                Admin Room Management
+            </small>
+
         </div>
 
     </div>
@@ -856,8 +962,8 @@ footer{
     </h2>
 
     <p>
-        Login with the authorized administrator
-        Google account to manage room requests.
+        Login with the authorized Google
+        account to manage room requests.
     </p>
 
     <button
@@ -877,39 +983,11 @@ footer{
 </section>
 
 
-<!-- ================= ACCESS DENIED ================= -->
-
-<section
-    id="accessDenied"
-    class="denied hidden"
->
-
-    <h2>
-        Access Denied
-    </h2>
-
-    <p>
-        This Google account is not authorized
-        to access the Munger Mandir Admin Panel.
-    </p>
-
-    <br>
-
-    <button
-        id="deniedLogout"
-        class="logout"
-    >
-        Logout
-    </button>
-
-</section>
-
-
 <!-- ================= ADMIN APP ================= -->
 
 <main
-    id="adminApp"
-    class="hidden"
+id="adminApp"
+class="hidden"
 >
 
 <div class="container">
@@ -922,8 +1000,8 @@ footer{
     </h2>
 
     <p>
-        View incoming room requests and manage
-        their status from one place.
+        View guest requests, assign rooms
+        and manage bookings.
     </p>
 
 </section>
@@ -995,7 +1073,7 @@ footer{
         id="searchInput"
         class="search"
         type="text"
-        placeholder="Search name, email, phone..."
+        placeholder="Search guest, email or phone..."
     >
 
 
@@ -1033,9 +1111,12 @@ footer{
 </div>
 
 
-<!-- ================= REQUESTS ================= -->
+<!-- ================= REQUEST LIST ================= -->
 
-<div id="loading" class="loading">
+<div
+    id="loading"
+    class="empty"
+>
 
     Loading room requests...
 
@@ -1044,7 +1125,6 @@ footer{
 
 <div
     id="requests"
-    class="requests"
 ></div>
 
 
@@ -1054,13 +1134,25 @@ footer{
 >
 
     <h3>
-        No Room Requests
+        No Requests Found
     </h3>
 
     <p>
-        New requests submitted from index.html
-        will appear here automatically.
+        New room requests will appear here.
     </p>
+
+</div>
+
+
+<!-- ================= CALENDAR ================= -->
+
+<div class="calendar-card">
+
+    <h2 class="calendar-title">
+        📅 Room Booking Calendar
+    </h2>
+
+    <div id="calendar"></div>
 
 </div>
 
@@ -1070,14 +1162,126 @@ footer{
 </main>
 
 
+<!-- ================= VIEW MODAL ================= -->
+
+<div
+id="viewModal"
+class="modal"
+>
+
+<div class="modal-box">
+
+    <div class="modal-head">
+
+        <h2>
+            Guest Request Details
+        </h2>
+
+        <button
+            class="close"
+            onclick="closeViewModal()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div id="viewContent"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================= ROOM MODAL ================= -->
+
+<div
+id="roomModal"
+class="modal"
+>
+
+<div class="modal-box">
+
+    <div class="modal-head">
+
+        <h2>
+            Assign Room
+        </h2>
+
+        <button
+            class="close"
+            onclick="closeRoomModal()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <p
+        id="roomGuestName"
+        style="
+        color:#776954;
+        margin-bottom:15px;
+        "
+    ></p>
+
+
+    <div class="room-select-box">
+
+        <label>
+            Select Room Number
+        </label>
+
+        <select
+            id="roomSelect"
+            class="room-select"
+        >
+
+            <option value="">
+                Select Room
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+        <button
+            id="saveRoomBtn"
+            class="save-room"
+        >
+            ✓ Approve & Assign Room
+        </button>
+
+        <button
+            class="cancel"
+            onclick="closeRoomModal()"
+        >
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
 <footer>
-    Munger Mandir Room Request Portal
+
+Munger Mandir Room Request Portal
+
 </footer>
 
 
 <!-- ================= FIREBASE ================= -->
 
 <script type="module">
+
 
 /* ==========================================
    FIREBASE IMPORT
@@ -1105,15 +1309,13 @@ import {
     onSnapshot,
     doc,
     updateDoc,
-    deleteDoc,
-    query
+    deleteDoc
 }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
 /* ==========================================
-   EXACT SAME FIREBASE CONFIG
-   AS index.html
+   EXACT FIREBASE CONFIG FROM INDEX.HTML
 ========================================== */
 
 const firebaseConfig = {
@@ -1143,7 +1345,7 @@ const firebaseConfig = {
 
 
 /* ==========================================
-   INITIALIZE
+   FIREBASE START
 ========================================== */
 
 const app =
@@ -1177,9 +1379,6 @@ document.getElementById("loginScreen");
 const adminApp =
 document.getElementById("adminApp");
 
-const accessDenied =
-document.getElementById("accessDenied");
-
 const userArea =
 document.getElementById("userArea");
 
@@ -1192,9 +1391,6 @@ document.getElementById("googleBtn");
 const logoutBtn =
 document.getElementById("logoutBtn");
 
-const deniedLogout =
-document.getElementById("deniedLogout");
-
 const userName =
 document.getElementById("userName");
 
@@ -1204,7 +1400,7 @@ document.getElementById("userPhoto");
 const loginMessage =
 document.getElementById("loginMessage");
 
-const requestsContainer =
+const requests =
 document.getElementById("requests");
 
 const loading =
@@ -1229,49 +1425,20 @@ document.getElementById("refreshBtn");
 
 let allRequests = [];
 
-let unsubscribeRequests = null;
+let unsubscribe = null;
+
+let calendar = null;
+
+let roomRequestId = null;
 
 
 /* ==========================================
-   MESSAGE
-========================================== */
-
-function showMessage(
-    element,
-    text,
-    type=""
-){
-
-    element.textContent =
-    text;
-
-    element.className =
-    "message " + type;
-
-    element.style.display =
-    "block";
-
-}
-
-
-/* ==========================================
-   GOOGLE LOGIN
+   LOGIN
 ========================================== */
 
 async function login(){
 
-    googleBtn.disabled =
-    true;
-
-    topLogin.disabled =
-    true;
-
-
-    showMessage(
-        loginMessage,
-        "Opening Google Login..."
-    );
-
+    googleBtn.disabled = true;
 
     try{
 
@@ -1284,27 +1451,22 @@ async function login(){
 
     catch(error){
 
-        console.error(
-            "LOGIN ERROR:",
-            error
-        );
+        console.error(error);
 
+        loginMessage.textContent =
+        firebaseError(error);
 
-        showMessage(
-            loginMessage,
-            firebaseError(error),
-            "error"
-        );
+        loginMessage.className =
+        "message error";
+
+        loginMessage.style.display =
+        "block";
 
     }
 
     finally{
 
-        googleBtn.disabled =
-        false;
-
-        topLogin.disabled =
-        false;
+        googleBtn.disabled = false;
 
     }
 
@@ -1316,7 +1478,6 @@ googleBtn.addEventListener(
     login
 );
 
-
 topLogin.addEventListener(
     "click",
     login
@@ -1327,46 +1488,22 @@ topLogin.addEventListener(
    LOGOUT
 ========================================== */
 
-async function logout(){
+logoutBtn.addEventListener(
+    "click",
+    async()=>{
 
-    try{
-
-        if(unsubscribeRequests){
-
-            unsubscribeRequests();
-
-            unsubscribeRequests =
-            null;
-
+        if(unsubscribe){
+            unsubscribe();
         }
 
         await signOut(auth);
 
     }
-
-    catch(error){
-
-        console.error(error);
-
-    }
-
-}
-
-
-logoutBtn.addEventListener(
-    "click",
-    logout
-);
-
-
-deniedLogout.addEventListener(
-    "click",
-    logout
 );
 
 
 /* ==========================================
-   AUTH STATE
+   AUTH
 ========================================== */
 
 onAuthStateChanged(
@@ -1383,10 +1520,6 @@ onAuthStateChanged(
                 "hidden"
             );
 
-            accessDenied.classList.add(
-                "hidden"
-            );
-
             userArea.classList.add(
                 "hidden"
             );
@@ -1400,68 +1533,29 @@ onAuthStateChanged(
         }
 
 
-        /* =========================
-           CHECK ADMIN EMAIL
-        ========================= */
-
-        const loggedEmail =
+        const email =
         (user.email || "")
         .toLowerCase()
         .trim();
 
 
-        const adminEmail =
-        ADMIN_EMAIL
-        .toLowerCase()
-        .trim();
+        if(
+            email !==
+            ADMIN_EMAIL.toLowerCase()
+        ){
 
-
-        if(loggedEmail !== adminEmail){
-
-            loginScreen.classList.add(
-                "hidden"
+            alert(
+                "Access denied. This account is not an administrator."
             );
 
-            adminApp.classList.add(
-                "hidden"
-            );
-
-            accessDenied.classList.remove(
-                "hidden"
-            );
-
-            userArea.classList.remove(
-                "hidden"
-            );
-
-            topLogin.classList.add(
-                "hidden"
-            );
-
-            userName.textContent =
-            user.displayName ||
-            user.email ||
-            "User";
-
-
-            userPhoto.src =
-            user.photoURL ||
-            "https://via.placeholder.com/100";
+            signOut(auth);
 
             return;
 
         }
 
 
-        /* =========================
-           ADMIN LOGIN SUCCESS
-        ========================= */
-
         loginScreen.classList.add(
-            "hidden"
-        );
-
-        accessDenied.classList.add(
             "hidden"
         );
 
@@ -1490,47 +1584,35 @@ onAuthStateChanged(
 
         loadRequests();
 
+        initializeCalendar();
+
     }
 );
 
 
 /* ==========================================
-   LOAD FIRESTORE REQUESTS
+   LOAD REQUESTS
 ========================================== */
 
 function loadRequests(){
+
+    if(unsubscribe){
+        unsubscribe();
+    }
+
 
     loading.classList.remove(
         "hidden"
     );
 
-    emptyState.classList.add(
-        "hidden"
-    );
 
-
-    if(unsubscribeRequests){
-
-        unsubscribeRequests();
-
-    }
-
-
-    const requestsRef =
-    collection(
-        db,
-        "roomRequests"
-    );
-
-
-    const q =
-    query(requestsRef);
-
-
-    unsubscribeRequests =
+    unsubscribe =
     onSnapshot(
 
-        q,
+        collection(
+            db,
+            "roomRequests"
+        ),
 
         snapshot => {
 
@@ -1554,19 +1636,17 @@ function loadRequests(){
 
 
             allRequests.sort(
-                (a,b) => {
+                (a,b)=>{
 
                     const aTime =
                     a.createdAt
                     ?.toMillis?.() || 0;
 
-
                     const bTime =
                     b.createdAt
                     ?.toMillis?.() || 0;
 
-
-                    return bTime - aTime;
+                    return bTime-aTime;
 
                 }
             );
@@ -1581,34 +1661,21 @@ function loadRequests(){
 
             renderRequests();
 
+            updateCalendar();
+
         },
 
 
         error => {
 
             console.error(
-                "FIRESTORE ERROR:",
+                "Firestore error:",
                 error
             );
 
-
-            loading.classList.add(
-                "hidden"
-            );
-
-
-            requestsContainer.innerHTML = "";
-
-
-            emptyState.classList.remove(
-                "hidden"
-            );
-
-
-            emptyState.innerHTML = `
-
+            loading.innerHTML = `
                 <h3>
-                    Unable to Load Requests
+                    Unable to load requests
                 </h3>
 
                 <p style="margin-top:8px">
@@ -1616,7 +1683,6 @@ function loadRequests(){
                         firebaseError(error)
                     )}
                 </p>
-
             `;
 
         }
@@ -1651,11 +1717,11 @@ function updateStats(){
                 pending++;
             }
 
-            else if(status === "approved"){
+            if(status === "approved"){
                 approved++;
             }
 
-            else if(status === "rejected"){
+            if(status === "rejected"){
                 rejected++;
             }
 
@@ -1690,14 +1756,13 @@ function updateStats(){
 
 
 /* ==========================================
-   RENDER REQUESTS
+   RENDER
 ========================================== */
 
 function renderRequests(){
 
     const search =
-    searchInput
-    .value
+    searchInput.value
     .toLowerCase()
     .trim();
 
@@ -1741,27 +1806,28 @@ function renderRequests(){
             "pending";
 
 
-            const matchesSearch =
-            name.includes(search) ||
-            email.includes(search) ||
-            phone.includes(search);
-
-
-            const matchesFilter =
-            filter === "all" ||
-            status === filter;
-
-
             return (
-                matchesSearch &&
-                matchesFilter
+
+                (
+                    name.includes(search) ||
+                    email.includes(search) ||
+                    phone.includes(search)
+                )
+
+                &&
+
+                (
+                    filter === "all" ||
+                    filter === status
+                )
+
             );
 
         }
     );
 
 
-    requestsContainer.innerHTML = "";
+    requests.innerHTML = "";
 
 
     if(filtered.length === 0){
@@ -1783,8 +1849,8 @@ function renderRequests(){
     filtered.forEach(
         item => {
 
-            requestsContainer.appendChild(
-                createRequestCard(item)
+            requests.appendChild(
+                createRequest(item)
             );
 
         }
@@ -1794,18 +1860,18 @@ function renderRequests(){
 
 
 /* ==========================================
-   CREATE CARD
+   CREATE REQUEST
 ========================================== */
 
-function createRequestCard(item){
+function createRequest(item){
 
-    const card =
+    const div =
     document.createElement(
         "div"
     );
 
 
-    card.className =
+    div.className =
     "request";
 
 
@@ -1824,16 +1890,12 @@ function createRequestCard(item){
     "pending";
 
 
-    const statusText =
-    capitalize(status);
+    const room =
+    item.roomNumber ||
+    "";
 
 
-    const requestId =
-    item.id ||
-    "-";
-
-
-    card.innerHTML = `
+    div.innerHTML = `
 
         <div class="request-top">
 
@@ -1844,197 +1906,92 @@ function createRequestCard(item){
                 </div>
 
                 <div class="request-id">
-                    Request ID: ${escapeHTML(requestId)}
+                    Request ID:
+                    ${escapeHTML(item.id)}
                 </div>
 
+                ${
+                    room
+                    ?
+                    `
+                    <div class="room-badge">
+                        🛏 Room ${escapeHTML(room)}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
             </div>
+
 
             <span
                 class="status ${escapeHTML(status)}"
             >
-                ${escapeHTML(statusText)}
+                ${capitalize(status)}
             </span>
 
         </div>
 
 
-        <div class="details">
+        <div class="summary">
 
-            <div class="detail">
+            <div class="summary-item">
 
-                <span class="detail-label">
-                    Email
-                </span>
-
-                <span class="detail-value">
-                    ${escapeHTML(
-                        item.email ||
-                        item.userEmail ||
-                        "-"
-                    )}
-                </span>
-
-            </div>
-
-
-            <div class="detail">
-
-                <span class="detail-label">
-                    Phone
-                </span>
-
-                <span class="detail-value">
-                    ${escapeHTML(
-                        item.phone || "-"
-                    )}
-                </span>
-
-            </div>
-
-
-            <div class="detail">
-
-                <span class="detail-label">
+                <span>
                     Check-in
                 </span>
 
-                <span class="detail-value">
+                <strong>
                     ${escapeHTML(
                         item.checkIn || "-"
                     )}
-                </span>
+                </strong>
 
             </div>
 
 
-            <div class="detail">
+            <div class="summary-item">
 
-                <span class="detail-label">
+                <span>
                     Check-out
                 </span>
 
-                <span class="detail-value">
+                <strong>
                     ${escapeHTML(
                         item.checkOut || "-"
                     )}
-                </span>
+                </strong>
 
             </div>
 
 
-            <div class="detail">
+            <div class="summary-item">
 
-                <span class="detail-label">
-                    Passport
+                <span>
+                    Phone
                 </span>
 
-                <span class="detail-value">
+                <strong>
                     ${escapeHTML(
-                        item.passport || "-"
+                        item.phone || "-"
                     )}
-                </span>
+                </strong>
 
             </div>
 
 
-            <div class="detail">
+            <div class="summary-item">
 
-                <span class="detail-label">
+                <span>
                     Beds
                 </span>
 
-                <span class="detail-value">
+                <strong>
                     ${escapeHTML(
                         String(item.beds || 0)
                     )}
-                </span>
-
-            </div>
-
-
-            <div class="detail">
-
-                <span class="detail-label">
-                    AC Room
-                </span>
-
-                <span class="detail-value">
-                    ${escapeHTML(
-                        item.acRoom || "-"
-                    )}
-                </span>
-
-            </div>
-
-
-            <div class="detail">
-
-                <span class="detail-label">
-                    Hot Water
-                </span>
-
-                <span class="detail-value">
-                    ${escapeHTML(
-                        item.hotWater || "-"
-                    )}
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="extra">
-
-            <div class="extra-title">
-                Room Extras
-            </div>
-
-
-            <div class="extra-grid">
-
-                <div class="extra-item">
-                    Utensils:
-                    <strong>
-                        ${escapeHTML(
-                            item.utensils || "No"
-                        )}
-                    </strong>
-                </div>
-
-
-                <div class="extra-item">
-                    Water Jugs:
-                    <strong>
-                        ${escapeHTML(
-                            String(
-                                item.waterJugs || 0
-                            )
-                        )}
-                    </strong>
-                </div>
-
-
-                <div class="extra-item">
-                    Mosquito:
-                    <strong>
-                        ${escapeHTML(
-                            item.mosquito || "No"
-                        )}
-                    </strong>
-                </div>
-
-
-                <div class="extra-item">
-                    Total Extra:
-                    <strong>
-                        ₹${escapeHTML(
-                            String(
-                                item.totalExtra || 0
-                            )
-                        )}
-                    </strong>
-                </div>
+                </strong>
 
             </div>
 
@@ -2044,36 +2001,71 @@ function createRequestCard(item){
         <div class="actions">
 
             <button
-                class="action approve-btn"
-                data-id="${escapeHTML(requestId)}"
-                data-action="approved"
+                class="action view-btn"
+                data-view="${escapeHTML(item.id)}"
             >
-                ✓ Approve
+                👁 View
             </button>
 
 
-            <button
-                class="action reject-btn"
-                data-id="${escapeHTML(requestId)}"
-                data-action="rejected"
-            >
-                ✕ Reject
-            </button>
+            ${
+                status !== "approved"
+                ?
+                `
+                <button
+                    class="action approve-btn"
+                    data-approve="${escapeHTML(item.id)}"
+                >
+                    ✓ Approve
+                </button>
+                `
+                :
+                `
+                <button
+                    class="action approve-btn"
+                    data-change-room="${escapeHTML(item.id)}"
+                >
+                    🛏 Change Room
+                </button>
+                `
+            }
 
 
-            <button
-                class="action pending-btn"
-                data-id="${escapeHTML(requestId)}"
-                data-action="pending"
-            >
-                ↻ Pending
-            </button>
+            ${
+                status !== "rejected"
+                ?
+                `
+                <button
+                    class="action reject-btn"
+                    data-reject="${escapeHTML(item.id)}"
+                >
+                    ✕ Reject
+                </button>
+                `
+                :
+                ""
+            }
+
+
+            ${
+                status !== "pending"
+                ?
+                `
+                <button
+                    class="action pending-btn"
+                    data-pending="${escapeHTML(item.id)}"
+                >
+                    ↻ Pending
+                </button>
+                `
+                :
+                ""
+            }
 
 
             <button
                 class="action delete-btn"
-                data-id="${escapeHTML(requestId)}"
-                data-action="delete"
+                data-delete="${escapeHTML(item.id)}"
             >
                 Delete
             </button>
@@ -2083,84 +2075,170 @@ function createRequestCard(item){
     `;
 
 
-    /* =========================
-       STATUS BUTTONS
-    ========================= */
+    /* VIEW */
 
-    card
-    .querySelectorAll(
-        "[data-action]"
-    )
-    .forEach(
-        button => {
-
-            button.addEventListener(
-                "click",
-                async () => {
-
-                    const id =
-                    button.dataset.id;
-
-                    const action =
-                    button.dataset.action;
+    const viewButton =
+    div.querySelector(
+        "[data-view]"
+    );
 
 
-                    if(action === "delete"){
+    viewButton.addEventListener(
+        "click",
+        ()=>{
+            openViewModal(item.id);
+        }
+    );
 
-                        await deleteRequest(
-                            id,
-                            button
-                        );
 
-                    }
+    /* APPROVE */
 
-                    else{
+    const approveButton =
+    div.querySelector(
+        "[data-approve]"
+    );
 
-                        await changeStatus(
-                            id,
-                            action,
-                            button
-                        );
 
-                    }
+    if(approveButton){
 
-                }
-            );
+        approveButton.addEventListener(
+            "click",
+            ()=>{
+                openRoomModal(item.id);
+            }
+        );
+
+    }
+
+
+    /* CHANGE ROOM */
+
+    const changeRoom =
+    div.querySelector(
+        "[data-change-room]"
+    );
+
+
+    if(changeRoom){
+
+        changeRoom.addEventListener(
+            "click",
+            ()=>{
+                openRoomModal(item.id);
+            }
+        );
+
+    }
+
+
+    /* REJECT */
+
+    const rejectButton =
+    div.querySelector(
+        "[data-reject]"
+    );
+
+
+    if(rejectButton){
+
+        rejectButton.addEventListener(
+            "click",
+            async()=>{
+
+                await updateStatus(
+                    item.id,
+                    "rejected"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* PENDING */
+
+    const pendingButton =
+    div.querySelector(
+        "[data-pending]"
+    );
+
+
+    if(pendingButton){
+
+        pendingButton.addEventListener(
+            "click",
+            async()=>{
+
+                await updateStatus(
+                    item.id,
+                    "pending"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* DELETE */
+
+    const deleteButton =
+    div.querySelector(
+        "[data-delete]"
+    );
+
+
+    deleteButton.addEventListener(
+        "click",
+        async()=>{
+
+            if(
+                !confirm(
+                    "Delete this request permanently?"
+                )
+            ){
+                return;
+            }
+
+
+            try{
+
+                await deleteDoc(
+                    doc(
+                        db,
+                        "roomRequests",
+                        item.id
+                    )
+                );
+
+            }
+
+            catch(error){
+
+                alert(
+                    firebaseError(error)
+                );
+
+            }
 
         }
     );
 
 
-    return card;
+    return div;
 
 }
 
 
 /* ==========================================
-   CHANGE STATUS
+   UPDATE STATUS
 ========================================== */
 
-async function changeStatus(
+async function updateStatus(
     id,
-    newStatus,
-    button
+    status
 ){
-
-    if(!id){
-        return;
-    }
-
-
-    const originalText =
-    button.textContent;
-
-
-    button.disabled =
-    true;
-
-    button.textContent =
-    "Updating...";
-
 
     try{
 
@@ -2173,43 +2251,20 @@ async function changeStatus(
             ),
 
             {
-                status:
-                newStatus
+                status:status
             }
 
         );
-
-
-        console.log(
-            "Status updated:",
-            id,
-            newStatus
-        );
-
 
     }
 
     catch(error){
 
-        console.error(
-            "STATUS UPDATE ERROR:",
-            error
-        );
-
+        console.error(error);
 
         alert(
             firebaseError(error)
         );
-
-    }
-
-    finally{
-
-        button.disabled =
-        false;
-
-        button.textContent =
-        originalText;
 
     }
 
@@ -2217,71 +2272,646 @@ async function changeStatus(
 
 
 /* ==========================================
-   DELETE
+   VIEW MODAL
 ========================================== */
 
-async function deleteRequest(
-    id,
-    button
-){
+function openViewModal(id){
 
-    if(!id){
-        return;
-    }
-
-
-    const confirmed =
-    confirm(
-        "Are you sure you want to delete this room request?"
+    const item =
+    allRequests.find(
+        x => x.id === id
     );
 
 
-    if(!confirmed){
+    if(!item){
         return;
     }
 
 
-    button.disabled =
-    true;
+    const name =
+    (
+        (item.firstName || "") +
+        " " +
+        (item.lastName || "")
+    )
+    .trim();
 
-    button.textContent =
-    "Deleting...";
+
+    document.getElementById(
+        "viewContent"
+    ).innerHTML = `
 
 
-    try{
+        <div class="detail-section">
 
-        await deleteDoc(
+            <h3>
+                👤 Guest Information
+            </h3>
 
-            doc(
-                db,
-                "roomRequests",
-                id
-            )
+            <div class="detail-grid">
 
-        );
+                ${detail(
+                    "First Name",
+                    item.firstName
+                )}
 
+                ${detail(
+                    "Last Name",
+                    item.lastName
+                )}
+
+                ${detail(
+                    "Phone",
+                    item.phone
+                )}
+
+                ${detail(
+                    "Email",
+                    item.email ||
+                    item.userEmail
+                )}
+
+                ${detail(
+                    "Passport",
+                    item.passport
+                )}
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-section">
+
+            <h3>
+                📅 Stay Information
+            </h3>
+
+            <div class="detail-grid">
+
+                ${detail(
+                    "Check-in",
+                    item.checkIn
+                )}
+
+                ${detail(
+                    "Check-out",
+                    item.checkOut
+                )}
+
+                ${detail(
+                    "Status",
+                    capitalize(
+                        item.status ||
+                        "pending"
+                    )
+                )}
+
+                ${detail(
+                    "Room",
+                    item.roomNumber
+                    ?
+                    "Room " +
+                    item.roomNumber
+                    :
+                    "Not assigned"
+                )}
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-section">
+
+            <h3>
+                🏠 Room Requirements
+            </h3>
+
+            <div class="detail-grid">
+
+                ${detail(
+                    "AC Room",
+                    item.acRoom
+                )}
+
+                ${detail(
+                    "Hot Water",
+                    item.hotWater
+                )}
+
+                ${detail(
+                    "Beds",
+                    item.beds
+                )}
+
+                ${detail(
+                    "Utensils",
+                    item.utensils
+                )}
+
+                ${detail(
+                    "Water Jugs",
+                    item.waterJugs
+                )}
+
+                ${detail(
+                    "Mosquito Dispeller",
+                    item.mosquito
+                )}
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-section">
+
+            <h3>
+                💰 Extra Charges
+            </h3>
+
+            <div class="detail-grid">
+
+                ${detail(
+                    "Utensils",
+                    "₹" +
+                    (item.utensilsPrice || 0)
+                )}
+
+                ${detail(
+                    "Water",
+                    "₹" +
+                    (item.waterPrice || 0)
+                )}
+
+                ${detail(
+                    "Mosquito",
+                    "₹" +
+                    (item.mosquitoPrice || 0)
+                )}
+
+                ${detail(
+                    "Total Extra",
+                    "₹" +
+                    (item.totalExtra || 0)
+                )}
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-section">
+
+            <h3>
+                🆔 Request ID
+            </h3>
+
+            <div class="detail">
+                <strong>
+                    ${escapeHTML(item.id)}
+                </strong>
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "viewModal"
+    ).style.display =
+    "flex";
+
+}
+
+
+window.closeViewModal =
+function(){
+
+    document.getElementById(
+        "viewModal"
+    ).style.display =
+    "none";
+
+};
+
+
+/* ==========================================
+   DETAIL HELPER
+========================================== */
+
+function detail(
+    label,
+    value
+){
+
+    return `
+
+        <div class="detail">
+
+            <label>
+                ${escapeHTML(label)}
+            </label>
+
+            <strong>
+                ${escapeHTML(
+                    value === undefined ||
+                    value === null ||
+                    value === ""
+                    ?
+                    "-"
+                    :
+                    String(value)
+                )}
+            </strong>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================
+   ROOM OPTIONS 1 - 70
+========================================== */
+
+const roomSelect =
+document.getElementById(
+    "roomSelect"
+);
+
+
+for(
+    let room = 1;
+    room <= 70;
+    room++
+){
+
+    const option =
+    document.createElement(
+        "option"
+    );
+
+    option.value =
+    room;
+
+    option.textContent =
+    "Room " + room;
+
+    roomSelect.appendChild(
+        option
+    );
+
+}
+
+
+/* ==========================================
+   OPEN ROOM MODAL
+========================================== */
+
+function openRoomModal(id){
+
+    const item =
+    allRequests.find(
+        x => x.id === id
+    );
+
+
+    if(!item){
+        return;
     }
 
-    catch(error){
 
-        console.error(
-            "DELETE ERROR:",
-            error
-        );
+    roomRequestId =
+    id;
 
 
-        alert(
-            firebaseError(error)
+    document.getElementById(
+        "roomGuestName"
+    ).textContent =
+    (
+        "Guest: " +
+        (
+            (item.firstName || "") +
+            " " +
+            (item.lastName || "")
+        ).trim()
+    );
+
+
+    roomSelect.value =
+    item.roomNumber ||
+    "";
+
+
+    document.getElementById(
+        "roomModal"
+    ).style.display =
+    "flex";
+
+}
+
+
+window.closeRoomModal =
+function(){
+
+    roomRequestId =
+    null;
+
+    document.getElementById(
+        "roomModal"
+    ).style.display =
+    "none";
+
+};
+
+
+/* ==========================================
+   SAVE ROOM + APPROVE
+========================================== */
+
+document
+.getElementById(
+    "saveRoomBtn"
+)
+.addEventListener(
+    "click",
+    async()=>{
+
+        if(!roomRequestId){
+
+            return;
+
+        }
+
+
+        const room =
+        roomSelect.value;
+
+
+        if(!room){
+
+            alert(
+                "Please select a room number."
+            );
+
+            return;
+
+        }
+
+
+        const button =
+        document.getElementById(
+            "saveRoomBtn"
         );
 
 
         button.disabled =
-        false;
+        true;
 
         button.textContent =
-        "Delete";
+        "Saving...";
+
+
+        try{
+
+            await updateDoc(
+
+                doc(
+                    db,
+                    "roomRequests",
+                    roomRequestId
+                ),
+
+                {
+
+                    status:
+                    "approved",
+
+                    roomNumber:
+                    Number(room)
+
+                }
+
+            );
+
+
+            closeRoomModal();
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            alert(
+                firebaseError(error)
+            );
+
+        }
+
+        finally{
+
+            button.disabled =
+            false;
+
+            button.textContent =
+            "✓ Approve & Assign Room";
+
+        }
 
     }
+);
+
+
+/* ==========================================
+   CALENDAR
+========================================== */
+
+function initializeCalendar(){
+
+    const calendarElement =
+    document.getElementById(
+        "calendar"
+    );
+
+
+    if(calendar){
+        return;
+    }
+
+
+    calendar =
+    new FullCalendar.Calendar(
+        calendarElement,
+        {
+
+            initialView:
+            "dayGridMonth",
+
+            height:
+            "auto",
+
+            headerToolbar:{
+
+                left:
+                "prev,next today",
+
+                center:
+                "title",
+
+                right:
+                "dayGridMonth,timeGridWeek"
+
+            },
+
+            eventClick:
+            function(info){
+
+                openViewModal(
+                    info.event.extendedProps
+                    .requestId
+                );
+
+            }
+
+        }
+    );
+
+
+    calendar.render();
+
+}
+
+
+/* ==========================================
+   UPDATE CALENDAR
+========================================== */
+
+function updateCalendar(){
+
+    if(!calendar){
+        return;
+    }
+
+
+    calendar.removeAllEvents();
+
+
+    allRequests.forEach(
+        item => {
+
+            if(
+                item.status !==
+                "approved"
+            ){
+                return;
+            }
+
+
+            if(
+                !item.checkIn ||
+                !item.checkOut
+            ){
+                return;
+            }
+
+
+            const name =
+            (
+                (item.firstName || "") +
+                " " +
+                (item.lastName || "")
+            )
+            .trim() ||
+            "Guest";
+
+
+            const room =
+            item.roomNumber
+            ?
+            "Room " +
+            item.roomNumber
+            :
+            "Room not assigned";
+
+
+            /*
+             * FullCalendar end date is exclusive.
+             * We add one day so checkout date
+             * remains visible in the booking range.
+             */
+
+            const endDate =
+            addOneDay(
+                item.checkOut
+            );
+
+
+            calendar.addEvent({
+
+                id:
+                item.id,
+
+                title:
+                name +
+                " — " +
+                room,
+
+                start:
+                item.checkIn,
+
+                end:
+                endDate,
+
+                allDay:
+                true,
+
+                backgroundColor:
+                "#8f570d",
+
+                borderColor:
+                "#8f570d",
+
+                extendedProps:{
+                    requestId:
+                    item.id
+                }
+
+            });
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   ADD ONE DAY
+========================================== */
+
+function addOneDay(dateString){
+
+    const date =
+    new Date(
+        dateString +
+        "T00:00:00"
+    );
+
+
+    date.setDate(
+        date.getDate() + 1
+    );
+
+
+    return (
+        date
+        .toISOString()
+        .split("T")[0]
+    );
 
 }
 
@@ -2304,27 +2934,13 @@ statusFilter.addEventListener(
 
 refreshBtn.addEventListener(
     "click",
-    () => {
-
-        loadRequests();
-
-    }
+    loadRequests
 );
 
 
 /* ==========================================
-   HELPERS
+   ESCAPE
 ========================================== */
-
-function capitalize(text){
-
-    return text
-    .charAt(0)
-    .toUpperCase() +
-    text.slice(1);
-
-}
-
 
 function escapeHTML(value){
 
@@ -2356,85 +2972,66 @@ function escapeHTML(value){
 
 
 /* ==========================================
+   CAPITALIZE
+========================================== */
+
+function capitalize(text){
+
+    return String(text)
+    .charAt(0)
+    .toUpperCase() +
+    String(text)
+    .slice(1);
+
+}
+
+
+/* ==========================================
    FIREBASE ERROR
 ========================================== */
 
 function firebaseError(error){
 
-    if(!error){
-
-        return "Unknown Firebase error.";
-
-    }
-
-
     if(
-        error.code ===
+        error?.code ===
         "permission-denied"
     ){
 
-        return `
-            Firestore permission denied.
-            Firebase Console → Firestore Database
-            → Rules check karo.
-        `;
+        return (
+            "Firestore permission denied. " +
+            "Firebase Console mein Firestore Rules check karo."
+        );
 
     }
 
 
     if(
-        error.code ===
-        "auth/popup-blocked"
-    ){
-
-        return `
-            Google Login popup blocked hai.
-            Browser mein popup allow karo.
-        `;
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/popup-closed-by-user"
-    ){
-
-        return `
-            Google Login window close kar di gayi.
-        `;
-
-    }
-
-
-    if(
-        error.code ===
+        error?.code ===
         "auth/unauthorized-domain"
     ){
 
-        return `
-            Ye website Firebase Authentication
-            ke Authorized Domains mein add nahi hai.
-        `;
+        return (
+            "Ye domain Firebase Authentication " +
+            "Authorized Domains mein add nahi hai."
+        );
 
     }
 
 
     if(
-        error.code ===
-        "auth/operation-not-allowed"
+        error?.code ===
+        "auth/popup-blocked"
     ){
 
-        return `
-            Firebase Console mein
-            Google Sign-In enable karo.
-        `;
+        return (
+            "Google login popup blocked hai."
+        );
 
     }
 
 
     return (
-        error.message ||
+        error?.message ||
         "Something went wrong."
     );
 
