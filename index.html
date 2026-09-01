@@ -6,14 +6,11 @@
 
 <title>Munger Mandir Room Request</title>
 
-<link rel="icon"
-      type="image/png"
-      href="logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 
 <!-- EMAILJS -->
 <script
-    type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
 
 <style>
@@ -31,7 +28,7 @@ body{
 }
 
 header{
-    background:#ffffff;
+    background:#fff;
     border-bottom:1px solid #e5ddd1;
     position:sticky;
     top:0;
@@ -58,12 +55,19 @@ header{
     height:50px;
     border-radius:15px;
     background:#8f570d;
-    color:white;
+    color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:bold;
     font-size:18px;
+    overflow:hidden;
+}
+
+.logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .brand h1{
@@ -154,6 +158,13 @@ button{
     margin:0 auto 18px;
     font-size:26px;
     font-weight:bold;
+    overflow:hidden;
+}
+
+.temple-icon img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .login-card h2{
@@ -170,7 +181,7 @@ button{
 .google-btn{
     width:100%;
     padding:14px;
-    background:white;
+    background:#fff;
     border:1px solid #d6c7b2;
     border-radius:10px;
     font-size:15px;
@@ -190,7 +201,7 @@ button{
 
 .hero{
     background:linear-gradient(135deg,#774607,#b97818);
-    color:white;
+    color:#fff;
     border-radius:24px;
     padding:40px;
     margin-bottom:25px;
@@ -243,10 +254,15 @@ textarea{
     border:1px solid #d9cbb8;
     border-radius:9px;
     outline:none;
-    background:white;
+    background:#fff;
     color:#30261b;
     font-size:14px;
     margin-bottom:16px;
+}
+
+textarea{
+    resize:vertical;
+    min-height:90px;
 }
 
 input:focus,
@@ -331,7 +347,7 @@ textarea:focus{
     border:none;
     border-radius:10px;
     background:#92570c;
-    color:white;
+    color:#fff;
     font-size:16px;
     font-weight:bold;
 }
@@ -432,6 +448,19 @@ textarea:focus{
     color:#776954;
     font-size:13px;
     margin-top:6px;
+    line-height:1.5;
+}
+
+.cleaning-box{
+    margin-top:14px;
+    padding:12px;
+    border-radius:10px;
+    background:#f7efe1;
+    border:1px solid #e5d5bc;
+}
+
+.cleaning-box strong{
+    color:#654317;
 }
 
 .admin{
@@ -451,13 +480,22 @@ textarea:focus{
     border-radius:7px;
     padding:8px 11px;
     margin-right:5px;
-    color:white;
+    margin-top:5px;
+    color:#fff;
     background:#6b4a22;
     font-size:12px;
 }
 
+.admin-button:hover{
+    opacity:.9;
+}
+
 .delete-button{
     background:#b91c1c;
+}
+
+.clean-button{
+    background:#2563eb;
 }
 
 .empty{
@@ -949,6 +987,62 @@ No
 </div>
 
 
+<!-- CLEANING REQUEST -->
+
+<div class="option-box">
+
+<div class="option-title">
+Do you need room cleaning service?
+<br>
+<small>Cleaning request can be managed by admin.</small>
+</div>
+
+<div class="radio-row">
+
+<label class="radio">
+
+<input
+    type="radio"
+    name="cleaning"
+    value="Yes"
+    required
+>
+
+Yes
+
+</label>
+
+<label class="radio">
+
+<input
+    type="radio"
+    name="cleaning"
+    value="No"
+>
+
+No
+
+</label>
+
+</div>
+
+</div>
+
+
+<div class="option-box">
+
+<div class="option-title">
+Additional Request
+</div>
+
+<textarea
+    id="additionalRequest"
+    placeholder="Any additional room request..."
+></textarea>
+
+</div>
+
+
 <div class="price-box">
 
 <div class="price-row">
@@ -1100,11 +1194,23 @@ All Out mosquito dispeller is ₹100.
 
 <div class="info-item">
 
+<strong>🧹 Cleaning Request</strong>
+
+<span>
+You can request room cleaning and the admin
+can manage the cleaning request.
+</span>
+
+</div>
+
+
+<div class="info-item">
+
 <strong>📧 Email Confirmation</strong>
 
 <span>
-Your request will be saved securely in the
-Munger Mandir system.
+Your request will be saved in the Munger Mandir
+Realtime Database.
 </span>
 
 </div>
@@ -1192,9 +1298,9 @@ Munger Mandir Room Request Portal
 
 <script type="module">
 
-/* ==========================================
-   FIREBASE IMPORT
-========================================== */
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
 
 import {
     initializeApp
@@ -1212,10 +1318,6 @@ import {
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
-/*
-   REALTIME DATABASE
-*/
-
 import {
     getDatabase,
     ref,
@@ -1231,9 +1333,9 @@ import {
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
 
-/* ==========================================
+/* =====================================================
    FIREBASE CONFIG
-========================================== */
+===================================================== */
 
 const firebaseConfig = {
 
@@ -1258,37 +1360,31 @@ const firebaseConfig = {
     measurementId:
     "G-LF2K2KFCN6",
 
-    /*
-       REALTIME DATABASE URL
-    */
     databaseURL:
     "https://munger-mandir-room-request-default-rtdb.firebaseio.com"
 };
 
 
-/* ==========================================
+/* =====================================================
    INITIALIZE FIREBASE
-========================================== */
+===================================================== */
 
 const app =
 initializeApp(firebaseConfig);
 
-
 const auth =
 getAuth(app);
 
-
 const db =
 getDatabase(app);
-
 
 const provider =
 new GoogleAuthProvider();
 
 
-/* ==========================================
+/* =====================================================
    EMAILJS
-========================================== */
+===================================================== */
 
 const EMAILJS_PUBLIC_KEY =
 "CXWBYZsHGFAFjnh1m";
@@ -1301,21 +1397,21 @@ const EMAILJS_SERVICE_ID =
 
 
 emailjs.init({
-    publicKey:EMAILJS_PUBLIC_KEY
+    publicKey: EMAILJS_PUBLIC_KEY
 });
 
 
-/* ==========================================
+/* =====================================================
    ADMIN EMAIL
-========================================== */
+===================================================== */
 
 const ADMIN_EMAIL =
 "rishantbhaumik@gmail.com";
 
 
-/* ==========================================
+/* =====================================================
    ELEMENTS
-========================================== */
+===================================================== */
 
 const loginScreen =
 document.getElementById("loginScreen");
@@ -1366,23 +1462,23 @@ const submitBtn =
 document.getElementById("submitBtn");
 
 
-/* ==========================================
-   LISTENER VARIABLES
-========================================== */
+/* =====================================================
+   LISTENERS
+===================================================== */
 
 let myRequestsUnsubscribe = null;
 
 let adminRequestsUnsubscribe = null;
 
 
-/* ==========================================
+/* =====================================================
    MESSAGE
-========================================== */
+===================================================== */
 
 function showMessage(
     element,
     text,
-    type=""
+    type = ""
 ){
 
     element.textContent =
@@ -1396,24 +1492,20 @@ function showMessage(
 }
 
 
-/* ==========================================
+/* =====================================================
    GOOGLE LOGIN
-========================================== */
+===================================================== */
 
 async function login(){
 
-    googleBtn.disabled =
-    true;
+    googleBtn.disabled = true;
 
-    topLogin.disabled =
-    true;
-
+    topLogin.disabled = true;
 
     showMessage(
         loginMessage,
         "Opening Google Login..."
     );
-
 
     try{
 
@@ -1421,7 +1513,6 @@ async function login(){
             auth,
             provider
         );
-
 
         loginMessage.style.display =
         "none";
@@ -1435,10 +1526,8 @@ async function login(){
             error
         );
 
-
         showMessage(
             loginMessage,
-            "Login failed: " +
             getFirebaseError(error),
             "error"
         );
@@ -1447,11 +1536,9 @@ async function login(){
 
     finally{
 
-        googleBtn.disabled =
-        false;
+        googleBtn.disabled = false;
 
-        topLogin.disabled =
-        false;
+        topLogin.disabled = false;
 
     }
 
@@ -1470,9 +1557,9 @@ topLogin.addEventListener(
 );
 
 
-/* ==========================================
+/* =====================================================
    LOGOUT
-========================================== */
+===================================================== */
 
 logoutBtn.addEventListener(
     "click",
@@ -1494,9 +1581,9 @@ logoutBtn.addEventListener(
 );
 
 
-/* ==========================================
+/* =====================================================
    AUTH STATE
-========================================== */
+===================================================== */
 
 onAuthStateChanged(
     auth,
@@ -1536,12 +1623,10 @@ onAuthStateChanged(
                 "firstName"
             );
 
-
             const last =
             document.getElementById(
                 "lastName"
             );
-
 
             const email =
             document.getElementById(
@@ -1571,9 +1656,7 @@ onAuthStateChanged(
             user.email || "";
 
 
-            /*
-               ADMIN CHECK
-            */
+            /* ADMIN CHECK */
 
             if(
                 user.email &&
@@ -1600,10 +1683,6 @@ onAuthStateChanged(
             }
 
 
-            /*
-               LOAD USER REQUESTS
-            */
-
             loadMyRequests(
                 user.uid
             );
@@ -1615,7 +1694,6 @@ onAuthStateChanged(
             stopMyRequestsListener();
 
             stopAdminListener();
-
 
             loginScreen.classList.remove(
                 "hidden"
@@ -1633,7 +1711,6 @@ onAuthStateChanged(
                 "hidden"
             );
 
-
             myRequests.innerHTML =
             '<div class="empty">Please login to view requests.</div>';
 
@@ -1643,9 +1720,9 @@ onAuthStateChanged(
 );
 
 
-/* ==========================================
+/* =====================================================
    PRICE CALCULATION
-========================================== */
+===================================================== */
 
 function calculateTotal(){
 
@@ -1740,9 +1817,9 @@ function calculateTotal(){
 }
 
 
-/* ==========================================
+/* =====================================================
    PRICE EVENTS
-========================================== */
+===================================================== */
 
 document
 .querySelectorAll(
@@ -1768,9 +1845,9 @@ document
 );
 
 
-/* ==========================================
+/* =====================================================
    SUBMIT REQUEST
-========================================== */
+===================================================== */
 
 roomForm.addEventListener(
     "submit",
@@ -1808,10 +1885,7 @@ roomForm.addEventListener(
         ).value;
 
 
-        if(
-            !checkIn ||
-            !checkOut
-        ){
+        if(!checkIn || !checkOut){
 
             showMessage(
                 formMessage,
@@ -1867,6 +1941,12 @@ roomForm.addEventListener(
         ).value.trim();
 
 
+        const additionalRequest =
+        document.getElementById(
+            "additionalRequest"
+        ).value.trim();
+
+
         const acInput =
         document.querySelector(
             'input[name="ac"]:checked'
@@ -1891,11 +1971,18 @@ roomForm.addEventListener(
         );
 
 
+        const cleaningInput =
+        document.querySelector(
+            'input[name="cleaning"]:checked'
+        );
+
+
         if(
             !acInput ||
             !heaterInput ||
             !utensilsInput ||
-            !mosquitoInput
+            !mosquitoInput ||
+            !cleaningInput
         ){
 
             showMessage(
@@ -1939,9 +2026,7 @@ roomForm.addEventListener(
 
         try{
 
-            /*
-               CREATE NEW REALTIME DATABASE ID
-            */
+            /* CREATE REQUEST */
 
             const newRequestRef =
             push(
@@ -1950,6 +2035,10 @@ roomForm.addEventListener(
                     "roomRequests"
                 )
             );
+
+
+            const requestId =
+            newRequestRef.key;
 
 
             const requestData = {
@@ -2002,6 +2091,17 @@ roomForm.addEventListener(
                 mosquito:
                 mosquitoInput.value,
 
+                cleaning:
+                cleaningInput.value,
+
+                cleaningStatus:
+                cleaningInput.value === "Yes"
+                ? "Requested"
+                : "Not Requested",
+
+                additionalRequest:
+                additionalRequest,
+
                 utensilsPrice:
                 prices.utensils,
 
@@ -2023,18 +2123,12 @@ roomForm.addEventListener(
             };
 
 
-            /*
-               SAVE TO REALTIME DATABASE
-            */
+            /* SAVE TO REALTIME DATABASE */
 
             await set(
                 newRequestRef,
                 requestData
             );
-
-
-            const requestId =
-            newRequestRef.key;
 
 
             console.log(
@@ -2043,9 +2137,9 @@ roomForm.addEventListener(
             );
 
 
-            /* ==========================================
+            /* =================================================
                EMAILJS
-            ========================================== */
+            ================================================= */
 
             let emailSent =
             false;
@@ -2101,6 +2195,12 @@ roomForm.addEventListener(
                         mosquito:
                         mosquitoInput.value,
 
+                        cleaning:
+                        cleaningInput.value,
+
+                        additional_request:
+                        additionalRequest,
+
                         total_extra:
                         prices.total,
 
@@ -2116,11 +2216,6 @@ roomForm.addEventListener(
 
                 emailSent =
                 true;
-
-
-                console.log(
-                    "Guest confirmation email sent."
-                );
 
             }
 
@@ -2141,7 +2236,7 @@ roomForm.addEventListener(
 
                 ?
 
-                "Room request submitted successfully! A confirmation email has been sent to " +
+                "Room request submitted successfully! Confirmation email sent to " +
                 email +
                 ". Request ID: " +
                 requestId
@@ -2150,7 +2245,7 @@ roomForm.addEventListener(
 
                 "Room request submitted successfully! Request ID: " +
                 requestId +
-                ". However, the confirmation email could not be sent.",
+                ". Email could not be sent.",
 
                 emailSent
                 ? "success"
@@ -2212,9 +2307,9 @@ roomForm.addEventListener(
 );
 
 
-/* ==========================================
+/* =====================================================
    STOP USER LISTENER
-========================================== */
+===================================================== */
 
 function stopMyRequestsListener(){
 
@@ -2230,19 +2325,14 @@ function stopMyRequestsListener(){
 }
 
 
-/* ==========================================
+/* =====================================================
    LOAD MY REQUESTS
-========================================== */
+===================================================== */
 
 function loadMyRequests(uid){
 
     stopMyRequestsListener();
 
-
-    /*
-       QUERY REALTIME DATABASE
-       ONLY CURRENT USER REQUESTS
-    */
 
     const userRequestsQuery =
     query(
@@ -2354,9 +2444,9 @@ function loadMyRequests(uid){
 }
 
 
-/* ==========================================
-   CREATE CARD
-========================================== */
+/* =====================================================
+   CREATE REQUEST CARD
+===================================================== */
 
 function createCard(
     id,
@@ -2402,6 +2492,10 @@ function createCard(
 
         </div>
 
+        <p>
+            <b>Request ID:</b>
+            ${escapeHTML(id)}
+        </p>
 
         <p>
             <b>Email:</b>
@@ -2412,14 +2506,12 @@ function createCard(
             )}
         </p>
 
-
         <p>
             <b>Phone:</b>
             ${escapeHTML(
                 data.phone || ""
             )}
         </p>
-
 
         <p>
             <b>Check-in:</b>
@@ -2428,14 +2520,12 @@ function createCard(
             )}
         </p>
 
-
         <p>
             <b>Check-out:</b>
             ${escapeHTML(
                 data.checkOut || ""
             )}
         </p>
-
 
         <p>
             <b>Passport:</b>
@@ -2444,12 +2534,10 @@ function createCard(
             )}
         </p>
 
-
         <p>
             <b>Beds:</b>
-            ${data.beds || 0}
+            ${Number(data.beds || 0)}
         </p>
-
 
         <p>
             <b>AC:</b>
@@ -2458,14 +2546,12 @@ function createCard(
             )}
         </p>
 
-
         <p>
             <b>Hot Water:</b>
             ${escapeHTML(
                 data.hotWater || ""
             )}
         </p>
-
 
         <p>
             <b>Utensils:</b>
@@ -2474,12 +2560,10 @@ function createCard(
             )}
         </p>
 
-
         <p>
             <b>Water Jugs:</b>
-            ${data.waterJugs || 0}
+            ${Number(data.waterJugs || 0)}
         </p>
-
 
         <p>
             <b>Mosquito Dispeller:</b>
@@ -2488,52 +2572,82 @@ function createCard(
             )}
         </p>
 
+        <p>
+            <b>Cleaning:</b>
+            ${escapeHTML(
+                data.cleaning || "No"
+            )}
+        </p>
+
+        <p>
+            <b>Cleaning Status:</b>
+            ${escapeHTML(
+                data.cleaningStatus || "Not Requested"
+            )}
+        </p>
+
+        <p>
+            <b>Additional Request:</b>
+            ${escapeHTML(
+                data.additionalRequest || "None"
+            )}
+        </p>
 
         <p>
             <b>Total Extra:</b>
-            ₹${data.totalExtra || 0}
+            ₹${Number(data.totalExtra || 0)}
         </p>
-
 
         ${
             adminMode
-
             ?
-
             `
 
             <div style="margin-top:14px">
 
                 <button
                     class="admin-button"
-                    data-id="${id}"
+                    data-id="${escapeHTML(id)}"
                     data-status="pending"
                 >
                     Pending
                 </button>
 
-
                 <button
                     class="admin-button"
-                    data-id="${id}"
+                    data-id="${escapeHTML(id)}"
                     data-status="approved"
                 >
                     Approve
                 </button>
 
-
                 <button
                     class="admin-button"
-                    data-id="${id}"
+                    data-id="${escapeHTML(id)}"
                     data-status="rejected"
                 >
                     Reject
                 </button>
 
+                ${
+                    data.cleaning === "Yes"
+                    ?
+                    `
+                    <button
+                        class="admin-button clean-button"
+                        data-id="${escapeHTML(id)}"
+                        data-cleaning="done"
+                    >
+                        Cleaning Done
+                    </button>
+                    `
+                    :
+                    ""
+                }
 
                 <button
                     class="admin-button delete-button"
-                    data-id="${id}"
+                    data-id="${escapeHTML(id)}"
                 >
                     Delete
                 </button>
@@ -2541,19 +2655,16 @@ function createCard(
             </div>
 
             `
-
             :
-
             ""
-
         }
 
     `;
 
 
-    /* ==========================================
+    /* =================================================
        ADMIN STATUS BUTTONS
-    ========================================== */
+    ================================================= */
 
     if(adminMode){
 
@@ -2618,9 +2729,77 @@ function createCard(
         );
 
 
-        /* ==========================================
+        /* =================================================
+           CLEANING DONE
+        ================================================= */
+
+        div
+        .querySelectorAll(
+            ".clean-button"
+        )
+        .forEach(
+            button=>{
+
+                button.addEventListener(
+                    "click",
+                    async()=>{
+
+                        try{
+
+                            button.disabled =
+                            true;
+
+
+                            const requestRef =
+                            ref(
+                                db,
+                                "roomRequests/" +
+                                button.dataset.id
+                            );
+
+
+                            await update(
+                                requestRef,
+                                {
+
+                                    cleaningStatus:
+                                    "Completed",
+
+                                    cleaningCompletedAt:
+                                    Date.now()
+
+                                }
+                            );
+
+
+                        }
+
+                        catch(error){
+
+                            alert(
+                                "Cleaning update failed: " +
+                                getFirebaseError(error)
+                            );
+
+                        }
+
+                        finally{
+
+                            button.disabled =
+                            false;
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =================================================
            DELETE
-        ========================================== */
+        ================================================= */
 
         const deleteBtn =
         div.querySelector(
@@ -2683,9 +2862,9 @@ function createCard(
 }
 
 
-/* ==========================================
+/* =====================================================
    STOP ADMIN LISTENER
-========================================== */
+===================================================== */
 
 function stopAdminListener(){
 
@@ -2701,9 +2880,9 @@ function stopAdminListener(){
 }
 
 
-/* ==========================================
+/* =====================================================
    LOAD ALL ADMIN REQUESTS
-========================================== */
+===================================================== */
 
 function loadAllRequests(){
 
@@ -2748,9 +2927,9 @@ function loadAllRequests(){
 }
 
 
-/* ==========================================
+/* =====================================================
    RENDER ADMIN
-========================================== */
+===================================================== */
 
 function renderAdmin(snapshot){
 
@@ -2849,20 +3028,13 @@ function renderAdmin(snapshot){
 }
 
 
-/* ==========================================
+/* =====================================================
    ADMIN FILTER
-========================================== */
+===================================================== */
 
 adminFilter.addEventListener(
     "change",
     ()=>{
-
-        /*
-           Listener ko reload karne ki
-           zarurat nahi hai.
-           Current snapshot automatically
-           render hoga.
-        */
 
         const user =
         auth.currentUser;
@@ -2883,9 +3055,9 @@ adminFilter.addEventListener(
 );
 
 
-/* ==========================================
+/* =====================================================
    FIREBASE ERROR
-========================================== */
+===================================================== */
 
 function getFirebaseError(error){
 
@@ -2901,7 +3073,7 @@ function getFirebaseError(error){
         "PERMISSION_DENIED"
     ){
 
-        return "Realtime Database permission denied. Firebase Console mein Realtime Database Rules check karo.";
+        return "Realtime Database permission denied. Firebase Console → Realtime Database → Rules check karo.";
 
     }
 
@@ -2911,7 +3083,7 @@ function getFirebaseError(error){
         "permission-denied"
     ){
 
-        return "Realtime Database permission denied. Firebase Console mein Realtime Database Rules check karo.";
+        return "Realtime Database permission denied. Firebase Console → Realtime Database → Rules check karo.";
 
     }
 
@@ -2964,9 +3136,9 @@ function getFirebaseError(error){
 }
 
 
-/* ==========================================
+/* =====================================================
    ESCAPE HTML
-========================================== */
+===================================================== */
 
 function escapeHTML(value){
 
@@ -3000,9 +3172,9 @@ function escapeHTML(value){
 }
 
 
-/* ==========================================
+/* =====================================================
    INITIAL PRICE
-========================================== */
+===================================================== */
 
 calculateTotal();
 
