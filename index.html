@@ -6,7 +6,6 @@
 
 <title>Munger Mandir Room Request</title>
 
-<!-- HOTEL APP FAVICON -->
 <link rel="icon"
       type="image/png"
       href="logo.png">
@@ -18,6 +17,7 @@
 </script>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -29,8 +29,6 @@ body{
     background:#f6f3ee;
     color:#30261b;
 }
-
-/* HEADER */
 
 header{
     background:#ffffff;
@@ -102,8 +100,6 @@ header{
     display:none !important;
 }
 
-/* BUTTONS */
-
 button{
     cursor:pointer;
 }
@@ -126,8 +122,6 @@ button{
     background:#5b3510;
     color:#fff;
 }
-
-/* LOGIN */
 
 .login-screen{
     min-height:calc(100vh - 79px);
@@ -188,8 +182,6 @@ button{
     background:#faf7f0;
 }
 
-/* MAIN */
-
 .container{
     max-width:1150px;
     margin:auto;
@@ -216,8 +208,6 @@ button{
     opacity:.95;
 }
 
-/* GRID */
-
 .grid{
     display:grid;
     grid-template-columns:1.1fr .9fr;
@@ -236,8 +226,6 @@ button{
     color:#5b3510;
     margin-bottom:20px;
 }
-
-/* FORM */
 
 label{
     display:block;
@@ -274,8 +262,6 @@ textarea:focus{
     gap:15px;
 }
 
-/* OPTIONS */
-
 .option-box{
     border:1px solid #e4d8c5;
     border-radius:13px;
@@ -311,8 +297,6 @@ textarea:focus{
     width:auto;
     margin:0;
 }
-
-/* PRICE */
 
 .price-box{
     margin-top:20px;
@@ -361,8 +345,6 @@ textarea:focus{
     cursor:not-allowed;
 }
 
-/* INFO */
-
 .info{
     display:grid;
     gap:12px;
@@ -387,8 +369,6 @@ textarea:focus{
     line-height:1.5;
 }
 
-/* MESSAGE */
-
 .message{
     display:none;
     margin-top:14px;
@@ -409,8 +389,6 @@ textarea:focus{
     background:#feecec;
     color:#991b1b;
 }
-
-/* REQUESTS */
 
 .requests{
     margin-top:25px;
@@ -456,8 +434,6 @@ textarea:focus{
     margin-top:6px;
 }
 
-/* ADMIN */
-
 .admin{
     margin-top:25px;
 }
@@ -484,67 +460,11 @@ textarea:focus{
     background:#b91c1c;
 }
 
-/* CLEANING */
-
-.cleaning-card{
-    margin-top:25px;
-}
-
-.cleaning-header{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:8px;
-}
-
-.cleaning-icon{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    background:#f5ead8;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-}
-
-.cleaning-description{
-    color:#7b6a55;
-    font-size:13px;
-    line-height:1.6;
-    margin-bottom:20px;
-}
-
-.cleaning-submit{
-    width:100%;
-    margin-top:5px;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:#92570c;
-    color:white;
-    font-size:15px;
-    font-weight:bold;
-}
-
-.cleaning-submit:hover{
-    background:#754407;
-}
-
-.cleaning-submit:disabled{
-    opacity:.65;
-    cursor:not-allowed;
-}
-
-/* EMPTY */
-
 .empty{
     color:#8a7964;
     padding:15px 0;
     font-size:14px;
 }
-
-/* FOOTER */
 
 footer{
     text-align:center;
@@ -552,8 +472,6 @@ footer{
     color:#9b8970;
     font-size:13px;
 }
-
-/* MOBILE */
 
 @media(max-width:850px){
 
@@ -603,6 +521,7 @@ footer{
     }
 
 }
+
 </style>
 </head>
 
@@ -806,8 +725,6 @@ Room Request Info
 </h3>
 
 
-<!-- AC -->
-
 <div class="option-box">
 
 <div class="option-title">
@@ -840,8 +757,6 @@ No
 </div>
 
 
-<!-- HOT WATER -->
-
 <div class="option-box">
 
 <div class="option-title">
@@ -873,8 +788,6 @@ No
 
 </div>
 
-
-<!-- BEDS -->
 
 <div class="option-box">
 
@@ -916,8 +829,6 @@ Select beds
 
 </div>
 
-
-<!-- UTENSILS -->
 
 <div class="option-box">
 
@@ -961,8 +872,6 @@ No
 </div>
 
 
-<!-- WATER -->
-
 <div class="option-box">
 
 <div class="option-title">
@@ -997,8 +906,6 @@ No water jug
 
 </div>
 
-
-<!-- MOSQUITO -->
 
 <div class="option-box">
 
@@ -1041,8 +948,6 @@ No
 
 </div>
 
-
-<!-- PRICE -->
 
 <div class="price-box">
 
@@ -1211,153 +1116,6 @@ Munger Mandir system.
 </div>
 
 
-<!-- ==========================================
-     CLEANING REQUEST
-========================================== -->
-
-<section class="card cleaning-card">
-
-<div class="cleaning-header">
-
-    <div class="cleaning-icon">
-        🧹
-    </div>
-
-    <div>
-        <h3 style="margin-bottom:4px;">
-            Cleaning Request
-        </h3>
-    </div>
-
-</div>
-
-<p class="cleaning-description">
-Need cleaning or have a cleaning problem in your room?
-Select your room and describe the problem below.
-Our staff can review your request.
-</p>
-
-
-<form id="cleaningForm">
-
-<label>
-Room Number
-</label>
-
-<select
-    id="cleaningRoom"
-    required
->
-
-<option value="">
-Select your room
-</option>
-
-<option value="Room 1">Room 1</option>
-<option value="Room 2">Room 2</option>
-<option value="Room 3">Room 3</option>
-<option value="Room 4">Room 4</option>
-<option value="Room 5">Room 5</option>
-<option value="Room 6">Room 6</option>
-<option value="Room 7">Room 7</option>
-<option value="Room 8">Room 8</option>
-<option value="Room 9">Room 9</option>
-<option value="Room 10">Room 10</option>
-<option value="Room 11">Room 11</option>
-<option value="Room 12">Room 12</option>
-<option value="Room 13">Room 13</option>
-<option value="Room 14">Room 14</option>
-<option value="Room 15">Room 15</option>
-<option value="Room 16">Room 16</option>
-<option value="Room 17">Room 17</option>
-<option value="Room 18">Room 18</option>
-<option value="Room 19">Room 19</option>
-<option value="Room 20">Room 20</option>
-<option value="Room 21">Room 21</option>
-<option value="Room 22">Room 22</option>
-<option value="Room 23">Room 23</option>
-<option value="Room 24">Room 24</option>
-<option value="Room 25">Room 25</option>
-<option value="Room 26">Room 26</option>
-<option value="Room 27">Room 27</option>
-<option value="Room 28">Room 28</option>
-<option value="Room 29">Room 29</option>
-<option value="Room 30">Room 30</option>
-<option value="Room 31">Room 31</option>
-<option value="Room 32">Room 32</option>
-<option value="Room 33">Room 33</option>
-<option value="Room 34">Room 34</option>
-<option value="Room 35">Room 35</option>
-<option value="Room 36">Room 36</option>
-<option value="Room 37">Room 37</option>
-<option value="Room 38">Room 38</option>
-<option value="Room 39">Room 39</option>
-<option value="Room 40">Room 40</option>
-<option value="Room 41">Room 41</option>
-<option value="Room 42">Room 42</option>
-<option value="Room 43">Room 43</option>
-<option value="Room 44">Room 44</option>
-<option value="Room 45">Room 45</option>
-<option value="Room 46">Room 46</option>
-<option value="Room 47">Room 47</option>
-<option value="Room 48">Room 48</option>
-<option value="Room 49">Room 49</option>
-<option value="Room 50">Room 50</option>
-<option value="Room 51">Room 51</option>
-<option value="Room 52">Room 52</option>
-<option value="Room 53">Room 53</option>
-<option value="Room 54">Room 54</option>
-<option value="Room 55">Room 55</option>
-<option value="Room 56">Room 56</option>
-<option value="Room 57">Room 57</option>
-<option value="Room 58">Room 58</option>
-<option value="Room 59">Room 59</option>
-<option value="Room 60">Room 60</option>
-<option value="Room 61">Room 61</option>
-<option value="Room 62">Room 62</option>
-<option value="Room 63">Room 63</option>
-<option value="Room 64">Room 64</option>
-<option value="Room 65">Room 65</option>
-<option value="Room 66">Room 66</option>
-<option value="Room 67">Room 67</option>
-<option value="Room 68">Room 68</option>
-<option value="Room 69">Room 69</option>
-<option value="Room 70">Room 70</option>
-
-</select>
-
-
-<label>
-Describe Cleaning Problem
-</label>
-
-<textarea
-    id="cleaningProblem"
-    rows="5"
-    required
-    maxlength="1000"
-    placeholder="Example: Room needs cleaning, bathroom needs cleaning, floor is dirty, dustbin needs to be emptied..."
-></textarea>
-
-
-<button
-    type="submit"
-    class="cleaning-submit"
-    id="cleaningSubmitBtn"
->
-🧹 Send Cleaning Request
-</button>
-
-<div
-    id="cleaningMessage"
-    class="message">
-</div>
-
-</form>
-
-</section>
-
-
 <!-- MY REQUESTS -->
 
 <section class="card requests">
@@ -1443,6 +1201,7 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
+
 import {
     getAuth,
     GoogleAuthProvider,
@@ -1452,19 +1211,24 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
+
+/*
+   REALTIME DATABASE
+*/
+
 import {
-    getFirestore,
-    collection,
-    addDoc,
+    getDatabase,
+    ref,
+    push,
+    set,
+    update,
+    remove,
+    onValue,
     query,
-    where,
-    onSnapshot,
-    doc,
-    updateDoc,
-    deleteDoc,
-    serverTimestamp
+    orderByChild,
+    equalTo
 }
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
 
 /* ==========================================
@@ -1492,25 +1256,38 @@ const firebaseConfig = {
     "1:145384185034:web:c828c0388f8bd79d79a833",
 
     measurementId:
-    "G-LF2K2KFCN6"
+    "G-LF2K2KFCN6",
+
+    /*
+       REALTIME DATABASE URL
+    */
+    databaseURL:
+    "https://munger-mandir-room-request-default-rtdb.firebaseio.com"
 };
 
 
 /* ==========================================
-   INITIALIZE
+   INITIALIZE FIREBASE
 ========================================== */
 
-const app = initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
 
-const db = getFirestore(app);
+const auth =
+getAuth(app);
 
-const provider = new GoogleAuthProvider();
+
+const db =
+getDatabase(app);
+
+
+const provider =
+new GoogleAuthProvider();
 
 
 /* ==========================================
-   EMAILJS CONFIGURATION
+   EMAILJS
 ========================================== */
 
 const EMAILJS_PUBLIC_KEY =
@@ -1522,8 +1299,9 @@ const EMAILJS_TEMPLATE_ID =
 const EMAILJS_SERVICE_ID =
 "service_o8984nf";
 
+
 emailjs.init({
-    publicKey: EMAILJS_PUBLIC_KEY
+    publicKey:EMAILJS_PUBLIC_KEY
 });
 
 
@@ -1589,27 +1367,16 @@ document.getElementById("submitBtn");
 
 
 /* ==========================================
-   CLEANING ELEMENTS
+   LISTENER VARIABLES
 ========================================== */
 
-const cleaningForm =
-document.getElementById("cleaningForm");
+let myRequestsUnsubscribe = null;
 
-const cleaningRoom =
-document.getElementById("cleaningRoom");
-
-const cleaningProblem =
-document.getElementById("cleaningProblem");
-
-const cleaningSubmitBtn =
-document.getElementById("cleaningSubmitBtn");
-
-const cleaningMessage =
-document.getElementById("cleaningMessage");
+let adminRequestsUnsubscribe = null;
 
 
 /* ==========================================
-   MESSAGE FUNCTION
+   MESSAGE
 ========================================== */
 
 function showMessage(
@@ -1618,12 +1385,14 @@ function showMessage(
     type=""
 ){
 
-    element.textContent = text;
+    element.textContent =
+    text;
 
     element.className =
     "message " + type;
 
-    element.style.display = "block";
+    element.style.display =
+    "block";
 }
 
 
@@ -1633,13 +1402,18 @@ function showMessage(
 
 async function login(){
 
-    googleBtn.disabled = true;
-    topLogin.disabled = true;
+    googleBtn.disabled =
+    true;
+
+    topLogin.disabled =
+    true;
+
 
     showMessage(
         loginMessage,
         "Opening Google Login..."
     );
+
 
     try{
 
@@ -1647,6 +1421,7 @@ async function login(){
             auth,
             provider
         );
+
 
         loginMessage.style.display =
         "none";
@@ -1660,6 +1435,7 @@ async function login(){
             error
         );
 
+
         showMessage(
             loginMessage,
             "Login failed: " +
@@ -1671,8 +1447,11 @@ async function login(){
 
     finally{
 
-        googleBtn.disabled = false;
-        topLogin.disabled = false;
+        googleBtn.disabled =
+        false;
+
+        topLogin.disabled =
+        false;
 
     }
 
@@ -1683,6 +1462,7 @@ googleBtn.addEventListener(
     "click",
     login
 );
+
 
 topLogin.addEventListener(
     "click",
@@ -1703,6 +1483,7 @@ logoutBtn.addEventListener(
             await signOut(auth);
 
         }
+
         catch(error){
 
             console.error(error);
@@ -1755,10 +1536,12 @@ onAuthStateChanged(
                 "firstName"
             );
 
+
             const last =
             document.getElementById(
                 "lastName"
             );
+
 
             const email =
             document.getElementById(
@@ -1769,11 +1552,14 @@ onAuthStateChanged(
             if(user.displayName){
 
                 const parts =
-                user.displayName.trim()
+                user.displayName
+                .trim()
                 .split(/\s+/);
+
 
                 first.value =
                 parts.shift() || "";
+
 
                 last.value =
                 parts.join(" ") || "";
@@ -1785,10 +1571,12 @@ onAuthStateChanged(
             user.email || "";
 
 
+            /*
+               ADMIN CHECK
+            */
+
             if(
                 user.email &&
-                ADMIN_EMAIL !==
-                "YOUR_ADMIN_EMAIL@gmail.com" &&
                 user.email.toLowerCase() ===
                 ADMIN_EMAIL.toLowerCase()
             ){
@@ -1800,21 +1588,34 @@ onAuthStateChanged(
                 loadAllRequests();
 
             }
+
             else{
 
                 adminPanel.classList.add(
                     "hidden"
                 );
 
+                stopAdminListener();
+
             }
 
+
+            /*
+               LOAD USER REQUESTS
+            */
 
             loadMyRequests(
                 user.uid
             );
 
         }
+
         else{
+
+            stopMyRequestsListener();
+
+            stopAdminListener();
+
 
             loginScreen.classList.remove(
                 "hidden"
@@ -1832,6 +1633,7 @@ onAuthStateChanged(
                 "hidden"
             );
 
+
             myRequests.innerHTML =
             '<div class="empty">Please login to view requests.</div>';
 
@@ -1848,12 +1650,15 @@ onAuthStateChanged(
 function calculateTotal(){
 
     let utensils = 0;
+
     let mosquito = 0;
+
 
     const utensil =
     document.querySelector(
         'input[name="utensils"]:checked'
     );
+
 
     const mosquitoInput =
     document.querySelector(
@@ -1923,15 +1728,21 @@ function calculateTotal(){
     "₹" + total;
 
 
-    return {
+    return{
+
         utensils,
         water,
         mosquito,
         total
+
     };
 
 }
 
+
+/* ==========================================
+   PRICE EVENTS
+========================================== */
 
 document
 .querySelectorAll(
@@ -1958,7 +1769,7 @@ document
 
 
 /* ==========================================
-   SUBMIT ROOM REQUEST
+   SUBMIT REQUEST
 ========================================== */
 
 roomForm.addEventListener(
@@ -2114,7 +1925,9 @@ roomForm.addEventListener(
         calculateTotal();
 
 
-        submitBtn.disabled = true;
+        submitBtn.disabled =
+        true;
+
 
         submitBtn.textContent =
         "Submitting...";
@@ -2126,8 +1939,16 @@ roomForm.addEventListener(
 
         try{
 
-            console.log(
-                "Saving request to Firestore..."
+            /*
+               CREATE NEW REALTIME DATABASE ID
+            */
+
+            const newRequestRef =
+            push(
+                ref(
+                    db,
+                    "roomRequests"
+                )
             );
 
 
@@ -2197,32 +2018,38 @@ roomForm.addEventListener(
                 "pending",
 
                 createdAt:
-                serverTimestamp()
+                Date.now()
 
             };
 
 
-            const docRef =
-            await addDoc(
-                collection(
-                    db,
-                    "roomRequests"
-                ),
+            /*
+               SAVE TO REALTIME DATABASE
+            */
+
+            await set(
+                newRequestRef,
                 requestData
             );
 
 
+            const requestId =
+            newRequestRef.key;
+
+
             console.log(
                 "Request saved:",
-                docRef.id
+                requestId
             );
 
 
             /* ==========================================
-               AUTOMATIC GUEST EMAIL
+               EMAILJS
             ========================================== */
 
-            let emailSent = false;
+            let emailSent =
+            false;
+
 
             try{
 
@@ -2230,14 +2057,19 @@ roomForm.addEventListener(
                     EMAILJS_SERVICE_ID,
                     EMAILJS_TEMPLATE_ID,
                     {
+
                         name:
-                        firstName + " " + lastName,
+                        firstName +
+                        " " +
+                        lastName,
 
                         email:
                         email,
 
                         guest_name:
-                        firstName + " " + lastName,
+                        firstName +
+                        " " +
+                        lastName,
 
                         check_in:
                         checkIn,
@@ -2273,20 +2105,26 @@ roomForm.addEventListener(
                         prices.total,
 
                         request_id:
-                        docRef.id,
+                        requestId,
 
                         status:
                         "Pending"
+
                     }
                 );
 
-                emailSent = true;
+
+                emailSent =
+                true;
+
 
                 console.log(
-                    "Guest confirmation email sent successfully."
+                    "Guest confirmation email sent."
                 );
 
-            }catch(emailError){
+            }
+
+            catch(emailError){
 
                 console.error(
                     "EMAILJS ERROR:",
@@ -2298,10 +2136,25 @@ roomForm.addEventListener(
 
             showMessage(
                 formMessage,
+
                 emailSent
-                    ? "Room request submitted successfully! A confirmation email has been sent to " + email + ". Request ID: " + docRef.id
-                    : "Room request submitted successfully! Request ID: " + docRef.id + ". However, the confirmation email could not be sent. Please check your EmailJS template/service settings.",
-                emailSent ? "success" : "error"
+
+                ?
+
+                "Room request submitted successfully! A confirmation email has been sent to " +
+                email +
+                ". Request ID: " +
+                requestId
+
+                :
+
+                "Room request submitted successfully! Request ID: " +
+                requestId +
+                ". However, the confirmation email could not be sent.",
+
+                emailSent
+                ? "success"
+                : "error"
             );
 
 
@@ -2318,17 +2171,21 @@ roomForm.addEventListener(
 
 
             window.scrollTo({
-                top:document.body.scrollHeight,
-                behavior:"smooth"
-            });
 
+                top:
+                document.body.scrollHeight,
+
+                behavior:
+                "smooth"
+
+            });
 
         }
 
         catch(error){
 
             console.error(
-                "FIRESTORE SUBMIT ERROR:",
+                "REALTIME DATABASE ERROR:",
                 error
             );
 
@@ -2343,7 +2200,8 @@ roomForm.addEventListener(
 
         finally{
 
-            submitBtn.disabled = false;
+            submitBtn.disabled =
+            false;
 
             submitBtn.textContent =
             "Submit Room Request";
@@ -2355,173 +2213,21 @@ roomForm.addEventListener(
 
 
 /* ==========================================
-   CLEANING REQUEST
+   STOP USER LISTENER
 ========================================== */
 
-cleaningForm.addEventListener(
-    "submit",
-    async event=>{
+function stopMyRequestsListener(){
 
-        event.preventDefault();
+    if(myRequestsUnsubscribe){
 
+        myRequestsUnsubscribe();
 
-        const user =
-        auth.currentUser;
-
-
-        if(!user){
-
-            showMessage(
-                cleaningMessage,
-                "Please login with Google first.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const room =
-        cleaningRoom.value.trim();
-
-
-        const problem =
-        cleaningProblem.value.trim();
-
-
-        if(!room){
-
-            showMessage(
-                cleaningMessage,
-                "Please select your room number.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(!problem){
-
-            showMessage(
-                cleaningMessage,
-                "Please describe your cleaning problem.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        cleaningSubmitBtn.disabled = true;
-
-        cleaningSubmitBtn.textContent =
-        "Sending Request...";
-
-
-        cleaningMessage.style.display =
-        "none";
-
-
-        try{
-
-            const cleaningData = {
-
-                uid:
-                user.uid,
-
-                guestName:
-                user.displayName || "",
-
-                guestEmail:
-                user.email || "",
-
-                room:
-                room,
-
-                problem:
-                problem,
-
-                status:
-                "pending",
-
-                createdAt:
-                serverTimestamp()
-
-            };
-
-
-            const cleaningRef =
-            await addDoc(
-
-                collection(
-                    db,
-                    "cleaningRequests"
-                ),
-
-                cleaningData
-
-            );
-
-
-            console.log(
-                "Cleaning request saved:",
-                cleaningRef.id
-            );
-
-
-            showMessage(
-
-                cleaningMessage,
-
-                "Cleaning request sent successfully! Request ID: " +
-                cleaningRef.id,
-
-                "success"
-
-            );
-
-
-            cleaningForm.reset();
-
-
-        }
-
-        catch(error){
-
-            console.error(
-                "CLEANING REQUEST ERROR:",
-                error
-            );
-
-
-            showMessage(
-
-                cleaningMessage,
-
-                getFirebaseError(error),
-
-                "error"
-
-            );
-
-        }
-
-        finally{
-
-            cleaningSubmitBtn.disabled =
-            false;
-
-            cleaningSubmitBtn.textContent =
-            "🧹 Send Cleaning Request";
-
-        }
+        myRequestsUnsubscribe =
+        null;
 
     }
-);
+
+}
 
 
 /* ==========================================
@@ -2530,30 +2236,37 @@ cleaningForm.addEventListener(
 
 function loadMyRequests(uid){
 
-    const q =
+    stopMyRequestsListener();
+
+
+    /*
+       QUERY REALTIME DATABASE
+       ONLY CURRENT USER REQUESTS
+    */
+
+    const userRequestsQuery =
     query(
-        collection(
+        ref(
             db,
             "roomRequests"
         ),
-        where(
-            "uid",
-            "==",
-            uid
-        )
+        orderByChild("uid"),
+        equalTo(uid)
     );
 
 
-    onSnapshot(
+    myRequestsUnsubscribe =
+    onValue(
 
-        q,
+        userRequestsQuery,
 
         snapshot=>{
 
-            myRequests.innerHTML = "";
+            myRequests.innerHTML =
+            "";
 
 
-            if(snapshot.empty){
+            if(!snapshot.exists()){
 
                 myRequests.innerHTML =
                 '<div class="empty">No room requests yet.</div>';
@@ -2563,15 +2276,21 @@ function loadMyRequests(uid){
             }
 
 
-            const requests = [];
+            const requests =
+            [];
 
 
             snapshot.forEach(
                 item=>{
 
                     requests.push({
-                        id:item.id,
-                        data:item.data()
+
+                        id:
+                        item.key,
+
+                        data:
+                        item.val()
+
                     });
 
                 }
@@ -2581,13 +2300,15 @@ function loadMyRequests(uid){
             requests.sort(
                 (a,b)=>{
 
-                    const aTime =
-                    a.data.createdAt?.toMillis?.() || 0;
-
-                    const bTime =
-                    b.data.createdAt?.toMillis?.() || 0;
-
-                    return bTime - aTime;
+                    return (
+                        Number(
+                            b.data.createdAt || 0
+                        )
+                        -
+                        Number(
+                            a.data.createdAt || 0
+                        )
+                    );
 
                 }
             );
@@ -2618,6 +2339,7 @@ function loadMyRequests(uid){
                 error
             );
 
+
             myRequests.innerHTML =
             '<div class="empty">Unable to load requests: ' +
             escapeHTML(
@@ -2633,7 +2355,7 @@ function loadMyRequests(uid){
 
 
 /* ==========================================
-   CREATE REQUEST CARD
+   CREATE CARD
 ========================================== */
 
 function createCard(
@@ -2680,69 +2402,104 @@ function createCard(
 
         </div>
 
+
         <p>
             <b>Email:</b>
-            ${escapeHTML(data.email || data.userEmail || "")}
+            ${escapeHTML(
+                data.email ||
+                data.userEmail ||
+                ""
+            )}
         </p>
+
 
         <p>
             <b>Phone:</b>
-            ${escapeHTML(data.phone || "")}
+            ${escapeHTML(
+                data.phone || ""
+            )}
         </p>
+
 
         <p>
             <b>Check-in:</b>
-            ${escapeHTML(data.checkIn || "")}
+            ${escapeHTML(
+                data.checkIn || ""
+            )}
         </p>
+
 
         <p>
             <b>Check-out:</b>
-            ${escapeHTML(data.checkOut || "")}
+            ${escapeHTML(
+                data.checkOut || ""
+            )}
         </p>
+
 
         <p>
             <b>Passport:</b>
-            ${escapeHTML(data.passport || "")}
+            ${escapeHTML(
+                data.passport || ""
+            )}
         </p>
+
 
         <p>
             <b>Beds:</b>
             ${data.beds || 0}
         </p>
 
+
         <p>
             <b>AC:</b>
-            ${escapeHTML(data.acRoom || "")}
+            ${escapeHTML(
+                data.acRoom || ""
+            )}
         </p>
+
 
         <p>
             <b>Hot Water:</b>
-            ${escapeHTML(data.hotWater || "")}
+            ${escapeHTML(
+                data.hotWater || ""
+            )}
         </p>
+
 
         <p>
             <b>Utensils:</b>
-            ${escapeHTML(data.utensils || "")}
+            ${escapeHTML(
+                data.utensils || ""
+            )}
         </p>
+
 
         <p>
             <b>Water Jugs:</b>
             ${data.waterJugs || 0}
         </p>
 
+
         <p>
             <b>Mosquito Dispeller:</b>
-            ${escapeHTML(data.mosquito || "")}
+            ${escapeHTML(
+                data.mosquito || ""
+            )}
         </p>
+
 
         <p>
             <b>Total Extra:</b>
             ₹${data.totalExtra || 0}
         </p>
 
+
         ${
             adminMode
+
             ?
+
             `
 
             <div style="margin-top:14px">
@@ -2755,6 +2512,7 @@ function createCard(
                     Pending
                 </button>
 
+
                 <button
                     class="admin-button"
                     data-id="${id}"
@@ -2763,6 +2521,7 @@ function createCard(
                     Approve
                 </button>
 
+
                 <button
                     class="admin-button"
                     data-id="${id}"
@@ -2770,6 +2529,7 @@ function createCard(
                 >
                     Reject
                 </button>
+
 
                 <button
                     class="admin-button delete-button"
@@ -2781,12 +2541,19 @@ function createCard(
             </div>
 
             `
+
             :
+
             ""
+
         }
 
     `;
 
+
+    /* ==========================================
+       ADMIN STATUS BUTTONS
+    ========================================== */
 
     if(adminMode){
 
@@ -2803,23 +2570,28 @@ function createCard(
 
                         try{
 
-                            button.disabled = true;
+                            button.disabled =
+                            true;
 
 
-                            await updateDoc(
+                            const requestRef =
+                            ref(
+                                db,
+                                "roomRequests/" +
+                                button.dataset.id
+                            );
 
-                                doc(
-                                    db,
-                                    "roomRequests",
-                                    button.dataset.id
-                                ),
 
+                            await update(
+                                requestRef,
                                 {
+
                                     status:
                                     button.dataset.status
-                                }
 
+                                }
                             );
+
 
                         }
 
@@ -2834,7 +2606,8 @@ function createCard(
 
                         finally{
 
-                            button.disabled = false;
+                            button.disabled =
+                            false;
 
                         }
 
@@ -2844,6 +2617,10 @@ function createCard(
             }
         );
 
+
+        /* ==========================================
+           DELETE
+        ========================================== */
 
         const deleteBtn =
         div.querySelector(
@@ -2868,17 +2645,16 @@ function createCard(
 
                 try{
 
-                    deleteBtn.disabled = true;
+                    deleteBtn.disabled =
+                    true;
 
 
-                    await deleteDoc(
-
-                        doc(
+                    await remove(
+                        ref(
                             db,
-                            "roomRequests",
+                            "roomRequests/" +
                             deleteBtn.dataset.id
                         )
-
                     );
 
                 }
@@ -2890,7 +2666,9 @@ function createCard(
                         getFirebaseError(error)
                     );
 
-                    deleteBtn.disabled = false;
+
+                    deleteBtn.disabled =
+                    false;
 
                 }
 
@@ -2906,32 +2684,39 @@ function createCard(
 
 
 /* ==========================================
-   LOAD ALL ADMIN REQUESTS
+   STOP ADMIN LISTENER
 ========================================== */
 
-let adminUnsubscribe = null;
+function stopAdminListener(){
 
+    if(adminRequestsUnsubscribe){
 
-function loadAllRequests(){
+        adminRequestsUnsubscribe();
 
-    if(adminUnsubscribe){
-
-        adminUnsubscribe();
+        adminRequestsUnsubscribe =
+        null;
 
     }
 
-
-    const q =
-    collection(
-        db,
-        "roomRequests"
-    );
+}
 
 
-    adminUnsubscribe =
-    onSnapshot(
+/* ==========================================
+   LOAD ALL ADMIN REQUESTS
+========================================== */
 
-        q,
+function loadAllRequests(){
+
+    stopAdminListener();
+
+
+    adminRequestsUnsubscribe =
+    onValue(
+
+        ref(
+            db,
+            "roomRequests"
+        ),
 
         snapshot=>{
 
@@ -2947,6 +2732,7 @@ function loadAllRequests(){
                 "ADMIN ERROR:",
                 error
             );
+
 
             allRequests.innerHTML =
             '<div class="empty">Unable to load admin requests: ' +
@@ -2972,18 +2758,25 @@ function renderAdmin(snapshot){
     adminFilter.value;
 
 
-    allRequests.innerHTML = "";
+    allRequests.innerHTML =
+    "";
 
 
-    const requests = [];
+    const requests =
+    [];
 
 
     snapshot.forEach(
         item=>{
 
             requests.push({
-                id:item.id,
-                data:item.data()
+
+                id:
+                item.key,
+
+                data:
+                item.val()
+
             });
 
         }
@@ -2993,19 +2786,22 @@ function renderAdmin(snapshot){
     requests.sort(
         (a,b)=>{
 
-            const aTime =
-            a.data.createdAt?.toMillis?.() || 0;
-
-            const bTime =
-            b.data.createdAt?.toMillis?.() || 0;
-
-            return bTime - aTime;
+            return (
+                Number(
+                    b.data.createdAt || 0
+                )
+                -
+                Number(
+                    a.data.createdAt || 0
+                )
+            );
 
         }
     );
 
 
-    let count = 0;
+    let count =
+    0;
 
 
     requests.forEach(
@@ -3053,11 +2849,35 @@ function renderAdmin(snapshot){
 }
 
 
+/* ==========================================
+   ADMIN FILTER
+========================================== */
+
 adminFilter.addEventListener(
     "change",
     ()=>{
 
-        loadAllRequests();
+        /*
+           Listener ko reload karne ki
+           zarurat nahi hai.
+           Current snapshot automatically
+           render hoga.
+        */
+
+        const user =
+        auth.currentUser;
+
+
+        if(
+            user &&
+            user.email &&
+            user.email.toLowerCase() ===
+            ADMIN_EMAIL.toLowerCase()
+        ){
+
+            loadAllRequests();
+
+        }
 
     }
 );
@@ -3070,7 +2890,19 @@ adminFilter.addEventListener(
 function getFirebaseError(error){
 
     if(!error){
+
         return "Unknown error.";
+
+    }
+
+
+    if(
+        error.code ===
+        "PERMISSION_DENIED"
+    ){
+
+        return "Realtime Database permission denied. Firebase Console mein Realtime Database Rules check karo.";
+
     }
 
 
@@ -3079,7 +2911,7 @@ function getFirebaseError(error){
         "permission-denied"
     ){
 
-        return "Firestore permission denied. Firebase Console mein Firestore Rules check karo.";
+        return "Realtime Database permission denied. Firebase Console mein Realtime Database Rules check karo.";
 
     }
 
@@ -3124,16 +2956,6 @@ function getFirebaseError(error){
     }
 
 
-    if(
-        error.code ===
-        "failed-precondition"
-    ){
-
-        return "Firebase configuration/index problem. Firestore settings check karo.";
-
-    }
-
-
     return (
         error.message ||
         "Something went wrong."
@@ -3149,11 +2971,31 @@ function getFirebaseError(error){
 function escapeHTML(value){
 
     return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
