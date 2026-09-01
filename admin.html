@@ -1,30 +1,13 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<title>Hotel Manager - Munger Mandir</title>
 
-<title>Munger Mandir Admin</title>
-
-<link rel="icon"
-      type="image/png"
-      href="logo.png">
-
-<!-- FULLCALENDAR -->
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.css"
->
-
-<script
-src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js">
-</script>
-
+<link rel="icon" type="image/png" href="logo.png">
 
 <style>
 
@@ -36,410 +19,283 @@ src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js">
 }
 
 body{
-    background:#f6f3ee;
-    color:#30261b;
+    background:#f1f4f8;
+    color:#111827;
 }
 
-/* ================= HEADER ================= */
+/* =========================
+   SIDEBAR
+========================= */
 
-header{
-    background:#ffffff;
-    border-bottom:1px solid #e5ddd1;
-    position:sticky;
+.sidebar{
+    position:fixed;
+    left:0;
     top:0;
+    bottom:0;
+    width:280px;
+    background:#101827;
+    color:white;
+    padding:25px 20px;
+    overflow-y:auto;
     z-index:1000;
 }
 
-.nav{
-    max-width:1150px;
-    margin:auto;
-    padding:14px 20px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.brand{
+.hotel-logo{
     display:flex;
     align-items:center;
     gap:12px;
+    padding:10px 15px 35px;
 }
 
-.logo{
-    width:50px;
-    height:50px;
+.hotel-logo-icon{
+    font-size:30px;
+}
 
+.hotel-logo h1{
+    font-size:27px;
+    color:#5ea1ff;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.menu-item{
+    padding:18px 20px;
     border-radius:15px;
-
-    background:#8f570d;
-    color:white;
-
+    font-size:21px;
+    color:#e5e7eb;
+    cursor:pointer;
+    transition:.2s;
     display:flex;
     align-items:center;
-    justify-content:center;
-
-    font-weight:bold;
-    font-size:18px;
+    gap:13px;
 }
 
-.brand h1{
-    font-size:20px;
-    color:#4e2d0b;
+.menu-item:hover{
+    background:#1d2939;
 }
 
-.brand small{
-    color:#8b7354;
-    font-size:12px;
+.menu-item.active{
+    background:#202c3c;
+    color:white;
 }
 
-.user-area{
+.menu-item span{
+    font-size:21px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:280px;
+    min-height:100vh;
+    padding:30px;
+}
+
+.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.page-title h2{
+    font-size:30px;
+    color:#172033;
+}
+
+.page-title p{
+    margin-top:5px;
+    color:#6b7280;
+}
+
+.admin-user{
     display:flex;
     align-items:center;
     gap:10px;
-}
-
-.user-photo{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid #e3d4bf;
-}
-
-.user-name{
-    font-size:14px;
-    font-weight:bold;
-    color:#4d3923;
-}
-
-.hidden{
-    display:none !important;
-}
-
-/* ================= BUTTONS ================= */
-
-button{
-    cursor:pointer;
-}
-
-.login-btn,
-.logout{
-    border:none;
-    border-radius:9px;
-    padding:10px 15px;
-    font-weight:bold;
-}
-
-.login-btn{
-    background:#fff;
-    border:1px solid #d7c8b3;
-    color:#5b3510;
-}
-
-.logout{
-    background:#5b3510;
-    color:#fff;
-}
-
-/* ================= LOGIN ================= */
-
-.login-screen{
-    min-height:calc(100vh - 79px);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:25px;
-}
-
-.login-card{
-    width:100%;
-    max-width:430px;
-
-    background:#fff;
-
-    border:1px solid #e5ddd1;
-    border-radius:24px;
-
-    padding:40px 30px;
-
-    text-align:center;
-
-    box-shadow:
-    0 15px 45px rgba(70,45,15,.08);
-}
-
-.temple-icon{
-    width:80px;
-    height:80px;
-
-    border-radius:22px;
-
-    background:#9a600e;
-    color:#fff;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    margin:0 auto 18px;
-
-    font-size:26px;
-    font-weight:bold;
-}
-
-.login-card h2{
-    color:#51300d;
-    margin-bottom:10px;
-}
-
-.login-card p{
-    color:#7b6a55;
-    line-height:1.6;
-    margin-bottom:25px;
-}
-
-.google-btn{
-    width:100%;
-
-    padding:14px;
-
     background:white;
-
-    border:1px solid #d6c7b2;
-
-    border-radius:10px;
-
-    font-size:15px;
-    font-weight:bold;
-
-    color:#3f3325;
+    border:1px solid #e0e5ec;
+    padding:8px 13px;
+    border-radius:12px;
 }
 
-.google-btn:hover{
-    background:#faf7f0;
+.admin-user img{
+    width:38px;
+    height:38px;
+    border-radius:50%;
 }
 
-.message{
-    display:none;
-
-    margin-top:15px;
-
-    padding:12px;
-
-    border-radius:9px;
-
-    font-size:13px;
-    line-height:1.5;
-}
-
-.message.error{
-    background:#feecec;
-    color:#991b1b;
-}
-
-/* ================= MAIN ================= */
-
-.container{
-    max-width:1150px;
-
-    margin:auto;
-
-    padding:30px 20px 60px;
-}
-
-.hero{
-    background:
-    linear-gradient(
-        135deg,
-        #774607,
-        #b97818
-    );
-
+.logout-btn{
+    border:none;
+    background:#ef4444;
     color:white;
-
-    border-radius:24px;
-
-    padding:40px;
-
-    margin-bottom:25px;
-
-    box-shadow:
-    0 12px 30px rgba(100,60,10,.14);
+    padding:9px 13px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.hero h2{
-    font-size:34px;
-    margin-bottom:10px;
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+    display:none;
 }
 
-.hero p{
-    max-width:700px;
-    line-height:1.6;
+.section.active{
+    display:block;
 }
 
-/* ================= STATS ================= */
+/* =========================
+   CARDS
+========================= */
 
 .stats{
     display:grid;
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-    gap:15px;
-
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
     margin-bottom:25px;
 }
 
-.stat{
+.stat-card{
     background:white;
-
-    border:1px solid #e5ddd1;
-
-    border-radius:17px;
-
-    padding:20px;
-
-    box-shadow:
-    0 6px 22px rgba(70,45,15,.04);
-
-    border-left:5px solid #9a600e;
-}
-
-.stat h3{
-    font-size:28px;
-
-    color:#51300d;
-
-    margin-bottom:5px;
-}
-
-.stat p{
-    color:#8a7964;
-
-    font-size:13px;
-}
-
-/* ================= CONTROLS ================= */
-
-.controls{
-    background:white;
-
-    border:1px solid #e5ddd1;
-
-    border-radius:16px;
-
-    padding:15px;
-
-    margin-bottom:20px;
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-}
-
-.search{
-    flex:1;
-
-    min-width:220px;
-
-    padding:12px 14px;
-
-    border:1px solid #d9cbb8;
-
-    border-radius:9px;
-
-    outline:none;
-}
-
-.filter{
-    padding:12px 14px;
-
-    border:1px solid #d9cbb8;
-
-    border-radius:9px;
-
-    background:white;
-
-    color:#30261b;
-}
-
-.refresh{
-    padding:12px 17px;
-
-    border:none;
-
-    border-radius:9px;
-
-    background:#5b3510;
-
-    color:white;
-
-    font-weight:bold;
-}
-
-/* ================= REQUEST ================= */
-
-.request{
-    background:#ffffff;
-
-    border:1px solid #e5ddd1;
-
+    border:1px solid #e1e6ed;
     border-radius:18px;
-
-    padding:20px;
-
-    margin-bottom:15px;
-
-    box-shadow:
-    0 6px 22px rgba(70,45,15,.04);
+    padding:22px;
 }
 
-.request-top{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    gap:15px;
-
-    margin-bottom:15px;
+.stat-card .icon{
+    font-size:27px;
+    margin-bottom:12px;
 }
 
-.guest-name{
-    font-size:19px;
-
-    font-weight:bold;
-
-    color:#51300d;
+.stat-card h3{
+    font-size:28px;
+    color:#172033;
 }
 
-.request-id{
-    font-size:11px;
-
-    color:#9b8970;
-
+.stat-card p{
+    color:#6b7280;
     margin-top:5px;
 }
 
+.card{
+    background:white;
+    border:1px solid #e0e5ec;
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:22px;
+}
+
+.card-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.card-title h3{
+    font-size:21px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    border:none;
+    border-radius:8px;
+    padding:9px 13px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.btn-view{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-approve{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-reject{
+    background:#dc2626;
+    color:white;
+}
+
+.btn-pending{
+    background:#a16207;
+    color:white;
+}
+
+.btn-progress{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-complete{
+    background:#15803d;
+    color:white;
+}
+
+.btn-delete{
+    background:#b91c1c;
+    color:white;
+}
+
+.btn-room{
+    background:#5b4a2d;
+    color:white;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+th{
+    text-align:left;
+    padding:13px;
+    background:#f7f9fc;
+    color:#4b5563;
+    font-size:13px;
+}
+
+td{
+    padding:14px 13px;
+    border-top:1px solid #edf0f4;
+    font-size:14px;
+}
+
 .status{
-    padding:6px 11px;
-
+    display:inline-block;
+    padding:6px 10px;
     border-radius:20px;
-
     font-size:12px;
-
     font-weight:bold;
 }
 
 .status.pending{
-    background:#fff0c9;
-    color:#8a5a00;
+    background:#fef3c7;
+    color:#92400e;
 }
 
 .status.approved{
@@ -452,420 +308,482 @@ button{
     color:#991b1b;
 }
 
-.room-badge{
-    background:#f4ead8;
-
-    color:#654317;
-
-    padding:6px 10px;
-
-    border-radius:8px;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    display:inline-block;
-
-    margin-top:8px;
+.status.in-progress{
+    background:#dbeafe;
+    color:#1d4ed8;
 }
 
-/* ================= REQUEST SUMMARY ================= */
-
-.summary{
-    display:grid;
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-    gap:10px;
-
-    margin-bottom:16px;
+.status.completed{
+    background:#dcfce7;
+    color:#166534;
 }
 
-.summary-item{
-    background:#faf7f1;
+/* =========================
+   FILTER
+========================= */
 
-    border:1px solid #eee2cf;
-
-    border-radius:10px;
-
-    padding:11px;
-}
-
-.summary-item span{
-    display:block;
-
-    color:#9b8060;
-
-    font-size:10px;
-
-    text-transform:uppercase;
-
-    margin-bottom:4px;
-}
-
-.summary-item strong{
-    color:#4d3923;
-
-    font-size:13px;
-}
-
-/* ================= ACTIONS ================= */
-
-.actions{
+.filters{
     display:flex;
-
-    gap:8px;
-
+    gap:10px;
     flex-wrap:wrap;
-
-    margin-top:15px;
 }
 
-.action{
-    border:none;
+select,
+input{
+    padding:11px 12px;
+    border:1px solid #d7dde6;
+    border-radius:9px;
+    background:white;
+    outline:none;
+}
 
-    border-radius:8px;
+select:focus,
+input:focus{
+    border-color:#4f8ff7;
+}
 
-    padding:10px 14px;
+/* =========================
+   ROOMS
+========================= */
 
-    color:white;
+.rooms-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
 
-    font-size:12px;
+.room{
+    background:white;
+    border:1px solid #e0e5ec;
+    border-radius:15px;
+    padding:20px;
+    min-height:125px;
+    position:relative;
+}
 
+.room-number{
+    font-size:22px;
     font-weight:bold;
 }
 
-.view-btn{
-    background:#6b4a22;
+.room.free{
+    border-left:5px solid #22c55e;
 }
 
-.view-btn:hover{
-    background:#513617;
+.room.occupied{
+    border-left:5px solid #ef4444;
 }
 
-.approve-btn{
-    background:#23823e;
+.room.reserved{
+    border-left:5px solid #f59e0b;
 }
 
-.reject-btn{
-    background:#b91c1c;
+.room-status{
+    margin-top:9px;
+    font-size:13px;
+    color:#6b7280;
 }
 
-.pending-btn{
-    background:#8a650d;
+.room-guest{
+    margin-top:10px;
+    font-size:13px;
+    color:#374151;
 }
 
-.delete-btn{
-    background:#444;
-}
+/* =========================
+   CALENDAR
+========================= */
 
-/* ================= CALENDAR ================= */
-
-.calendar-card{
-    background:white;
-
-    border:1px solid #e5ddd1;
-
-    border-radius:20px;
-
-    padding:20px;
-
-    margin-top:25px;
-
-    box-shadow:
-    0 6px 22px rgba(70,45,15,.04);
-}
-
-.calendar-title{
-    color:#5b3510;
-
-    margin-bottom:17px;
-}
-
-#calendar{
-    width:100%;
-}
-
-/* ================= EMPTY ================= */
-
-.empty{
-    background:white;
-
-    border:1px solid #e5ddd1;
-
-    border-radius:16px;
-
-    padding:40px 20px;
-
-    text-align:center;
-
-    color:#8a7964;
-}
-
-.empty h3{
-    color:#5b3510;
-
-    margin-bottom:7px;
-}
-
-/* ================= MODAL ================= */
-
-.modal{
-    display:none;
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-    rgba(0,0,0,.55);
-
-    z-index:5000;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-}
-
-.modal-box{
-    width:100%;
-
-    max-width:600px;
-
-    max-height:90vh;
-
-    overflow-y:auto;
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:25px;
-
-    box-shadow:
-    0 20px 60px rgba(0,0,0,.25);
-}
-
-.modal-head{
+.calendar-header{
     display:flex;
-
-    justify-content:space-between;
-
-    gap:10px;
-
     align-items:center;
-
+    justify-content:space-between;
     margin-bottom:20px;
 }
 
-.modal-head h2{
-    color:#51300d;
+.calendar-header h3{
+    font-size:24px;
+}
 
-    font-size:22px;
+.calendar-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.calendar-btn{
+    border:none;
+    background:#172033;
+    color:white;
+    border-radius:8px;
+    padding:9px 14px;
+    cursor:pointer;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.weekday{
+    text-align:center;
+    font-weight:bold;
+    color:#6b7280;
+    padding:10px;
+}
+
+.day{
+    min-height:125px;
+    background:white;
+    border:1px solid #dfe5ed;
+    border-radius:14px;
+    padding:13px;
+    overflow:hidden;
+}
+
+.day-number{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:9px;
+}
+
+.day.today{
+    border:2px solid #3b82f6;
+}
+
+.booking-event{
+    display:block;
+    background:#dbeafe;
+    color:#1d4ed8;
+    border-radius:8px;
+    padding:7px;
+    margin-top:6px;
+    font-size:12px;
+    cursor:pointer;
+    line-height:1.35;
+}
+
+.booking-event:hover{
+    background:#bfdbfe;
+}
+
+.empty-day{
+    background:#fafbfc;
+}
+
+/* =========================
+   CLEANING
+========================= */
+
+.cleaning-card{
+    background:white;
+    border:1px solid #e0e5ec;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:14px;
+}
+
+.cleaning-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.cleaning-top h3{
+    margin-bottom:8px;
+}
+
+.cleaning-top p{
+    margin-top:4px;
+    color:#6b7280;
+    font-size:13px;
+}
+
+.problem{
+    background:#f8fafc;
+    border:1px solid #e6eaf0;
+    padding:14px;
+    border-radius:10px;
+    line-height:1.5;
+    margin-bottom:15px;
+}
+
+.cleaning-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:3000;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:650px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
 
 .close{
     width:35px;
     height:35px;
-
     border:none;
-
     border-radius:50%;
-
-    background:#f3eee6;
-
-    color:#51300d;
-
+    background:#f1f5f9;
     font-size:20px;
-}
-
-.detail-section{
-    margin-bottom:18px;
-}
-
-.detail-section h3{
-    color:#6b4a22;
-
-    font-size:15px;
-
-    border-bottom:1px solid #eadfcf;
-
-    padding-bottom:8px;
-
-    margin-bottom:10px;
-}
-
-.detail-grid{
-    display:grid;
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-    gap:9px;
-}
-
-.detail{
-    background:#faf7f1;
-
-    border:1px solid #eee2cf;
-
-    border-radius:9px;
-
-    padding:10px;
-}
-
-.detail label{
-    display:block;
-
-    color:#9b8060;
-
-    font-size:10px;
-
-    margin-bottom:4px;
-}
-
-.detail strong{
-    color:#4d3923;
-
-    font-size:13px;
-}
-
-.room-select-box{
-    background:#fbf2df;
-
-    border:1px solid #e6d0a9;
-
-    border-radius:12px;
-
-    padding:15px;
-
-    margin-top:15px;
-}
-
-.room-select-box label{
-    display:block;
-
-    font-weight:bold;
-
-    color:#654317;
-
-    margin-bottom:8px;
-}
-
-.room-select{
-    width:100%;
-
-    padding:12px;
-
-    border:1px solid #d9cbb8;
-
-    border-radius:9px;
-
-    background:white;
-
-    color:#30261b;
-}
-
-.modal-actions{
-    display:flex;
-
-    gap:8px;
-
-    margin-top:20px;
-}
-
-.modal-actions button{
-    flex:1;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:9px;
-
-    color:white;
-
-    font-weight:bold;
-}
-
-.save-room{
-    background:#23823e;
-}
-
-.cancel{
-    background:#6b4a22;
-}
-
-/* ================= CALENDAR EVENT ================= */
-
-.fc-event{
     cursor:pointer;
 }
 
-.fc-event-title{
-    font-weight:bold;
+.details-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-/* ================= MOBILE ================= */
+.detail{
+    background:#f8fafc;
+    border-radius:10px;
+    padding:13px;
+}
+
+.detail strong{
+    display:block;
+    color:#6b7280;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.detail span{
+    font-size:14px;
+    color:#111827;
+}
+
+.modal-actions{
+    margin-top:20px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.room-assignment{
+    margin-top:20px;
+    padding:17px;
+    background:#f8fafc;
+    border-radius:12px;
+}
+
+.room-assignment label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.room-assignment select{
+    width:100%;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-screen{
+    position:fixed;
+    inset:0;
+    background:#101827;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+}
+
+.login-card{
+    width:90%;
+    max-width:420px;
+    background:white;
+    border-radius:22px;
+    padding:35px;
+    text-align:center;
+}
+
+.login-icon{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.login-card h2{
+    margin-bottom:8px;
+}
+
+.login-card p{
+    color:#6b7280;
+    line-height:1.5;
+    margin-bottom:22px;
+}
+
+.google-login{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-error{
+    color:#b91c1c;
+    margin-top:15px;
+    font-size:13px;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:1100px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .rooms-grid{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+}
 
 @media(max-width:850px){
 
-    .stats{
-        grid-template-columns:
-        repeat(2,1fr);
+    .sidebar{
+        width:220px;
     }
 
-    .summary{
-        grid-template-columns:
-        repeat(2,1fr);
+    .main{
+        margin-left:220px;
+        padding:20px;
+    }
+
+    .rooms-grid{
+        grid-template-columns:repeat(3,1fr);
     }
 
 }
 
-@media(max-width:600px){
+@media(max-width:650px){
 
-    .nav{
-        padding:10px 13px;
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+        min-height:auto;
     }
 
-    .brand h1{
+    .main{
+        margin-left:0;
+        padding:15px;
+    }
+
+    .hotel-logo{
+        padding-bottom:20px;
+    }
+
+    .menu{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .menu-item{
+        padding:13px;
         font-size:16px;
     }
 
-    .brand small{
+    .menu-item span{
+        font-size:15px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .rooms-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .calendar-grid{
+        gap:4px;
+    }
+
+    .day{
+        min-height:90px;
+        padding:7px;
+    }
+
+    .booking-event{
         font-size:10px;
+        padding:5px;
     }
 
-    .user-name{
-        display:none;
-    }
-
-    .container{
-        padding:20px 13px 45px;
-    }
-
-    .hero{
-        padding:27px 20px;
-    }
-
-    .hero h2{
-        font-size:27px;
-    }
-
-    .summary{
+    .details-grid{
         grid-template-columns:1fr;
     }
 
-    .detail-grid{
-        grid-template-columns:1fr;
-    }
-
-    .request-top{
+    .topbar{
+        align-items:flex-start;
+        gap:10px;
         flex-direction:column;
+    }
+
+}
+
+/* =========================
+   SMALL
+========================= */
+
+@media(max-width:430px){
+
+    .menu{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .rooms-grid{
+        grid-template-columns:1fr 1fr;
     }
 
 }
@@ -874,418 +792,583 @@ button{
 
 </head>
 
-
 <body>
 
 
-<!-- ================= HEADER ================= -->
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
-<header>
+<div id="loginScreen" class="login-screen">
 
-<div class="nav">
+    <div class="login-card">
 
-    <div class="brand">
+        <div class="login-icon">🏨</div>
 
-        <div class="logo">
-            MM
-        </div>
+        <h2>Hotel Manager</h2>
 
-        <div>
-
-            <h1>
-                Munger Mandir
-            </h1>
-
-            <small>
-                Admin Room Management
-            </small>
-
-        </div>
-
-    </div>
-
-
-    <div
-        id="userArea"
-        class="user-area hidden"
-    >
-
-        <span
-            id="userName"
-            class="user-name"
-        ></span>
-
-        <img
-            id="userPhoto"
-            class="user-photo"
-            src=""
-            alt="Admin"
-        >
+        <p>
+            Munger Mandir Admin Panel
+        </p>
 
         <button
-            id="logoutBtn"
-            class="logout"
+            id="googleLogin"
+            class="google-login"
         >
-            Logout
+            Continue with Google
         </button>
 
-    </div>
-
-
-    <button
-        id="topLogin"
-        class="login-btn"
-    >
-        Google Login
-    </button>
-
-</div>
-
-</header>
-
-
-<!-- ================= LOGIN ================= -->
-
-<section
-    id="loginScreen"
-    class="login-screen"
->
-
-<div class="login-card">
-
-    <div class="temple-icon">
-        MM
-    </div>
-
-    <h2>
-        Munger Mandir Admin
-    </h2>
-
-    <p>
-        Login with the authorized Google
-        account to manage room requests.
-    </p>
-
-    <button
-        id="googleBtn"
-        class="google-btn"
-    >
-        Continue with Google
-    </button>
-
-    <div
-        id="loginMessage"
-        class="message"
-    ></div>
-
-</div>
-
-</section>
-
-
-<!-- ================= ADMIN APP ================= -->
-
-<main
-id="adminApp"
-class="hidden"
->
-
-<div class="container">
-
-
-<section class="hero">
-
-    <h2>
-        Room Request Management
-    </h2>
-
-    <p>
-        View guest requests, assign rooms
-        and manage bookings.
-    </p>
-
-</section>
-
-
-<!-- ================= STATS ================= -->
-
-<div class="stats">
-
-    <div class="stat">
-
-        <h3 id="totalCount">
-            0
-        </h3>
-
-        <p>
-            Total Requests
-        </p>
-
-    </div>
-
-
-    <div class="stat">
-
-        <h3 id="pendingCount">
-            0
-        </h3>
-
-        <p>
-            Pending
-        </p>
-
-    </div>
-
-
-    <div class="stat">
-
-        <h3 id="approvedCount">
-            0
-        </h3>
-
-        <p>
-            Approved
-        </p>
-
-    </div>
-
-
-    <div class="stat">
-
-        <h3 id="rejectedCount">
-            0
-        </h3>
-
-        <p>
-            Rejected
-        </p>
+        <div
+            id="loginError"
+            class="login-error"
+        ></div>
 
     </div>
 
 </div>
 
 
-<!-- ================= CONTROLS ================= -->
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-<div class="controls">
+<aside class="sidebar">
 
-    <input
-        id="searchInput"
-        class="search"
-        type="text"
-        placeholder="Search guest, email or phone..."
+    <div class="hotel-logo">
+
+        <div class="hotel-logo-icon">
+            🏨
+        </div>
+
+        <h1>
+            Hotel Manager
+        </h1>
+
+    </div>
+
+
+    <div class="menu">
+
+        <div
+            class="menu-item active"
+            data-section="dashboard"
+        >
+            📊
+            <span>Dashboard</span>
+        </div>
+
+
+        <div
+            class="menu-item"
+            data-section="bookings"
+        >
+            🗓️
+            <span>Bookings</span>
+        </div>
+
+
+        <div
+            class="menu-item"
+            data-section="rooms"
+        >
+            🚪
+            <span>Rooms 1–70</span>
+        </div>
+
+
+        <div
+            class="menu-item"
+            data-section="cleaning"
+        >
+            🧹
+            <span>Cleaning Requests</span>
+        </div>
+
+
+        <div
+            class="menu-item"
+            data-section="calendar"
+        >
+            📅
+            <span>Calendar</span>
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <div class="topbar">
+
+        <div class="page-title">
+
+            <h2 id="pageTitle">
+                Dashboard
+            </h2>
+
+            <p>
+                Munger Mandir Room Management
+            </p>
+
+        </div>
+
+
+        <div class="admin-user">
+
+            <img
+                id="adminPhoto"
+                src="https://via.placeholder.com/100"
+                alt="Admin"
+            >
+
+            <span id="adminName">
+                Admin
+            </span>
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         DASHBOARD
+    ================================================= -->
+
+    <section
+        id="dashboard"
+        class="section active"
     >
 
+        <div class="stats">
 
-    <select
-        id="statusFilter"
-        class="filter"
+            <div class="stat-card">
+
+                <div class="icon">
+                    📋
+                </div>
+
+                <h3 id="totalRequests">
+                    0
+                </h3>
+
+                <p>
+                    Total Requests
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="icon">
+                    ⏳
+                </div>
+
+                <h3 id="pendingRequests">
+                    0
+                </h3>
+
+                <p>
+                    Pending
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="icon">
+                    ✅
+                </div>
+
+                <h3 id="approvedRequests">
+                    0
+                </h3>
+
+                <p>
+                    Approved
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="icon">
+                    🧹
+                </div>
+
+                <h3 id="cleaningCount">
+                    0
+                </h3>
+
+                <p>
+                    Cleaning Requests
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+
+                <h3>
+                    Recent Requests
+                </h3>
+
+                <button
+                    class="btn btn-view"
+                    onclick="openSection('bookings')"
+                >
+                    View All
+                </button>
+
+            </div>
+
+
+            <div
+                id="recentRequests"
+                class="table-wrap"
+            >
+
+                Loading...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         BOOKINGS
+    ================================================= -->
+
+    <section
+        id="bookings"
+        class="section"
     >
 
-        <option value="all">
-            All Requests
-        </option>
+        <div class="card">
 
-        <option value="pending">
-            Pending
-        </option>
+            <div class="card-title">
 
-        <option value="approved">
-            Approved
-        </option>
+                <h3>
+                    All Room Requests
+                </h3>
 
-        <option value="rejected">
-            Rejected
-        </option>
+                <div class="filters">
 
-    </select>
+                    <select id="bookingFilter">
+
+                        <option value="all">
+                            All Requests
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="approved">
+                            Approved
+                        </option>
+
+                        <option value="rejected">
+                            Rejected
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
 
 
-    <button
-        id="refreshBtn"
-        class="refresh"
+            <div
+                id="bookingTable"
+                class="table-wrap"
+            >
+
+                Loading bookings...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ROOMS
+    ================================================= -->
+
+    <section
+        id="rooms"
+        class="section"
     >
-        ↻ Refresh
-    </button>
 
-</div>
+        <div class="card">
 
+            <div class="card-title">
 
-<!-- ================= REQUEST LIST ================= -->
+                <h3>
+                    Rooms 1–70
+                </h3>
 
-<div
-    id="loading"
-    class="empty"
->
+                <div>
 
-    Loading room requests...
+                    <span
+                        style="color:#16a34a;font-size:13px;"
+                    >
+                        ● Available
+                    </span>
 
-</div>
+                    &nbsp;&nbsp;
 
+                    <span
+                        style="color:#ef4444;font-size:13px;"
+                    >
+                        ● Occupied
+                    </span>
 
-<div
-    id="requests"
-></div>
+                </div>
 
-
-<div
-    id="emptyState"
-    class="empty hidden"
->
-
-    <h3>
-        No Requests Found
-    </h3>
-
-    <p>
-        New room requests will appear here.
-    </p>
-
-</div>
+            </div>
 
 
-<!-- ================= CALENDAR ================= -->
+            <div
+                id="roomsGrid"
+                class="rooms-grid"
+            >
 
-<div class="calendar-card">
+            </div>
 
-    <h2 class="calendar-title">
-        📅 Room Booking Calendar
-    </h2>
+        </div>
 
-    <div id="calendar"></div>
-
-</div>
+    </section>
 
 
-</div>
+    <!-- =================================================
+         CLEANING
+    ================================================= -->
+
+    <section
+        id="cleaning"
+        class="section"
+    >
+
+        <div class="card">
+
+            <div class="card-title">
+
+                <h3>
+                    🧹 Cleaning Requests
+                </h3>
+
+                <select id="cleaningFilter">
+
+                    <option value="all">
+                        All Requests
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="in-progress">
+                        In Progress
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="cleaningList">
+
+                Loading cleaning requests...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         CALENDAR
+    ================================================= -->
+
+    <section
+        id="calendar"
+        class="section"
+    >
+
+        <div class="card">
+
+            <div class="calendar-header">
+
+                <h3 id="calendarTitle">
+                    Calendar
+                </h3>
+
+                <div class="calendar-buttons">
+
+                    <button
+                        id="prevMonth"
+                        class="calendar-btn"
+                    >
+                        ←
+                    </button>
+
+                    <button
+                        id="todayBtn"
+                        class="calendar-btn"
+                    >
+                        Today
+                    </button>
+
+                    <button
+                        id="nextMonth"
+                        class="calendar-btn"
+                    >
+                        →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="calendar-grid">
+
+                <div class="weekday">Sun</div>
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tue</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thu</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+
+            </div>
+
+
+            <div
+                id="calendarGrid"
+                class="calendar-grid"
+            >
+
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
 
-<!-- ================= VIEW MODAL ================= -->
+<!-- =====================================================
+     REQUEST DETAILS MODAL
+===================================================== -->
 
 <div
-id="viewModal"
-class="modal"
+    id="detailsModal"
+    class="modal-overlay"
 >
 
-<div class="modal-box">
+    <div class="modal">
 
-    <div class="modal-head">
+        <div class="modal-header">
 
-        <h2>
-            Guest Request Details
-        </h2>
+            <h2>
+                Guest Request
+            </h2>
 
-        <button
-            class="close"
-            onclick="closeViewModal()"
-        >
-            ×
-        </button>
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
 
-    </div>
-
-
-    <div id="viewContent"></div>
-
-</div>
-
-</div>
+        </div>
 
 
-<!-- ================= ROOM MODAL ================= -->
-
-<div
-id="roomModal"
-class="modal"
->
-
-<div class="modal-box">
-
-    <div class="modal-head">
-
-        <h2>
-            Assign Room
-        </h2>
-
-        <button
-            class="close"
-            onclick="closeRoomModal()"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <p
-        id="roomGuestName"
-        style="
-        color:#776954;
-        margin-bottom:15px;
-        "
-    ></p>
-
-
-    <div class="room-select-box">
-
-        <label>
-            Select Room Number
-        </label>
-
-        <select
-            id="roomSelect"
-            class="room-select"
+        <div
+            id="guestDetails"
+            class="details-grid"
         >
 
-            <option value="">
-                Select Room
-            </option>
-
-        </select>
-
-    </div>
+        </div>
 
 
-    <div class="modal-actions">
-
-        <button
-            id="saveRoomBtn"
-            class="save-room"
+        <div
+            id="roomAssignment"
+            class="room-assignment"
         >
-            ✓ Approve & Assign Room
-        </button>
 
-        <button
-            class="cancel"
-            onclick="closeRoomModal()"
+            <label>
+                Assign Room
+            </label>
+
+            <select id="assignRoom">
+
+                <option value="">
+                    Select Room
+                </option>
+
+            </select>
+
+            <button
+                id="saveRoomBtn"
+                class="btn btn-room"
+                style="margin-top:10px;width:100%;"
+            >
+                Save Room Assignment
+            </button>
+
+        </div>
+
+
+        <div
+            id="modalActions"
+            class="modal-actions"
         >
-            Cancel
-        </button>
+
+        </div>
 
     </div>
 
 </div>
 
-</div>
-
-
-<footer>
-
-Munger Mandir Room Request Portal
-
-</footer>
-
-
-<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
 
-/* ==========================================
-   FIREBASE IMPORT
-========================================== */
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
 
 import {
     initializeApp
@@ -1314,9 +1397,9 @@ import {
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* ==========================================
-   EXACT FIREBASE CONFIG FROM INDEX.HTML
-========================================== */
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
@@ -1344,9 +1427,9 @@ const firebaseConfig = {
 };
 
 
-/* ==========================================
-   FIREBASE START
-========================================== */
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
 
 const app =
 initializeApp(firebaseConfig);
@@ -1361,140 +1444,111 @@ const provider =
 new GoogleAuthProvider();
 
 
-/* ==========================================
+/* =====================================================
    ADMIN EMAIL
-========================================== */
+===================================================== */
 
 const ADMIN_EMAIL =
 "rishantbhaumik@gmail.com";
 
 
-/* ==========================================
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let allBookingData = [];
+
+let allCleaningData = [];
+
+let selectedRequestId = null;
+
+let currentCalendarDate =
+new Date();
+
+
+let unsubscribeBookings = null;
+
+let unsubscribeCleaning = null;
+
+
+/* =====================================================
    ELEMENTS
-========================================== */
+===================================================== */
 
 const loginScreen =
 document.getElementById("loginScreen");
 
-const adminApp =
-document.getElementById("adminApp");
+const googleLogin =
+document.getElementById("googleLogin");
 
-const userArea =
-document.getElementById("userArea");
+const loginError =
+document.getElementById("loginError");
 
-const topLogin =
-document.getElementById("topLogin");
+const adminName =
+document.getElementById("adminName");
 
-const googleBtn =
-document.getElementById("googleBtn");
+const adminPhoto =
+document.getElementById("adminPhoto");
 
 const logoutBtn =
 document.getElementById("logoutBtn");
 
-const userName =
-document.getElementById("userName");
 
-const userPhoto =
-document.getElementById("userPhoto");
-
-const loginMessage =
-document.getElementById("loginMessage");
-
-const requests =
-document.getElementById("requests");
-
-const loading =
-document.getElementById("loading");
-
-const emptyState =
-document.getElementById("emptyState");
-
-const searchInput =
-document.getElementById("searchInput");
-
-const statusFilter =
-document.getElementById("statusFilter");
-
-const refreshBtn =
-document.getElementById("refreshBtn");
-
-
-/* ==========================================
-   DATA
-========================================== */
-
-let allRequests = [];
-
-let unsubscribe = null;
-
-let calendar = null;
-
-let roomRequestId = null;
-
-
-/* ==========================================
+/* =====================================================
    LOGIN
-========================================== */
+===================================================== */
 
-async function login(){
-
-    googleBtn.disabled = true;
-
-    try{
-
-        await signInWithPopup(
-            auth,
-            provider
-        );
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        loginMessage.textContent =
-        firebaseError(error);
-
-        loginMessage.className =
-        "message error";
-
-        loginMessage.style.display =
-        "block";
-
-    }
-
-    finally{
-
-        googleBtn.disabled = false;
-
-    }
-
-}
-
-
-googleBtn.addEventListener(
+googleLogin.addEventListener(
     "click",
-    login
-);
+    async()=>{
 
-topLogin.addEventListener(
-    "click",
-    login
+        loginError.textContent =
+        "";
+
+        googleLogin.disabled =
+        true;
+
+        googleLogin.textContent =
+        "Opening Google Login...";
+
+        try{
+
+            await signInWithPopup(
+                auth,
+                provider
+            );
+
+        }
+        catch(error){
+
+            console.error(error);
+
+            loginError.textContent =
+            getError(error);
+
+        }
+
+        finally{
+
+            googleLogin.disabled =
+            false;
+
+            googleLogin.textContent =
+            "Continue with Google";
+
+        }
+
+    }
 );
 
 
-/* ==========================================
+/* =====================================================
    LOGOUT
-========================================== */
+===================================================== */
 
 logoutBtn.addEventListener(
     "click",
     async()=>{
-
-        if(unsubscribe){
-            unsubscribe();
-        }
 
         await signOut(auth);
 
@@ -1502,13 +1556,13 @@ logoutBtn.addEventListener(
 );
 
 
-/* ==========================================
-   AUTH
-========================================== */
+/* =====================================================
+   AUTH STATE
+===================================================== */
 
 onAuthStateChanged(
     auth,
-    user => {
+    user=>{
 
         if(!user){
 
@@ -1516,97 +1570,180 @@ onAuthStateChanged(
                 "hidden"
             );
 
-            adminApp.classList.add(
-                "hidden"
-            );
-
-            userArea.classList.add(
-                "hidden"
-            );
-
-            topLogin.classList.remove(
-                "hidden"
-            );
-
             return;
 
         }
-
-
-        const email =
-        (user.email || "")
-        .toLowerCase()
-        .trim();
 
 
         if(
-            email !==
+            user.email &&
+            user.email.toLowerCase() ===
             ADMIN_EMAIL.toLowerCase()
         ){
 
-            alert(
-                "Access denied. This account is not an administrator."
+            loginScreen.classList.add(
+                "hidden"
             );
+
+            adminName.textContent =
+            user.displayName ||
+            "Admin";
+
+            adminPhoto.src =
+            user.photoURL ||
+            "https://via.placeholder.com/100";
+
+
+            startAdmin();
+
+        }
+        else{
+
+            loginScreen.classList.remove(
+                "hidden"
+            );
+
+            loginError.textContent =
+            "Access denied. This Google account is not the admin account.";
 
             signOut(auth);
 
-            return;
-
         }
-
-
-        loginScreen.classList.add(
-            "hidden"
-        );
-
-        adminApp.classList.remove(
-            "hidden"
-        );
-
-        userArea.classList.remove(
-            "hidden"
-        );
-
-        topLogin.classList.add(
-            "hidden"
-        );
-
-
-        userName.textContent =
-        user.displayName ||
-        "Admin";
-
-
-        userPhoto.src =
-        user.photoURL ||
-        "https://via.placeholder.com/100";
-
-
-        loadRequests();
-
-        initializeCalendar();
 
     }
 );
 
 
-/* ==========================================
-   LOAD REQUESTS
-========================================== */
+/* =====================================================
+   START ADMIN
+===================================================== */
 
-function loadRequests(){
+function startAdmin(){
 
-    if(unsubscribe){
-        unsubscribe();
+    generateRooms();
+
+    loadBookings();
+
+    loadCleaningRequests();
+
+    renderCalendar();
+
+}
+
+
+/* =====================================================
+   SIDEBAR NAVIGATION
+===================================================== */
+
+document
+.querySelectorAll(".menu-item")
+.forEach(item=>{
+
+    item.addEventListener(
+        "click",
+        ()=>{
+
+            openSection(
+                item.dataset.section
+            );
+
+        }
+    );
+
+});
+
+
+window.openSection =
+function(sectionName){
+
+    document
+    .querySelectorAll(".section")
+    .forEach(section=>{
+
+        section.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    const section =
+    document.getElementById(
+        sectionName
+    );
+
+    if(section){
+
+        section.classList.add(
+            "active"
+        );
+
     }
 
 
-    loading.classList.remove(
-        "hidden"
-    );
+    document
+    .querySelectorAll(".menu-item")
+    .forEach(item=>{
+
+        item.classList.toggle(
+            "active",
+            item.dataset.section ===
+            sectionName
+        );
+
+    });
 
 
-    unsubscribe =
+    const titles = {
+
+        dashboard:
+        "Dashboard",
+
+        bookings:
+        "Bookings",
+
+        rooms:
+        "Rooms 1–70",
+
+        cleaning:
+        "Cleaning Requests",
+
+        calendar:
+        "Calendar"
+
+    };
+
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+    titles[sectionName] ||
+    "Dashboard";
+
+
+    if(sectionName === "calendar"){
+
+        renderCalendar();
+
+    }
+
+};
+
+
+/* =====================================================
+   LOAD BOOKINGS
+===================================================== */
+
+function loadBookings(){
+
+    if(unsubscribeBookings){
+
+        unsubscribeBookings();
+
+    }
+
+
+    unsubscribeBookings =
     onSnapshot(
 
         collection(
@@ -1614,36 +1751,33 @@ function loadRequests(){
             "roomRequests"
         ),
 
-        snapshot => {
+        snapshot=>{
 
-            allRequests = [];
-
-
-            snapshot.forEach(
-                item => {
-
-                    allRequests.push({
-
-                        id:
-                        item.id,
-
-                        ...item.data()
-
-                    });
-
-                }
-            );
+            allBookingData = [];
 
 
-            allRequests.sort(
+            snapshot.forEach(item=>{
+
+                allBookingData.push({
+
+                    id:item.id,
+
+                    data:item.data()
+
+                });
+
+            });
+
+
+            allBookingData.sort(
                 (a,b)=>{
 
                     const aTime =
-                    a.createdAt
+                    a.data.createdAt
                     ?.toMillis?.() || 0;
 
                     const bTime =
-                    b.createdAt
+                    b.data.createdAt
                     ?.toMillis?.() || 0;
 
                     return bTime-aTime;
@@ -1652,38 +1786,30 @@ function loadRequests(){
             );
 
 
-            loading.classList.add(
-                "hidden"
-            );
+            renderBookings();
 
+            renderDashboard();
 
-            updateStats();
+            generateRooms();
 
-            renderRequests();
-
-            updateCalendar();
+            renderCalendar();
 
         },
 
-
-        error => {
+        error=>{
 
             console.error(
-                "Firestore error:",
+                "BOOKING ERROR:",
                 error
             );
 
-            loading.innerHTML = `
-                <h3>
-                    Unable to load requests
-                </h3>
-
-                <p style="margin-top:8px">
-                    ${escapeHTML(
-                        firebaseError(error)
-                    )}
-                </p>
-            `;
+            document.getElementById(
+                "bookingTable"
+            ).innerHTML =
+            `<p style="color:#b91c1c;">
+                Unable to load bookings:
+                ${escapeHTML(getError(error))}
+            </p>`;
 
         }
 
@@ -1692,553 +1818,647 @@ function loadRequests(){
 }
 
 
-/* ==========================================
-   STATS
-========================================== */
+/* =====================================================
+   RENDER DASHBOARD
+===================================================== */
 
-function updateStats(){
+function renderDashboard(){
 
-    let pending = 0;
-
-    let approved = 0;
-
-    let rejected = 0;
+    const total =
+    allBookingData.length;
 
 
-    allRequests.forEach(
-        item => {
+    const pending =
+    allBookingData.filter(
+        x=>(
+            x.data.status ||
+            "pending"
+        ) === "pending"
+    ).length;
 
-            const status =
-            item.status ||
-            "pending";
 
-
-            if(status === "pending"){
-                pending++;
-            }
-
-            if(status === "approved"){
-                approved++;
-            }
-
-            if(status === "rejected"){
-                rejected++;
-            }
-
-        }
-    );
+    const approved =
+    allBookingData.filter(
+        x=>
+        x.data.status ===
+        "approved"
+    ).length;
 
 
     document.getElementById(
-        "totalCount"
+        "totalRequests"
     ).textContent =
-    allRequests.length;
+    total;
 
 
     document.getElementById(
-        "pendingCount"
+        "pendingRequests"
     ).textContent =
     pending;
 
 
     document.getElementById(
-        "approvedCount"
+        "approvedRequests"
     ).textContent =
     approved;
 
 
     document.getElementById(
-        "rejectedCount"
+        "cleaningCount"
     ).textContent =
-    rejected;
+    allCleaningData.filter(
+        x=>
+        x.data.status !==
+        "completed"
+    ).length;
+
+
+    renderRecent();
 
 }
 
 
-/* ==========================================
-   RENDER
-========================================== */
+/* =====================================================
+   RECENT
+===================================================== */
 
-function renderRequests(){
+function renderRecent(){
 
-    const search =
-    searchInput.value
-    .toLowerCase()
-    .trim();
-
-
-    const filter =
-    statusFilter.value;
-
-
-    const filtered =
-    allRequests.filter(
-        item => {
-
-            const name =
-            (
-                (item.firstName || "") +
-                " " +
-                (item.lastName || "")
-            )
-            .toLowerCase();
-
-
-            const email =
-            (
-                item.email ||
-                item.userEmail ||
-                ""
-            )
-            .toLowerCase();
-
-
-            const phone =
-            (
-                item.phone ||
-                ""
-            )
-            .toLowerCase();
-
-
-            const status =
-            item.status ||
-            "pending";
-
-
-            return (
-
-                (
-                    name.includes(search) ||
-                    email.includes(search) ||
-                    phone.includes(search)
-                )
-
-                &&
-
-                (
-                    filter === "all" ||
-                    filter === status
-                )
-
-            );
-
-        }
+    const container =
+    document.getElementById(
+        "recentRequests"
     );
 
 
-    requests.innerHTML = "";
+    const recent =
+    allBookingData.slice(0,5);
 
 
-    if(filtered.length === 0){
+    if(!recent.length){
 
-        emptyState.classList.remove(
-            "hidden"
-        );
+        container.innerHTML =
+        `<p style="padding:20px;color:#6b7280;">
+            No room requests yet.
+        </p>`;
 
         return;
 
     }
 
 
-    emptyState.classList.add(
-        "hidden"
-    );
+    let html = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Guest</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
 
 
-    filtered.forEach(
-        item => {
+    recent.forEach(item=>{
 
-            requests.appendChild(
-                createRequest(item)
-            );
+        const d =
+        item.data;
 
-        }
-    );
+        const status =
+        d.status ||
+        "pending";
+
+
+        html += `
+
+            <tr>
+
+                <td>
+                    ${escapeHTML(
+                        (d.firstName || "") +
+                        " " +
+                        (d.lastName || "")
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        d.checkIn || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        d.checkOut || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${statusBadge(status)}
+                </td>
+
+                <td>
+                    <button
+                        class="btn btn-view"
+                        onclick="viewRequest('${item.id}')"
+                    >
+                        View
+                    </button>
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+
+    container.innerHTML =
+    html;
 
 }
 
 
-/* ==========================================
-   CREATE REQUEST
-========================================== */
+/* =====================================================
+   BOOKINGS TABLE
+===================================================== */
 
-function createRequest(item){
+function renderBookings(){
 
-    const div =
-    document.createElement(
-        "div"
+    const container =
+    document.getElementById(
+        "bookingTable"
     );
 
 
-    div.className =
-    "request";
+    const filter =
+    document.getElementById(
+        "bookingFilter"
+    ).value;
 
 
-    const name =
-    (
-        (item.firstName || "") +
-        " " +
-        (item.lastName || "")
-    )
-    .trim() ||
-    "Guest";
+    const filtered =
+    allBookingData.filter(item=>{
+
+        const status =
+        item.data.status ||
+        "pending";
+
+        return (
+            filter === "all" ||
+            status === filter
+        );
+
+    });
 
 
-    const status =
-    item.status ||
-    "pending";
+    if(!filtered.length){
+
+        container.innerHTML =
+        `<p style="padding:20px;color:#6b7280;">
+            No requests found.
+        </p>`;
+
+        return;
+
+    }
 
 
-    const room =
-    item.roomNumber ||
-    "";
+    let html = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Guest</th>
+                    <th>Email</th>
+                    <th>Dates</th>
+                    <th>Room</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
 
 
-    div.innerHTML = `
+    filtered.forEach(item=>{
 
-        <div class="request-top">
+        const d =
+        item.data;
 
-            <div>
-
-                <div class="guest-name">
-                    ${escapeHTML(name)}
-                </div>
-
-                <div class="request-id">
-                    Request ID:
-                    ${escapeHTML(item.id)}
-                </div>
-
-                ${
-                    room
-                    ?
-                    `
-                    <div class="room-badge">
-                        🛏 Room ${escapeHTML(room)}
-                    </div>
-                    `
-                    :
-                    ""
-                }
-
-            </div>
+        const status =
+        d.status ||
+        "pending";
 
 
-            <span
-                class="status ${escapeHTML(status)}"
-            >
-                ${capitalize(status)}
+        html += `
+
+            <tr>
+
+                <td>
+                    <b>
+                        ${escapeHTML(
+                            (d.firstName || "") +
+                            " " +
+                            (d.lastName || "")
+                        )}
+                    </b>
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        d.email ||
+                        d.userEmail ||
+                        "-"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        d.checkIn || "-"
+                    )}
+                    →
+                    ${escapeHTML(
+                        d.checkOut || "-"
+                    )}
+                </td>
+
+                <td>
+                    ${d.room
+                        ? escapeHTML(d.room)
+                        : "Not assigned"}
+                </td>
+
+                <td>
+                    ${statusBadge(status)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-view"
+                        onclick="viewRequest('${item.id}')"
+                    >
+                        👁️ View
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    container.innerHTML =
+    html;
+
+}
+
+
+document
+.getElementById("bookingFilter")
+.addEventListener(
+    "change",
+    renderBookings
+);
+
+
+/* =====================================================
+   VIEW REQUEST
+===================================================== */
+
+window.viewRequest =
+function(id){
+
+    const item =
+    allBookingData.find(
+        x=>x.id === id
+    );
+
+
+    if(!item){
+
+        return;
+
+    }
+
+
+    selectedRequestId =
+    id;
+
+
+    const d =
+    item.data;
+
+
+    const details =
+    document.getElementById(
+        "guestDetails"
+    );
+
+
+    details.innerHTML = `
+
+        <div class="detail">
+            <strong>Guest Name</strong>
+            <span>
+                ${escapeHTML(
+                    (d.firstName || "") +
+                    " " +
+                    (d.lastName || "")
+                )}
             </span>
-
         </div>
 
-
-        <div class="summary">
-
-            <div class="summary-item">
-
-                <span>
-                    Check-in
-                </span>
-
-                <strong>
-                    ${escapeHTML(
-                        item.checkIn || "-"
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="summary-item">
-
-                <span>
-                    Check-out
-                </span>
-
-                <strong>
-                    ${escapeHTML(
-                        item.checkOut || "-"
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="summary-item">
-
-                <span>
-                    Phone
-                </span>
-
-                <strong>
-                    ${escapeHTML(
-                        item.phone || "-"
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="summary-item">
-
-                <span>
-                    Beds
-                </span>
-
-                <strong>
-                    ${escapeHTML(
-                        String(item.beds || 0)
-                    )}
-                </strong>
-
-            </div>
-
+        <div class="detail">
+            <strong>Email</strong>
+            <span>
+                ${escapeHTML(
+                    d.email ||
+                    d.userEmail ||
+                    "-"
+                )}
+            </span>
         </div>
 
+        <div class="detail">
+            <strong>Phone</strong>
+            <span>
+                ${escapeHTML(
+                    d.phone || "-"
+                )}
+            </span>
+        </div>
 
-        <div class="actions">
+        <div class="detail">
+            <strong>Passport</strong>
+            <span>
+                ${escapeHTML(
+                    d.passport || "-"
+                )}
+            </span>
+        </div>
 
-            <button
-                class="action view-btn"
-                data-view="${escapeHTML(item.id)}"
-            >
-                👁 View
-            </button>
+        <div class="detail">
+            <strong>Check-in</strong>
+            <span>
+                ${escapeHTML(
+                    d.checkIn || "-"
+                )}
+            </span>
+        </div>
 
+        <div class="detail">
+            <strong>Check-out</strong>
+            <span>
+                ${escapeHTML(
+                    d.checkOut || "-"
+                )}
+            </span>
+        </div>
 
-            ${
-                status !== "approved"
-                ?
-                `
-                <button
-                    class="action approve-btn"
-                    data-approve="${escapeHTML(item.id)}"
-                >
-                    ✓ Approve
-                </button>
-                `
-                :
-                `
-                <button
-                    class="action approve-btn"
-                    data-change-room="${escapeHTML(item.id)}"
-                >
-                    🛏 Change Room
-                </button>
-                `
-            }
+        <div class="detail">
+            <strong>AC Room</strong>
+            <span>
+                ${escapeHTML(
+                    d.acRoom || "-"
+                )}
+            </span>
+        </div>
 
+        <div class="detail">
+            <strong>Hot Water</strong>
+            <span>
+                ${escapeHTML(
+                    d.hotWater || "-"
+                )}
+            </span>
+        </div>
 
-            ${
-                status !== "rejected"
-                ?
-                `
-                <button
-                    class="action reject-btn"
-                    data-reject="${escapeHTML(item.id)}"
-                >
-                    ✕ Reject
-                </button>
-                `
-                :
-                ""
-            }
+        <div class="detail">
+            <strong>Beds</strong>
+            <span>
+                ${d.beds || 0}
+            </span>
+        </div>
 
+        <div class="detail">
+            <strong>Utensils</strong>
+            <span>
+                ${escapeHTML(
+                    d.utensils || "-"
+                )}
+            </span>
+        </div>
 
-            ${
-                status !== "pending"
-                ?
-                `
-                <button
-                    class="action pending-btn"
-                    data-pending="${escapeHTML(item.id)}"
-                >
-                    ↻ Pending
-                </button>
-                `
-                :
-                ""
-            }
+        <div class="detail">
+            <strong>Water Jugs</strong>
+            <span>
+                ${d.waterJugs || 0}
+            </span>
+        </div>
 
+        <div class="detail">
+            <strong>Mosquito Dispeller</strong>
+            <span>
+                ${escapeHTML(
+                    d.mosquito || "-"
+                )}
+            </span>
+        </div>
 
-            <button
-                class="action delete-btn"
-                data-delete="${escapeHTML(item.id)}"
-            >
-                Delete
-            </button>
+        <div class="detail">
+            <strong>Total Extra</strong>
+            <span>
+                ₹${d.totalExtra || 0}
+            </span>
+        </div>
 
+        <div class="detail">
+            <strong>Current Room</strong>
+            <span>
+                ${escapeHTML(
+                    d.room || "Not assigned"
+                )}
+            </span>
+        </div>
+
+        <div class="detail">
+            <strong>Status</strong>
+            <span>
+                ${statusBadge(
+                    d.status || "pending"
+                )}
+            </span>
         </div>
 
     `;
 
 
-    /* VIEW */
+    /* ROOM SELECT */
 
-    const viewButton =
-    div.querySelector(
-        "[data-view]"
+    const roomSelect =
+    document.getElementById(
+        "assignRoom"
     );
 
 
-    viewButton.addEventListener(
-        "click",
-        ()=>{
-            openViewModal(item.id);
-        }
-    );
+    roomSelect.innerHTML =
+    `<option value="">
+        Select Room
+    </option>`;
 
 
-    /* APPROVE */
+    for(
+        let i=1;
+        i<=70;
+        i++
+    ){
 
-    const approveButton =
-    div.querySelector(
-        "[data-approve]"
-    );
+        const room =
+        "Room " + i;
 
 
-    if(approveButton){
-
-        approveButton.addEventListener(
-            "click",
-            ()=>{
-                openRoomModal(item.id);
-            }
+        const option =
+        document.createElement(
+            "option"
         );
 
-    }
+
+        option.value =
+        room;
+
+        option.textContent =
+        room;
 
 
-    /* CHANGE ROOM */
+        if(
+            d.room === room
+        ){
 
-    const changeRoom =
-    div.querySelector(
-        "[data-change-room]"
-    );
-
-
-    if(changeRoom){
-
-        changeRoom.addEventListener(
-            "click",
-            ()=>{
-                openRoomModal(item.id);
-            }
-        );
-
-    }
-
-
-    /* REJECT */
-
-    const rejectButton =
-    div.querySelector(
-        "[data-reject]"
-    );
-
-
-    if(rejectButton){
-
-        rejectButton.addEventListener(
-            "click",
-            async()=>{
-
-                await updateStatus(
-                    item.id,
-                    "rejected"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* PENDING */
-
-    const pendingButton =
-    div.querySelector(
-        "[data-pending]"
-    );
-
-
-    if(pendingButton){
-
-        pendingButton.addEventListener(
-            "click",
-            async()=>{
-
-                await updateStatus(
-                    item.id,
-                    "pending"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* DELETE */
-
-    const deleteButton =
-    div.querySelector(
-        "[data-delete]"
-    );
-
-
-    deleteButton.addEventListener(
-        "click",
-        async()=>{
-
-            if(
-                !confirm(
-                    "Delete this request permanently?"
-                )
-            ){
-                return;
-            }
-
-
-            try{
-
-                await deleteDoc(
-                    doc(
-                        db,
-                        "roomRequests",
-                        item.id
-                    )
-                );
-
-            }
-
-            catch(error){
-
-                alert(
-                    firebaseError(error)
-                );
-
-            }
+            option.selected =
+            true;
 
         }
+
+
+        roomSelect.appendChild(
+            option
+        );
+
+    }
+
+
+    /* ACTION BUTTONS */
+
+    const actions =
+    document.getElementById(
+        "modalActions"
     );
 
 
-    return div;
+    actions.innerHTML = `
 
-}
+        <button
+            class="btn btn-approve"
+            onclick="changeStatus('${id}','approved')"
+        >
+            ✅ Approve
+        </button>
+
+        <button
+            class="btn btn-pending"
+            onclick="changeStatus('${id}','pending')"
+        >
+            ⏳ Pending
+        </button>
+
+        <button
+            class="btn btn-reject"
+            onclick="changeStatus('${id}','rejected')"
+        >
+            ❌ Reject
+        </button>
+
+        <button
+            class="btn btn-delete"
+            onclick="deleteRequest('${id}')"
+        >
+            🗑️ Delete
+        </button>
+
+    `;
 
 
-/* ==========================================
-   UPDATE STATUS
-========================================== */
+    document
+    .getElementById(
+        "detailsModal"
+    )
+    .classList.add(
+        "show"
+    );
 
-async function updateStatus(
-    id,
-    status
-){
+};
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+window.closeModal =
+function(){
+
+    document
+    .getElementById(
+        "detailsModal"
+    )
+    .classList.remove(
+        "show"
+    );
+
+};
+
+
+/* =====================================================
+   CHANGE BOOKING STATUS
+===================================================== */
+
+window.changeStatus =
+async function(id,status){
 
     try{
 
@@ -2256,392 +2476,33 @@ async function updateStatus(
 
         );
 
-    }
 
+        viewRequest(id);
+
+    }
     catch(error){
 
-        console.error(error);
-
         alert(
-            firebaseError(error)
+            "Status update failed:\n" +
+            getError(error)
         );
 
     }
 
-}
-
-
-/* ==========================================
-   VIEW MODAL
-========================================== */
-
-function openViewModal(id){
-
-    const item =
-    allRequests.find(
-        x => x.id === id
-    );
-
-
-    if(!item){
-        return;
-    }
-
-
-    const name =
-    (
-        (item.firstName || "") +
-        " " +
-        (item.lastName || "")
-    )
-    .trim();
-
-
-    document.getElementById(
-        "viewContent"
-    ).innerHTML = `
-
-
-        <div class="detail-section">
-
-            <h3>
-                👤 Guest Information
-            </h3>
-
-            <div class="detail-grid">
-
-                ${detail(
-                    "First Name",
-                    item.firstName
-                )}
-
-                ${detail(
-                    "Last Name",
-                    item.lastName
-                )}
-
-                ${detail(
-                    "Phone",
-                    item.phone
-                )}
-
-                ${detail(
-                    "Email",
-                    item.email ||
-                    item.userEmail
-                )}
-
-                ${detail(
-                    "Passport",
-                    item.passport
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail-section">
-
-            <h3>
-                📅 Stay Information
-            </h3>
-
-            <div class="detail-grid">
-
-                ${detail(
-                    "Check-in",
-                    item.checkIn
-                )}
-
-                ${detail(
-                    "Check-out",
-                    item.checkOut
-                )}
-
-                ${detail(
-                    "Status",
-                    capitalize(
-                        item.status ||
-                        "pending"
-                    )
-                )}
-
-                ${detail(
-                    "Room",
-                    item.roomNumber
-                    ?
-                    "Room " +
-                    item.roomNumber
-                    :
-                    "Not assigned"
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail-section">
-
-            <h3>
-                🏠 Room Requirements
-            </h3>
-
-            <div class="detail-grid">
-
-                ${detail(
-                    "AC Room",
-                    item.acRoom
-                )}
-
-                ${detail(
-                    "Hot Water",
-                    item.hotWater
-                )}
-
-                ${detail(
-                    "Beds",
-                    item.beds
-                )}
-
-                ${detail(
-                    "Utensils",
-                    item.utensils
-                )}
-
-                ${detail(
-                    "Water Jugs",
-                    item.waterJugs
-                )}
-
-                ${detail(
-                    "Mosquito Dispeller",
-                    item.mosquito
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail-section">
-
-            <h3>
-                💰 Extra Charges
-            </h3>
-
-            <div class="detail-grid">
-
-                ${detail(
-                    "Utensils",
-                    "₹" +
-                    (item.utensilsPrice || 0)
-                )}
-
-                ${detail(
-                    "Water",
-                    "₹" +
-                    (item.waterPrice || 0)
-                )}
-
-                ${detail(
-                    "Mosquito",
-                    "₹" +
-                    (item.mosquitoPrice || 0)
-                )}
-
-                ${detail(
-                    "Total Extra",
-                    "₹" +
-                    (item.totalExtra || 0)
-                )}
-
-            </div>
-
-        </div>
-
-
-        <div class="detail-section">
-
-            <h3>
-                🆔 Request ID
-            </h3>
-
-            <div class="detail">
-                <strong>
-                    ${escapeHTML(item.id)}
-                </strong>
-            </div>
-
-        </div>
-
-    `;
-
-
-    document.getElementById(
-        "viewModal"
-    ).style.display =
-    "flex";
-
-}
-
-
-window.closeViewModal =
-function(){
-
-    document.getElementById(
-        "viewModal"
-    ).style.display =
-    "none";
-
 };
 
 
-/* ==========================================
-   DETAIL HELPER
-========================================== */
-
-function detail(
-    label,
-    value
-){
-
-    return `
-
-        <div class="detail">
-
-            <label>
-                ${escapeHTML(label)}
-            </label>
-
-            <strong>
-                ${escapeHTML(
-                    value === undefined ||
-                    value === null ||
-                    value === ""
-                    ?
-                    "-"
-                    :
-                    String(value)
-                )}
-            </strong>
-
-        </div>
-
-    `;
-
-}
-
-
-/* ==========================================
-   ROOM OPTIONS 1 - 70
-========================================== */
-
-const roomSelect =
-document.getElementById(
-    "roomSelect"
-);
-
-
-for(
-    let room = 1;
-    room <= 70;
-    room++
-){
-
-    const option =
-    document.createElement(
-        "option"
-    );
-
-    option.value =
-    room;
-
-    option.textContent =
-    "Room " + room;
-
-    roomSelect.appendChild(
-        option
-    );
-
-}
-
-
-/* ==========================================
-   OPEN ROOM MODAL
-========================================== */
-
-function openRoomModal(id){
-
-    const item =
-    allRequests.find(
-        x => x.id === id
-    );
-
-
-    if(!item){
-        return;
-    }
-
-
-    roomRequestId =
-    id;
-
-
-    document.getElementById(
-        "roomGuestName"
-    ).textContent =
-    (
-        "Guest: " +
-        (
-            (item.firstName || "") +
-            " " +
-            (item.lastName || "")
-        ).trim()
-    );
-
-
-    roomSelect.value =
-    item.roomNumber ||
-    "";
-
-
-    document.getElementById(
-        "roomModal"
-    ).style.display =
-    "flex";
-
-}
-
-
-window.closeRoomModal =
-function(){
-
-    roomRequestId =
-    null;
-
-    document.getElementById(
-        "roomModal"
-    ).style.display =
-    "none";
-
-};
-
-
-/* ==========================================
-   SAVE ROOM + APPROVE
-========================================== */
+/* =====================================================
+   ASSIGN ROOM
+===================================================== */
 
 document
-.getElementById(
-    "saveRoomBtn"
-)
+.getElementById("saveRoomBtn")
 .addEventListener(
     "click",
     async()=>{
 
-        if(!roomRequestId){
+        if(!selectedRequestId){
 
             return;
 
@@ -2649,31 +2510,20 @@ document
 
 
         const room =
-        roomSelect.value;
+        document.getElementById(
+            "assignRoom"
+        ).value;
 
 
         if(!room){
 
             alert(
-                "Please select a room number."
+                "Please select a room."
             );
 
             return;
 
         }
-
-
-        const button =
-        document.getElementById(
-            "saveRoomBtn"
-        );
-
-
-        button.disabled =
-        true;
-
-        button.textContent =
-        "Saving...";
 
 
         try{
@@ -2683,43 +2533,33 @@ document
                 doc(
                     db,
                     "roomRequests",
-                    roomRequestId
+                    selectedRequestId
                 ),
 
                 {
-
-                    status:
-                    "approved",
-
-                    roomNumber:
-                    Number(room)
-
+                    room:room
                 }
 
             );
 
 
-            closeRoomModal();
-
-        }
-
-        catch(error){
-
-            console.error(error);
-
             alert(
-                firebaseError(error)
+                room +
+                " assigned successfully."
+            );
+
+
+            viewRequest(
+                selectedRequestId
             );
 
         }
+        catch(error){
 
-        finally{
-
-            button.disabled =
-            false;
-
-            button.textContent =
-            "✓ Approve & Assign Room";
+            alert(
+                "Room assignment failed:\n" +
+                getError(error)
+            );
 
         }
 
@@ -2727,220 +2567,935 @@ document
 );
 
 
-/* ==========================================
-   CALENDAR
-========================================== */
+/* =====================================================
+   DELETE REQUEST
+===================================================== */
 
-function initializeCalendar(){
+window.deleteRequest =
+async function(id){
 
-    const calendarElement =
-    document.getElementById(
-        "calendar"
-    );
+    if(
+        !confirm(
+            "Delete this room request permanently?"
+        )
+    ){
 
-
-    if(calendar){
         return;
+
     }
 
 
-    calendar =
-    new FullCalendar.Calendar(
-        calendarElement,
-        {
+    try{
 
-            initialView:
-            "dayGridMonth",
+        await deleteDoc(
 
-            height:
-            "auto",
+            doc(
+                db,
+                "roomRequests",
+                id
+            )
 
-            headerToolbar:{
+        );
 
-                left:
-                "prev,next today",
 
-                center:
-                "title",
+        closeModal();
 
-                right:
-                "dayGridMonth,timeGridWeek"
+    }
+    catch(error){
 
-            },
+        alert(
+            "Delete failed:\n" +
+            getError(error)
+        );
 
-            eventClick:
-            function(info){
+    }
 
-                openViewModal(
-                    info.event.extendedProps
-                    .requestId
+};
+
+
+/* =====================================================
+   ROOMS 1–70
+===================================================== */
+
+function generateRooms(){
+
+    const grid =
+    document.getElementById(
+        "roomsGrid"
+    );
+
+
+    grid.innerHTML =
+    "";
+
+
+    for(
+        let i=1;
+        i<=70;
+        i++
+    ){
+
+        const roomName =
+        "Room " + i;
+
+
+        const today =
+        new Date();
+
+        today.setHours(
+            0,0,0,0
+        );
+
+
+        const booking =
+        allBookingData.find(
+            item=>{
+
+                const d =
+                item.data;
+
+
+                if(
+                    d.status !==
+                    "approved" ||
+                    d.room !==
+                    roomName
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    !d.checkIn ||
+                    !d.checkOut
+                ){
+
+                    return false;
+
+                }
+
+
+                const start =
+                dateOnly(
+                    d.checkIn
+                );
+
+                const end =
+                dateOnly(
+                    d.checkOut
+                );
+
+
+                return (
+                    today >= start &&
+                    today < end
                 );
 
             }
-
-        }
-    );
+        );
 
 
-    calendar.render();
+        const room =
+        document.createElement(
+            "div"
+        );
+
+
+        room.className =
+        "room " +
+        (
+            booking
+            ? "occupied"
+            : "free"
+        );
+
+
+        room.innerHTML = `
+
+            <div class="room-number">
+                🚪 ${roomName}
+            </div>
+
+            <div class="room-status">
+
+                ${
+                    booking
+                    ? "🔴 Occupied"
+                    : "🟢 Available"
+                }
+
+            </div>
+
+            ${
+                booking
+                ?
+                `
+                <div class="room-guest">
+
+                    <b>
+                        ${escapeHTML(
+                            (booking.data.firstName || "") +
+                            " " +
+                            (booking.data.lastName || "")
+                        )}
+                    </b>
+
+                    <br>
+
+                    ${escapeHTML(
+                        booking.data.checkIn || ""
+                    )}
+                    →
+                    ${escapeHTML(
+                        booking.data.checkOut || ""
+                    )}
+
+                </div>
+                `
+                :
+                `
+                <div class="room-guest">
+                    No current booking
+                </div>
+                `
+            }
+
+        `;
+
+
+        grid.appendChild(
+            room
+        );
+
+    }
 
 }
 
 
-/* ==========================================
-   UPDATE CALENDAR
-========================================== */
+/* =====================================================
+   CLEANING REQUESTS
+===================================================== */
 
-function updateCalendar(){
+function loadCleaningRequests(){
 
-    if(!calendar){
-        return;
+    if(unsubscribeCleaning){
+
+        unsubscribeCleaning();
+
     }
 
 
-    calendar.removeAllEvents();
+    unsubscribeCleaning =
+    onSnapshot(
+
+        collection(
+            db,
+            "cleaningRequests"
+        ),
+
+        snapshot=>{
+
+            allCleaningData =
+            [];
 
 
-    allRequests.forEach(
-        item => {
+            snapshot.forEach(item=>{
 
-            if(
-                item.status !==
-                "approved"
-            ){
-                return;
-            }
+                allCleaningData.push({
 
+                    id:item.id,
 
-            if(
-                !item.checkIn ||
-                !item.checkOut
-            ){
-                return;
-            }
+                    data:item.data()
 
-
-            const name =
-            (
-                (item.firstName || "") +
-                " " +
-                (item.lastName || "")
-            )
-            .trim() ||
-            "Guest";
-
-
-            const room =
-            item.roomNumber
-            ?
-            "Room " +
-            item.roomNumber
-            :
-            "Room not assigned";
-
-
-            /*
-             * FullCalendar end date is exclusive.
-             * We add one day so checkout date
-             * remains visible in the booking range.
-             */
-
-            const endDate =
-            addOneDay(
-                item.checkOut
-            );
-
-
-            calendar.addEvent({
-
-                id:
-                item.id,
-
-                title:
-                name +
-                " — " +
-                room,
-
-                start:
-                item.checkIn,
-
-                end:
-                endDate,
-
-                allDay:
-                true,
-
-                backgroundColor:
-                "#8f570d",
-
-                borderColor:
-                "#8f570d",
-
-                extendedProps:{
-                    requestId:
-                    item.id
-                }
+                });
 
             });
 
+
+            allCleaningData.sort(
+                (a,b)=>{
+
+                    const aTime =
+                    a.data.createdAt
+                    ?.toMillis?.() || 0;
+
+                    const bTime =
+                    b.data.createdAt
+                    ?.toMillis?.() || 0;
+
+                    return bTime-aTime;
+
+                }
+            );
+
+
+            renderCleaning();
+
+            renderDashboard();
+
+        },
+
+        error=>{
+
+            console.error(
+                "CLEANING ERROR:",
+                error
+            );
+
+
+            document.getElementById(
+                "cleaningList"
+            ).innerHTML =
+            `<p style="color:#b91c1c;">
+                Unable to load cleaning requests.
+            </p>`;
+
         }
+
     );
 
 }
 
 
-/* ==========================================
-   ADD ONE DAY
-========================================== */
+/* =====================================================
+   RENDER CLEANING
+===================================================== */
 
-function addOneDay(dateString){
+function renderCleaning(){
 
-    const date =
+    const container =
+    document.getElementById(
+        "cleaningList"
+    );
+
+
+    const filter =
+    document.getElementById(
+        "cleaningFilter"
+    ).value;
+
+
+    const filtered =
+    allCleaningData.filter(item=>{
+
+        const status =
+        item.data.status ||
+        "pending";
+
+
+        return (
+            filter === "all" ||
+            filter === status
+        );
+
+    });
+
+
+    if(!filtered.length){
+
+        container.innerHTML =
+        `<p style="padding:20px;color:#6b7280;">
+            No cleaning requests found.
+        </p>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+    "";
+
+
+    filtered.forEach(item=>{
+
+        const d =
+        item.data;
+
+
+        const status =
+        d.status ||
+        "pending";
+
+
+        const card =
+        document.createElement(
+            "div"
+        );
+
+
+        card.className =
+        "cleaning-card";
+
+
+        card.innerHTML = `
+
+            <div class="cleaning-top">
+
+                <div>
+
+                    <h3>
+                        🧹 ${escapeHTML(
+                            d.room ||
+                            "Room not selected"
+                        )}
+                    </h3>
+
+                    <p>
+                        <b>Guest:</b>
+                        ${escapeHTML(
+                            d.guestName ||
+                            "Guest"
+                        )}
+                    </p>
+
+                    <p>
+                        <b>Email:</b>
+                        ${escapeHTML(
+                            d.guestEmail ||
+                            "-"
+                        )}
+                    </p>
+
+                </div>
+
+                <div>
+                    ${statusBadge(status)}
+                </div>
+
+            </div>
+
+
+            <div class="problem">
+
+                <b>
+                    Problem / Cleaning Request
+                </b>
+
+                <p style="margin-top:7px;">
+                    ${escapeHTML(
+                        d.problem ||
+                        "-"
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="cleaning-actions">
+
+                <button
+                    class="btn btn-pending"
+                    onclick="changeCleaningStatus('${item.id}','pending')"
+                >
+                    Pending
+                </button>
+
+                <button
+                    class="btn btn-progress"
+                    onclick="changeCleaningStatus('${item.id}','in-progress')"
+                >
+                    In Progress
+                </button>
+
+                <button
+                    class="btn btn-complete"
+                    onclick="changeCleaningStatus('${item.id}','completed')"
+                >
+                    Completed
+                </button>
+
+                <button
+                    class="btn btn-delete"
+                    onclick="deleteCleaning('${item.id}')"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(
+            card
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   CLEANING STATUS
+===================================================== */
+
+window.changeCleaningStatus =
+async function(id,status){
+
+    try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "cleaningRequests",
+                id
+            ),
+
+            {
+                status:status
+            }
+
+        );
+
+    }
+    catch(error){
+
+        alert(
+            "Cleaning status update failed:\n" +
+            getError(error)
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   DELETE CLEANING
+===================================================== */
+
+window.deleteCleaning =
+async function(id){
+
+    if(
+        !confirm(
+            "Delete this cleaning request?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "cleaningRequests",
+                id
+            )
+
+        );
+
+    }
+    catch(error){
+
+        alert(
+            "Delete failed:\n" +
+            getError(error)
+        );
+
+    }
+
+};
+
+
+document
+.getElementById(
+    "cleaningFilter"
+)
+.addEventListener(
+    "change",
+    renderCleaning
+);
+
+
+/* =====================================================
+   CALENDAR VARIABLES
+===================================================== */
+
+const monthNames = [
+
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+
+];
+
+
+/* =====================================================
+   CALENDAR
+===================================================== */
+
+function renderCalendar(){
+
+    const year =
+    currentCalendarDate.getFullYear();
+
+    const month =
+    currentCalendarDate.getMonth();
+
+
+    document.getElementById(
+        "calendarTitle"
+    ).textContent =
+    monthNames[month] +
+    " " +
+    year;
+
+
+    const grid =
+    document.getElementById(
+        "calendarGrid"
+    );
+
+
+    grid.innerHTML =
+    "";
+
+
+    const firstDay =
     new Date(
-        dateString +
-        "T00:00:00"
-    );
+        year,
+        month,
+        1
+    ).getDay();
 
 
-    date.setDate(
-        date.getDate() + 1
+    const daysInMonth =
+    new Date(
+        year,
+        month + 1,
+        0
+    ).getDate();
+
+
+    /* EMPTY DAYS */
+
+    for(
+        let i=0;
+        i<firstDay;
+        i++
+    ){
+
+        const empty =
+        document.createElement(
+            "div"
+        );
+
+
+        empty.className =
+        "day empty-day";
+
+
+        grid.appendChild(
+            empty
+        );
+
+    }
+
+
+    /* DAYS */
+
+    for(
+        let day=1;
+        day<=daysInMonth;
+        day++
+    ){
+
+        const date =
+        new Date(
+            year,
+            month,
+            day
+        );
+
+
+        const cell =
+        document.createElement(
+            "div"
+        );
+
+
+        cell.className =
+        "day";
+
+
+        if(
+            isToday(date)
+        ){
+
+            cell.classList.add(
+                "today"
+            );
+
+        }
+
+
+        const number =
+        document.createElement(
+            "div"
+        );
+
+
+        number.className =
+        "day-number";
+
+
+        number.textContent =
+        day;
+
+
+        cell.appendChild(
+            number
+        );
+
+
+        /* BOOKINGS ON THIS DAY */
+
+        allBookingData
+        .filter(item=>{
+
+            const d =
+            item.data;
+
+
+            if(
+                d.status !==
+                "approved"
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                !d.checkIn ||
+                !d.checkOut ||
+                !d.room
+            ){
+
+                return false;
+
+            }
+
+
+            const start =
+            dateOnly(
+                d.checkIn
+            );
+
+            const end =
+            dateOnly(
+                d.checkOut
+            );
+
+
+            return (
+                date >= start &&
+                date < end
+            );
+
+        })
+        .forEach(item=>{
+
+            const d =
+            item.data;
+
+
+            const event =
+            document.createElement(
+                "div"
+            );
+
+
+            event.className =
+            "booking-event";
+
+
+            event.innerHTML =
+            `
+                🏨 <b>
+                ${escapeHTML(
+                    d.room
+                )}
+                </b>
+                <br>
+                ${escapeHTML(
+                    (d.firstName || "") +
+                    " " +
+                    (d.lastName || "")
+                )}
+            `;
+
+
+            event.onclick =
+            ()=>{
+
+                viewRequest(
+                    item.id
+                );
+
+            };
+
+
+            cell.appendChild(
+                event
+            );
+
+        });
+
+
+        grid.appendChild(
+            cell
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CALENDAR BUTTONS
+===================================================== */
+
+document
+.getElementById(
+    "prevMonth"
+)
+.addEventListener(
+    "click",
+    ()=>{
+
+        currentCalendarDate.setMonth(
+            currentCalendarDate.getMonth()-1
+        );
+
+        renderCalendar();
+
+    }
+);
+
+
+document
+.getElementById(
+    "nextMonth"
+)
+.addEventListener(
+    "click",
+    ()=>{
+
+        currentCalendarDate.setMonth(
+            currentCalendarDate.getMonth()+1
+        );
+
+        renderCalendar();
+
+    }
+);
+
+
+document
+.getElementById(
+    "todayBtn"
+)
+.addEventListener(
+    "click",
+    ()=>{
+
+        currentCalendarDate =
+        new Date();
+
+        renderCalendar();
+
+    }
+);
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function statusBadge(status){
+
+    let label =
+    status;
+
+
+    if(status === "in-progress"){
+
+        label =
+        "In Progress";
+
+    }
+    else{
+
+        label =
+        status.charAt(0).toUpperCase() +
+        status.slice(1);
+
+    }
+
+
+    return `
+        <span class="status ${escapeHTML(status)}">
+            ${escapeHTML(label)}
+        </span>
+    `;
+
+}
+
+
+function dateOnly(value){
+
+    const parts =
+    value.split("-");
+
+    return new Date(
+        Number(parts[0]),
+        Number(parts[1])-1,
+        Number(parts[2])
     );
+
+}
+
+
+function isToday(date){
+
+    const now =
+    new Date();
 
 
     return (
-        date
-        .toISOString()
-        .split("T")[0]
+        date.getFullYear() ===
+        now.getFullYear() &&
+
+        date.getMonth() ===
+        now.getMonth() &&
+
+        date.getDate() ===
+        now.getDate()
     );
 
 }
 
-
-/* ==========================================
-   SEARCH
-========================================== */
-
-searchInput.addEventListener(
-    "input",
-    renderRequests
-);
-
-
-statusFilter.addEventListener(
-    "change",
-    renderRequests
-);
-
-
-refreshBtn.addEventListener(
-    "click",
-    loadRequests
-);
-
-
-/* ==========================================
-   ESCAPE
-========================================== */
 
 function escapeHTML(value){
 
@@ -2971,75 +3526,70 @@ function escapeHTML(value){
 }
 
 
-/* ==========================================
-   CAPITALIZE
-========================================== */
+function getError(error){
 
-function capitalize(text){
+    if(!error){
 
-    return String(text)
-    .charAt(0)
-    .toUpperCase() +
-    String(text)
-    .slice(1);
+        return "Unknown error.";
 
-}
+    }
 
-
-/* ==========================================
-   FIREBASE ERROR
-========================================== */
-
-function firebaseError(error){
 
     if(
-        error?.code ===
+        error.code ===
         "permission-denied"
     ){
 
-        return (
-            "Firestore permission denied. " +
-            "Firebase Console mein Firestore Rules check karo."
-        );
+        return "Firestore permission denied. Firebase Rules check karo.";
 
     }
 
 
     if(
-        error?.code ===
-        "auth/unauthorized-domain"
-    ){
-
-        return (
-            "Ye domain Firebase Authentication " +
-            "Authorized Domains mein add nahi hai."
-        );
-
-    }
-
-
-    if(
-        error?.code ===
+        error.code ===
         "auth/popup-blocked"
     ){
 
-        return (
-            "Google login popup blocked hai."
-        );
+        return "Google login popup blocked hai.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/popup-closed-by-user"
+    ){
+
+        return "Google login window close kar di gayi.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/unauthorized-domain"
+    ){
+
+        return "Ye domain Firebase Authentication me authorized nahi hai.";
 
     }
 
 
     return (
-        error?.message ||
+        error.message ||
         "Something went wrong."
     );
 
 }
 
+
+/* =====================================================
+   INITIAL
+===================================================== */
+
+renderCalendar();
+
 </script>
 
 </body>
-
 </html>
-```
