@@ -186,6 +186,9 @@ const auth=getAuth(app);
 const db=getDatabase(app);
 const provider=new GoogleAuthProvider();
 
+// EmailJS
+const WEB3FORMS_ACCESS_KEY="0c730a5f-ed1d-44ec-b062-e743d479f9d6";
+
 let allBookingData=[];
 let allCleaningData=[];
 let selectedRequestId=null;
@@ -357,11 +360,129 @@ window.changeStatus=async function(id,status){
 $("saveRoomBtn").addEventListener("click",async()=>{
   if(!selectedRequestId)return;
   const room=$("assignRoom").value;if(!room){alert("Please select a room.");return}
+
+  const item=allBookingData.find(x=>x.id===selectedRequestId);
+  if(!item)return;
+  const d=item.data||{};
+  const previousRoom=d.room||"";
+
+  const btn=$("saveRoomBtn");
+  btn.disabled=true;
+  btn.textContent="Assigning Room...";
+
   try{
-    await update(ref(db,"roomRequests/"+selectedRequestId),{room});
-    alert(room+" assigned successfully.");
+    // Assign the room and approve the request.
+    await update(ref(db,"roomRequests/"+selectedRequestId),{
+      room:room,
+      status:"approved",
+      roomAssignedAt:Date.now()
+    });
+
+    // Send the room confirmation through Web3Forms only when a new/different room is assigned.
+    // Web3Forms sends the submission to the email connected to this Access Key.
+    // If Autoresponder is enabled in Web3Forms, the guest also receives a copy at data.email.
+    let emailSent=false;
+    if(previousRoom!==room){
+      const guestName=((d.firstName||"")+" "+(d.lastName||"")).trim() || d.userName || "Guest";
+      const guestEmail=d.email||d.userEmail||"";
+
+      if(guestEmail){
+        try{
+          const roomMessage = `
+Radhe Radhe 🙏
+
+Dear ${guestName},
+
+We are happy to inform you that your room request has been accepted.
+
+Your Room Number: ${room}
+
+Your Details
+-------------------------
+Name: ${guestName}
+Room No: ${room}
+Check-in: ${d.checkIn||""}
+Check-out: ${d.checkOut||""}
+Phone: ${d.phone||""}
+Passport: ${d.passport||""}
+Beds: ${d.beds||""}
+AC Room: ${d.acRoom||""}
+Hot Water: ${d.hotWater||""}
+Utensils: ${d.utensils||""}
+20L Water Jugs: ${d.waterJugs||0}
+Mosquito Dispeller: ${d.mosquito||""}
+Total Extra: ₹${d.totalExtra||0}
+Request ID: ${selectedRequestId}
+Status: Approved
+-------------------------
+
+Thank you for choosing Munger Raj Mandir.
+
+We look forward to welcoming you.
+
+Radhe Radhe 🙏
+Munger Mandir`;
+
+          const emailResponse = await fetch("https://api.web3forms.com/submit",{
+            method:"POST",
+            headers:{
+              "Content-Type":"application/json",
+              "Accept":"application/json"
+            },
+            body:JSON.stringify({
+              access_key:WEB3FORMS_ACCESS_KEY,
+              subject:"Room Request Accepted - Munger Mandir",
+              from_name:"Munger Mandir",
+              name:guestName,
+              email:guestEmail,
+              replyto:guestEmail,
+              guest_name:guestName,
+              room_no:room,
+              check_in:d.checkIn||"",
+              check_out:d.checkOut||"",
+              phone:d.phone||"",
+              passport:d.passport||"",
+              beds:d.beds||"",
+              ac_room:d.acRoom||"",
+              hot_water:d.hotWater||"",
+              utensils:d.utensils||"",
+              water_jugs:d.waterJugs||0,
+              mosquito:d.mosquito||"",
+              total_extra:d.totalExtra||0,
+              request_id:selectedRequestId,
+              status:"Approved",
+              message:roomMessage,
+              botcheck:false
+            })
+          });
+
+          const emailResult=await emailResponse.json();
+          if(emailResponse.ok && emailResult.success){
+            emailSent=true;
+            await update(ref(db,"roomRequests/"+selectedRequestId),{roomConfirmationEmailSentAt:Date.now()});
+          }else{
+            throw new Error(emailResult.message||"Web3Forms could not send the email.");
+          }
+        }catch(emailError){
+          console.error("WEB3FORMS ROOM ASSIGNMENT EMAIL ERROR:",emailError);
+        }
+      }
+    }
+
     viewRequest(selectedRequestId);
-  }catch(e){alert("Room assignment failed:\n"+getError(e))}
+    if(emailSent){
+      alert(room+" assigned successfully.\n\nConfirmation email sent to "+(d.email||d.userEmail)+".");
+    }else if(previousRoom===room){
+      alert(room+" is already assigned to this guest.");
+    }else{
+      alert(room+" assigned successfully, but the confirmation email could not be sent.\n\nCheck your Web3Forms Access Key and email/autoresponder settings.");
+    }
+  }catch(e){
+    alert("Room assignment failed:\n"+getError(e));
+  }finally{
+    btn.disabled=false;
+    btn.textContent="Save Room Assignment";
+  }
 });
 
 window.deleteRequest=async function(id){
