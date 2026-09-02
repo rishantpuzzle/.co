@@ -1,3595 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Hotel Manager - Munger Mandir</title>
-
 <link rel="icon" type="image/png" href="logo.png">
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-    background:#f1f4f8;
-    color:#111827;
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    width:280px;
-    background:#101827;
-    color:white;
-    padding:25px 20px;
-    overflow-y:auto;
-    z-index:1000;
-}
-
-.hotel-logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:10px 15px 35px;
-}
-
-.hotel-logo-icon{
-    font-size:30px;
-}
-
-.hotel-logo h1{
-    font-size:27px;
-    color:#5ea1ff;
-}
-
-.menu{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.menu-item{
-    padding:18px 20px;
-    border-radius:15px;
-    font-size:21px;
-    color:#e5e7eb;
-    cursor:pointer;
-    transition:.2s;
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
-
-.menu-item:hover{
-    background:#1d2939;
-}
-
-.menu-item.active{
-    background:#202c3c;
-    color:white;
-}
-
-.menu-item span{
-    font-size:21px;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main{
-    margin-left:280px;
-    min-height:100vh;
-    padding:30px;
-}
-
-.topbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:25px;
-}
-
-.page-title h2{
-    font-size:30px;
-    color:#172033;
-}
-
-.page-title p{
-    margin-top:5px;
-    color:#6b7280;
-}
-
-.admin-user{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:white;
-    border:1px solid #e0e5ec;
-    padding:8px 13px;
-    border-radius:12px;
-}
-
-.admin-user img{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-}
-
-.logout-btn{
-    border:none;
-    background:#ef4444;
-    color:white;
-    padding:9px 13px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-.section{
-    display:none;
-}
-
-.section.active{
-    display:block;
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-    margin-bottom:25px;
-}
-
-.stat-card{
-    background:white;
-    border:1px solid #e1e6ed;
-    border-radius:18px;
-    padding:22px;
-}
-
-.stat-card .icon{
-    font-size:27px;
-    margin-bottom:12px;
-}
-
-.stat-card h3{
-    font-size:28px;
-    color:#172033;
-}
-
-.stat-card p{
-    color:#6b7280;
-    margin-top:5px;
-}
-
-.card{
-    background:white;
-    border:1px solid #e0e5ec;
-    border-radius:18px;
-    padding:22px;
-    margin-bottom:22px;
-}
-
-.card-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:18px;
-}
-
-.card-title h3{
-    font-size:21px;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn{
-    border:none;
-    border-radius:8px;
-    padding:9px 13px;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:13px;
-}
-
-.btn-view{
-    background:#2563eb;
-    color:white;
-}
-
-.btn-approve{
-    background:#16a34a;
-    color:white;
-}
-
-.btn-reject{
-    background:#dc2626;
-    color:white;
-}
-
-.btn-pending{
-    background:#a16207;
-    color:white;
-}
-
-.btn-progress{
-    background:#2563eb;
-    color:white;
-}
-
-.btn-complete{
-    background:#15803d;
-    color:white;
-}
-
-.btn-delete{
-    background:#b91c1c;
-    color:white;
-}
-
-.btn-room{
-    background:#5b4a2d;
-    color:white;
-}
-
-/* =========================
-   TABLE
-========================= */
-
-.table-wrap{
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:850px;
-}
-
-th{
-    text-align:left;
-    padding:13px;
-    background:#f7f9fc;
-    color:#4b5563;
-    font-size:13px;
-}
-
-td{
-    padding:14px 13px;
-    border-top:1px solid #edf0f4;
-    font-size:14px;
-}
-
-.status{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.status.pending{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.status.approved{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.status.rejected{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.status.in-progress{
-    background:#dbeafe;
-    color:#1d4ed8;
-}
-
-.status.completed{
-    background:#dcfce7;
-    color:#166534;
-}
-
-/* =========================
-   FILTER
-========================= */
-
-.filters{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-select,
-input{
-    padding:11px 12px;
-    border:1px solid #d7dde6;
-    border-radius:9px;
-    background:white;
-    outline:none;
-}
-
-select:focus,
-input:focus{
-    border-color:#4f8ff7;
-}
-
-/* =========================
-   ROOMS
-========================= */
-
-.rooms-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:15px;
-}
-
-.room{
-    background:white;
-    border:1px solid #e0e5ec;
-    border-radius:15px;
-    padding:20px;
-    min-height:125px;
-    position:relative;
-}
-
-.room-number{
-    font-size:22px;
-    font-weight:bold;
-}
-
-.room.free{
-    border-left:5px solid #22c55e;
-}
-
-.room.occupied{
-    border-left:5px solid #ef4444;
-}
-
-.room.reserved{
-    border-left:5px solid #f59e0b;
-}
-
-.room-status{
-    margin-top:9px;
-    font-size:13px;
-    color:#6b7280;
-}
-
-.room-guest{
-    margin-top:10px;
-    font-size:13px;
-    color:#374151;
-}
-
-/* =========================
-   CALENDAR
-========================= */
-
-.calendar-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:20px;
-}
-
-.calendar-header h3{
-    font-size:24px;
-}
-
-.calendar-buttons{
-    display:flex;
-    gap:8px;
-}
-
-.calendar-btn{
-    border:none;
-    background:#172033;
-    color:white;
-    border-radius:8px;
-    padding:9px 14px;
-    cursor:pointer;
-}
-
-.calendar-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:10px;
-}
-
-.weekday{
-    text-align:center;
-    font-weight:bold;
-    color:#6b7280;
-    padding:10px;
-}
-
-.day{
-    min-height:125px;
-    background:white;
-    border:1px solid #dfe5ed;
-    border-radius:14px;
-    padding:13px;
-    overflow:hidden;
-}
-
-.day-number{
-    font-size:18px;
-    font-weight:bold;
-    margin-bottom:9px;
-}
-
-.day.today{
-    border:2px solid #3b82f6;
-}
-
-.booking-event{
-    display:block;
-    background:#dbeafe;
-    color:#1d4ed8;
-    border-radius:8px;
-    padding:7px;
-    margin-top:6px;
-    font-size:12px;
-    cursor:pointer;
-    line-height:1.35;
-}
-
-.booking-event:hover{
-    background:#bfdbfe;
-}
-
-.empty-day{
-    background:#fafbfc;
-}
-
-/* =========================
-   CLEANING
-========================= */
-
-.cleaning-card{
-    background:white;
-    border:1px solid #e0e5ec;
-    border-radius:16px;
-    padding:20px;
-    margin-bottom:14px;
-}
-
-.cleaning-top{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:15px;
-}
-
-.cleaning-top h3{
-    margin-bottom:8px;
-}
-
-.cleaning-top p{
-    margin-top:4px;
-    color:#6b7280;
-    font-size:13px;
-}
-
-.problem{
-    background:#f8fafc;
-    border:1px solid #e6eaf0;
-    padding:14px;
-    border-radius:10px;
-    line-height:1.5;
-    margin-bottom:15px;
-}
-
-.cleaning-actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    z-index:3000;
-}
-
-.modal-overlay.show{
-    display:flex;
-}
-
-.modal{
-    width:100%;
-    max-width:650px;
-    max-height:90vh;
-    overflow-y:auto;
-    background:white;
-    border-radius:20px;
-    padding:25px;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.close{
-    width:35px;
-    height:35px;
-    border:none;
-    border-radius:50%;
-    background:#f1f5f9;
-    font-size:20px;
-    cursor:pointer;
-}
-
-.details-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.detail{
-    background:#f8fafc;
-    border-radius:10px;
-    padding:13px;
-}
-
-.detail strong{
-    display:block;
-    color:#6b7280;
-    font-size:12px;
-    margin-bottom:5px;
-}
-
-.detail span{
-    font-size:14px;
-    color:#111827;
-}
-
-.modal-actions{
-    margin-top:20px;
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.room-assignment{
-    margin-top:20px;
-    padding:17px;
-    background:#f8fafc;
-    border-radius:12px;
-}
-
-.room-assignment label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-.room-assignment select{
-    width:100%;
-}
-
-/* =========================
-   LOGIN
-========================= */
-
-.login-screen{
-    position:fixed;
-    inset:0;
-    background:#101827;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:5000;
-}
-
-.login-card{
-    width:90%;
-    max-width:420px;
-    background:white;
-    border-radius:22px;
-    padding:35px;
-    text-align:center;
-}
-
-.login-icon{
-    font-size:55px;
-    margin-bottom:15px;
-}
-
-.login-card h2{
-    margin-bottom:8px;
-}
-
-.login-card p{
-    color:#6b7280;
-    line-height:1.5;
-    margin-bottom:22px;
-}
-
-.google-login{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:#2563eb;
-    color:white;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.login-error{
-    color:#b91c1c;
-    margin-top:15px;
-    font-size:13px;
-}
-
-.hidden{
-    display:none !important;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:1100px){
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .rooms-grid{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-}
-
-@media(max-width:850px){
-
-    .sidebar{
-        width:220px;
-    }
-
-    .main{
-        margin-left:220px;
-        padding:20px;
-    }
-
-    .rooms-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-}
-
-@media(max-width:650px){
-
-    .sidebar{
-        position:relative;
-        width:100%;
-        height:auto;
-        min-height:auto;
-    }
-
-    .main{
-        margin-left:0;
-        padding:15px;
-    }
-
-    .hotel-logo{
-        padding-bottom:20px;
-    }
-
-    .menu{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-    }
-
-    .menu-item{
-        padding:13px;
-        font-size:16px;
-    }
-
-    .menu-item span{
-        font-size:15px;
-    }
-
-    .stats{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .rooms-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .calendar-grid{
-        gap:4px;
-    }
-
-    .day{
-        min-height:90px;
-        padding:7px;
-    }
-
-    .booking-event{
-        font-size:10px;
-        padding:5px;
-    }
-
-    .details-grid{
-        grid-template-columns:1fr;
-    }
-
-    .topbar{
-        align-items:flex-start;
-        gap:10px;
-        flex-direction:column;
-    }
-
-}
-
-/* =========================
-   SMALL
-========================= */
-
-@media(max-width:430px){
-
-    .menu{
-        grid-template-columns:1fr;
-    }
-
-    .stats{
-        grid-template-columns:1fr;
-    }
-
-    .rooms-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f1f4f8;color:#111827}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:280px;background:#101827;color:#fff;padding:25px 20px;overflow-y:auto;z-index:1000}
+.hotel-logo{display:flex;align-items:center;gap:12px;padding:10px 15px 35px}
+.hotel-logo-icon{font-size:30px}.hotel-logo h1{font-size:27px;color:#5ea1ff}
+.menu{display:flex;flex-direction:column;gap:8px}
+.menu-item{padding:18px 20px;border-radius:15px;font-size:21px;color:#e5e7eb;cursor:pointer;display:flex;align-items:center;gap:13px}
+.menu-item:hover,.menu-item.active{background:#202c3c;color:#fff}.menu-item span{font-size:21px}
+.main{margin-left:280px;min-height:100vh;padding:30px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}
+.page-title h2{font-size:30px;color:#172033}.page-title p{margin-top:5px;color:#6b7280}
+.admin-user{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e0e5ec;padding:8px 13px;border-radius:12px}
+.admin-user img{width:38px;height:38px;border-radius:50%}
+.logout-btn{border:none;background:#ef4444;color:#fff;padding:9px 13px;border-radius:8px;cursor:pointer;font-weight:bold}
+.section{display:none}.section.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:25px}
+.stat-card,.card{background:#fff;border:1px solid #e0e5ec;border-radius:18px}
+.stat-card{padding:22px}.stat-card .icon{font-size:27px;margin-bottom:12px}.stat-card h3{font-size:28px;color:#172033}.stat-card p{color:#6b7280;margin-top:5px}
+.card{padding:22px;margin-bottom:22px}.card-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.card-title h3{font-size:21px}
+.btn{border:none;border-radius:8px;padding:9px 13px;cursor:pointer;font-weight:bold;font-size:13px}
+.btn-view{background:#2563eb;color:#fff}.btn-approve{background:#16a34a;color:#fff}.btn-reject{background:#dc2626;color:#fff}.btn-pending{background:#a16207;color:#fff}.btn-room{background:#5b4a2d;color:#fff}.btn-delete{background:#b91c1c;color:#fff}
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+select,input{padding:11px 12px;border:1px solid #d7dde6;border-radius:9px;background:#fff;outline:none}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:850px}
+th{text-align:left;padding:13px;background:#f7f9fc;color:#4b5563;font-size:13px}
+td{padding:14px 13px;border-top:1px solid #edf0f4;font-size:14px}
+.status{display:inline-block;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.status.pending{background:#fef3c7;color:#92400e}.status.approved{background:#dcfce7;color:#166534}.status.rejected{background:#fee2e2;color:#991b1b}
+.status.in-progress{background:#dbeafe;color:#1d4ed8}.status.completed{background:#dcfce7;color:#166534}
+.rooms-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
+.room{background:#fff;border:1px solid #e0e5ec;border-radius:15px;padding:20px;min-height:125px}
+.room.free{border-left:5px solid #22c55e}.room.occupied{border-left:5px solid #ef4444}
+.room-number{font-size:22px;font-weight:bold}.room-status{margin-top:9px;font-size:13px;color:#6b7280}.room-guest{margin-top:10px;font-size:13px;color:#374151}
+.calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.calendar-header h3{font-size:24px}
+.calendar-buttons{display:flex;gap:8px}.calendar-btn{border:none;background:#172033;color:#fff;border-radius:8px;padding:9px 14px;cursor:pointer}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.weekday{text-align:center;font-weight:bold;color:#6b7280;padding:10px}
+.day{min-height:125px;background:#fff;border:1px solid #dfe5ed;border-radius:14px;padding:13px;overflow:hidden}.day-number{font-size:18px;font-weight:bold;margin-bottom:9px}
+.day.today{border:2px solid #3b82f6}.empty-day{background:#fafbfc}
+.booking-event{display:block;background:#dbeafe;color:#1d4ed8;border-radius:8px;padding:7px;margin-top:6px;font-size:12px;cursor:pointer;line-height:1.35}
+.cleaning-card{background:#fff;border:1px solid #e0e5ec;border-radius:16px;padding:20px;margin-bottom:14px}
+.cleaning-top{display:flex;justify-content:space-between;gap:15px;margin-bottom:15px}.cleaning-top h3{margin-bottom:8px}.cleaning-top p{margin-top:4px;color:#6b7280;font-size:13px}
+.problem{background:#f8fafc;border:1px solid #e6eaf0;padding:14px;border-radius:10px;line-height:1.5;margin-bottom:15px}.cleaning-actions{display:flex;gap:8px;flex-wrap:wrap}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:3000}.modal-overlay.show{display:flex}
+.modal{width:100%;max-width:650px;max-height:90vh;overflow-y:auto;background:#fff;border-radius:20px;padding:25px}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.close{width:35px;height:35px;border:none;border-radius:50%;background:#f1f5f9;font-size:20px;cursor:pointer}
+.details-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail{background:#f8fafc;border-radius:10px;padding:13px}.detail strong{display:block;color:#6b7280;font-size:12px;margin-bottom:5px}.detail span{font-size:14px;color:#111827}
+.modal-actions{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}.room-assignment{margin-top:20px;padding:17px;background:#f8fafc;border-radius:12px}.room-assignment label{display:block;font-weight:bold;margin-bottom:8px}.room-assignment select{width:100%}
+.login-screen{position:fixed;inset:0;background:#101827;display:flex;align-items:center;justify-content:center;z-index:5000}.login-card{width:90%;max-width:420px;background:#fff;border-radius:22px;padding:35px;text-align:center}
+.login-icon{font-size:55px;margin-bottom:15px}.login-card h2{margin-bottom:8px}.login-card p{color:#6b7280;line-height:1.5;margin-bottom:22px}.google-login{width:100%;padding:14px;border:none;border-radius:10px;background:#2563eb;color:#fff;font-size:15px;font-weight:bold;cursor:pointer}.login-error{color:#b91c1c;margin-top:15px;font-size:13px}.hidden{display:none!important}
+@media(max-width:1100px){.stats{grid-template-columns:repeat(2,1fr)}.rooms-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:850px){.sidebar{width:220px}.main{margin-left:220px;padding:20px}.rooms-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){.sidebar{position:relative;width:100%;height:auto;min-height:auto}.main{margin-left:0;padding:15px}.hotel-logo{padding-bottom:20px}.menu{display:grid;grid-template-columns:1fr 1fr}.menu-item{padding:13px}.menu-item span{font-size:15px}.stats{grid-template-columns:1fr 1fr}.rooms-grid{grid-template-columns:repeat(2,1fr)}.calendar-grid{gap:4px}.day{min-height:90px;padding:7px}.booking-event{font-size:10px;padding:5px}.details-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;gap:10px;flex-direction:column}}
+@media(max-width:430px){.menu{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.rooms-grid{grid-template-columns:1fr 1fr}}
 </style>
-
 </head>
-
 <body>
 
-
-<!-- =====================================================
-     LOGIN
-===================================================== -->
-
 <div id="loginScreen" class="login-screen">
-
-    <div class="login-card">
-
-        <div class="login-icon">🏨</div>
-
-        <h2>Hotel Manager</h2>
-
-        <p>
-            Munger Mandir Admin Panel
-        </p>
-
-        <button
-            id="googleLogin"
-            class="google-login"
-        >
-            Continue with Google
-        </button>
-
-        <div
-            id="loginError"
-            class="login-error"
-        ></div>
-
-    </div>
-
+  <div class="login-card">
+    <div class="login-icon">🏨</div>
+    <h2>Hotel Manager</h2>
+    <p>Munger Mandir Admin Panel</p>
+    <button id="googleLogin" class="google-login">Continue with Google</button>
+    <div id="loginError" class="login-error"></div>
+  </div>
 </div>
-
-
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
 
 <aside class="sidebar">
-
-    <div class="hotel-logo">
-
-        <div class="hotel-logo-icon">
-            🏨
-        </div>
-
-        <h1>
-            Hotel Manager
-        </h1>
-
-    </div>
-
-
-    <div class="menu">
-
-        <div
-            class="menu-item active"
-            data-section="dashboard"
-        >
-            📊
-            <span>Dashboard</span>
-        </div>
-
-
-        <div
-            class="menu-item"
-            data-section="bookings"
-        >
-            🗓️
-            <span>Bookings</span>
-        </div>
-
-
-        <div
-            class="menu-item"
-            data-section="rooms"
-        >
-            🚪
-            <span>Rooms 1–70</span>
-        </div>
-
-
-        <div
-            class="menu-item"
-            data-section="cleaning"
-        >
-            🧹
-            <span>Cleaning Requests</span>
-        </div>
-
-
-        <div
-            class="menu-item"
-            data-section="calendar"
-        >
-            📅
-            <span>Calendar</span>
-        </div>
-
-    </div>
-
+  <div class="hotel-logo"><div class="hotel-logo-icon">🏨</div><h1>Hotel Manager</h1></div>
+  <div class="menu">
+    <div class="menu-item active" data-section="dashboard">📊 <span>Dashboard</span></div>
+    <div class="menu-item" data-section="bookings">🗓️ <span>Bookings</span></div>
+    <div class="menu-item" data-section="rooms">🚪 <span>Rooms 1–70</span></div>
+    <div class="menu-item" data-section="cleaning">🧹 <span>Cleaning Requests</span></div>
+    <div class="menu-item" data-section="calendar">📅 <span>Calendar</span></div>
+  </div>
 </aside>
 
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
 <main class="main">
-
-
-    <div class="topbar">
-
-        <div class="page-title">
-
-            <h2 id="pageTitle">
-                Dashboard
-            </h2>
-
-            <p>
-                Munger Mandir Room Management
-            </p>
-
-        </div>
-
-
-        <div class="admin-user">
-
-            <img
-                id="adminPhoto"
-                src="https://via.placeholder.com/100"
-                alt="Admin"
-            >
-
-            <span id="adminName">
-                Admin
-            </span>
-
-            <button
-                id="logoutBtn"
-                class="logout-btn"
-            >
-                Logout
-            </button>
-
-        </div>
-
+  <div class="topbar">
+    <div class="page-title"><h2 id="pageTitle">Dashboard</h2><p>Munger Mandir Room Management</p></div>
+    <div class="admin-user">
+      <img id="adminPhoto" src="https://via.placeholder.com/100" alt="Admin">
+      <span id="adminName">Admin</span>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
     </div>
+  </div>
 
+  <section id="dashboard" class="section active">
+    <div class="stats">
+      <div class="stat-card"><div class="icon">📋</div><h3 id="totalRequests">0</h3><p>Total Requests</p></div>
+      <div class="stat-card"><div class="icon">⏳</div><h3 id="pendingRequests">0</h3><p>Pending</p></div>
+      <div class="stat-card"><div class="icon">✅</div><h3 id="approvedRequests">0</h3><p>Approved</p></div>
+      <div class="stat-card"><div class="icon">🧹</div><h3 id="cleaningCount">0</h3><p>Cleaning Requests</p></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><h3>Recent Requests</h3><button class="btn btn-view" onclick="openSection('bookings')">View All</button></div>
+      <div id="recentRequests" class="table-wrap">Loading...</div>
+    </div>
+  </section>
 
-    <!-- =================================================
-         DASHBOARD
-    ================================================= -->
-
-    <section
-        id="dashboard"
-        class="section active"
-    >
-
-        <div class="stats">
-
-            <div class="stat-card">
-
-                <div class="icon">
-                    📋
-                </div>
-
-                <h3 id="totalRequests">
-                    0
-                </h3>
-
-                <p>
-                    Total Requests
-                </p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="icon">
-                    ⏳
-                </div>
-
-                <h3 id="pendingRequests">
-                    0
-                </h3>
-
-                <p>
-                    Pending
-                </p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="icon">
-                    ✅
-                </div>
-
-                <h3 id="approvedRequests">
-                    0
-                </h3>
-
-                <p>
-                    Approved
-                </p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="icon">
-                    🧹
-                </div>
-
-                <h3 id="cleaningCount">
-                    0
-                </h3>
-
-                <p>
-                    Cleaning Requests
-                </p>
-
-            </div>
-
+  <section id="bookings" class="section">
+    <div class="card">
+      <div class="card-title">
+        <h3>All Room Requests</h3>
+        <div class="filters">
+          <select id="bookingFilter"><option value="all">All Requests</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
         </div>
-
-
-        <div class="card">
-
-            <div class="card-title">
-
-                <h3>
-                    Recent Requests
-                </h3>
-
-                <button
-                    class="btn btn-view"
-                    onclick="openSection('bookings')"
-                >
-                    View All
-                </button>
-
-            </div>
-
-
-            <div
-                id="recentRequests"
-                class="table-wrap"
-            >
-
-                Loading...
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         BOOKINGS
-    ================================================= -->
-
-    <section
-        id="bookings"
-        class="section"
-    >
-
-        <div class="card">
-
-            <div class="card-title">
-
-                <h3>
-                    All Room Requests
-                </h3>
-
-                <div class="filters">
-
-                    <select id="bookingFilter">
-
-                        <option value="all">
-                            All Requests
-                        </option>
-
-                        <option value="pending">
-                            Pending
-                        </option>
-
-                        <option value="approved">
-                            Approved
-                        </option>
-
-                        <option value="rejected">
-                            Rejected
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="bookingTable"
-                class="table-wrap"
-            >
-
-                Loading bookings...
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         ROOMS
-    ================================================= -->
-
-    <section
-        id="rooms"
-        class="section"
-    >
-
-        <div class="card">
-
-            <div class="card-title">
-
-                <h3>
-                    Rooms 1–70
-                </h3>
-
-                <div>
-
-                    <span
-                        style="color:#16a34a;font-size:13px;"
-                    >
-                        ● Available
-                    </span>
-
-                    &nbsp;&nbsp;
-
-                    <span
-                        style="color:#ef4444;font-size:13px;"
-                    >
-                        ● Occupied
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="roomsGrid"
-                class="rooms-grid"
-            >
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         CLEANING
-    ================================================= -->
-
-    <section
-        id="cleaning"
-        class="section"
-    >
-
-        <div class="card">
-
-            <div class="card-title">
-
-                <h3>
-                    🧹 Cleaning Requests
-                </h3>
-
-                <select id="cleaningFilter">
-
-                    <option value="all">
-                        All Requests
-                    </option>
-
-                    <option value="pending">
-                        Pending
-                    </option>
-
-                    <option value="in-progress">
-                        In Progress
-                    </option>
-
-                    <option value="completed">
-                        Completed
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div id="cleaningList">
-
-                Loading cleaning requests...
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         CALENDAR
-    ================================================= -->
-
-    <section
-        id="calendar"
-        class="section"
-    >
-
-        <div class="card">
-
-            <div class="calendar-header">
-
-                <h3 id="calendarTitle">
-                    Calendar
-                </h3>
-
-                <div class="calendar-buttons">
-
-                    <button
-                        id="prevMonth"
-                        class="calendar-btn"
-                    >
-                        ←
-                    </button>
-
-                    <button
-                        id="todayBtn"
-                        class="calendar-btn"
-                    >
-                        Today
-                    </button>
-
-                    <button
-                        id="nextMonth"
-                        class="calendar-btn"
-                    >
-                        →
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="calendar-grid">
-
-                <div class="weekday">Sun</div>
-                <div class="weekday">Mon</div>
-                <div class="weekday">Tue</div>
-                <div class="weekday">Wed</div>
-                <div class="weekday">Thu</div>
-                <div class="weekday">Fri</div>
-                <div class="weekday">Sat</div>
-
-            </div>
-
-
-            <div
-                id="calendarGrid"
-                class="calendar-grid"
-            >
-
-            </div>
-
-        </div>
-
-    </section>
-
+      </div>
+      <div id="bookingTable" class="table-wrap">Loading bookings...</div>
+    </div>
+  </section>
+
+  <section id="rooms" class="section">
+    <div class="card">
+      <div class="card-title"><h3>Rooms 1–70</h3><div><span style="color:#16a34a;font-size:13px">● Available</span>&nbsp;&nbsp;<span style="color:#ef4444;font-size:13px">● Occupied</span></div></div>
+      <div id="roomsGrid" class="rooms-grid"></div>
+    </div>
+  </section>
+
+  <section id="cleaning" class="section">
+    <div class="card">
+      <div class="card-title"><h3>🧹 Cleaning Requests</h3>
+        <select id="cleaningFilter"><option value="all">All Requests</option><option value="pending">Pending</option><option value="in-progress">In Progress</option><option value="completed">Completed</option></select>
+      </div>
+      <div id="cleaningList">Loading cleaning requests...</div>
+    </div>
+  </section>
+
+  <section id="calendar" class="section">
+    <div class="card">
+      <div class="calendar-header"><h3 id="calendarTitle">Calendar</h3>
+        <div class="calendar-buttons"><button id="prevMonth" class="calendar-btn">←</button><button id="todayBtn" class="calendar-btn">Today</button><button id="nextMonth" class="calendar-btn">→</button></div>
+      </div>
+      <div class="calendar-grid">
+        <div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div>
+      </div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </div>
+  </section>
 </main>
 
-
-<!-- =====================================================
-     REQUEST DETAILS MODAL
-===================================================== -->
-
-<div
-    id="detailsModal"
-    class="modal-overlay"
->
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h2>
-                Guest Request
-            </h2>
-
-            <button
-                class="close"
-                onclick="closeModal()"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div
-            id="guestDetails"
-            class="details-grid"
-        >
-
-        </div>
-
-
-        <div
-            id="roomAssignment"
-            class="room-assignment"
-        >
-
-            <label>
-                Assign Room
-            </label>
-
-            <select id="assignRoom">
-
-                <option value="">
-                    Select Room
-                </option>
-
-            </select>
-
-            <button
-                id="saveRoomBtn"
-                class="btn btn-room"
-                style="margin-top:10px;width:100%;"
-            >
-                Save Room Assignment
-            </button>
-
-        </div>
-
-
-        <div
-            id="modalActions"
-            class="modal-actions"
-        >
-
-        </div>
-
+<div id="detailsModal" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><h2>Guest Request</h2><button class="close" onclick="closeModal()">×</button></div>
+    <div id="guestDetails" class="details-grid"></div>
+    <div class="room-assignment">
+      <label>Assign Room</label>
+      <select id="assignRoom"><option value="">Select Room</option></select>
+      <button id="saveRoomBtn" class="btn btn-room" style="margin-top:10px;width:100%">Save Room Assignment</button>
     </div>
-
+    <div id="modalActions" class="modal-actions"></div>
+  </div>
 </div>
 
-
 <script type="module">
-
-
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
-
-import {
-    initializeApp
-}
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-
-import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    signOut,
-    onAuthStateChanged
-}
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import {getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged}
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import {getDatabase,ref,onValue,update,remove}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
-
-import {
-    getFirestore,
-    collection,
-    onSnapshot,
-    doc,
-    updateDoc,
-    deleteDoc
-}
-from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
-
-const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyD7qJWxjijDXrdTiI7D14zR-ds-j46rNzc",
-
-    authDomain:
-    "munger-mandir-room-request.firebaseapp.com",
-
-    projectId:
-    "munger-mandir-room-request",
-
-    storageBucket:
-    "munger-mandir-room-request.firebasestorage.app",
-
-    messagingSenderId:
-    "145384185034",
-
-    appId:
-    "1:145384185034:web:c828c0388f8bd79d79a833",
-
-    measurementId:
-    "G-LF2K2KFCN6"
-
+const firebaseConfig={
+  apiKey:"AIzaSyD7qJWxjijDXrdTiI7D14Z-rds-j46rNzc",
+  authDomain:"munger-mandir-room-request.firebaseapp.com",
+  projectId:"munger-mandir-room-request",
+  storageBucket:"munger-mandir-room-request.firebasestorage.app",
+  messagingSenderId:"145384185034",
+  appId:"1:145384185034:web:c828c0388f8bd79d79a833",
+  measurementId:"G-LF2K2KFCN6",
+  databaseURL:"https://munger-mandir-room-request-default-rtdb.firebaseio.com"
 };
 
-
-/* =====================================================
-   INITIALIZE FIREBASE
-===================================================== */
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
-
-const provider =
-new GoogleAuthProvider();
-
-
-/* =====================================================
-   ADMIN EMAIL
-===================================================== */
-
-const ADMIN_EMAIL =
-"rishantbhaumik@gmail.com";
-
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-let allBookingData = [];
-
-let allCleaningData = [];
-
-let selectedRequestId = null;
-
-let currentCalendarDate =
-new Date();
-
-
-let unsubscribeBookings = null;
-
-let unsubscribeCleaning = null;
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const loginScreen =
-document.getElementById("loginScreen");
-
-const googleLogin =
-document.getElementById("googleLogin");
-
-const loginError =
-document.getElementById("loginError");
-
-const adminName =
-document.getElementById("adminName");
-
-const adminPhoto =
-document.getElementById("adminPhoto");
-
-const logoutBtn =
-document.getElementById("logoutBtn");
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-googleLogin.addEventListener(
-    "click",
-    async()=>{
-
-        loginError.textContent =
-        "";
-
-        googleLogin.disabled =
-        true;
-
-        googleLogin.textContent =
-        "Opening Google Login...";
-
-        try{
-
-            await signInWithPopup(
-                auth,
-                provider
-            );
-
-        }
-        catch(error){
-
-            console.error(error);
-
-            loginError.textContent =
-            getError(error);
-
-        }
-
-        finally{
-
-            googleLogin.disabled =
-            false;
-
-            googleLogin.textContent =
-            "Continue with Google";
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-logoutBtn.addEventListener(
-    "click",
-    async()=>{
-
-        await signOut(auth);
-
-    }
-);
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-onAuthStateChanged(
-    auth,
-    user=>{
-
-        if(!user){
-
-            loginScreen.classList.remove(
-                "hidden"
-            );
-
-            return;
-
-        }
-
-
-        if(
-            user.email &&
-            user.email.toLowerCase() ===
-            ADMIN_EMAIL.toLowerCase()
-        ){
-
-            loginScreen.classList.add(
-                "hidden"
-            );
-
-            adminName.textContent =
-            user.displayName ||
-            "Admin";
-
-            adminPhoto.src =
-            user.photoURL ||
-            "https://via.placeholder.com/100";
-
-
-            startAdmin();
-
-        }
-        else{
-
-            loginScreen.classList.remove(
-                "hidden"
-            );
-
-            loginError.textContent =
-            "Access denied. This Google account is not the admin account.";
-
-            signOut(auth);
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   START ADMIN
-===================================================== */
-
-function startAdmin(){
-
-    generateRooms();
-
-    loadBookings();
-
-    loadCleaningRequests();
-
-    renderCalendar();
-
-}
-
-
-/* =====================================================
-   SIDEBAR NAVIGATION
-===================================================== */
-
-document
-.querySelectorAll(".menu-item")
-.forEach(item=>{
-
-    item.addEventListener(
-        "click",
-        ()=>{
-
-            openSection(
-                item.dataset.section
-            );
-
-        }
-    );
-
+const ADMIN_EMAIL="rishantbhaumik@gmail.com";
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getDatabase(app);
+const provider=new GoogleAuthProvider();
+
+let allBookingData=[];
+let allCleaningData=[];
+let selectedRequestId=null;
+let currentCalendarDate=new Date();
+let unsubscribeBookings=null;
+let unsubscribeCleaning=null;
+
+const $=id=>document.getElementById(id);
+const loginScreen=$("loginScreen"),googleLogin=$("googleLogin"),loginError=$("loginError");
+const adminName=$("adminName"),adminPhoto=$("adminPhoto"),logoutBtn=$("logoutBtn");
+
+googleLogin.addEventListener("click",async()=>{
+  loginError.textContent="";
+  googleLogin.disabled=true;
+  googleLogin.textContent="Opening Google Login...";
+  try{await signInWithPopup(auth,provider)}
+  catch(e){console.error(e);loginError.textContent=getError(e)}
+  finally{googleLogin.disabled=false;googleLogin.textContent="Continue with Google"}
 });
 
+logoutBtn.addEventListener("click",()=>signOut(auth));
 
-window.openSection =
-function(sectionName){
+onAuthStateChanged(auth,user=>{
+  stopListeners();
+  if(!user){
+    loginScreen.classList.remove("hidden");
+    return;
+  }
+  if((user.email||"").toLowerCase()!==ADMIN_EMAIL.toLowerCase()){
+    loginScreen.classList.remove("hidden");
+    loginError.textContent="Access denied. This Google account is not the admin account.";
+    signOut(auth);
+    return;
+  }
+  loginScreen.classList.add("hidden");
+  adminName.textContent=user.displayName||"Admin";
+  adminPhoto.src=user.photoURL||"https://via.placeholder.com/100";
+  startAdmin();
+});
 
-    document
-    .querySelectorAll(".section")
-    .forEach(section=>{
+function startAdmin(){
+  loadBookings();
+  loadCleaningRequests();
+  renderCalendar();
+}
 
-        section.classList.remove(
-            "active"
-        );
+function stopListeners(){
+  if(unsubscribeBookings){unsubscribeBookings();unsubscribeBookings=null}
+  if(unsubscribeCleaning){unsubscribeCleaning();unsubscribeCleaning=null}
+}
 
-    });
+document.querySelectorAll(".menu-item").forEach(item=>{
+  item.addEventListener("click",()=>openSection(item.dataset.section));
+});
 
-
-    const section =
-    document.getElementById(
-        sectionName
-    );
-
-    if(section){
-
-        section.classList.add(
-            "active"
-        );
-
-    }
-
-
-    document
-    .querySelectorAll(".menu-item")
-    .forEach(item=>{
-
-        item.classList.toggle(
-            "active",
-            item.dataset.section ===
-            sectionName
-        );
-
-    });
-
-
-    const titles = {
-
-        dashboard:
-        "Dashboard",
-
-        bookings:
-        "Bookings",
-
-        rooms:
-        "Rooms 1–70",
-
-        cleaning:
-        "Cleaning Requests",
-
-        calendar:
-        "Calendar"
-
-    };
-
-
-    document.getElementById(
-        "pageTitle"
-    ).textContent =
-    titles[sectionName] ||
-    "Dashboard";
-
-
-    if(sectionName === "calendar"){
-
-        renderCalendar();
-
-    }
-
+window.openSection=function(name){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  const section=$(name); if(section)section.classList.add("active");
+  document.querySelectorAll(".menu-item").forEach(i=>i.classList.toggle("active",i.dataset.section===name));
+  const titles={dashboard:"Dashboard",bookings:"Bookings",rooms:"Rooms 1–70",cleaning:"Cleaning Requests",calendar:"Calendar"};
+  $("pageTitle").textContent=titles[name]||"Dashboard";
+  if(name==="calendar")renderCalendar();
 };
-
-
-/* =====================================================
-   LOAD BOOKINGS
-===================================================== */
 
 function loadBookings(){
-
-    if(unsubscribeBookings){
-
-        unsubscribeBookings();
-
-    }
-
-
-    unsubscribeBookings =
-    onSnapshot(
-
-        collection(
-            db,
-            "roomRequests"
-        ),
-
-        snapshot=>{
-
-            allBookingData = [];
-
-
-            snapshot.forEach(item=>{
-
-                allBookingData.push({
-
-                    id:item.id,
-
-                    data:item.data()
-
-                });
-
-            });
-
-
-            allBookingData.sort(
-                (a,b)=>{
-
-                    const aTime =
-                    a.data.createdAt
-                    ?.toMillis?.() || 0;
-
-                    const bTime =
-                    b.data.createdAt
-                    ?.toMillis?.() || 0;
-
-                    return bTime-aTime;
-
-                }
-            );
-
-
-            renderBookings();
-
-            renderDashboard();
-
-            generateRooms();
-
-            renderCalendar();
-
-        },
-
-        error=>{
-
-            console.error(
-                "BOOKING ERROR:",
-                error
-            );
-
-            document.getElementById(
-                "bookingTable"
-            ).innerHTML =
-            `<p style="color:#b91c1c;">
-                Unable to load bookings:
-                ${escapeHTML(getError(error))}
-            </p>`;
-
-        }
-
-    );
-
+  if(unsubscribeBookings)unsubscribeBookings();
+  unsubscribeBookings=onValue(ref(db,"roomRequests"),snapshot=>{
+    allBookingData=[];
+    snapshot.forEach(child=>{
+      const data=child.val()||{};
+      allBookingData.push({id:child.key,data});
+    });
+    allBookingData.sort((a,b)=>Number(b.data.createdAt||0)-Number(a.data.createdAt||0));
+    renderBookings();
+    renderDashboard();
+    generateRooms();
+    renderCalendar();
+  },error=>{
+    console.error("RTDB booking error:",error);
+    $("bookingTable").innerHTML=`<p style="color:#b91c1c">Unable to load bookings: ${escapeHTML(getError(error))}</p>`;
+  });
 }
-
-
-/* =====================================================
-   RENDER DASHBOARD
-===================================================== */
 
 function renderDashboard(){
-
-    const total =
-    allBookingData.length;
-
-
-    const pending =
-    allBookingData.filter(
-        x=>(
-            x.data.status ||
-            "pending"
-        ) === "pending"
-    ).length;
-
-
-    const approved =
-    allBookingData.filter(
-        x=>
-        x.data.status ===
-        "approved"
-    ).length;
-
-
-    document.getElementById(
-        "totalRequests"
-    ).textContent =
-    total;
-
-
-    document.getElementById(
-        "pendingRequests"
-    ).textContent =
-    pending;
-
-
-    document.getElementById(
-        "approvedRequests"
-    ).textContent =
-    approved;
-
-
-    document.getElementById(
-        "cleaningCount"
-    ).textContent =
-    allCleaningData.filter(
-        x=>
-        x.data.status !==
-        "completed"
-    ).length;
-
-
-    renderRecent();
-
+  $("totalRequests").textContent=allBookingData.length;
+  $("pendingRequests").textContent=allBookingData.filter(x=>(x.data.status||"pending")==="pending").length;
+  $("approvedRequests").textContent=allBookingData.filter(x=>x.data.status==="approved").length;
+  $("cleaningCount").textContent=allCleaningData.filter(x=>(x.data.status||"pending")!=="completed").length;
+  renderRecent();
 }
-
-
-/* =====================================================
-   RECENT
-===================================================== */
 
 function renderRecent(){
-
-    const container =
-    document.getElementById(
-        "recentRequests"
-    );
-
-
-    const recent =
-    allBookingData.slice(0,5);
-
-
-    if(!recent.length){
-
-        container.innerHTML =
-        `<p style="padding:20px;color:#6b7280;">
-            No room requests yet.
-        </p>`;
-
-        return;
-
-    }
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Guest</th>
-                    <th>Check-in</th>
-                    <th>Check-out</th>
-                    <th>Status</th>
-                    <th>Action</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-    `;
-
-
-    recent.forEach(item=>{
-
-        const d =
-        item.data;
-
-        const status =
-        d.status ||
-        "pending";
-
-
-        html += `
-
-            <tr>
-
-                <td>
-                    ${escapeHTML(
-                        (d.firstName || "") +
-                        " " +
-                        (d.lastName || "")
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        d.checkIn || "-"
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        d.checkOut || "-"
-                    )}
-                </td>
-
-                <td>
-                    ${statusBadge(status)}
-                </td>
-
-                <td>
-                    <button
-                        class="btn btn-view"
-                        onclick="viewRequest('${item.id}')"
-                    >
-                        View
-                    </button>
-                </td>
-
-            </tr>
-
-        `;
-
-    });
-
-
-    html += `
-            </tbody>
-        </table>
-    `;
-
-
-    container.innerHTML =
-    html;
-
+  const recent=allBookingData.slice(0,5);
+  if(!recent.length){$("recentRequests").innerHTML='<p style="padding:20px;color:#6b7280">No room requests yet.</p>';return}
+  let html=`<table><thead><tr><th>Guest</th><th>Check-in</th><th>Check-out</th><th>Status</th><th>Action</th></tr></thead><tbody>`;
+  recent.forEach(item=>{
+    const d=item.data,status=d.status||"pending";
+    html+=`<tr><td>${escapeHTML((d.firstName||"")+" "+(d.lastName||""))}</td><td>${escapeHTML(d.checkIn||"-")}</td><td>${escapeHTML(d.checkOut||"-")}</td><td>${statusBadge(status)}</td><td><button class="btn btn-view" onclick="viewRequest('${item.id}')">View</button></td></tr>`;
+  });
+  $("recentRequests").innerHTML=html+"</tbody></table>";
 }
-
-
-/* =====================================================
-   BOOKINGS TABLE
-===================================================== */
 
 function renderBookings(){
-
-    const container =
-    document.getElementById(
-        "bookingTable"
-    );
-
-
-    const filter =
-    document.getElementById(
-        "bookingFilter"
-    ).value;
-
-
-    const filtered =
-    allBookingData.filter(item=>{
-
-        const status =
-        item.data.status ||
-        "pending";
-
-        return (
-            filter === "all" ||
-            status === filter
-        );
-
-    });
-
-
-    if(!filtered.length){
-
-        container.innerHTML =
-        `<p style="padding:20px;color:#6b7280;">
-            No requests found.
-        </p>`;
-
-        return;
-
-    }
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Guest</th>
-                    <th>Email</th>
-                    <th>Dates</th>
-                    <th>Room</th>
-                    <th>Status</th>
-                    <th>Action</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-    `;
-
-
-    filtered.forEach(item=>{
-
-        const d =
-        item.data;
-
-        const status =
-        d.status ||
-        "pending";
-
-
-        html += `
-
-            <tr>
-
-                <td>
-                    <b>
-                        ${escapeHTML(
-                            (d.firstName || "") +
-                            " " +
-                            (d.lastName || "")
-                        )}
-                    </b>
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        d.email ||
-                        d.userEmail ||
-                        "-"
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        d.checkIn || "-"
-                    )}
-                    →
-                    ${escapeHTML(
-                        d.checkOut || "-"
-                    )}
-                </td>
-
-                <td>
-                    ${d.room
-                        ? escapeHTML(d.room)
-                        : "Not assigned"}
-                </td>
-
-                <td>
-                    ${statusBadge(status)}
-                </td>
-
-                <td>
-
-                    <button
-                        class="btn btn-view"
-                        onclick="viewRequest('${item.id}')"
-                    >
-                        👁️ View
-                    </button>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    });
-
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    container.innerHTML =
-    html;
-
+  const filter=$("bookingFilter").value;
+  const filtered=allBookingData.filter(item=>filter==="all"||(item.data.status||"pending")===filter);
+  if(!filtered.length){$("bookingTable").innerHTML='<p style="padding:20px;color:#6b7280">No requests found.</p>';return}
+  let html=`<table><thead><tr><th>Guest</th><th>Email</th><th>Dates</th><th>Room</th><th>Status</th><th>Action</th></tr></thead><tbody>`;
+  filtered.forEach(item=>{
+    const d=item.data,status=d.status||"pending";
+    html+=`<tr>
+      <td><b>${escapeHTML((d.firstName||"")+" "+(d.lastName||""))}</b></td>
+      <td>${escapeHTML(d.email||d.userEmail||"-")}</td>
+      <td>${escapeHTML(d.checkIn||"-")} → ${escapeHTML(d.checkOut||"-")}</td>
+      <td>${d.room?escapeHTML(d.room):"Not assigned"}</td>
+      <td>${statusBadge(status)}</td>
+      <td><button class="btn btn-view" onclick="viewRequest('${item.id}')">👁️ View</button></td>
+    </tr>`;
+  });
+  $("bookingTable").innerHTML=html+"</tbody></table>";
 }
-
-
-document
-.getElementById("bookingFilter")
-.addEventListener(
-    "change",
-    renderBookings
-);
-
-
-/* =====================================================
-   VIEW REQUEST
-===================================================== */
-
-window.viewRequest =
-function(id){
-
-    const item =
-    allBookingData.find(
-        x=>x.id === id
-    );
-
-
-    if(!item){
-
-        return;
-
-    }
-
-
-    selectedRequestId =
-    id;
-
-
-    const d =
-    item.data;
-
-
-    const details =
-    document.getElementById(
-        "guestDetails"
-    );
-
-
-    details.innerHTML = `
-
-        <div class="detail">
-            <strong>Guest Name</strong>
-            <span>
-                ${escapeHTML(
-                    (d.firstName || "") +
-                    " " +
-                    (d.lastName || "")
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Email</strong>
-            <span>
-                ${escapeHTML(
-                    d.email ||
-                    d.userEmail ||
-                    "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Phone</strong>
-            <span>
-                ${escapeHTML(
-                    d.phone || "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Passport</strong>
-            <span>
-                ${escapeHTML(
-                    d.passport || "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Check-in</strong>
-            <span>
-                ${escapeHTML(
-                    d.checkIn || "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Check-out</strong>
-            <span>
-                ${escapeHTML(
-                    d.checkOut || "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>AC Room</strong>
-            <span>
-                ${escapeHTML(
-                    d.acRoom || "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Hot Water</strong>
-            <span>
-                ${escapeHTML(
-                    d.hotWater || "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Beds</strong>
-            <span>
-                ${d.beds || 0}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Utensils</strong>
-            <span>
-                ${escapeHTML(
-                    d.utensils || "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Water Jugs</strong>
-            <span>
-                ${d.waterJugs || 0}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Mosquito Dispeller</strong>
-            <span>
-                ${escapeHTML(
-                    d.mosquito || "-"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Total Extra</strong>
-            <span>
-                ₹${d.totalExtra || 0}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Current Room</strong>
-            <span>
-                ${escapeHTML(
-                    d.room || "Not assigned"
-                )}
-            </span>
-        </div>
-
-        <div class="detail">
-            <strong>Status</strong>
-            <span>
-                ${statusBadge(
-                    d.status || "pending"
-                )}
-            </span>
-        </div>
-
-    `;
-
-
-    /* ROOM SELECT */
-
-    const roomSelect =
-    document.getElementById(
-        "assignRoom"
-    );
-
-
-    roomSelect.innerHTML =
-    `<option value="">
-        Select Room
-    </option>`;
-
-
-    for(
-        let i=1;
-        i<=70;
-        i++
-    ){
-
-        const room =
-        "Room " + i;
-
-
-        const option =
-        document.createElement(
-            "option"
-        );
-
-
-        option.value =
-        room;
-
-        option.textContent =
-        room;
-
-
-        if(
-            d.room === room
-        ){
-
-            option.selected =
-            true;
-
-        }
-
-
-        roomSelect.appendChild(
-            option
-        );
-
-    }
-
-
-    /* ACTION BUTTONS */
-
-    const actions =
-    document.getElementById(
-        "modalActions"
-    );
-
-
-    actions.innerHTML = `
-
-        <button
-            class="btn btn-approve"
-            onclick="changeStatus('${id}','approved')"
-        >
-            ✅ Approve
-        </button>
-
-        <button
-            class="btn btn-pending"
-            onclick="changeStatus('${id}','pending')"
-        >
-            ⏳ Pending
-        </button>
-
-        <button
-            class="btn btn-reject"
-            onclick="changeStatus('${id}','rejected')"
-        >
-            ❌ Reject
-        </button>
-
-        <button
-            class="btn btn-delete"
-            onclick="deleteRequest('${id}')"
-        >
-            🗑️ Delete
-        </button>
-
-    `;
-
-
-    document
-    .getElementById(
-        "detailsModal"
-    )
-    .classList.add(
-        "show"
-    );
-
+$("bookingFilter").addEventListener("change",renderBookings);
+
+window.viewRequest=function(id){
+  const item=allBookingData.find(x=>x.id===id); if(!item)return;
+  selectedRequestId=id;
+  const d=item.data;
+  $("guestDetails").innerHTML=`
+    ${detail("Guest Name",(d.firstName||"")+" "+(d.lastName||""))}
+    ${detail("Email",d.email||d.userEmail||"-")}
+    ${detail("Phone",d.phone||"-")}
+    ${detail("Passport",d.passport||"-")}
+    ${detail("Check-in",d.checkIn||"-")}
+    ${detail("Check-out",d.checkOut||"-")}
+    ${detail("AC Room",d.acRoom||"-")}
+    ${detail("Hot Water",d.hotWater||"-")}
+    ${detail("Beds",d.beds||0)}
+    ${detail("Utensils",d.utensils||"-")}
+    ${detail("Water Jugs",d.waterJugs||0)}
+    ${detail("Mosquito Dispeller",d.mosquito||"-")}
+    ${detail("Total Extra","₹"+(d.totalExtra||0))}
+    ${detail("Current Room",d.room||"Not assigned")}
+    <div class="detail"><strong>Status</strong><span>${statusBadge(d.status||"pending")}</span></div>`;
+  const select=$("assignRoom");
+  select.innerHTML='<option value="">Select Room</option>';
+  for(let i=1;i<=70;i++){
+    const room="Room "+i,opt=document.createElement("option");
+    opt.value=room;opt.textContent=room;if(d.room===room)opt.selected=true;
+    select.appendChild(opt);
+  }
+  $("modalActions").innerHTML=`
+    <button class="btn btn-approve" onclick="changeStatus('${id}','approved')">✅ Approve</button>
+    <button class="btn btn-pending" onclick="changeStatus('${id}','pending')">⏳ Pending</button>
+    <button class="btn btn-reject" onclick="changeStatus('${id}','rejected')">❌ Reject</button>
+    <button class="btn btn-delete" onclick="deleteRequest('${id}')">🗑️ Delete</button>`;
+  $("detailsModal").classList.add("show");
 };
 
+function detail(title,value){return `<div class="detail"><strong>${escapeHTML(title)}</strong><span>${escapeHTML(value)}</span></div>`}
 
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
+window.closeModal=()=>{$("detailsModal").classList.remove("show");selectedRequestId=null};
 
-window.closeModal =
-function(){
-
-    document
-    .getElementById(
-        "detailsModal"
-    )
-    .classList.remove(
-        "show"
-    );
-
+window.changeStatus=async function(id,status){
+  try{
+    await update(ref(db,"roomRequests/"+id),{status});
+    viewRequest(id);
+  }catch(e){alert("Status update failed:\n"+getError(e))}
 };
 
+$("saveRoomBtn").addEventListener("click",async()=>{
+  if(!selectedRequestId)return;
+  const room=$("assignRoom").value;if(!room){alert("Please select a room.");return}
+  try{
+    await update(ref(db,"roomRequests/"+selectedRequestId),{room});
+    alert(room+" assigned successfully.");
+    viewRequest(selectedRequestId);
+  }catch(e){alert("Room assignment failed:\n"+getError(e))}
+});
 
-/* =====================================================
-   CHANGE BOOKING STATUS
-===================================================== */
-
-window.changeStatus =
-async function(id,status){
-
-    try{
-
-        await updateDoc(
-
-            doc(
-                db,
-                "roomRequests",
-                id
-            ),
-
-            {
-                status:status
-            }
-
-        );
-
-
-        viewRequest(id);
-
-    }
-    catch(error){
-
-        alert(
-            "Status update failed:\n" +
-            getError(error)
-        );
-
-    }
-
+window.deleteRequest=async function(id){
+  if(!confirm("Delete this room request permanently?"))return;
+  try{await remove(ref(db,"roomRequests/"+id));closeModal()}
+  catch(e){alert("Delete failed:\n"+getError(e))}
 };
-
-
-/* =====================================================
-   ASSIGN ROOM
-===================================================== */
-
-document
-.getElementById("saveRoomBtn")
-.addEventListener(
-    "click",
-    async()=>{
-
-        if(!selectedRequestId){
-
-            return;
-
-        }
-
-
-        const room =
-        document.getElementById(
-            "assignRoom"
-        ).value;
-
-
-        if(!room){
-
-            alert(
-                "Please select a room."
-            );
-
-            return;
-
-        }
-
-
-        try{
-
-            await updateDoc(
-
-                doc(
-                    db,
-                    "roomRequests",
-                    selectedRequestId
-                ),
-
-                {
-                    room:room
-                }
-
-            );
-
-
-            alert(
-                room +
-                " assigned successfully."
-            );
-
-
-            viewRequest(
-                selectedRequestId
-            );
-
-        }
-        catch(error){
-
-            alert(
-                "Room assignment failed:\n" +
-                getError(error)
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   DELETE REQUEST
-===================================================== */
-
-window.deleteRequest =
-async function(id){
-
-    if(
-        !confirm(
-            "Delete this room request permanently?"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    try{
-
-        await deleteDoc(
-
-            doc(
-                db,
-                "roomRequests",
-                id
-            )
-
-        );
-
-
-        closeModal();
-
-    }
-    catch(error){
-
-        alert(
-            "Delete failed:\n" +
-            getError(error)
-        );
-
-    }
-
-};
-
-
-/* =====================================================
-   ROOMS 1–70
-===================================================== */
 
 function generateRooms(){
-
-    const grid =
-    document.getElementById(
-        "roomsGrid"
-    );
-
-
-    grid.innerHTML =
-    "";
-
-
-    for(
-        let i=1;
-        i<=70;
-        i++
-    ){
-
-        const roomName =
-        "Room " + i;
-
-
-        const today =
-        new Date();
-
-        today.setHours(
-            0,0,0,0
-        );
-
-
-        const booking =
-        allBookingData.find(
-            item=>{
-
-                const d =
-                item.data;
-
-
-                if(
-                    d.status !==
-                    "approved" ||
-                    d.room !==
-                    roomName
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    !d.checkIn ||
-                    !d.checkOut
-                ){
-
-                    return false;
-
-                }
-
-
-                const start =
-                dateOnly(
-                    d.checkIn
-                );
-
-                const end =
-                dateOnly(
-                    d.checkOut
-                );
-
-
-                return (
-                    today >= start &&
-                    today < end
-                );
-
-            }
-        );
-
-
-        const room =
-        document.createElement(
-            "div"
-        );
-
-
-        room.className =
-        "room " +
-        (
-            booking
-            ? "occupied"
-            : "free"
-        );
-
-
-        room.innerHTML = `
-
-            <div class="room-number">
-                🚪 ${roomName}
-            </div>
-
-            <div class="room-status">
-
-                ${
-                    booking
-                    ? "🔴 Occupied"
-                    : "🟢 Available"
-                }
-
-            </div>
-
-            ${
-                booking
-                ?
-                `
-                <div class="room-guest">
-
-                    <b>
-                        ${escapeHTML(
-                            (booking.data.firstName || "") +
-                            " " +
-                            (booking.data.lastName || "")
-                        )}
-                    </b>
-
-                    <br>
-
-                    ${escapeHTML(
-                        booking.data.checkIn || ""
-                    )}
-                    →
-                    ${escapeHTML(
-                        booking.data.checkOut || ""
-                    )}
-
-                </div>
-                `
-                :
-                `
-                <div class="room-guest">
-                    No current booking
-                </div>
-                `
-            }
-
-        `;
-
-
-        grid.appendChild(
-            room
-        );
-
-    }
-
+  const grid=$("roomsGrid");grid.innerHTML="";
+  for(let i=1;i<=70;i++){
+    const roomName="Room "+i;
+    const booking=allBookingData.find(item=>{
+      const d=item.data;if(d.status!=="approved"||d.room!==roomName||!d.checkIn||!d.checkOut)return false;
+      const start=dateOnly(d.checkIn),end=dateOnly(d.checkOut),today=new Date();today.setHours(0,0,0,0);
+      return today>=start&&today<end;
+    });
+    const div=document.createElement("div");div.className="room "+(booking?"occupied":"free");
+    div.innerHTML=`<div class="room-number">🚪 ${roomName}</div><div class="room-status">${booking?"🔴 Occupied":"🟢 Available"}</div>
+    <div class="room-guest">${booking?`<b>${escapeHTML((booking.data.firstName||"")+" "+(booking.data.lastName||""))}</b><br>${escapeHTML(booking.data.checkIn||"")} → ${escapeHTML(booking.data.checkOut||"")}`:"No current booking"}</div>`;
+    grid.appendChild(div);
+  }
 }
-
-
-/* =====================================================
-   CLEANING REQUESTS
-===================================================== */
 
 function loadCleaningRequests(){
-
-    if(unsubscribeCleaning){
-
-        unsubscribeCleaning();
-
-    }
-
-
-    unsubscribeCleaning =
-    onSnapshot(
-
-        collection(
-            db,
-            "cleaningRequests"
-        ),
-
-        snapshot=>{
-
-            allCleaningData =
-            [];
-
-
-            snapshot.forEach(item=>{
-
-                allCleaningData.push({
-
-                    id:item.id,
-
-                    data:item.data()
-
-                });
-
-            });
-
-
-            allCleaningData.sort(
-                (a,b)=>{
-
-                    const aTime =
-                    a.data.createdAt
-                    ?.toMillis?.() || 0;
-
-                    const bTime =
-                    b.data.createdAt
-                    ?.toMillis?.() || 0;
-
-                    return bTime-aTime;
-
-                }
-            );
-
-
-            renderCleaning();
-
-            renderDashboard();
-
-        },
-
-        error=>{
-
-            console.error(
-                "CLEANING ERROR:",
-                error
-            );
-
-
-            document.getElementById(
-                "cleaningList"
-            ).innerHTML =
-            `<p style="color:#b91c1c;">
-                Unable to load cleaning requests.
-            </p>`;
-
-        }
-
-    );
-
+  if(unsubscribeCleaning)unsubscribeCleaning();
+  unsubscribeCleaning=onValue(ref(db,"cleaningRequests"),snapshot=>{
+    allCleaningData=[];
+    snapshot.forEach(child=>allCleaningData.push({id:child.key,data:child.val()||{}}));
+    allCleaningData.sort((a,b)=>Number(b.data.createdAt||0)-Number(a.data.createdAt||0));
+    renderCleaning();renderDashboard();
+  },error=>{
+    console.error("RTDB cleaning error:",error);
+    $("cleaningList").innerHTML='<p style="color:#b91c1c">Unable to load cleaning requests.</p>';
+  });
 }
-
-
-/* =====================================================
-   RENDER CLEANING
-===================================================== */
 
 function renderCleaning(){
-
-    const container =
-    document.getElementById(
-        "cleaningList"
-    );
-
-
-    const filter =
-    document.getElementById(
-        "cleaningFilter"
-    ).value;
-
-
-    const filtered =
-    allCleaningData.filter(item=>{
-
-        const status =
-        item.data.status ||
-        "pending";
-
-
-        return (
-            filter === "all" ||
-            filter === status
-        );
-
-    });
-
-
-    if(!filtered.length){
-
-        container.innerHTML =
-        `<p style="padding:20px;color:#6b7280;">
-            No cleaning requests found.
-        </p>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-    "";
-
-
-    filtered.forEach(item=>{
-
-        const d =
-        item.data;
-
-
-        const status =
-        d.status ||
-        "pending";
-
-
-        const card =
-        document.createElement(
-            "div"
-        );
-
-
-        card.className =
-        "cleaning-card";
-
-
-        card.innerHTML = `
-
-            <div class="cleaning-top">
-
-                <div>
-
-                    <h3>
-                        🧹 ${escapeHTML(
-                            d.room ||
-                            "Room not selected"
-                        )}
-                    </h3>
-
-                    <p>
-                        <b>Guest:</b>
-                        ${escapeHTML(
-                            d.guestName ||
-                            "Guest"
-                        )}
-                    </p>
-
-                    <p>
-                        <b>Email:</b>
-                        ${escapeHTML(
-                            d.guestEmail ||
-                            "-"
-                        )}
-                    </p>
-
-                </div>
-
-                <div>
-                    ${statusBadge(status)}
-                </div>
-
-            </div>
-
-
-            <div class="problem">
-
-                <b>
-                    Problem / Cleaning Request
-                </b>
-
-                <p style="margin-top:7px;">
-                    ${escapeHTML(
-                        d.problem ||
-                        "-"
-                    )}
-                </p>
-
-            </div>
-
-
-            <div class="cleaning-actions">
-
-                <button
-                    class="btn btn-pending"
-                    onclick="changeCleaningStatus('${item.id}','pending')"
-                >
-                    Pending
-                </button>
-
-                <button
-                    class="btn btn-progress"
-                    onclick="changeCleaningStatus('${item.id}','in-progress')"
-                >
-                    In Progress
-                </button>
-
-                <button
-                    class="btn btn-complete"
-                    onclick="changeCleaningStatus('${item.id}','completed')"
-                >
-                    Completed
-                </button>
-
-                <button
-                    class="btn btn-delete"
-                    onclick="deleteCleaning('${item.id}')"
-                >
-                    Delete
-                </button>
-
-            </div>
-
-        `;
-
-
-        container.appendChild(
-            card
-        );
-
-    });
-
+  const filter=$("cleaningFilter").value;
+  const filtered=allCleaningData.filter(x=>filter==="all"||(x.data.status||"pending")===filter);
+  if(!filtered.length){$("cleaningList").innerHTML='<p style="padding:20px;color:#6b7280">No cleaning requests found.</p>';return}
+  $("cleaningList").innerHTML="";
+  filtered.forEach(item=>{
+    const d=item.data,status=d.status||"pending";
+    const card=document.createElement("div");card.className="cleaning-card";
+    card.innerHTML=`<div class="cleaning-top"><div><h3>🧹 ${escapeHTML(d.room||"Room not selected")}</h3>
+      <p><b>Guest:</b> ${escapeHTML(d.guestName||"Guest")}</p><p><b>Email:</b> ${escapeHTML(d.guestEmail||"-")}</p></div><div>${statusBadge(status)}</div></div>
+      <div class="problem"><b>Problem / Cleaning Request</b><p style="margin-top:7px">${escapeHTML(d.problem||"-")}</p></div>
+      <div class="cleaning-actions">
+        <button class="btn btn-pending" onclick="changeCleaningStatus('${item.id}','pending')">Pending</button>
+        <button class="btn btn-view" onclick="changeCleaningStatus('${item.id}','in-progress')">In Progress</button>
+        <button class="btn btn-approve" onclick="changeCleaningStatus('${item.id}','completed')">Completed</button>
+        <button class="btn btn-delete" onclick="deleteCleaning('${item.id}')">Delete</button>
+      </div>`;
+    $("cleaningList").appendChild(card);
+  });
 }
+$("cleaningFilter").addEventListener("change",renderCleaning);
 
-
-/* =====================================================
-   CLEANING STATUS
-===================================================== */
-
-window.changeCleaningStatus =
-async function(id,status){
-
-    try{
-
-        await updateDoc(
-
-            doc(
-                db,
-                "cleaningRequests",
-                id
-            ),
-
-            {
-                status:status
-            }
-
-        );
-
-    }
-    catch(error){
-
-        alert(
-            "Cleaning status update failed:\n" +
-            getError(error)
-        );
-
-    }
-
+window.changeCleaningStatus=async function(id,status){
+  try{await update(ref(db,"cleaningRequests/"+id),{status})}
+  catch(e){alert("Cleaning status update failed:\n"+getError(e))}
+};
+window.deleteCleaning=async function(id){
+  if(!confirm("Delete this cleaning request?"))return;
+  try{await remove(ref(db,"cleaningRequests/"+id))}
+  catch(e){alert("Delete failed:\n"+getError(e))}
 };
 
-
-/* =====================================================
-   DELETE CLEANING
-===================================================== */
-
-window.deleteCleaning =
-async function(id){
-
-    if(
-        !confirm(
-            "Delete this cleaning request?"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    try{
-
-        await deleteDoc(
-
-            doc(
-                db,
-                "cleaningRequests",
-                id
-            )
-
-        );
-
-    }
-    catch(error){
-
-        alert(
-            "Delete failed:\n" +
-            getError(error)
-        );
-
-    }
-
-};
-
-
-document
-.getElementById(
-    "cleaningFilter"
-)
-.addEventListener(
-    "change",
-    renderCleaning
-);
-
-
-/* =====================================================
-   CALENDAR VARIABLES
-===================================================== */
-
-const monthNames = [
-
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-
-];
-
-
-/* =====================================================
-   CALENDAR
-===================================================== */
-
+const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
 function renderCalendar(){
-
-    const year =
-    currentCalendarDate.getFullYear();
-
-    const month =
-    currentCalendarDate.getMonth();
-
-
-    document.getElementById(
-        "calendarTitle"
-    ).textContent =
-    monthNames[month] +
-    " " +
-    year;
-
-
-    const grid =
-    document.getElementById(
-        "calendarGrid"
-    );
-
-
-    grid.innerHTML =
-    "";
-
-
-    const firstDay =
-    new Date(
-        year,
-        month,
-        1
-    ).getDay();
-
-
-    const daysInMonth =
-    new Date(
-        year,
-        month + 1,
-        0
-    ).getDate();
-
-
-    /* EMPTY DAYS */
-
-    for(
-        let i=0;
-        i<firstDay;
-        i++
-    ){
-
-        const empty =
-        document.createElement(
-            "div"
-        );
-
-
-        empty.className =
-        "day empty-day";
-
-
-        grid.appendChild(
-            empty
-        );
-
-    }
-
-
-    /* DAYS */
-
-    for(
-        let day=1;
-        day<=daysInMonth;
-        day++
-    ){
-
-        const date =
-        new Date(
-            year,
-            month,
-            day
-        );
-
-
-        const cell =
-        document.createElement(
-            "div"
-        );
-
-
-        cell.className =
-        "day";
-
-
-        if(
-            isToday(date)
-        ){
-
-            cell.classList.add(
-                "today"
-            );
-
-        }
-
-
-        const number =
-        document.createElement(
-            "div"
-        );
-
-
-        number.className =
-        "day-number";
-
-
-        number.textContent =
-        day;
-
-
-        cell.appendChild(
-            number
-        );
-
-
-        /* BOOKINGS ON THIS DAY */
-
-        allBookingData
-        .filter(item=>{
-
-            const d =
-            item.data;
-
-
-            if(
-                d.status !==
-                "approved"
-            ){
-
-                return false;
-
-            }
-
-
-            if(
-                !d.checkIn ||
-                !d.checkOut ||
-                !d.room
-            ){
-
-                return false;
-
-            }
-
-
-            const start =
-            dateOnly(
-                d.checkIn
-            );
-
-            const end =
-            dateOnly(
-                d.checkOut
-            );
-
-
-            return (
-                date >= start &&
-                date < end
-            );
-
-        })
-        .forEach(item=>{
-
-            const d =
-            item.data;
-
-
-            const event =
-            document.createElement(
-                "div"
-            );
-
-
-            event.className =
-            "booking-event";
-
-
-            event.innerHTML =
-            `
-                🏨 <b>
-                ${escapeHTML(
-                    d.room
-                )}
-                </b>
-                <br>
-                ${escapeHTML(
-                    (d.firstName || "") +
-                    " " +
-                    (d.lastName || "")
-                )}
-            `;
-
-
-            event.onclick =
-            ()=>{
-
-                viewRequest(
-                    item.id
-                );
-
-            };
-
-
-            cell.appendChild(
-                event
-            );
-
-        });
-
-
-        grid.appendChild(
-            cell
-        );
-
-    }
-
+  const y=currentCalendarDate.getFullYear(),m=currentCalendarDate.getMonth();
+  $("calendarTitle").textContent=monthNames[m]+" "+y;
+  const grid=$("calendarGrid");grid.innerHTML="";
+  const firstDay=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
+  for(let i=0;i<firstDay;i++){const e=document.createElement("div");e.className="day empty-day";grid.appendChild(e)}
+  for(let day=1;day<=days;day++){
+    const date=new Date(y,m,day),cell=document.createElement("div");cell.className="day";
+    if(isToday(date))cell.classList.add("today");
+    cell.innerHTML=`<div class="day-number">${day}</div>`;
+    allBookingData.filter(item=>{
+      const d=item.data;if(d.status!=="approved"||!d.checkIn||!d.checkOut||!d.room)return false;
+      return date>=dateOnly(d.checkIn)&&date<dateOnly(d.checkOut);
+    }).forEach(item=>{
+      const d=item.data,event=document.createElement("div");event.className="booking-event";
+      event.innerHTML=`🏨 <b>${escapeHTML(d.room)}</b><br>${escapeHTML((d.firstName||"")+" "+(d.lastName||""))}`;
+      event.onclick=()=>viewRequest(item.id);cell.appendChild(event);
+    });
+    grid.appendChild(cell);
+  }
 }
-
-
-/* =====================================================
-   CALENDAR BUTTONS
-===================================================== */
-
-document
-.getElementById(
-    "prevMonth"
-)
-.addEventListener(
-    "click",
-    ()=>{
-
-        currentCalendarDate.setMonth(
-            currentCalendarDate.getMonth()-1
-        );
-
-        renderCalendar();
-
-    }
-);
-
-
-document
-.getElementById(
-    "nextMonth"
-)
-.addEventListener(
-    "click",
-    ()=>{
-
-        currentCalendarDate.setMonth(
-            currentCalendarDate.getMonth()+1
-        );
-
-        renderCalendar();
-
-    }
-);
-
-
-document
-.getElementById(
-    "todayBtn"
-)
-.addEventListener(
-    "click",
-    ()=>{
-
-        currentCalendarDate =
-        new Date();
-
-        renderCalendar();
-
-    }
-);
-
-
-/* =====================================================
-   HELPERS
-===================================================== */
+$("prevMonth").addEventListener("click",()=>{currentCalendarDate.setMonth(currentCalendarDate.getMonth()-1);renderCalendar()});
+$("nextMonth").addEventListener("click",()=>{currentCalendarDate.setMonth(currentCalendarDate.getMonth()+1);renderCalendar()});
+$("todayBtn").addEventListener("click",()=>{currentCalendarDate=new Date();renderCalendar()});
 
 function statusBadge(status){
-
-    let label =
-    status;
-
-
-    if(status === "in-progress"){
-
-        label =
-        "In Progress";
-
-    }
-    else{
-
-        label =
-        status.charAt(0).toUpperCase() +
-        status.slice(1);
-
-    }
-
-
-    return `
-        <span class="status ${escapeHTML(status)}">
-            ${escapeHTML(label)}
-        </span>
-    `;
-
+  const label=status==="in-progress"?"In Progress":status.charAt(0).toUpperCase()+status.slice(1);
+  return `<span class="status ${escapeHTML(status)}">${escapeHTML(label)}</span>`;
 }
-
-
-function dateOnly(value){
-
-    const parts =
-    value.split("-");
-
-    return new Date(
-        Number(parts[0]),
-        Number(parts[1])-1,
-        Number(parts[2])
-    );
-
+function dateOnly(v){const p=String(v).split("-");return new Date(Number(p[0]),Number(p[1])-1,Number(p[2]))}
+function isToday(d){const n=new Date();return d.getFullYear()===n.getFullYear()&&d.getMonth()===n.getMonth()&&d.getDate()===n.getDate()}
+function escapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function getError(e){
+  if(!e)return"Unknown error.";
+  if(e.code==="PERMISSION_DENIED"||e.code==="permission-denied")return"Realtime Database permission denied. Firebase Console → Realtime Database → Rules check karo.";
+  if(e.code==="auth/popup-blocked")return"Google login popup blocked hai.";
+  if(e.code==="auth/popup-closed-by-user")return"Google login window close kar di gayi.";
+  if(e.code==="auth/unauthorized-domain")return"Ye domain Firebase Authentication me authorized nahi hai.";
+  if(e.code==="auth/operation-not-allowed")return"Firebase Console me Google Sign-In enable karo.";
+  return e.message||"Something went wrong.";
 }
-
-
-function isToday(date){
-
-    const now =
-    new Date();
-
-
-    return (
-        date.getFullYear() ===
-        now.getFullYear() &&
-
-        date.getMonth() ===
-        now.getMonth() &&
-
-        date.getDate() ===
-        now.getDate()
-    );
-
-}
-
-
-function escapeHTML(value){
-
-    return String(
-        value ?? ""
-    )
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
-
-}
-
-
-function getError(error){
-
-    if(!error){
-
-        return "Unknown error.";
-
-    }
-
-
-    if(
-        error.code ===
-        "permission-denied"
-    ){
-
-        return "Firestore permission denied. Firebase Rules check karo.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/popup-blocked"
-    ){
-
-        return "Google login popup blocked hai.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/popup-closed-by-user"
-    ){
-
-        return "Google login window close kar di gayi.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/unauthorized-domain"
-    ){
-
-        return "Ye domain Firebase Authentication me authorized nahi hai.";
-
-    }
-
-
-    return (
-        error.message ||
-        "Something went wrong."
-    );
-
-}
-
-
-/* =====================================================
-   INITIAL
-===================================================== */
-
 renderCalendar();
-
 </script>
-
 </body>
 </html>
