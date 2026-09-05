@@ -336,13 +336,59 @@ window.viewRequest=function(id){
     ${detail("Total Extra","₹"+(d.totalExtra||0))}
     ${detail("Current Room",d.room||"Not assigned")}
     <div class="detail"><strong>Status</strong><span>${statusBadge(d.status||"pending")}</span></div>`;
+
   const select=$("assignRoom");
   select.innerHTML='<option value="">Select Room</option>';
-  for(let i=1;i<=70;i++){
-    const room="Room "+i,opt=document.createElement("option");
+
+  const roomNames=[
+    "101",
+    "102",
+    "103",
+    "104*",
+    "105*",
+    "106",
+    "107",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "17B",
+    "17C",
+    "18",
+    "19",
+    "H1",
+    "A1",
+    "A2",
+    "A7",
+    "A8",
+    "A9",
+    "A10",
+    "A11",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7",
+    "203",
+    "204",
+    "205",
+    "207"
+  ];
+
+  roomNames.forEach(roomName=>{
+    const room=roomName,opt=document.createElement("option");
     opt.value=room;opt.textContent=room;if(d.room===room)opt.selected=true;
     select.appendChild(opt);
-  }
+  });
+
   $("modalActions").innerHTML=`
     <button class="btn btn-approve" onclick="changeStatus('${id}','approved')">✅ Approve</button>
     <button class="btn btn-pending" onclick="changeStatus('${id}','pending')">⏳ Pending</button>
@@ -453,18 +499,62 @@ window.deleteRequest=async function(id){
 
 function generateRooms(){
   const grid=$("roomsGrid");grid.innerHTML="";
-  for(let i=1;i<=70;i++){
-    const roomName="Room "+i;
+
+  const roomNames=[
+    "101",
+    "102",
+    "103",
+    "104*",
+    "105*",
+    "106",
+    "107",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "17B",
+    "17C",
+    "18",
+    "19",
+    "H1",
+    "A1",
+    "A2",
+    "A7",
+    "A8",
+    "A9",
+    "A10",
+    "A11",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7",
+    "203",
+    "204",
+    "205",
+    "207"
+  ];
+
+  roomNames.forEach(roomName=>{
     const booking=allBookingData.find(item=>{
       const d=item.data;if(d.status!=="approved"||d.room!==roomName||!d.checkIn||!d.checkOut)return false;
       const start=dateOnly(d.checkIn),end=dateOnly(d.checkOut),today=new Date();today.setHours(0,0,0,0);
       return today>=start&&today<end;
     });
+
     const div=document.createElement("div");div.className="room "+(booking?"occupied":"free");
     div.innerHTML=`<div class="room-number">🚪 ${roomName}</div><div class="room-status">${booking?"🔴 Occupied":"🟢 Available"}</div>
     <div class="room-guest">${booking?`<b>${escapeHTML((booking.data.firstName||"")+" "+(booking.data.lastName||""))}</b><br>${escapeHTML(booking.data.checkIn||"")} → ${escapeHTML(booking.data.checkOut||"")}`:"No current booking"}</div>`;
     grid.appendChild(div);
-  }
+  });
 }
 
 function loadCleaningRequests(){
@@ -506,6 +596,7 @@ window.changeCleaningStatus=async function(id,status){
   try{await update(ref(db,"cleaningRequests/"+id),{status})}
   catch(e){alert("Cleaning status update failed:\n"+getError(e))}
 };
+
 window.deleteCleaning=async function(id){
   if(!confirm("Delete this cleaning request?"))return;
   try{await remove(ref(db,"cleaningRequests/"+id))}
@@ -513,16 +604,22 @@ window.deleteCleaning=async function(id){
 };
 
 const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
+
 function renderCalendar(){
   const y=currentCalendarDate.getFullYear(),m=currentCalendarDate.getMonth();
   $("calendarTitle").textContent=monthNames[m]+" "+y;
   const grid=$("calendarGrid");grid.innerHTML="";
   const firstDay=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
-  for(let i=0;i<firstDay;i++){const e=document.createElement("div");e.className="day empty-day";grid.appendChild(e)}
+
+  for(let i=0;i<firstDay;i++){
+    const e=document.createElement("div");e.className="day empty-day";grid.appendChild(e)
+  }
+
   for(let day=1;day<=days;day++){
     const date=new Date(y,m,day),cell=document.createElement("div");cell.className="day";
     if(isToday(date))cell.classList.add("today");
     cell.innerHTML=`<div class="day-number">${day}</div>`;
+
     allBookingData.filter(item=>{
       const d=item.data;if(d.status!=="approved"||!d.checkIn||!d.checkOut||!d.room)return false;
       return date>=dateOnly(d.checkIn)&&date<dateOnly(d.checkOut);
@@ -531,20 +628,45 @@ function renderCalendar(){
       event.innerHTML=`🏨 <b>${escapeHTML(d.room)}</b><br>${escapeHTML((d.firstName||"")+" "+(d.lastName||""))}`;
       event.onclick=()=>viewRequest(item.id);cell.appendChild(event);
     });
+
     grid.appendChild(cell);
   }
 }
-$("prevMonth").addEventListener("click",()=>{currentCalendarDate.setMonth(currentCalendarDate.getMonth()-1);renderCalendar()});
-$("nextMonth").addEventListener("click",()=>{currentCalendarDate.setMonth(currentCalendarDate.getMonth()+1);renderCalendar()});
-$("todayBtn").addEventListener("click",()=>{currentCalendarDate=new Date();renderCalendar()});
+
+$("prevMonth").addEventListener("click",()=>{
+  currentCalendarDate.setMonth(currentCalendarDate.getMonth()-1);
+  renderCalendar()
+});
+
+$("nextMonth").addEventListener("click",()=>{
+  currentCalendarDate.setMonth(currentCalendarDate.getMonth()+1);
+  renderCalendar()
+});
+
+$("todayBtn").addEventListener("click",()=>{
+  currentCalendarDate=new Date();
+  renderCalendar()
+});
 
 function statusBadge(status){
   const label=status==="in-progress"?"In Progress":status.charAt(0).toUpperCase()+status.slice(1);
   return `<span class="status ${escapeHTML(status)}">${escapeHTML(label)}</span>`;
 }
-function dateOnly(v){const p=String(v).split("-");return new Date(Number(p[0]),Number(p[1])-1,Number(p[2]))}
-function isToday(d){const n=new Date();return d.getFullYear()===n.getFullYear()&&d.getMonth()===n.getMonth()&&d.getDate()===n.getDate()}
-function escapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+
+function dateOnly(v){
+  const p=String(v).split("-");
+  return new Date(Number(p[0]),Number(p[1])-1,Number(p[2]))
+}
+
+function isToday(d){
+  const n=new Date();
+  return d.getFullYear()===n.getFullYear()&&d.getMonth()===n.getMonth()&&d.getDate()===n.getDate()
+}
+
+function escapeHTML(v){
+  return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")
+}
+
 function getError(e){
   if(!e)return"Unknown error.";
   if(e.code==="PERMISSION_DENIED"||e.code==="permission-denied")return"Realtime Database permission denied. Firebase Console → Realtime Database → Rules check karo.";
@@ -554,6 +676,7 @@ function getError(e){
   if(e.code==="auth/operation-not-allowed")return"Firebase Console me Google Sign-In enable karo.";
   return e.message||"Something went wrong.";
 }
+
 renderCalendar();
 </script>
 </body>
