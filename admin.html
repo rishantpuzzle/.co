@@ -209,12 +209,15 @@ const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getDatabase(app);
 const provider=new GoogleAuthProvider();
+provider.setCustomParameters({prompt:"select_account"});
 
 // EmailJS - ROOM CONFIRMATION ONLY
 const EMAILJS_PUBLIC_KEY="QfXRTgJSSkBcv72T7";
 const EMAILJS_SERVICE_ID="1234567890";
 const EMAILJS_TEMPLATE_ID="template_kq9x50d";
-emailjs.init({publicKey:EMAILJS_PUBLIC_KEY});
+if(window.emailjs){
+  emailjs.init({publicKey:EMAILJS_PUBLIC_KEY});
+}
 
 let allBookingData=[];
 let allCleaningData=[];
@@ -240,9 +243,15 @@ googleLogin.addEventListener("click",async()=>{
   loginError.textContent="";
   googleLogin.disabled=true;
   googleLogin.textContent="Opening Google Login...";
-  try{await signInWithPopup(auth,provider)}
-  catch(e){console.error(e);loginError.textContent=getError(e)}
-  finally{googleLogin.disabled=false;googleLogin.textContent="Continue with Google"}
+  try{
+    await signInWithPopup(auth,provider);
+  }catch(e){
+    console.error("GOOGLE LOGIN ERROR:",e);
+    loginError.textContent=getError(e);
+  }finally{
+    googleLogin.disabled=false;
+    googleLogin.textContent="Continue with Google";
+  }
 });
 
 logoutBtn.addEventListener("click",()=>signOut(auth));
@@ -675,10 +684,12 @@ function escapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("
 function getError(e){
   if(!e)return"Unknown error.";
   if(e.code==="PERMISSION_DENIED"||e.code==="permission-denied")return"Realtime Database permission denied. Firebase Console → Realtime Database → Rules check karo.";
-  if(e.code==="auth/popup-blocked")return"Google login popup blocked hai.";
+  if(e.code==="auth/popup-blocked")return"Google login popup blocked hai. Browser me popups allow karo aur dobara try karo.";
   if(e.code==="auth/popup-closed-by-user")return"Google login window close kar di gayi.";
-  if(e.code==="auth/unauthorized-domain")return"Ye domain Firebase Authentication me authorized nahi hai.";
-  if(e.code==="auth/operation-not-allowed")return"Firebase Console me Google Sign-In enable karo.";
+  if(e.code==="auth/unauthorized-domain")return"Ye website domain Firebase Authentication → Settings → Authorized domains me add nahi hai.";
+  if(e.code==="auth/operation-not-allowed")return"Firebase Console me Authentication → Sign-in method → Google ko Enable karo.";
+  if(e.code==="auth/network-request-failed")return"Internet connection ya Firebase network request me problem hai.";
+  if(e.code==="auth/cancelled-popup-request")return"Google login popup already open hai. Us popup ko complete karke dobara try karo.";
   return e.message||"Something went wrong.";
 }
 renderCalendar();
