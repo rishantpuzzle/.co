@@ -549,9 +549,7 @@ window.checkoutBooking=async function(id){
   const guestName=((d.firstName||"")+" "+(d.lastName||"")).trim() || d.userName || "Guest";
   const guestEmail=(d.email||d.userEmail||"").trim();
 
-  if(!confirm(room+" checkout karna hai?
-
-Checkout ke baad is room ki Cleaning Request automatically create ho jayegi."))return;
+  if(!confirm(room+" checkout karna hai?\n\nCheckout ke baad is room ki Cleaning Request automatically create ho jayegi."))return;
 
   try{
     // Mark the booking as checked out without changing its approval status.
@@ -571,9 +569,7 @@ Checkout ke baad is room ki Cleaning Request automatically create ho jayegi."))r
       createdAt:Date.now()
     });
 
-    alert(room+" checked out successfully.
-
-Cleaning request automatically added.");
+    alert(room+" checked out successfully.\n\nCleaning request automatically added.");
     renderBookings();
     generateRooms();
     renderTodayActivity();
