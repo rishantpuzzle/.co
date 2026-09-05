@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guest House- Munger Mandir</title>
+<title>Hotel Manager - Munger Mandir</title>
 <link rel="icon" type="image/png" href="logo.png">
 
 <style>
@@ -27,7 +27,7 @@ body{background:#f1f4f8;color:#111827}
 .stat-card{padding:22px}.stat-card .icon{font-size:27px;margin-bottom:12px}.stat-card h3{font-size:28px;color:#172033}.stat-card p{color:#6b7280;margin-top:5px}
 .card{padding:22px;margin-bottom:22px}.card-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.card-title h3{font-size:21px}
 .btn{border:none;border-radius:8px;padding:9px 13px;cursor:pointer;font-weight:bold;font-size:13px}
-.btn-view{background:#2563eb;color:#fff}.btn-approve{background:#16a34a;color:#fff}.btn-reject{background:#dc2626;color:#fff}.btn-pending{background:#a16207;color:#fff}.btn-room{background:#5b4a2d;color:#fff}.btn-delete{background:#b91c1c;color:#fff}
+.btn-view{background:#2563eb;color:#fff}.btn-checkout{background:#ea580c;color:#fff}.btn-approve{background:#16a34a;color:#fff}.btn-reject{background:#dc2626;color:#fff}.btn-pending{background:#a16207;color:#fff}.btn-room{background:#5b4a2d;color:#fff}.btn-delete{background:#b91c1c;color:#fff}
 .filters{display:flex;gap:10px;flex-wrap:wrap}
 select,input{padding:11px 12px;border:1px solid #d7dde6;border-radius:9px;background:#fff;outline:none}
 .table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:850px}
@@ -36,6 +36,13 @@ td{padding:14px 13px;border-top:1px solid #edf0f4;font-size:14px}
 .status{display:inline-block;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}
 .status.pending{background:#fef3c7;color:#92400e}.status.approved{background:#dcfce7;color:#166534}.status.rejected{background:#fee2e2;color:#991b1b}
 .status.in-progress{background:#dbeafe;color:#1d4ed8}.status.completed{background:#dcfce7;color:#166534}
+.activity-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:25px}
+.activity-stat{background:#fff;border:1px solid #e0e5ec;border-radius:18px;padding:22px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+.activity-stat-top{display:flex;align-items:center;justify-content:space-between;color:#64748b;font-size:18px}.activity-stat .activity-icon{font-size:32px}.activity-stat h3{font-size:48px;color:#172033;margin-top:12px}
+.activity-card{background:#fff;border:1px solid #e0e5ec;border-radius:18px;padding:22px;margin-bottom:22px}
+.activity-card-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.activity-card-title h3{font-size:28px;color:#172033}
+.refresh-btn{border:none;background:#eef4ff;color:#315794;padding:14px 24px;border-radius:14px;font-size:20px;font-weight:bold;cursor:pointer}
+.activity-empty{text-align:center;padding:48px 20px;color:#64748b;font-size:18px;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb}
 .rooms-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
 .room{background:#fff;border:1px solid #e0e5ec;border-radius:15px;padding:20px;min-height:125px}
 .room.free{border-left:5px solid #22c55e}.room.occupied{border-left:5px solid #ef4444}
@@ -56,10 +63,10 @@ td{padding:14px 13px;border-top:1px solid #edf0f4;font-size:14px}
 .modal-actions{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}.room-assignment{margin-top:20px;padding:17px;background:#f8fafc;border-radius:12px}.room-assignment label{display:block;font-weight:bold;margin-bottom:8px}.room-assignment select{width:100%}
 .login-screen{position:fixed;inset:0;background:#101827;display:flex;align-items:center;justify-content:center;z-index:5000}.login-card{width:90%;max-width:420px;background:#fff;border-radius:22px;padding:35px;text-align:center}
 .login-icon{font-size:55px;margin-bottom:15px}.login-card h2{margin-bottom:8px}.login-card p{color:#6b7280;line-height:1.5;margin-bottom:22px}.google-login{width:100%;padding:14px;border:none;border-radius:10px;background:#2563eb;color:#fff;font-size:15px;font-weight:bold;cursor:pointer}.login-error{color:#b91c1c;margin-top:15px;font-size:13px}.hidden{display:none!important}
-@media(max-width:1100px){.stats{grid-template-columns:repeat(2,1fr)}.rooms-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:1100px){.stats,.activity-stats{grid-template-columns:repeat(2,1fr)}.rooms-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:850px){.sidebar{width:220px}.main{margin-left:220px;padding:20px}.rooms-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:650px){.sidebar{position:relative;width:100%;height:auto;min-height:auto}.main{margin-left:0;padding:15px}.hotel-logo{padding-bottom:20px}.menu{display:grid;grid-template-columns:1fr 1fr}.menu-item{padding:13px}.menu-item span{font-size:15px}.stats{grid-template-columns:1fr 1fr}.rooms-grid{grid-template-columns:repeat(2,1fr)}.calendar-grid{gap:4px}.day{min-height:90px;padding:7px}.booking-event{font-size:10px;padding:5px}.details-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;gap:10px;flex-direction:column}}
-@media(max-width:430px){.menu{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.rooms-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.activity-stats{grid-template-columns:1fr 1fr}.activity-card-title{align-items:flex-start;gap:15px;flex-direction:column}.sidebar{position:relative;width:100%;height:auto;min-height:auto}.main{margin-left:0;padding:15px}.hotel-logo{padding-bottom:20px}.menu{display:grid;grid-template-columns:1fr 1fr}.menu-item{padding:13px}.menu-item span{font-size:15px}.stats{grid-template-columns:1fr 1fr}.rooms-grid{grid-template-columns:repeat(2,1fr)}.calendar-grid{gap:4px}.day{min-height:90px;padding:7px}.booking-event{font-size:10px;padding:5px}.details-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;gap:10px;flex-direction:column}}
+@media(max-width:430px){.menu{grid-template-columns:1fr}.stats,.activity-stats{grid-template-columns:1fr}.rooms-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -75,7 +82,7 @@ td{padding:14px 13px;border-top:1px solid #edf0f4;font-size:14px}
 </div>
 
 <aside class="sidebar">
-  <div class="hotel-logo"><div class="hotel-logo-icon">🏨</div><h1>Guest House Manager</h1></div>
+  <div class="hotel-logo"><div class="hotel-logo-icon">🏨</div><h1>Hotel Manager</h1></div>
   <div class="menu">
     <div class="menu-item active" data-section="dashboard">📊 <span>Dashboard</span></div>
     <div class="menu-item" data-section="bookings">🗓️ <span>Bookings</span></div>
@@ -109,6 +116,18 @@ td{padding:14px 13px;border-top:1px solid #edf0f4;font-size:14px}
   </section>
 
   <section id="bookings" class="section">
+    <div class="activity-stats">
+      <div class="activity-stat"><div class="activity-stat-top"><span>Today's Check-ins</span><span class="activity-icon">🛬</span></div><h3 id="todayCheckIns">0</h3></div>
+      <div class="activity-stat"><div class="activity-stat-top"><span>Today's Check-outs</span><span class="activity-icon">🛫</span></div><h3 id="todayCheckOuts">0</h3></div>
+      <div class="activity-stat"><div class="activity-stat-top"><span>Occupied Rooms</span><span class="activity-icon">🛏️</span></div><h3 id="occupiedRooms">0</h3></div>
+      <div class="activity-stat"><div class="activity-stat-top"><span>Cleaning Pending</span><span class="activity-icon">🧹</span></div><h3 id="cleaningPendingToday">0</h3></div>
+    </div>
+
+    <div class="activity-card">
+      <div class="activity-card-title"><h3>Today's Activity</h3><button class="refresh-btn" onclick="renderTodayActivity()">Refresh</button></div>
+      <div class="table-wrap" id="todayActivityTable">Loading...</div>
+    </div>
+
     <div class="card">
       <div class="card-title">
         <h3>All Room Requests</h3>
@@ -116,7 +135,7 @@ td{padding:14px 13px;border-top:1px solid #edf0f4;font-size:14px}
           <select id="bookingFilter"><option value="all">All Requests</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
         </div>
       </div>
-      <div id="bookingTable"<button id="checkoutBtn" class="checkout-btn">Checkout</button> class="table-wrap">Loading bookings...</div>
+      <div id="bookingTable" class="table-wrap">Loading bookings...</div>
     </div>
   </section>
 
@@ -168,7 +187,7 @@ td{padding:14px 13px;border-top:1px solid #edf0f4;font-size:14px}
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged}
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-import {getDatabase,ref,onValue,update,remove}
+import {getDatabase,ref,onValue,update,remove,push}
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
 const firebaseConfig={
@@ -182,7 +201,10 @@ const firebaseConfig={
   databaseURL:"https://munger-mandir-room-request-default-rtdb.firebaseio.com"
 };
 
-const ADMIN_EMAIL="rishantbhaumik@gmail.com";
+const ADMIN_EMAILS=[
+  "radhamohanmandir@gmail.com",
+  "rishantbhaumik@gmail.com"
+];
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getDatabase(app);
@@ -200,6 +222,15 @@ let selectedRequestId=null;
 let currentCalendarDate=new Date();
 let unsubscribeBookings=null;
 let unsubscribeCleaning=null;
+
+const ROOM_NAMES=[
+  "101","102","103","104*","105*","106","107",
+  "1","2","3","4","5","6","7","8","9","10",
+  "17B","17C","18","19","H1",
+  "A1","A2","A7","A8","A9","A10","A11",
+  "M1","M2","M3","M4","M5","M6","M7",
+  "203","204","205","207"
+];
 
 const $=id=>document.getElementById(id);
 const loginScreen=$("loginScreen"),googleLogin=$("googleLogin"),loginError=$("loginError");
@@ -222,7 +253,7 @@ onAuthStateChanged(auth,user=>{
     loginScreen.classList.remove("hidden");
     return;
   }
-  if((user.email||"").toLowerCase()!==ADMIN_EMAIL.toLowerCase()){
+  if(!ADMIN_EMAILS.includes((user.email||"").toLowerCase())){
     loginScreen.classList.remove("hidden");
     loginError.textContent="Access denied. This Google account is not the admin account.";
     signOut(auth);
@@ -271,10 +302,59 @@ function loadBookings(){
     renderDashboard();
     generateRooms();
     renderCalendar();
+    renderTodayActivity();
   },error=>{
     console.error("RTDB booking error:",error);
     $("bookingTable").innerHTML=`<p style="color:#b91c1c">Unable to load bookings: ${escapeHTML(getError(error))}</p>`;
   });
+}
+
+function renderTodayActivity(){
+  const today=new Date();today.setHours(0,0,0,0);
+  const todayKey=[
+    today.getFullYear(),
+    String(today.getMonth()+1).padStart(2,"0"),
+    String(today.getDate()).padStart(2,"0")
+  ].join("-");
+
+  const checkIns=allBookingData.filter(item=>item.data.status==="approved"&&item.data.checkIn===todayKey);
+  const checkOuts=allBookingData.filter(item=>item.data.status==="approved"&&item.data.checkOut===todayKey);
+  const occupied=allBookingData.filter(item=>{
+    const d=item.data;
+    if(d.status!=="approved"||d.checkedOutAt||!d.room||!d.checkIn||!d.checkOut)return false;
+    return today>=dateOnly(d.checkIn)&&today<dateOnly(d.checkOut);
+  });
+  const cleaningPending=allCleaningData.filter(item=>(item.data.status||"pending")!=="completed");
+
+  $("todayCheckIns").textContent=checkIns.length;
+  $("todayCheckOuts").textContent=checkOuts.length;
+  $("occupiedRooms").textContent=occupied.length;
+  $("cleaningPendingToday").textContent=cleaningPending.length;
+
+  const activities=[
+    ...checkIns.map(item=>({item,type:"Check-in"})),
+    ...checkOuts.map(item=>({item,type:"Check-out"}))
+  ];
+
+  const table=$("todayActivityTable");
+  if(!activities.length){
+    table.innerHTML='<div class="activity-empty">No activity today.</div>';
+    return;
+  }
+
+  let html=`<table><thead><tr><th>GUEST</th><th>ROOM</th><th>CHECK-IN</th><th>CHECK-OUT</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody>`;
+  activities.forEach(({item,type})=>{
+    const d=item.data;
+    html+=`<tr>
+      <td><b>${escapeHTML((d.firstName||"")+" "+(d.lastName||""))}</b></td>
+      <td>${escapeHTML(d.room||"-")}</td>
+      <td>${escapeHTML(d.checkIn||"-")}</td>
+      <td>${escapeHTML(d.checkOut||"-")}</td>
+      <td><span class="status ${type==="Check-in"?"approved":"pending"}">${type}</span></td>
+      <td><button class="btn btn-view" onclick="viewRequest('${item.id}')">View</button></td>
+    </tr>`;
+  });
+  table.innerHTML=html+"</tbody></table>";
 }
 
 function renderDashboard(){
@@ -309,7 +389,10 @@ function renderBookings(){
       <td>${escapeHTML(d.checkIn||"-")} → ${escapeHTML(d.checkOut||"-")}</td>
       <td>${d.room?escapeHTML(d.room):"Not assigned"}</td>
       <td>${statusBadge(status)}</td>
-      <td><button class="btn btn-view" onclick="viewRequest('${item.id}')">👁️ View</button></td>
+      <td>
+        <button class="btn btn-view" onclick="viewRequest('${item.id}')">👁️ View</button>
+        ${status==="approved"&&!d.checkedOutAt?`<button class="btn btn-checkout" style="margin-left:6px" onclick="checkoutBooking('${item.id}')">🚪 Checkout</button>`:d.checkedOutAt?'<span style="margin-left:6px;color:#16a34a;font-weight:bold;font-size:12px">Checked Out</span>':''}
+      </td>
     </tr>`;
   });
   $("bookingTable").innerHTML=html+"</tbody></table>";
@@ -336,59 +419,13 @@ window.viewRequest=function(id){
     ${detail("Total Extra","₹"+(d.totalExtra||0))}
     ${detail("Current Room",d.room||"Not assigned")}
     <div class="detail"><strong>Status</strong><span>${statusBadge(d.status||"pending")}</span></div>`;
-
   const select=$("assignRoom");
   select.innerHTML='<option value="">Select Room</option>';
-
-  const roomNames=[
-    "101",
-    "102",
-    "103",
-    "104*",
-    "105*",
-    "106",
-    "107",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "17B",
-    "17C",
-    "18",
-    "19",
-    "H1",
-    "A1",
-    "A2",
-    "A7",
-    "A8",
-    "A9",
-    "A10",
-    "A11",
-    "M1",
-    "M2",
-    "M3",
-    "M4",
-    "M5",
-    "M6",
-    "M7",
-    "203",
-    "204",
-    "205",
-    "207"
-  ];
-
-  roomNames.forEach(roomName=>{
-    const room=roomName,opt=document.createElement("option");
+  ROOM_NAMES.forEach(room=>{
+    const opt=document.createElement("option");
     opt.value=room;opt.textContent=room;if(d.room===room)opt.selected=true;
     select.appendChild(opt);
   });
-
   $("modalActions").innerHTML=`
     <button class="btn btn-approve" onclick="changeStatus('${id}','approved')">✅ Approve</button>
     <button class="btn btn-pending" onclick="changeStatus('${id}','pending')">⏳ Pending</button>
@@ -491,6 +528,52 @@ $("saveRoomBtn").addEventListener("click",async()=>{
   }
 });
 
+window.checkoutBooking=async function(id){
+  const item=allBookingData.find(x=>x.id===id);
+  if(!item)return;
+
+  const d=item.data||{};
+  const room=(d.room||"").trim();
+  if(!room){alert("This booking has no room assigned.");return}
+  if(d.checkedOutAt){alert("This guest has already been checked out.");return}
+
+  const guestName=((d.firstName||"")+" "+(d.lastName||"")).trim() || d.userName || "Guest";
+  const guestEmail=(d.email||d.userEmail||"").trim();
+
+  if(!confirm(room+" checkout karna hai?
+
+Checkout ke baad is room ki Cleaning Request automatically create ho jayegi."))return;
+
+  try{
+    // Mark the booking as checked out without changing its approval status.
+    await update(ref(db,"roomRequests/"+id),{
+      checkedOutAt:Date.now()
+    });
+
+    // Automatically create a cleaning request for the checked-out room.
+    const cleaningRef=push(ref(db,"cleaningRequests"));
+    await update(cleaningRef,{
+      room:room,
+      guestName:guestName,
+      guestEmail:guestEmail,
+      problem:"Guest checkout completed. Room cleaning required.",
+      status:"pending",
+      bookingRequestId:id,
+      createdAt:Date.now()
+    });
+
+    alert(room+" checked out successfully.
+
+Cleaning request automatically added.");
+    renderBookings();
+    generateRooms();
+    renderTodayActivity();
+    renderDashboard();
+  }catch(e){
+    alert("Checkout failed:\n"+getError(e));
+  }
+};
+
 window.deleteRequest=async function(id){
   if(!confirm("Delete this room request permanently?"))return;
   try{await remove(ref(db,"roomRequests/"+id));closeModal()}
@@ -499,71 +582,25 @@ window.deleteRequest=async function(id){
 
 function generateRooms(){
   const grid=$("roomsGrid");grid.innerHTML="";
-
-  const roomNames=[
-    "101",
-    "102",
-    "103",
-    "104*",
-    "105*",
-    "106",
-    "107",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "17B",
-    "17C",
-    "18",
-    "19",
-    "H1",
-    "A1",
-    "A2",
-    "A7",
-    "A8",
-    "A9",
-    "A10",
-    "A11",
-    "M1",
-    "M2",
-    "M3",
-    "M4",
-    "M5",
-    "M6",
-    "M7",
-    "203",
-    "204",
-    "205",
-    "207"
-  ];
-
-  roomNames.forEach(roomName=>{
+  ROOM_NAMES.forEach(roomName=>{
     const booking=allBookingData.find(item=>{
-      const d=item.data;if(d.status!=="approved"||d.room!==roomName||!d.checkIn||!d.checkOut)return false;
+      const d=item.data;if(d.status!=="approved"||d.checkedOutAt||d.room!==roomName||!d.checkIn||!d.checkOut)return false;
       const start=dateOnly(d.checkIn),end=dateOnly(d.checkOut),today=new Date();today.setHours(0,0,0,0);
       return today>=start&&today<end;
     });
-
     const div=document.createElement("div");div.className="room "+(booking?"occupied":"free");
     div.innerHTML=`<div class="room-number">🚪 ${roomName}</div><div class="room-status">${booking?"🔴 Occupied":"🟢 Available"}</div>
     <div class="room-guest">${booking?`<b>${escapeHTML((booking.data.firstName||"")+" "+(booking.data.lastName||""))}</b><br>${escapeHTML(booking.data.checkIn||"")} → ${escapeHTML(booking.data.checkOut||"")}`:"No current booking"}</div>`;
     grid.appendChild(div);
   });
 }
-
 function loadCleaningRequests(){
   if(unsubscribeCleaning)unsubscribeCleaning();
   unsubscribeCleaning=onValue(ref(db,"cleaningRequests"),snapshot=>{
     allCleaningData=[];
     snapshot.forEach(child=>allCleaningData.push({id:child.key,data:child.val()||{}}));
     allCleaningData.sort((a,b)=>Number(b.data.createdAt||0)-Number(a.data.createdAt||0));
-    renderCleaning();renderDashboard();
+    renderCleaning();renderDashboard();renderTodayActivity();
   },error=>{
     console.error("RTDB cleaning error:",error);
     $("cleaningList").innerHTML='<p style="color:#b91c1c">Unable to load cleaning requests.</p>';
@@ -596,7 +633,6 @@ window.changeCleaningStatus=async function(id,status){
   try{await update(ref(db,"cleaningRequests/"+id),{status})}
   catch(e){alert("Cleaning status update failed:\n"+getError(e))}
 };
-
 window.deleteCleaning=async function(id){
   if(!confirm("Delete this cleaning request?"))return;
   try{await remove(ref(db,"cleaningRequests/"+id))}
@@ -604,22 +640,16 @@ window.deleteCleaning=async function(id){
 };
 
 const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
-
 function renderCalendar(){
   const y=currentCalendarDate.getFullYear(),m=currentCalendarDate.getMonth();
   $("calendarTitle").textContent=monthNames[m]+" "+y;
   const grid=$("calendarGrid");grid.innerHTML="";
   const firstDay=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
-
-  for(let i=0;i<firstDay;i++){
-    const e=document.createElement("div");e.className="day empty-day";grid.appendChild(e)
-  }
-
+  for(let i=0;i<firstDay;i++){const e=document.createElement("div");e.className="day empty-day";grid.appendChild(e)}
   for(let day=1;day<=days;day++){
     const date=new Date(y,m,day),cell=document.createElement("div");cell.className="day";
     if(isToday(date))cell.classList.add("today");
     cell.innerHTML=`<div class="day-number">${day}</div>`;
-
     allBookingData.filter(item=>{
       const d=item.data;if(d.status!=="approved"||!d.checkIn||!d.checkOut||!d.room)return false;
       return date>=dateOnly(d.checkIn)&&date<dateOnly(d.checkOut);
@@ -628,45 +658,20 @@ function renderCalendar(){
       event.innerHTML=`🏨 <b>${escapeHTML(d.room)}</b><br>${escapeHTML((d.firstName||"")+" "+(d.lastName||""))}`;
       event.onclick=()=>viewRequest(item.id);cell.appendChild(event);
     });
-
     grid.appendChild(cell);
   }
 }
-
-$("prevMonth").addEventListener("click",()=>{
-  currentCalendarDate.setMonth(currentCalendarDate.getMonth()-1);
-  renderCalendar()
-});
-
-$("nextMonth").addEventListener("click",()=>{
-  currentCalendarDate.setMonth(currentCalendarDate.getMonth()+1);
-  renderCalendar()
-});
-
-$("todayBtn").addEventListener("click",()=>{
-  currentCalendarDate=new Date();
-  renderCalendar()
-});
+$("prevMonth").addEventListener("click",()=>{currentCalendarDate.setMonth(currentCalendarDate.getMonth()-1);renderCalendar()});
+$("nextMonth").addEventListener("click",()=>{currentCalendarDate.setMonth(currentCalendarDate.getMonth()+1);renderCalendar()});
+$("todayBtn").addEventListener("click",()=>{currentCalendarDate=new Date();renderCalendar()});
 
 function statusBadge(status){
   const label=status==="in-progress"?"In Progress":status.charAt(0).toUpperCase()+status.slice(1);
   return `<span class="status ${escapeHTML(status)}">${escapeHTML(label)}</span>`;
 }
-
-function dateOnly(v){
-  const p=String(v).split("-");
-  return new Date(Number(p[0]),Number(p[1])-1,Number(p[2]))
-}
-
-function isToday(d){
-  const n=new Date();
-  return d.getFullYear()===n.getFullYear()&&d.getMonth()===n.getMonth()&&d.getDate()===n.getDate()
-}
-
-function escapeHTML(v){
-  return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")
-}
-
+function dateOnly(v){const p=String(v).split("-");return new Date(Number(p[0]),Number(p[1])-1,Number(p[2]))}
+function isToday(d){const n=new Date();return d.getFullYear()===n.getFullYear()&&d.getMonth()===n.getMonth()&&d.getDate()===n.getDate()}
+function escapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
 function getError(e){
   if(!e)return"Unknown error.";
   if(e.code==="PERMISSION_DENIED"||e.code==="permission-denied")return"Realtime Database permission denied. Firebase Console → Realtime Database → Rules check karo.";
@@ -676,8 +681,8 @@ function getError(e){
   if(e.code==="auth/operation-not-allowed")return"Firebase Console me Google Sign-In enable karo.";
   return e.message||"Something went wrong.";
 }
-
 renderCalendar();
+renderTodayActivity();
 </script>
 </body>
 </html>
