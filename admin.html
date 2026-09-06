@@ -55,7 +55,7 @@ td{padding:14px 13px;border-top:1px solid #edf0f4;font-size:14px}
 .booking-event{display:block;background:#dbeafe;color:#1d4ed8;border-radius:8px;padding:7px;margin-top:6px;font-size:12px;cursor:pointer;line-height:1.35}
 .cleaning-card{background:#fff;border:1px solid #e0e5ec;border-radius:16px;padding:20px;margin-bottom:14px}
 .cleaning-top{display:flex;justify-content:space-between;gap:15px;margin-bottom:15px}.cleaning-top h3{margin-bottom:8px}.cleaning-top p{margin-top:4px;color:#6b7280;font-size:13px}
-.problem{background:#f8fafc;border:1px solid #e6eaf0;padding:14px;border-radius:10px;line-height:1.5;margin-bottom:15px}.cleaning-actions{display:flex;gap:8px;flex-wrap:wrap}
+.problem{background:#f8fafc;border:1px solid #e6eaf0;padding:14px;border-radius:10px;line-height:1.5;margin-bottom:15px}.cleaning-date{background:#f8fafc;border:1px solid #e6eaf0;padding:14px;border-radius:10px;margin-bottom:15px}.cleaning-date label{display:block;font-weight:bold;margin-bottom:8px;color:#374151}.cleaning-date-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.cleaning-date-row input{flex:1;min-width:180px}.cleaning-actions{display:flex;gap:8px;flex-wrap:wrap}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:3000}.modal-overlay.show{display:flex}
 .modal{width:100%;max-width:650px;max-height:90vh;overflow-y:auto;background:#fff;border-radius:20px;padding:25px}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.close{width:35px;height:35px;border:none;border-radius:50%;background:#f1f5f9;font-size:20px;cursor:pointer}
@@ -623,6 +623,13 @@ function renderCleaning(){
     card.innerHTML=`<div class="cleaning-top"><div><h3>🧹 ${escapeHTML(d.room||"Room not selected")}</h3>
       <p><b>Guest:</b> ${escapeHTML(d.guestName||"Guest")}</p><p><b>Email:</b> ${escapeHTML(d.guestEmail||"-")}</p></div><div>${statusBadge(status)}</div></div>
       <div class="problem"><b>Problem / Cleaning Request</b><p style="margin-top:7px">${escapeHTML(d.problem||"-")}</p></div>
+      <div class="cleaning-date">
+        <label>Cleaning Date</label>
+        <div class="cleaning-date-row">
+          <input type="date" id="cleaningDate_${item.id}" value="${escapeHTML(d.cleaningDate||"")}">
+          <button class="btn btn-view" onclick="saveCleaningDate('${item.id}')">Save Date</button>
+        </div>
+      </div>
       <div class="cleaning-actions">
         <button class="btn btn-pending" onclick="changeCleaningStatus('${item.id}','pending')">Pending</button>
         <button class="btn btn-view" onclick="changeCleaningStatus('${item.id}','in-progress')">In Progress</button>
@@ -638,6 +645,17 @@ window.changeCleaningStatus=async function(id,status){
   try{await update(ref(db,"cleaningRequests/"+id),{status})}
   catch(e){alert("Cleaning status update failed:\n"+getError(e))}
 };
+window.saveCleaningDate=async function(id){
+  const input=$("cleaningDate_"+id);
+  if(!input){return}
+  const cleaningDate=input.value;
+  if(!cleaningDate){alert("Please select a cleaning date.");return}
+  try{
+    await update(ref(db,"cleaningRequests/"+id),{cleaningDate:cleaningDate,cleaningDateUpdatedAt:Date.now()});
+    alert("Cleaning date saved successfully.");
+  }catch(e){alert("Cleaning date update failed:\n"+getError(e))}
+};
+
 window.deleteCleaning=async function(id){
   if(!confirm("Delete this cleaning request?"))return;
   try{await remove(ref(db,"cleaningRequests/"+id))}
